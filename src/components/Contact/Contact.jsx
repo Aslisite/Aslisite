@@ -1,0 +1,459 @@
+import { useState } from 'react';
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  TextField,
+  Button,
+  Paper,
+  Snackbar,
+  Alert,
+} from '@mui/material';
+import { Send, Email, Phone, LocationOn, Business } from '@mui/icons-material';
+import { colors } from '../../theme/theme';
+
+const contactInfo = [
+  {
+    icon: Email,
+    label: 'Email Us',
+    value: 'info@aslisite.com',
+    href: 'mailto:info@aslisite.com',
+  },
+  {
+    icon: Phone,
+    label: 'Call Us',
+    value: '91 9495664173',
+    href: 'tel:+919495664173',
+  },
+  {
+    icon: LocationOn,
+    label: 'Visit Us',
+    value: 'Aslisite Technologies, Peruvallur, Malappuram, Kerala, India 676317',
+    href: '#',
+  },
+  {
+    icon: Business,
+    label: 'Business Hours',
+    value: 'Mon - Fri: 9:00 AM - 6:00 PM IST',
+    href: null,
+  },
+];
+
+const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: '',
+  });
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Simulate form submission
+    console.log('Form submitted:', formData);
+    setSnackbar({
+      open: true,
+      message: 'Thank you for your message! We\'ll get back to you within 24 hours.',
+      severity: 'success',
+    });
+    setFormData({ name: '', email: '', company: '', message: '' });
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbar((prev) => ({ ...prev, open: false }));
+  };
+
+  return (
+    <Box
+      id="contact"
+      component="section"
+      sx={{
+        py: { xs: 10, md: 12 },
+        backgroundColor: colors.background.secondary,
+        position: 'relative',
+      }}
+    >
+      <Container maxWidth="lg">
+        {/* Section Header */}
+        <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}>
+          <Typography
+            variant="overline"
+            sx={{
+              color: colors.accent.primary,
+              fontWeight: 600,
+              letterSpacing: 2,
+              fontSize: '0.875rem',
+              display: 'block',
+              mb: 2,
+            }}
+          >
+            Get In Touch
+          </Typography>
+          <Typography
+            variant="h2"
+            sx={{
+              color: colors.text.primary,
+              fontWeight: 700,
+              mb: 3,
+              fontSize: { xs: '2rem', md: '2.75rem' },
+            }}
+          >
+            Let's Build Something Amazing Together
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              color: colors.text.secondary,
+              maxWidth: '600px',
+              mx: 'auto',
+              lineHeight: 1.8,
+              fontSize: { xs: '1rem', md: '1.125rem' },
+            }}
+          >
+            Ready to transform your digital presence? We'd love to hear about your project. 
+            Reach out and let's start the conversation.
+          </Typography>
+        </Box>
+
+        <Grid container spacing={{ xs: 4, md: 6 }}>
+          {/* Contact Information */}
+          <Grid item xs={12} md={5}>
+            <Box sx={{ height: '100%' }}>
+              <Typography
+                variant="h4"
+                sx={{
+                  color: colors.text.primary,
+                  fontWeight: 600,
+                  mb: 4,
+                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                }}
+              >
+                Contact Information
+              </Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                {contactInfo.map((item, index) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <Box
+                      key={index}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: 2,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: 48,
+                          height: 48,
+                          borderRadius: 2,
+                          background: colors.accent.gradient,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                        }}
+                      >
+                        <IconComponent sx={{ fontSize: 22, color: '#fff' }} />
+                      </Box>
+                      <Box>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: colors.text.muted,
+                            mb: 0.5,
+                            fontWeight: 500,
+                          }}
+                        >
+                          {item.label}
+                        </Typography>
+                        {item.href ? (
+                          <Typography
+                            component="a"
+                            href={item.href}
+                            sx={{
+                              color: colors.text.primary,
+                              textDecoration: 'none',
+                              transition: 'color 0.2s ease',
+                              '&:hover': {
+                                color: colors.accent.primary,
+                              },
+                            }}
+                          >
+                            {item.value}
+                          </Typography>
+                        ) : (
+                          <Typography sx={{ color: colors.text.primary }}>
+                            {item.value}
+                          </Typography>
+                        )}
+                      </Box>
+                    </Box>
+                  );
+                })}
+              </Box>
+
+              {/* Map Placeholder */}
+              <Paper
+                elevation={0}
+                sx={{
+                  mt: 4,
+                  height: 200,
+                  backgroundColor: colors.background.primary,
+                  border: `1px solid ${colors.border.light}`,
+                  borderRadius: 3,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  overflow: 'hidden',
+                }}
+              >
+                <Box
+                  sx={{
+                    textAlign: 'center',
+                    color: colors.text.muted,
+                  }}
+                >
+                  <LocationOn sx={{ fontSize: 48, mb: 1, opacity: 0.5 }} />
+                  <Typography variant="body2">Interactive Map</Typography>
+                  <Typography variant="caption" sx={{ display: 'block' }}>
+                    Peruvallur, Malappuram, Kerala
+                  </Typography>
+                </Box>
+              </Paper>
+            </Box>
+          </Grid>
+
+          {/* Contact Form */}
+          <Grid item xs={12} md={7}>
+            <Paper
+              elevation={0}
+              component="form"
+              onSubmit={handleSubmit}
+              sx={{
+                p: { xs: 3, md: 4 },
+                backgroundColor: colors.background.primary,
+                border: `1px solid ${colors.border.light}`,
+                borderRadius: 3,
+                height: '100%',
+              }}
+            >
+              <Typography
+                variant="h4"
+                sx={{
+                  color: colors.text.primary,
+                  fontWeight: 600,
+                  mb: 4,
+                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                }}
+              >
+                Send Us a Message
+              </Typography>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Your Name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    variant="outlined"
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        backgroundColor: colors.background.secondary,
+                        '& fieldset': {
+                          borderColor: colors.border.light,
+                        },
+                        '&:hover fieldset': {
+                          borderColor: colors.accent.primary,
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: colors.accent.primary,
+                        },
+                      },
+                      '& .MuiInputLabel-root': {
+                        color: colors.text.muted,
+                        '&.Mui-focused': {
+                          color: colors.accent.primary,
+                        },
+                      },
+                      '& .MuiOutlinedInput-input': {
+                        color: colors.text.primary,
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Email Address"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    variant="outlined"
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        backgroundColor: colors.background.secondary,
+                        '& fieldset': {
+                          borderColor: colors.border.light,
+                        },
+                        '&:hover fieldset': {
+                          borderColor: colors.accent.primary,
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: colors.accent.primary,
+                        },
+                      },
+                      '& .MuiInputLabel-root': {
+                        color: colors.text.muted,
+                        '&.Mui-focused': {
+                          color: colors.accent.primary,
+                        },
+                      },
+                      '& .MuiOutlinedInput-input': {
+                        color: colors.text.primary,
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Company (Optional)"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    variant="outlined"
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        backgroundColor: colors.background.secondary,
+                        '& fieldset': {
+                          borderColor: colors.border.light,
+                        },
+                        '&:hover fieldset': {
+                          borderColor: colors.accent.primary,
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: colors.accent.primary,
+                        },
+                      },
+                      '& .MuiInputLabel-root': {
+                        color: colors.text.muted,
+                        '&.Mui-focused': {
+                          color: colors.accent.primary,
+                        },
+                      },
+                      '& .MuiOutlinedInput-input': {
+                        color: colors.text.primary,
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Your Message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    multiline
+                    rows={5}
+                    variant="outlined"
+                    placeholder="Tell us about your project, goals, and timeline..."
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        backgroundColor: colors.background.secondary,
+                        '& fieldset': {
+                          borderColor: colors.border.light,
+                        },
+                        '&:hover fieldset': {
+                          borderColor: colors.accent.primary,
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: colors.accent.primary,
+                        },
+                      },
+                      '& .MuiInputLabel-root': {
+                        color: colors.text.muted,
+                        '&.Mui-focused': {
+                          color: colors.accent.primary,
+                        },
+                      },
+                      '& .MuiOutlinedInput-input': {
+                        color: colors.text.primary,
+                      },
+                      '& .MuiOutlinedInput-input::placeholder': {
+                        color: colors.text.muted,
+                        opacity: 0.7,
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    size="large"
+                    endIcon={<Send />}
+                    sx={{
+                      background: colors.accent.gradient,
+                      color: '#fff',
+                      fontWeight: 600,
+                      px: 4,
+                      py: 1.5,
+                      fontSize: '1rem',
+                      textTransform: 'none',
+                      '&:hover': {
+                        background: colors.accent.gradient,
+                        opacity: 0.9,
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 8px 25px rgba(0, 212, 255, 0.3)',
+                      },
+                      transition: 'all 0.3s ease',
+                    }}
+                  >
+                    Send Message
+                  </Button>
+                </Grid>
+              </Grid>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
+
+      {/* Success Snackbar */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          sx={{
+            width: '100%',
+            backgroundColor: colors.background.secondary,
+            color: colors.text.primary,
+            border: `1px solid ${colors.accent.primary}`,
+          }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </Box>
+  );
+};
+
+export default Contact;
