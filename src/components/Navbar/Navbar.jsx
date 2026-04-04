@@ -13,18 +13,25 @@ import {
   useTheme,
   useMediaQuery,
 } from '@mui/material';
-import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
+import { Menu as MenuIcon, Close as CloseIcon, KeyboardArrowDown as KeyboardArrowDownIcon } from '@mui/icons-material';
 import { colors } from '../../theme/theme';
 
 const navItems = [
+  { label: 'Products', href: '#products', hasDropdown: true },
   { label: 'Services', href: '#services' },
   { label: 'Stats', href: '#stats' },
   { label: 'Contact', href: '#contact' },
 ];
 
+const productItems = [
+  { label: 'Aslibooks', href: 'https://www.aslibooks.com/', description: 'Invoice Software' },
+];
+
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [mobileOpenProducts, setMobileOpenProducts] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -55,44 +62,110 @@ const Navbar = () => {
           borderBottom: `1px solid ${colors.border.light}`,
         }}
       >
-        <Typography
-          variant="h6"
-          sx={{
-            fontWeight: 800,
-            background: colors.accent.gradient,
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
-        >
-          Aslisite
-        </Typography>
-        <IconButton onClick={handleDrawerToggle} sx={{ color: colors.text.primary }}>
-          <CloseIcon />
-        </IconButton>
-      </Box>
-      <List sx={{ pt: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Box
+            component="img"
+            src="/AslisiteLogo.svg"
+            alt="Aslisite"
+            sx={{ width: 40, height: 40 }}
+          />
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 800,
+              background: colors.accent.gradient,
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Aslisite
+          </Typography>
+          <IconButton onClick={handleDrawerToggle} sx={{ color: colors.text.primary }}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <List sx={{ pt: 2 }}>
         {navItems.map((item) => (
           <ListItem key={item.label} disablePadding>
-            <ListItemButton
-              component="a"
-              href={item.href}
-              onClick={handleDrawerToggle}
-              sx={{
-                py: 2,
-                px: 3,
-                '&:hover': {
-                  backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                },
-              }}
-            >
-              <ListItemText
-                primary={item.label}
-                primaryTypographyProps={{
-                  sx: { color: colors.text.secondary, fontWeight: 500 },
+            {item.hasDropdown ? (
+              <Box>
+                <ListItemButton
+                  onClick={() => setMobileOpenProducts(!mobileOpenProducts)}
+                  sx={{
+                    py: 2,
+                    px: 3,
+                    '&:hover': {
+                      backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                    },
+                  }}
+                >
+                  <ListItemText
+                    primary={item.label}
+                    primaryTypographyProps={{
+                      sx: { color: colors.text.secondary, fontWeight: 500 },
+                    }}
+                  />
+                  <KeyboardArrowDownIcon
+                    sx={{
+                      color: colors.text.secondary,
+                      transform: mobileOpenProducts ? 'rotate(180deg)' : 'rotate(0)',
+                      transition: 'transform 0.2s ease',
+                    }}
+                  />
+                </ListItemButton>
+                {mobileOpenProducts && (
+                  <Box sx={{ pl: 4 }}>
+                    {productItems.map((product) => (
+                      <ListItemButton
+                        key={product.label}
+                        component="a"
+                        href={product.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={handleDrawerToggle}
+                        sx={{
+                          py: 1.5,
+                          px: 3,
+                          '&:hover': {
+                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                          },
+                        }}
+                      >
+                        <Box>
+                          <Typography sx={{ color: colors.text.secondary, fontWeight: 500 }}>
+                            {product.label}
+                          </Typography>
+                          <Typography sx={{ color: colors.text.secondary, fontSize: '0.75rem', opacity: 0.7 }}>
+                            {product.description}
+                          </Typography>
+                        </Box>
+                      </ListItemButton>
+                    ))}
+                  </Box>
+                )}
+              </Box>
+            ) : (
+              <ListItemButton
+                component="a"
+                href={item.href}
+                onClick={handleDrawerToggle}
+                sx={{
+                  py: 2,
+                  px: 3,
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                  },
                 }}
-              />
-            </ListItemButton>
+              >
+                <ListItemText
+                  primary={item.label}
+                  primaryTypographyProps={{
+                    sx: { color: colors.text.secondary, fontWeight: 500 },
+                  }}
+                />
+              </ListItemButton>
+            )}
           </ListItem>
         ))}
         <ListItem sx={{ px: 3, pt: 2 }}>
@@ -106,6 +179,7 @@ const Navbar = () => {
           </Button>
         </ListItem>
       </List>
+      </Box>
     </Box>
   );
 
@@ -135,45 +209,140 @@ const Navbar = () => {
             }}
           >
             {/* Logo */}
-            <Typography
-              variant="h6"
+            <Box
               component="a"
               href="#"
-              sx={{
-                fontWeight: 800,
-                background: colors.accent.gradient,
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                textDecoration: 'none',
-                fontSize: { xs: '1.25rem', md: '1.5rem' },
-              }}
+              sx={{ display: 'flex', alignItems: 'center', gap: 1.5, textDecoration: 'none' }}
             >
-              Aslisite
-            </Typography>
+              <Box
+                component="img"
+                src="/AslisiteLogo.svg"
+                alt="Aslisite"
+                sx={{ width: { xs: 32, md: 40 }, height: { xs: 32, md: 40 } }}
+              />
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 800,
+                  background: colors.accent.gradient,
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                }}
+              >
+                Aslisite
+              </Typography>
+            </Box>
 
             {/* Desktop Navigation */}
             {!isMobile && (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                 <Box component="nav" sx={{ display: 'flex', gap: 3 }}>
                   {navItems.map((item) => (
-                    <Typography
+                    <Box
                       key={item.label}
-                      component="a"
-                      href={item.href}
-                      sx={{
-                        color: colors.text.secondary,
-                        textDecoration: 'none',
-                        fontWeight: 500,
-                        fontSize: '0.9375rem',
-                        transition: 'color 0.2s ease',
-                        '&:hover': {
-                          color: colors.accent.primary,
-                        },
-                      }}
+                      sx={{ position: 'relative', py: 1 }}
+                      onMouseEnter={() => item.hasDropdown && setOpenDropdown('products')}
+                      onMouseLeave={() => item.hasDropdown && setOpenDropdown(null)}
                     >
-                      {item.label}
-                    </Typography>
+                      {item.hasDropdown ? (
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 0.5,
+                            cursor: 'pointer',
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              color: colors.text.secondary,
+                              textDecoration: 'none',
+                              fontWeight: 500,
+                              fontSize: '0.9375rem',
+                              transition: 'color 0.2s ease',
+                              '&:hover': {
+                                color: colors.accent.primary,
+                              },
+                            }}
+                          >
+                            {item.label}
+                          </Typography>
+                          <KeyboardArrowDownIcon
+                            sx={{
+                              fontSize: '1rem',
+                              color: colors.text.secondary,
+                              transform: openDropdown === 'products' ? 'rotate(180deg)' : 'rotate(0)',
+                              transition: 'transform 0.2s ease',
+                            }}
+                          />
+                        </Box>
+                      ) : (
+                        <Typography
+                          component="a"
+                          href={item.href}
+                          sx={{
+                            color: colors.text.secondary,
+                            textDecoration: 'none',
+                            fontWeight: 500,
+                            fontSize: '0.9375rem',
+                            transition: 'color 0.2s ease',
+                            '&:hover': {
+                              color: colors.accent.primary,
+                            },
+                          }}
+                        >
+                          {item.label}
+                        </Typography>
+                      )}
+                      {item.hasDropdown && openDropdown === 'products' && (
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: 0,
+                            mt: 0.5,
+                            pt: 1,
+                            py: 1,
+                            px: 1,
+                            minWidth: 220,
+                            backgroundColor: colors.background.primary,
+                            border: `1px solid ${colors.border.light}`,
+                            borderRadius: 2,
+                            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+                            zIndex: 1001,
+                          }}
+                        >
+                          {productItems.map((product) => (
+                            <Box
+                              key={product.label}
+                              component="a"
+                              href={product.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              sx={{
+                                display: 'block',
+                                px: 2,
+                                py: 1.25,
+                                borderRadius: 1,
+                                textDecoration: 'none',
+                                '&:hover': {
+                                  backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                                },
+                              }}
+                            >
+                              <Typography sx={{ color: colors.text.primary, fontWeight: 500, fontSize: '0.875rem' }}>
+                                {product.label}
+                              </Typography>
+                              <Typography sx={{ color: colors.text.secondary, fontSize: '0.75rem', mt: 0.25 }}>
+                                {product.description}
+                              </Typography>
+                            </Box>
+                          ))}
+                        </Box>
+                      )}
+                    </Box>
                   ))}
                 </Box>
                 <Button
