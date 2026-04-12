@@ -60,27 +60,35 @@ const Navbar = () => {
         backdropFilter: 'blur(20px)',
         display: 'flex',
         flexDirection: 'column',
+        '@keyframes fadeIn': {
+          from: { opacity: 0, transform: 'translateY(-10px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
       }}
     >
       {/* Top Right Close */}
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2, pt: 3 }}>
         <IconButton
           onClick={handleDrawerToggle}
           sx={{
+            width: 48,
+            height: 48,
             color: colors.text.primary,
             backgroundColor: 'rgba(255, 255, 255, 0.05)',
             borderRadius: 2,
+            transition: 'all 0.2s ease',
             '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              backgroundColor: 'rgba(255, 255, 255, 0.15)',
+              transform: 'scale(1.05)',
             },
           }}
         >
-          <CloseIcon />
+          <CloseIcon sx={{ fontSize: 24 }} />
         </IconButton>
       </Box>
 
       {/* Menu Items */}
-      <List sx={{ flex: 1, px: 2 }}>
+      <List sx={{ flex: 1, px: 3, pt: 2 }}>
         {navItems.map((item, index) => (
           <Box key={item.label}>
             {item.hasDropdown ? (
@@ -88,26 +96,32 @@ const Navbar = () => {
                 <ListItemButton
                   onClick={() => setMobileOpenProducts(!mobileOpenProducts)}
                   sx={{
-                    py: 2,
+                    py: 2.5,
+                    px: 3,
                     borderRadius: 2,
+                    transition: 'all 0.2s ease',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                    },
                   }}
                 >
                   <ListItemText
                     primary={item.label}
                     primaryTypographyProps={{
-                      sx: { color: colors.text.primary, fontWeight: 500, fontSize: '1.125rem' },
+                      sx: { color: colors.text.primary, fontWeight: 500, fontSize: '1.25rem' },
                     }}
                   />
                   <KeyboardArrowDownIcon
                     sx={{
-                      color: colors.text.secondary,
+                      color: colors.accent.primary,
+                      fontSize: 20,
                       transform: mobileOpenProducts ? 'rotate(180deg)' : 'rotate(0)',
-                      transition: 'transform 0.2s ease',
+                      transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     }}
                   />
                 </ListItemButton>
                 {mobileOpenProducts && (
-                  <Box sx={{ pl: 2 }}>
+                  <Box sx={{ pl: 3, animation: 'fadeIn 0.2s ease' }}>
                     {productItems.map((product) => (
                       <ListItemButton
                         key={product.label}
@@ -116,9 +130,19 @@ const Navbar = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={handleDrawerToggle}
-                        sx={{ py: 1.5, borderRadius: 1.5 }}
+                        sx={{
+                          py: 2,
+                          px: 3,
+                          borderRadius: 2,
+                          borderLeft: `2px solid ${colors.accent.primary}`,
+                          transition: 'all 0.2s ease',
+                          '&:hover': {
+                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                            pl: 4,
+                          },
+                        }}
                       >
-                        <Typography sx={{ color: colors.accent.primary, fontWeight: 500 }}>
+                        <Typography sx={{ color: colors.accent.primary, fontWeight: 500, fontSize: '1rem' }}>
                           {product.label}
                         </Typography>
                       </ListItemButton>
@@ -132,14 +156,19 @@ const Navbar = () => {
                 href={item.href}
                 onClick={handleDrawerToggle}
                 sx={{
-                  py: 2,
+                  py: 2.5,
+                  px: 3,
                   borderRadius: 2,
+                  transition: 'all 0.2s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                  },
                 }}
               >
                 <ListItemText
                   primary={item.label}
                   primaryTypographyProps={{
-                    sx: { color: colors.text.primary, fontWeight: 500, fontSize: '1.125rem' },
+                    sx: { color: colors.text.primary, fontWeight: 500, fontSize: '1.25rem' },
                   }}
                 />
               </ListItemButton>
@@ -149,7 +178,7 @@ const Navbar = () => {
       </List>
 
       {/* Divider */}
-      <Box sx={{ mx: 2, borderBottom: `1px solid ${colors.border.light}` }} />
+      <Box sx={{ mx: 3, borderBottom: `1px solid ${colors.border.light}`, opacity: 0.5 }} />
 
       {/* Footer Button */}
       <Box sx={{ p: 3 }}>
@@ -158,15 +187,17 @@ const Navbar = () => {
           fullWidth
           size="large"
           sx={{
-            py: 2,
-            fontSize: '1rem',
+            py: 2.2,
+            fontSize: '1.1rem',
             fontWeight: 600,
             background: colors.accent.gradient,
-            borderRadius: 2,
-            boxShadow: '0 4px 20px rgba(0, 212, 255, 0.25)',
+            borderRadius: 2.5,
+            boxShadow: '0 4px 20px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.15)',
+            transition: 'all 0.3s ease',
             '&:hover': {
               background: colors.accent.gradient,
-              boxShadow: '0 6px 25px rgba(0, 212, 255, 0.35)',
+              boxShadow: '0 6px 28px rgba(0, 212, 255, 0.45), 0 0 40px rgba(0, 212, 255, 0.2)',
+              transform: 'translateY(-2px)',
             },
           }}
         >
