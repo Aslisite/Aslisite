@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import {
   Box,
   Container,
@@ -9,9 +10,14 @@ import {
   Paper,
   Snackbar,
   Alert,
+  CircularProgress,
 } from '@mui/material';
 import { Send, Email, Phone, LocationOn, Business } from '@mui/icons-material';
 import { colors } from '../../theme/theme';
+
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
 
 const contactInfo = [
   {
@@ -48,22 +54,34 @@ const Contact = () => {
     message: '',
   });
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate form submission
-    console.log('Form submitted:', formData);
-    setSnackbar({
-      open: true,
-      message: 'Thank you for your message! We\'ll get back to you within 24 hours.',
-      severity: 'success',
-    });
-    setFormData({ name: '', email: '', company: '', message: '' });
+    setLoading(true);
+
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, PUBLIC_KEY);
+      setSnackbar({
+        open: true,
+        message: 'Thank you for your message! We\'ll get back to you within 24 hours.',
+        severity: 'success',
+      });
+      setFormData({ name: '', email: '', company: '', message: '' });
+    } catch (error) {
+      setSnackbar({
+        open: true,
+        message: 'Failed to send message. Please try again or email us directly.',
+        severity: 'error',
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCloseSnackbar = () => {
@@ -405,7 +423,8 @@ const Contact = () => {
                     type="submit"
                     variant="contained"
                     size="large"
-                    endIcon={<Send />}
+                    disabled={loading}
+                    endIcon={loading ? <CircularProgress size={20} color="inherit" /> : <Send />}
                     sx={{
                       background: colors.accent.gradient,
                       color: '#fff',
@@ -421,9 +440,13 @@ const Contact = () => {
                         boxShadow: '0 8px 25px rgba(0, 212, 255, 0.3)',
                       },
                       transition: 'all 0.3s ease',
+                      '&:disabled': {
+                        background: colors.accent.gradient,
+                        opacity: 0.7,
+                      },
                     }}
                   >
-                    Send Message
+                    {loading ? 'Sending...' : 'Send Message'}
                   </Button>
                 </Grid>
               </Grid>
