@@ -52,7 +52,16 @@ const Navbar = () => {
   };
 
   const drawer = (
-    <Box sx={{ height: '100%', backgroundColor: colors.background.primary }}>
+    <Box
+      sx={{
+        width: 280,
+        height: '100%',
+        backgroundColor: colors.background.primary,
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      {/* Header */}
       <Box
         sx={{
           display: 'flex',
@@ -62,48 +71,42 @@ const Navbar = () => {
           borderBottom: `1px solid ${colors.border.light}`,
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
           <Box
             component="img"
             src="/AslisiteLogo.svg"
             alt="Aslisite"
-            sx={{ width: 40, height: 40 }}
+            sx={{ width: 36, height: 36 }}
           />
           <Typography
-            variant="h6"
             sx={{
               fontWeight: 800,
-              background: colors.accent.gradient,
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              fontSize: '1.25rem',
+              color: colors.text.primary,
             }}
           >
             Aslisite
           </Typography>
-          <IconButton onClick={handleDrawerToggle} sx={{ color: colors.text.primary }}>
-            <CloseIcon />
-          </IconButton>
         </Box>
-        <List sx={{ pt: 2 }}>
+        <IconButton onClick={handleDrawerToggle} sx={{ color: colors.text.primary }}>
+          <CloseIcon />
+        </IconButton>
+      </Box>
+
+      {/* Menu Items */}
+      <List sx={{ flex: 1, pt: 1 }}>
         {navItems.map((item) => (
           <ListItem key={item.label} disablePadding>
             {item.hasDropdown ? (
-              <Box>
+              <Box sx={{ width: '100%' }}>
                 <ListItemButton
                   onClick={() => setMobileOpenProducts(!mobileOpenProducts)}
-                  sx={{
-                    py: 2,
-                    px: 3,
-                    '&:hover': {
-                      backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                    },
-                  }}
+                  sx={{ py: 2, px: 3 }}
                 >
                   <ListItemText
                     primary={item.label}
                     primaryTypographyProps={{
-                      sx: { color: colors.text.secondary, fontWeight: 500 },
+                      sx: { color: colors.text.primary, fontWeight: 500 },
                     }}
                   />
                   <KeyboardArrowDownIcon
@@ -115,7 +118,7 @@ const Navbar = () => {
                   />
                 </ListItemButton>
                 {mobileOpenProducts && (
-                  <Box sx={{ pl: 4 }}>
+                  <Box sx={{ pl: 3 }}>
                     {productItems.map((product) => (
                       <ListItemButton
                         key={product.label}
@@ -124,19 +127,13 @@ const Navbar = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={handleDrawerToggle}
-                        sx={{
-                          py: 1.5,
-                          px: 3,
-                          '&:hover': {
-                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                          },
-                        }}
+                        sx={{ py: 1.5, px: 3 }}
                       >
                         <Box>
-                          <Typography sx={{ color: colors.text.secondary, fontWeight: 500 }}>
+                          <Typography sx={{ color: colors.accent.primary, fontWeight: 500, fontSize: '0.875rem' }}>
                             {product.label}
                           </Typography>
-                          <Typography sx={{ color: colors.text.secondary, fontSize: '0.75rem', opacity: 0.7 }}>
+                          <Typography sx={{ color: colors.text.muted, fontSize: '0.75rem' }}>
                             {product.description}
                           </Typography>
                         </Box>
@@ -150,35 +147,32 @@ const Navbar = () => {
                 component="a"
                 href={item.href}
                 onClick={handleDrawerToggle}
-                sx={{
-                  py: 2,
-                  px: 3,
-                  '&:hover': {
-                    backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                  },
-                }}
+                sx={{ py: 2, px: 3 }}
               >
                 <ListItemText
                   primary={item.label}
                   primaryTypographyProps={{
-                    sx: { color: colors.text.secondary, fontWeight: 500 },
+                    sx: { color: colors.text.primary, fontWeight: 500 },
                   }}
                 />
               </ListItemButton>
             )}
           </ListItem>
         ))}
-        <ListItem sx={{ px: 3, pt: 2 }}>
-          <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            sx={{ py: 1.5 }}
-          >
-            Get Started
-          </Button>
-        </ListItem>
       </List>
+
+      {/* Footer Button */}
+      <Box sx={{ p: 2, borderTop: `1px solid ${colors.border.light}` }}>
+        <Button
+          variant="contained"
+          fullWidth
+          sx={{
+            py: 1.5,
+            background: colors.accent.gradient,
+          }}
+        >
+          Get Started
+        </Button>
       </Box>
     </Box>
   );
@@ -382,10 +376,8 @@ const Navbar = () => {
         ModalProps={{ keepMounted: true }}
         sx={{
           display: { xs: 'block', md: 'none' },
-          zIndex: 1100,
           '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
-            width: 300,
+            width: 280,
             backgroundColor: colors.background.primary,
             borderLeft: `1px solid ${colors.border.light}`,
           },
