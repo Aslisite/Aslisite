@@ -66,8 +66,28 @@ const Navbar = () => {
         },
       }}
     >
-      {/* Top Right Close */}
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2, pt: 3 }}>
+      {/* Header with Logo and Close */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2, pt: 3 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+          <Box
+            component="img"
+            src="/AslisiteLogo.svg"
+            alt="Aslisite"
+            sx={{ width: 36, height: 36 }}
+          />
+          <Typography
+            sx={{
+              fontWeight: 800,
+              fontSize: '1.25rem',
+              background: colors.accent.gradient,
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Aslisite
+          </Typography>
+        </Box>
         <IconButton
           onClick={handleDrawerToggle}
           sx={{
