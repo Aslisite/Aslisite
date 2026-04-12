@@ -382,9 +382,10 @@ const Navbar = () => {
         ModalProps={{ keepMounted: true }}
         sx={{
           display: { xs: 'block', md: 'none' },
+          zIndex: 1100,
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
-            width: 280,
+            width: 300,
             backgroundColor: colors.background.primary,
             borderLeft: `1px solid ${colors.border.light}`,
           },
