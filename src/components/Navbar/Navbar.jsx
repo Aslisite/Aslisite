@@ -54,59 +54,48 @@ const Navbar = () => {
   const drawer = (
     <Box
       sx={{
-        width: 280,
+        width: '100%',
         height: '100%',
-        backgroundColor: colors.background.primary,
+        backgroundColor: 'rgba(10, 10, 15, 0.95)',
+        backdropFilter: 'blur(20px)',
         display: 'flex',
         flexDirection: 'column',
       }}
     >
-      {/* Header */}
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          p: 2,
-          borderBottom: `1px solid ${colors.border.light}`,
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          <Box
-            component="img"
-            src="/AslisiteLogo.svg"
-            alt="Aslisite"
-            sx={{ width: 36, height: 36 }}
-          />
-          <Typography
-            sx={{
-              fontWeight: 800,
-              fontSize: '1.25rem',
-              color: colors.text.primary,
-            }}
-          >
-            Aslisite
-          </Typography>
-        </Box>
-        <IconButton onClick={handleDrawerToggle} sx={{ color: colors.text.primary }}>
+      {/* Top Right Close */}
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
+        <IconButton
+          onClick={handleDrawerToggle}
+          sx={{
+            color: colors.text.primary,
+            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            borderRadius: 2,
+            '&:hover': {
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            },
+          }}
+        >
           <CloseIcon />
         </IconButton>
       </Box>
 
       {/* Menu Items */}
-      <List sx={{ flex: 1, pt: 1 }}>
-        {navItems.map((item) => (
-          <ListItem key={item.label} disablePadding>
+      <List sx={{ flex: 1, px: 2 }}>
+        {navItems.map((item, index) => (
+          <Box key={item.label}>
             {item.hasDropdown ? (
               <Box sx={{ width: '100%' }}>
                 <ListItemButton
                   onClick={() => setMobileOpenProducts(!mobileOpenProducts)}
-                  sx={{ py: 2, px: 3 }}
+                  sx={{
+                    py: 2,
+                    borderRadius: 2,
+                  }}
                 >
                   <ListItemText
                     primary={item.label}
                     primaryTypographyProps={{
-                      sx: { color: colors.text.primary, fontWeight: 500 },
+                      sx: { color: colors.text.primary, fontWeight: 500, fontSize: '1.125rem' },
                     }}
                   />
                   <KeyboardArrowDownIcon
@@ -118,7 +107,7 @@ const Navbar = () => {
                   />
                 </ListItemButton>
                 {mobileOpenProducts && (
-                  <Box sx={{ pl: 3 }}>
+                  <Box sx={{ pl: 2 }}>
                     {productItems.map((product) => (
                       <ListItemButton
                         key={product.label}
@@ -127,16 +116,11 @@ const Navbar = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={handleDrawerToggle}
-                        sx={{ py: 1.5, px: 3 }}
+                        sx={{ py: 1.5, borderRadius: 1.5 }}
                       >
-                        <Box>
-                          <Typography sx={{ color: colors.accent.primary, fontWeight: 500, fontSize: '0.875rem' }}>
-                            {product.label}
-                          </Typography>
-                          <Typography sx={{ color: colors.text.muted, fontSize: '0.75rem' }}>
-                            {product.description}
-                          </Typography>
-                        </Box>
+                        <Typography sx={{ color: colors.accent.primary, fontWeight: 500 }}>
+                          {product.label}
+                        </Typography>
                       </ListItemButton>
                     ))}
                   </Box>
@@ -147,28 +131,43 @@ const Navbar = () => {
                 component="a"
                 href={item.href}
                 onClick={handleDrawerToggle}
-                sx={{ py: 2, px: 3 }}
+                sx={{
+                  py: 2,
+                  borderRadius: 2,
+                }}
               >
                 <ListItemText
                   primary={item.label}
                   primaryTypographyProps={{
-                    sx: { color: colors.text.primary, fontWeight: 500 },
+                    sx: { color: colors.text.primary, fontWeight: 500, fontSize: '1.125rem' },
                   }}
                 />
               </ListItemButton>
             )}
-          </ListItem>
+          </Box>
         ))}
       </List>
 
+      {/* Divider */}
+      <Box sx={{ mx: 2, borderBottom: `1px solid ${colors.border.light}` }} />
+
       {/* Footer Button */}
-      <Box sx={{ p: 2, borderTop: `1px solid ${colors.border.light}` }}>
+      <Box sx={{ p: 3 }}>
         <Button
           variant="contained"
           fullWidth
+          size="large"
           sx={{
-            py: 1.5,
+            py: 2,
+            fontSize: '1rem',
+            fontWeight: 600,
             background: colors.accent.gradient,
+            borderRadius: 2,
+            boxShadow: '0 4px 20px rgba(0, 212, 255, 0.25)',
+            '&:hover': {
+              background: colors.accent.gradient,
+              boxShadow: '0 6px 25px rgba(0, 212, 255, 0.35)',
+            },
           }}
         >
           Get Started
@@ -376,10 +375,15 @@ const Navbar = () => {
         ModalProps={{ keepMounted: true }}
         sx={{
           display: { xs: 'block', md: 'none' },
+          '& .MuiBackdrop-root': {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backdropFilter: 'blur(4px)',
+          },
           '& .MuiDrawer-paper': {
-            width: 280,
-            backgroundColor: colors.background.primary,
-            borderLeft: `1px solid ${colors.border.light}`,
+            width: '100%',
+            maxWidth: 320,
+            backgroundColor: 'transparent',
+            boxShadow: '-10px 0 40px rgba(0, 0, 0, 0.5)',
           },
         }}
       >
