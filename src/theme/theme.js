@@ -159,7 +159,7 @@ let theme = createTheme({
           borderRadius: 8,
           padding: '12px 28px',
           fontSize: '1rem',
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: 'background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         },
         containedPrimary: {
           background: colors.accent.gradient,
@@ -194,7 +194,7 @@ let theme = createTheme({
           backgroundColor: colors.background.card,
           border: `1px solid ${colors.border.light}`,
           borderRadius: 16,
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           '&:hover': {
             transform: 'translateY(-4px)',
             borderColor: colors.border.medium,
@@ -206,7 +206,7 @@ let theme = createTheme({
     MuiIconButton: {
       styleOverrides: {
         root: {
-          transition: 'all 0.2s ease',
+          transition: 'background-color 0.2s ease, color 0.2s ease',
           '&:hover': {
             backgroundColor: 'rgba(0, 212, 255, 0.1)',
             color: colors.accent.primary,

@@ -1,44 +1,31 @@
-import { Box, Container, Typography, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Container, Typography, useTheme, useMediaQuery, List, ListItem, ListItemIcon, ListItemText, Stack, Button, Grid } from '@mui/material';
 import { colors } from '../../theme/theme';
+import { ReceiptLong, AccountBalance, TrendingUp, Speed, ArrowForward } from '@mui/icons-material';
 
-const stats = [
-  {
-    value: '200+',
-    label: 'Projects Delivered',
-    description: 'Successfully launched digital products',
-  },
-  {
-    value: '98%',
-    label: 'Client Satisfaction',
-    description: 'Average client rating across projects',
-  },
-  {
-    value: '$2.5M+',
-    label: 'Revenue Generated',
-    description: 'For our clients in 2024',
-  },
-  {
-    value: '15+',
-    label: 'Years Experience',
-    description: 'Building digital solutions',
-  },
+const features = [
+  { icon: <ReceiptLong />, text: 'Easy Invoice Creation' },
+  { icon: <AccountBalance />, text: 'GST-Ready Billing' },
+  { icon: <TrendingUp />, text: 'Expense & Payment Tracking' },
+  { icon: <Speed />, text: 'Simple Dashboard Insights' }
 ];
 
 const Stats = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box
       component="section"
       id="stats"
+      tabIndex="-1"
       sx={{
-        pt: { xs: 8, md: 10 },
-        pb: { xs: 4, md: 6 },
+        pt: { xs: 6, md: 8 },
+        pb: { xs: 6, md: 8 },
         backgroundColor: colors.background.primary,
         position: 'relative',
         overflow: 'hidden',
+        scrollMarginTop: '80px',
+        borderBottom: `1px solid ${colors.border.light}`,
       }}
     >
       {/* Background Gradient */}
@@ -46,18 +33,19 @@ const Stats = () => {
         sx={{
           position: 'absolute',
           top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
+          right: '0%', // Moved towards the image side
+          transform: 'translate(20%, -50%)',
           width: '800px',
-          height: '400px',
-          background: `radial-gradient(ellipse, rgba(0, 212, 255, 0.08) 0%, transparent 70%)`,
-          filter: 'blur(40px)',
+          height: '800px',
+          background: `radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 60%)`,
+          filter: 'blur(60px)',
+          pointerEvents: 'none'
         }}
       />
-
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+      
+      <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
         {/* Section Header */}
-        <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 6 } }}>
+        <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 }, maxWidth: '900px', mx: 'auto' }}>
           <Typography
             variant="overline"
             sx={{
@@ -72,159 +60,181 @@ const Stats = () => {
               border: `1px solid rgba(0, 212, 255, 0.2)`,
               fontSize: { xs: '0.7rem', sm: '0.75rem' },
               letterSpacing: '0.1em',
+              fontWeight: 600,
             }}
           >
-            AsliBooks Success Metrics
+            Our Product
           </Typography>
+          
           <Typography
             variant="h2"
             sx={{
-              fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
-              fontWeight: 700,
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
+              fontWeight: 800,
               mb: 2,
               color: colors.text.primary,
+              lineHeight: 1.2
             }}
           >
-            Numbers That{' '}
-            <Box
-              component="span"
-              sx={{
-                background: colors.accent.gradient,
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Speak
-            </Box>
+            AsliBooks – Smart Invoicing & GST Solution for Growing Businesses
           </Typography>
+          
           <Typography
             variant="h6"
             sx={{
               color: colors.text.secondary,
               fontWeight: 400,
-              maxWidth: '600px',
-              mx: 'auto',
               fontSize: { xs: '1rem', md: '1.125rem' },
               lineHeight: 1.6,
             }}
           >
-            Our track record demonstrates consistent delivery of exceptional results
+            Simplify billing, manage GST, and track your business finances — all in one place.
           </Typography>
         </Box>
 
-        {/* Stats Grid */}
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: {
-              xs: 'repeat(2, 1fr)',
-              md: 'repeat(4, 1fr)',
-            },
-            gap: { xs: 3, md: 4 },
-          }}
-        >
-          {stats.map((stat, index) => (
+        <Grid container spacing={{ xs: 6, md: 3 }} alignItems="center">
+          
+          {/* Left Column: Content */}
+          <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              {features.map((feature, idx) => (
+                <ListItem 
+                  key={idx} 
+                  disablePadding 
+                  sx={{
+                    transition: 'transform 0.2s ease',
+                    '&:hover': {
+                      transform: 'translateY(-2px)'
+                    }
+                  }}
+                >
+                  <ListItemIcon sx={{ color: colors.accent.primary, minWidth: 40 }}>
+                    {feature.icon}
+                  </ListItemIcon>
+                  <ListItemText 
+                    primary={feature.text} 
+                    primaryTypographyProps={{ 
+                      fontSize: '1rem', 
+                      fontWeight: 500, 
+                      color: colors.text.primary 
+                    }} 
+                  />
+                </ListItem>
+              ))}
+            </List>
+
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 1 }}>
+              <Button
+                variant="contained"
+                size="large"
+                component="a"
+                href="https://www.aslibooks.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                endIcon={<ArrowForward />}
+                sx={{
+                  py: 1.5,
+                  px: 4,
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  background: colors.accent.gradient,
+                  borderRadius: 2,
+                  boxShadow: '0 4px 20px rgba(0, 212, 255, 0.3)',
+                  transition: 'background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
+                  '&:hover': {
+                    background: colors.accent.gradient,
+                    boxShadow: '0 6px 28px rgba(0, 212, 255, 0.45)',
+                    transform: 'translateY(-2px)',
+                  },
+                }}
+              >
+                Try AsliBooks
+              </Button>
+            </Stack>
+          </Grid>
+
+          {/* Right Column: Visual Mockup */}
+          <Grid item xs={12} md={6}>
             <Box
-              key={index}
               sx={{
-                textAlign: 'center',
-                p: { xs: 2.5, md: 4 },
-                borderRadius: 3,
-                backgroundColor: 'rgba(255, 255, 255, 0.02)',
-                border: `1px solid ${colors.border.light}`,
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                  borderColor: colors.border.medium,
-                  transform: 'translateY(-4px)',
-                },
+                position: 'relative',
+                display: 'flex',
+                justifyContent: { xs: 'center', md: 'flex-start' },
+                alignItems: 'center',
+                perspective: '1000px',
               }}
             >
-              {/* Value */}
-              <Typography
-                variant="h2"
-                sx={{
-                  fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
-                  fontWeight: 800,
-                  background: colors.accent.gradient,
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  mb: 1,
-                  lineHeight: 1,
-                }}
+              {/* Decorative Blur Effect Base Frame */}
+              <Box 
+                 sx={{
+                    position: 'relative',
+                    width: '100%',
+                    maxWidth: { xs: '100%', md: '600px' },
+                    borderRadius: 2,
+                    overflow: 'hidden',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: `1px solid rgba(255, 255, 255, 0.1)`,
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)',
+                    backdropFilter: 'blur(10px)',
+                    transform: { xs: 'none', md: 'rotateY(-5deg) rotateX(2deg)' },
+                    transition: 'transform 0.5s ease',
+                    '&:hover': {
+                      transform: { xs: 'none', md: 'rotateY(0deg) rotateX(0deg)' },
+                    }
+                 }}
               >
-                {stat.value}
-              </Typography>
-
-              {/* Label */}
-              <Typography
-                variant="h6"
-                sx={{
-                  fontWeight: 600,
-                  color: colors.text.primary,
-                  mb: 0.5,
-                  fontSize: { xs: '0.9rem', md: '1rem' },
-                }}
-              >
-                {stat.label}
-              </Typography>
-
-              {/* Description */}
-              <Typography
-                variant="body2"
-                sx={{
-                  color: colors.text.muted,
-                  fontSize: '0.8rem',
-                }}
-              >
-                {stat.description}
-              </Typography>
+                {/* Top Window Actions (fake dot buttons) */}
+                <Box sx={{ display: 'flex', gap: 1, px: 2, py: 1.5, borderBottom: '1px solid rgba(255,255,255,0.05)', backgroundColor: 'rgba(255, 255, 255, 0.01)' }}>
+                   <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ff5f56' }} />
+                   <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ffbd2e' }} />
+                   <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#27c93f' }} />
+                </Box>
+                
+                {/* Image Wrapper */}
+                <Box 
+                  sx={{ 
+                    bgcolor: '#0f172a' 
+                  }}
+                >
+                   <Box
+                     component="img"
+                     src="/aslibooks-dashboard.png"
+                     alt="AsliBooks Dashboard Mockup"
+                     sx={{
+                        width: '100%',
+                        height: 'auto',
+                        display: 'block',
+                        opacity: 0.9,
+                     }}
+                   />
+                </Box>
+              </Box>
             </Box>
-          ))}
-        </Box>
+          </Grid>
+        </Grid>
 
-        {/* Trust Badges */}
+        {/* Trust Badges Line */}
         <Box
           sx={{
-            mt: { xs: 4, md: 6 },
+            mt: { xs: 6, md: 8 },
             pt: { xs: 3, md: 4 },
             borderTop: `1px solid ${colors.border.light}`,
             display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
             alignItems: 'center',
             justifyContent: 'center',
-            gap: { xs: 2, md: 4 },
           }}
         >
-          <Typography variant="body2" sx={{ color: colors.text.muted }}>
-            Trusted by innovative companies worldwide
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              gap: { xs: 3, md: 5 },
-              opacity: 0.5,
-              flexWrap: 'wrap',
-              justifyContent: 'center',
+          <Typography 
+            variant="subtitle2" 
+            sx={{ 
+              color: colors.text.muted,
+              letterSpacing: 1,
+              fontWeight: 500,
+              fontSize: { xs: '0.8rem', md: '0.9rem' }
             }}
           >
-            {['TechCorp', 'InnovateCo', 'DigitalFirst', 'CloudScale'].map((company, idx) => (
-              <Typography
-                key={idx}
-                variant="subtitle2"
-                sx={{
-                  color: colors.text.secondary,
-                  fontWeight: 600,
-                  letterSpacing: 1,
-                  fontSize: { xs: '0.75rem', md: '0.875rem' },
-                }}
-              >
-                {company}
-              </Typography>
-            ))}
-          </Box>
+            Built for small businesses, freelancers, and startups
+          </Typography>
         </Box>
       </Container>
     </Box>

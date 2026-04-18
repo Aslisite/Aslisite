@@ -17,9 +17,8 @@ import { Menu as MenuIcon, Close as CloseIcon, KeyboardArrowDown as KeyboardArro
 import { colors } from '../../theme/theme';
 
 const navItems = [
-  { label: 'Products', href: '#products', hasDropdown: true },
   { label: 'Services', href: '#services' },
-  { label: 'Stats', href: '#stats' },
+  { label: 'Our Product', href: '#stats' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -119,7 +118,7 @@ const Navbar = () => {
                     py: 2.5,
                     px: 3,
                     borderRadius: 2,
-                    transition: 'all 0.2s ease',
+                    transition: 'background-color 0.2s ease',
                     '&:hover': {
                       backgroundColor: 'rgba(255, 255, 255, 0.08)',
                     },
@@ -143,7 +142,7 @@ const Navbar = () => {
                 {mobileOpenProducts && (
                   <Box sx={{ pl: 3, animation: 'fadeIn 0.2s ease' }}>
                     {productItems.map((product) => (
-                      <ListItemButton
+                      <Box
                         key={product.label}
                         component="a"
                         href={product.href}
@@ -151,21 +150,21 @@ const Navbar = () => {
                         rel="noopener noreferrer"
                         onClick={handleDrawerToggle}
                         sx={{
-                          py: 2,
+                          display: 'block',
+                          py: 1.5,
                           px: 3,
-                          borderRadius: 2,
-                          borderLeft: `2px solid ${colors.accent.primary}`,
-                          transition: 'all 0.2s ease',
+                          textDecoration: 'none',
+                          color: colors.text.secondary,
+                          transition: 'color 0.2s ease',
                           '&:hover': {
-                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                            pl: 4,
+                            color: colors.accent.primary,
                           },
                         }}
                       >
-                        <Typography sx={{ color: colors.accent.primary, fontWeight: 500, fontSize: '1rem' }}>
+                        <Typography sx={{ fontWeight: 500, fontSize: '1rem', color: 'inherit' }}>
                           {product.label}
                         </Typography>
-                      </ListItemButton>
+                      </Box>
                     ))}
                   </Box>
                 )}
@@ -206,6 +205,11 @@ const Navbar = () => {
           variant="contained"
           fullWidth
           size="large"
+          component="a"
+          href="https://wa.me/919495664173?text=Hi%20Aslisite,%20I'm%20interested%20in%20starting%20a%20project!"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={handleDrawerToggle}
           sx={{
             py: 2.2,
             fontSize: '1.1rem',
@@ -213,7 +217,7 @@ const Navbar = () => {
             background: colors.accent.gradient,
             borderRadius: 2.5,
             boxShadow: '0 4px 20px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.15)',
-            transition: 'all 0.3s ease',
+            transition: 'background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
             '&:hover': {
               background: colors.accent.gradient,
               boxShadow: '0 6px 28px rgba(0, 212, 255, 0.45), 0 0 40px rgba(0, 212, 255, 0.2)',
@@ -240,7 +244,7 @@ const Navbar = () => {
           backgroundColor: scrolled ? 'rgba(10, 10, 15, 0.95)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
           borderBottom: scrolled ? `1px solid ${colors.border.light}` : 'none',
-          transition: 'all 0.3s ease',
+          transition: 'background-color 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease',
         }}
       >
         <Container maxWidth="xl">
@@ -393,6 +397,10 @@ const Navbar = () => {
                   variant="contained"
                   color="primary"
                   size="medium"
+                  component="a"
+                  href="https://wa.me/919495664173?text=Hi%20Aslisite,%20I'm%20interested%20in%20starting%20a%20project!"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   sx={{ py: 1, px: 3 }}
                 >
                   Get Started
@@ -403,6 +411,7 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             {isMobile && (
               <IconButton
+                aria-label="Open menu"
                 onClick={handleDrawerToggle}
                 sx={{
                   color: colors.text.primary,

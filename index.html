@@ -66,7 +66,8 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <a href="#hero" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" onfocus="this.style.left='0';this.style.top='0';this.style.width='auto';this.style.height='auto';this.style.overflow='visible';this.onfocus=function(){this.style.left='-9999px';}" class="skip-link">Skip to main content</a>
+    <div id="root" tabindex="-1"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

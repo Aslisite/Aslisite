@@ -37,10 +37,13 @@ const Services = () => {
     <Box
       component="section"
       id="services"
+      tabIndex="-1"
       sx={{
-        py: { xs: 10, md: 12 },
+        py: { xs: 6, md: 8 },
         backgroundColor: colors.background.secondary,
         position: 'relative',
+        scrollMarginTop: '80px',
+        borderBottom: `1px solid ${colors.border.light}`,
       }}
     >
       {/* Background Accent */}

@@ -6,11 +6,13 @@ const Hero = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
 
   return (
     <Box
       component="section"
       id="hero"
+      tabIndex="-1"
       sx={{
         minHeight: { xs: '100vh', md: 'calc(100vh - 64px)' },
         display: 'flex',
@@ -19,8 +21,10 @@ const Hero = () => {
         position: 'relative',
         overflow: 'hidden',
         background: `linear-gradient(135deg, ${colors.background.primary} 0%, ${colors.background.secondary} 50%, ${colors.background.primary} 100%)`,
-        pt: { xs: '80px', md: '64px' }, // Account for navbar
-        pb: { xs: 4, md: 6 },
+        pt: { xs: '80px', md: '64px' },
+        pb: { xs: 6, md: 8 },
+        scrollMarginTop: '64px',
+        borderBottom: `1px solid ${colors.border.light}`,
       }}
     >
       {/* Animated Background Gradient Orbs */}
@@ -34,7 +38,7 @@ const Hero = () => {
           borderRadius: '50%',
           background: `radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%)`,
           filter: 'blur(60px)',
-          animation: 'float 8s ease-in-out infinite',
+          animation: prefersReducedMotion ? 'none' : 'float 8s ease-in-out infinite',
           '@keyframes float': {
             '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
             '50%': { transform: 'translateY(-30px) rotate(5deg)' },
@@ -51,7 +55,7 @@ const Hero = () => {
           borderRadius: '50%',
           background: `radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%)`,
           filter: 'blur(60px)',
-          animation: 'float 10s ease-in-out infinite reverse',
+          animation: prefersReducedMotion ? 'none' : 'float 10s ease-in-out infinite reverse',
         }}
       />
       
@@ -169,6 +173,10 @@ const Hero = () => {
               variant="contained"
               color="primary"
               size="large"
+              component="a"
+              href="https://wa.me/919495664173?text=Hi%20Aslisite,%20I'm%20interested%20in%20starting%20a%20project!"
+              target="_blank"
+              rel="noopener noreferrer"
               endIcon={<ArrowForward />}
               sx={{
                 py: 1.5,
@@ -197,11 +205,12 @@ const Hero = () => {
           </Stack>
 
           {/* Trust Indicators */}
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={{ xs: 1.5, sm: 3 }}
+          <Box
             sx={{
+              display: 'flex',
+              flexDirection: { xs: 'column', sm: 'row' },
               alignItems: 'center',
+              gap: { xs: 1.5, sm: 3 },
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -230,7 +239,7 @@ const Hero = () => {
             <Typography variant="body2" sx={{ color: colors.text.muted }}>
               Trusted by 200+ clients worldwide
             </Typography>
-          </Stack>
+          </Box>
         </Box>
       </Container>
 
@@ -241,12 +250,12 @@ const Hero = () => {
           right: { xs: 16, md: 40 },
           top: '50%',
           transform: 'translateY(-50%)',
-          display: 'flex',
+          display: { xs: 'none', md: 'flex' },
           flexDirection: 'column',
           alignItems: 'center',
           gap: 1,
           zIndex: 10,
-          animation: 'bounce 2s ease-in-out infinite',
+          animation: prefersReducedMotion ? 'none' : 'bounce 2s ease-in-out infinite',
           '@keyframes bounce': {
             '0%, 100%': { transform: 'translateY(-50%)' },
             '50%': { transform: 'translateY(calc(-50% + 10px))' },
@@ -276,7 +285,7 @@ const Hero = () => {
               height: 8,
               borderRadius: 2,
               backgroundColor: colors.accent.primary,
-              animation: 'scroll 2s ease-in-out infinite',
+              animation: prefersReducedMotion ? 'none' : 'scroll 2s ease-in-out infinite',
               '@keyframes scroll': {
                 '0%, 100%': { opacity: 1, transform: 'translateY(0)' },
                 '50%': { opacity: 0.5, transform: 'translateY(8px)' },

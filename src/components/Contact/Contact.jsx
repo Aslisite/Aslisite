@@ -92,10 +92,12 @@ const Contact = () => {
     <Box
       id="contact"
       component="section"
+      tabIndex="-1"
       sx={{
-        py: { xs: 10, md: 12 },
+        py: { xs: 6, md: 8 },
         backgroundColor: colors.background.secondary,
         position: 'relative',
+        scrollMarginTop: '80px',
       }}
     >
       <Container maxWidth="lg">
@@ -283,6 +285,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    autoComplete="name"
                     variant="outlined"
                     sx={{
                       '& .MuiOutlinedInput-root': {
@@ -315,6 +318,8 @@ const Contact = () => {
                     label="Email Address"
                     name="email"
                     type="email"
+                    inputMode="email"
+                    autoComplete="email"
                     value={formData.email}
                     onChange={handleChange}
                     required
@@ -388,7 +393,7 @@ const Contact = () => {
                     multiline
                     rows={5}
                     variant="outlined"
-                    placeholder="Tell us about your project, goals, and timeline..."
+                    placeholder="Tell us about your project, goals, and timeline…"
                     sx={{
                       '& .MuiOutlinedInput-root': {
                         backgroundColor: colors.background.secondary,
@@ -439,14 +444,14 @@ const Contact = () => {
                         transform: 'translateY(-2px)',
                         boxShadow: '0 8px 25px rgba(0, 212, 255, 0.3)',
                       },
-                      transition: 'all 0.3s ease',
+                      transition: 'opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease',
                       '&:disabled': {
                         background: colors.accent.gradient,
                         opacity: 0.7,
                       },
                     }}
                   >
-                    {loading ? 'Sending...' : 'Send Message'}
+                    {loading ? 'Sending…' : 'Send Message'}
                   </Button>
                 </Grid>
               </Grid>
