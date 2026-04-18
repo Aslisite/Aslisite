@@ -1,13 +1,13 @@
 import { Box, Container, Typography, Link, Grid, IconButton, Divider, useTheme, useMediaQuery } from '@mui/material';
-import { Twitter, LinkedIn, GitHub, Instagram, Mail, Phone, LocationOn } from '@mui/icons-material';
+import { Twitter, LinkedIn, Facebook, Instagram, Mail, WhatsApp, LocationOn } from '@mui/icons-material';
 import { colors } from '../../theme/theme';
 
 const navigation = {
   services: [
     { label: 'Web Development', href: '#services' },
-    { label: 'UI/UX Design', href: '#services' },
-    { label: 'SEO & Growth', href: '#services' },
-    { label: 'SaaS Architecture', href: '#services' },
+    { label: 'Ecommerce Solutions', href: '#services' },
+    { label: 'Custom Software', href: '#services' },
+    { label: 'SEO Services', href: '#services' },
   ],
   company: [
     { label: 'Our Team', href: '#team' },
@@ -24,9 +24,9 @@ const navigation = {
 
 const socialLinks = [
   { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: LinkedIn, href: '#', label: 'LinkedIn' },
-  { icon: GitHub, href: '#', label: 'GitHub' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: LinkedIn, href: 'https://www.linkedin.com/company/aslisite', label: 'LinkedIn' },
+  { icon: Facebook, href: 'https://www.facebook.com/aslisite', label: 'Facebook' },
+  { icon: Instagram, href: 'https://www.instagram.com/aslisite_', label: 'Instagram' },
 ];
 
 const Footer = () => {
@@ -239,9 +239,11 @@ const Footer = () => {
                     </Link>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                    <Phone sx={{ fontSize: 18, color: colors.accent.primary }} />
+                    <WhatsApp sx={{ fontSize: 18, color: colors.accent.primary }} />
                     <Link
-                      href="tel:+919495664173"
+                      href="https://wa.me/919495664173?text=Hi%20Aslisite,%20I'm%20interested%20in%20starting%20a%20project!"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       underline="none"
                       sx={{
                         color: colors.text.muted,
