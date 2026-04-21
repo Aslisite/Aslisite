@@ -1,6 +1,15 @@
-import { Box, Container, Typography, Card, CardContent, Grid, useTheme, useMediaQuery } from '@mui/material';
-import { Code, ShoppingCart, Build, TrendingUp } from '@mui/icons-material';
+import { Box, Card, CardContent, Container, Grid, Typography, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import CodeImport from '@mui/icons-material/Code';
+import ShoppingCartImport from '@mui/icons-material/ShoppingCart';
+import BuildImport from '@mui/icons-material/Build';
+import TrendingUpImport from '@mui/icons-material/TrendingUp';
 import { colors } from '../../theme/theme';
+
+const Code = CodeImport.default || CodeImport;
+const ShoppingCart = ShoppingCartImport.default || ShoppingCartImport;
+const Build = BuildImport.default || BuildImport;
+const TrendingUp = TrendingUpImport.default || TrendingUpImport;
 
 const services = [
   {

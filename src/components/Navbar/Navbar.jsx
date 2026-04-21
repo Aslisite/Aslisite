@@ -1,24 +1,19 @@
 import { useState, useEffect } from 'react';
-import {
-  Box,
-  Container,
-  Typography,
-  Button,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  useTheme,
-  useMediaQuery,
-} from '@mui/material';
-import { Menu as MenuIcon, Close as CloseIcon, KeyboardArrowDown as KeyboardArrowDownIcon } from '@mui/icons-material';
+import { Box, Button, Container, Drawer, IconButton, List, ListItemButton, ListItemText, Typography, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import CloseIconImport from '@mui/icons-material/Close';
+import KeyboardArrowDownIconImport from '@mui/icons-material/KeyboardArrowDown';
+import MenuIconImport from '@mui/icons-material/Menu';
 import { colors } from '../../theme/theme';
+
+const CloseIcon = CloseIconImport.default || CloseIconImport;
+const KeyboardArrowDownIcon = KeyboardArrowDownIconImport.default || KeyboardArrowDownIconImport;
+const MenuIcon = MenuIconImport.default || MenuIconImport;
 
 const navItems = [
   { label: 'Services', href: '#services' },
   { label: 'Our Product', href: '#stats' },
+  { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -259,7 +254,7 @@ const Navbar = () => {
             {/* Logo */}
             <Box
               component="a"
-              href="#"
+              href="#hero"
               sx={{ display: 'flex', alignItems: 'center', gap: 1.5, textDecoration: 'none' }}
             >
               <Box

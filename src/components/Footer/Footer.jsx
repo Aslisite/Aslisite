@@ -1,6 +1,19 @@
-import { Box, Container, Typography, Link, Grid, IconButton, Divider, useTheme, useMediaQuery } from '@mui/material';
-import { Twitter, LinkedIn, Facebook, Instagram, Mail, WhatsApp, LocationOn } from '@mui/icons-material';
+import { Box, Container, Divider, Grid, IconButton, Link, Typography, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import FacebookImport from '@mui/icons-material/Facebook';
+import InstagramImport from '@mui/icons-material/Instagram';
+import LinkedInImport from '@mui/icons-material/LinkedIn';
+import LocationOnImport from '@mui/icons-material/LocationOn';
+import MailImport from '@mui/icons-material/Mail';
+import WhatsAppImport from '@mui/icons-material/WhatsApp';
 import { colors } from '../../theme/theme';
+
+const Facebook = FacebookImport.default || FacebookImport;
+const Instagram = InstagramImport.default || InstagramImport;
+const LinkedIn = LinkedInImport.default || LinkedInImport;
+const LocationOn = LocationOnImport.default || LocationOnImport;
+const Mail = MailImport.default || MailImport;
+const WhatsApp = WhatsAppImport.default || WhatsAppImport;
 
 const navigation = {
   services: [
@@ -9,21 +22,15 @@ const navigation = {
     { label: 'Custom Software', href: '#services' },
     { label: 'SEO Services', href: '#services' },
   ],
-  company: [
-    { label: 'Our Team', href: '#team' },
-    { label: 'Careers', href: '#careers' },
+  quickLinks: [
+    { label: 'Home', href: '#hero' },
+    { label: 'Our Product', href: '#stats' },
+    { label: 'FAQ', href: '#faq' },
     { label: 'Contact', href: '#contact' },
-  ],
-  resources: [
-    { label: 'Blog', href: '#blog' },
-    { label: 'Case Studies', href: '#cases' },
-    { label: 'Documentation', href: '#docs' },
-    { label: 'Support', href: '#support' },
   ],
 };
 
 const socialLinks = [
-  { icon: Twitter, href: '#', label: 'Twitter' },
   { icon: LinkedIn, href: 'https://www.linkedin.com/company/aslisite', label: 'LinkedIn' },
   { icon: Facebook, href: 'https://www.facebook.com/aslisite', label: 'Facebook' },
   { icon: Instagram, href: 'https://www.instagram.com/aslisite_', label: 'Instagram' },
@@ -45,9 +52,7 @@ const Footer = () => {
       }}
     >
       <Container maxWidth="lg">
-        {/* Main Footer Content */}
         <Grid container spacing={{ xs: 4, md: 6 }}>
-          {/* Brand Column */}
           <Grid item xs={12} md={4}>
             <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
               <Typography
@@ -76,7 +81,6 @@ const Footer = () => {
                 Premium digital agency crafting exceptional web experiences that drive business growth and transform ideas into reality.
               </Typography>
 
-              {/* Social Links */}
               <Box sx={{ display: 'flex', gap: 1, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                 {socialLinks.map((social, index) => {
                   const IconComponent = social.icon;
@@ -85,6 +89,8 @@ const Footer = () => {
                       key={index}
                       href={social.href}
                       aria-label={social.label}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       size="small"
                       sx={{
                         color: colors.text.muted,
@@ -105,10 +111,8 @@ const Footer = () => {
             </Box>
           </Grid>
 
-          {/* Navigation Columns */}
           <Grid item xs={12} md={8}>
             <Grid container spacing={{ xs: 3, md: 4 }}>
-              {/* Services */}
               <Grid item xs={6} sm={4}>
                 <Typography
                   variant="subtitle2"
@@ -124,11 +128,11 @@ const Footer = () => {
                 >
                   Services
                 </Typography>
-                <Box 
-                  component="nav" 
-                  sx={{ 
-                    display: 'flex', 
-                    flexDirection: 'column', 
+                <Box
+                  component="nav"
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
                     gap: 1.5,
                     alignItems: { xs: 'center', sm: 'flex-start' },
                   }}
@@ -153,7 +157,6 @@ const Footer = () => {
                 </Box>
               </Grid>
 
-              {/* Company */}
               <Grid item xs={6} sm={4}>
                 <Typography
                   variant="subtitle2"
@@ -167,18 +170,18 @@ const Footer = () => {
                     textAlign: { xs: 'center', sm: 'left' },
                   }}
                 >
-                  Company
+                  Quick Links
                 </Typography>
-                <Box 
-                  component="nav" 
-                  sx={{ 
-                    display: 'flex', 
-                    flexDirection: 'column', 
+                <Box
+                  component="nav"
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
                     gap: 1.5,
                     alignItems: { xs: 'center', sm: 'flex-start' },
                   }}
                 >
-                  {navigation.company.map((item, index) => (
+                  {navigation.quickLinks.map((item, index) => (
                     <Link
                       key={index}
                       href={item.href}
@@ -198,7 +201,6 @@ const Footer = () => {
                 </Box>
               </Grid>
 
-              {/* Contact */}
               <Grid item xs={12} sm={4}>
                 <Typography
                   variant="subtitle2"
@@ -212,12 +214,12 @@ const Footer = () => {
                     textAlign: { xs: 'center', sm: 'left' },
                   }}
                 >
-                  Contact
+                  Get In Touch
                 </Typography>
-                <Box 
-                  sx={{ 
-                    display: 'flex', 
-                    flexDirection: 'column', 
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
                     gap: 2,
                     alignItems: { xs: 'center', sm: 'flex-start' },
                   }}
@@ -260,7 +262,7 @@ const Footer = () => {
                     <LocationOn sx={{ fontSize: 18, color: colors.accent.primary, mt: 0.25 }} />
                     <Typography
                       variant="body2"
-                      sx={{ color: colors.text.muted, fontSize: '0.875rem', lineHeight: 1.6 }}
+                      sx={{ color: colors.text.muted, fontSize: '0.875rem', lineHeight: 1.6, textAlign: { xs: 'center', sm: 'left' } }}
                     >
                       Aslisite Technologies<br />
                       Peruvallur<br />
@@ -275,7 +277,6 @@ const Footer = () => {
           </Grid>
         </Grid>
 
-        {/* Divider */}
         <Divider
           sx={{
             my: { xs: 4, md: 6 },
@@ -283,7 +284,6 @@ const Footer = () => {
           }}
         />
 
-        {/* Bottom Bar */}
         <Box
           sx={{
             display: 'flex',
@@ -295,49 +295,11 @@ const Footer = () => {
           }}
         >
           <Typography variant="caption" sx={{ color: colors.text.muted }}>
-            © {currentYear} Aslisite. All rights reserved.
+            Copyright {currentYear} Aslisite. All rights reserved.
           </Typography>
-          <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link
-              href="#privacy"
-              underline="none"
-              sx={{
-                color: colors.text.muted,
-                fontSize: '0.75rem',
-                '&:hover': {
-                  color: colors.accent.primary,
-                },
-              }}
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="#terms"
-              underline="none"
-              sx={{
-                color: colors.text.muted,
-                fontSize: '0.75rem',
-                '&:hover': {
-                  color: colors.accent.primary,
-                },
-              }}
-            >
-              Terms of Service
-            </Link>
-            <Link
-              href="#cookies"
-              underline="none"
-              sx={{
-                color: colors.text.muted,
-                fontSize: '0.75rem',
-                '&:hover': {
-                  color: colors.accent.primary,
-                },
-              }}
-            >
-              Cookie Policy
-            </Link>
-          </Box>
+          <Typography variant="caption" sx={{ color: colors.text.muted }}>
+            Web development, ecommerce, UI/UX, and SEO services in Kerala
+          </Typography>
         </Box>
       </Container>
     </Box>

@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  TextField,
-  Button,
-  Paper,
-  Snackbar,
-  Alert,
-  CircularProgress,
-} from '@mui/material';
-import { Send, Email, Phone, LocationOn, Business } from '@mui/icons-material';
+import { Alert, Box, Button, CircularProgress, Container, Grid, Paper, Snackbar, TextField, Typography } from '@mui/material';
+import BusinessImport from '@mui/icons-material/Business';
+import EmailImport from '@mui/icons-material/Email';
+import LocationOnImport from '@mui/icons-material/LocationOn';
+import PhoneImport from '@mui/icons-material/Phone';
+import SendImport from '@mui/icons-material/Send';
 import { colors } from '../../theme/theme';
+
+const Business = BusinessImport.default || BusinessImport;
+const Email = EmailImport.default || EmailImport;
+const LocationOn = LocationOnImport.default || LocationOnImport;
+const Phone = PhoneImport.default || PhoneImport;
+const Send = SendImport.default || SendImport;
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
@@ -36,7 +35,7 @@ const contactInfo = [
     icon: LocationOn,
     label: 'Visit Us',
     value: 'Aslisite Technologies, Peruvallur, Malappuram, Kerala, India 676317',
-    href: '#',
+    href: null,
   },
   {
     icon: Business,
@@ -101,7 +100,6 @@ const Contact = () => {
       }}
     >
       <Container maxWidth="lg">
-        {/* Section Header */}
         <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}>
           <Typography
             variant="overline"
@@ -125,7 +123,7 @@ const Contact = () => {
               fontSize: { xs: '2rem', md: '2.75rem' },
             }}
           >
-            Let's Build Something Amazing Together
+            Let&apos;s Build Something Amazing Together
           </Typography>
           <Typography
             variant="body1"
@@ -137,13 +135,12 @@ const Contact = () => {
               fontSize: { xs: '1rem', md: '1.125rem' },
             }}
           >
-            Ready to transform your digital presence? We'd love to hear about your project. 
-            Reach out and let's start the conversation.
+            Ready to transform your digital presence? We&apos;d love to hear about your project.
+            Reach out and let&apos;s start the conversation.
           </Typography>
         </Box>
 
         <Grid container spacing={{ xs: 4, md: 6 }}>
-          {/* Contact Information */}
           <Grid item xs={12} md={5}>
             <Box sx={{ height: '100%' }}>
               <Typography
@@ -220,7 +217,6 @@ const Contact = () => {
                 })}
               </Box>
 
-              {/* Map Placeholder */}
               <Paper
                 elevation={0}
                 sx={{
@@ -251,7 +247,6 @@ const Contact = () => {
             </Box>
           </Grid>
 
-          {/* Contact Form */}
           <Grid item xs={12} md={7}>
             <Paper
               elevation={0}
@@ -393,7 +388,7 @@ const Contact = () => {
                     multiline
                     rows={5}
                     variant="outlined"
-                    placeholder="Tell us about your project, goals, and timeline…"
+                    placeholder="Tell us about your project, goals, and timeline..."
                     sx={{
                       '& .MuiOutlinedInput-root': {
                         backgroundColor: colors.background.secondary,
@@ -451,7 +446,7 @@ const Contact = () => {
                       },
                     }}
                   >
-                    {loading ? 'Sending…' : 'Send Message'}
+                    {loading ? 'Sending...' : 'Send Message'}
                   </Button>
                 </Grid>
               </Grid>
@@ -460,7 +455,6 @@ const Contact = () => {
         </Grid>
       </Container>
 
-      {/* Success Snackbar */}
       <Snackbar
         open={snackbar.open}
         autoHideDuration={6000}

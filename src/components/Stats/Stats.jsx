@@ -1,6 +1,17 @@
-import { Box, Container, Typography, useTheme, useMediaQuery, List, ListItem, ListItemIcon, ListItemText, Stack, Button, Grid } from '@mui/material';
+import { Box, Button, Container, Grid, List, ListItem, ListItemIcon, ListItemText, Stack, Typography, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { colors } from '../../theme/theme';
-import { ReceiptLong, AccountBalance, TrendingUp, Speed, ArrowForward } from '@mui/icons-material';
+import ReceiptLongImport from '@mui/icons-material/ReceiptLong';
+import AccountBalanceImport from '@mui/icons-material/AccountBalance';
+import TrendingUpImport from '@mui/icons-material/TrendingUp';
+import SpeedImport from '@mui/icons-material/Speed';
+import ArrowForwardImport from '@mui/icons-material/ArrowForward';
+
+const ReceiptLong = ReceiptLongImport.default || ReceiptLongImport;
+const AccountBalance = AccountBalanceImport.default || AccountBalanceImport;
+const TrendingUp = TrendingUpImport.default || TrendingUpImport;
+const Speed = SpeedImport.default || SpeedImport;
+const ArrowForward = ArrowForwardImport.default || ArrowForwardImport;
 
 const features = [
   { icon: <ReceiptLong />, text: 'Easy Invoice Creation' },
@@ -28,23 +39,21 @@ const Stats = () => {
         borderBottom: `1px solid ${colors.border.light}`,
       }}
     >
-      {/* Background Gradient */}
       <Box
         sx={{
           position: 'absolute',
           top: '50%',
-          right: '0%', // Moved towards the image side
+          right: '0%',
           transform: 'translate(20%, -50%)',
           width: '800px',
           height: '800px',
-          background: `radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 60%)`,
+          background: 'radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 60%)',
           filter: 'blur(60px)',
           pointerEvents: 'none'
         }}
       />
-      
+
       <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
-        {/* Section Header */}
         <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 }, maxWidth: '900px', mx: 'auto' }}>
           <Typography
             variant="overline"
@@ -57,7 +66,7 @@ const Stats = () => {
               borderRadius: 2,
               backgroundColor: 'rgba(0, 212, 255, 0.1)',
               color: colors.accent.primary,
-              border: `1px solid rgba(0, 212, 255, 0.2)`,
+              border: '1px solid rgba(0, 212, 255, 0.2)',
               fontSize: { xs: '0.7rem', sm: '0.75rem' },
               letterSpacing: '0.1em',
               fontWeight: 600,
@@ -65,7 +74,7 @@ const Stats = () => {
           >
             Our Product
           </Typography>
-          
+
           <Typography
             variant="h2"
             sx={{
@@ -76,9 +85,9 @@ const Stats = () => {
               lineHeight: 1.2
             }}
           >
-            AsliBooks – Smart Invoicing & GST Solution for Growing Businesses
+            AsliBooks - Smart Invoicing & GST Solution for Growing Businesses
           </Typography>
-          
+
           <Typography
             variant="h6"
             sx={{
@@ -88,19 +97,17 @@ const Stats = () => {
               lineHeight: 1.6,
             }}
           >
-            Simplify billing, manage GST, and track your business finances — all in one place.
+            Simplify billing, manage GST, and track your business finances - all in one place.
           </Typography>
         </Box>
 
         <Grid container spacing={{ xs: 6, md: 3 }} alignItems="center">
-          
-          {/* Left Column: Content */}
           <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               {features.map((feature, idx) => (
-                <ListItem 
-                  key={idx} 
-                  disablePadding 
+                <ListItem
+                  key={idx}
+                  disablePadding
                   sx={{
                     transition: 'transform 0.2s ease',
                     '&:hover': {
@@ -111,13 +118,13 @@ const Stats = () => {
                   <ListItemIcon sx={{ color: colors.accent.primary, minWidth: 40 }}>
                     {feature.icon}
                   </ListItemIcon>
-                  <ListItemText 
-                    primary={feature.text} 
-                    primaryTypographyProps={{ 
-                      fontSize: '1rem', 
-                      fontWeight: 500, 
-                      color: colors.text.primary 
-                    }} 
+                  <ListItemText
+                    primary={feature.text}
+                    primaryTypographyProps={{
+                      fontSize: '1rem',
+                      fontWeight: 500,
+                      color: colors.text.primary
+                    }}
                   />
                 </ListItem>
               ))}
@@ -153,7 +160,6 @@ const Stats = () => {
             </Stack>
           </Grid>
 
-          {/* Right Column: Visual Mockup */}
           <Grid item xs={12} md={6}>
             <Box
               sx={{
@@ -164,56 +170,52 @@ const Stats = () => {
                 perspective: '1000px',
               }}
             >
-              {/* Decorative Blur Effect Base Frame */}
-              <Box 
-                 sx={{
-                    position: 'relative',
-                    width: '100%',
-                    maxWidth: { xs: '100%', md: '600px' },
-                    borderRadius: 2,
-                    overflow: 'hidden',
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: `1px solid rgba(255, 255, 255, 0.1)`,
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)',
-                    backdropFilter: 'blur(10px)',
-                    transform: { xs: 'none', md: 'rotateY(-5deg) rotateX(2deg)' },
-                    transition: 'transform 0.5s ease',
-                    '&:hover': {
-                      transform: { xs: 'none', md: 'rotateY(0deg) rotateX(0deg)' },
-                    }
-                 }}
+              <Box
+                sx={{
+                  position: 'relative',
+                  width: '100%',
+                  maxWidth: { xs: '100%', md: '600px' },
+                  borderRadius: 2,
+                  overflow: 'hidden',
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)',
+                  backdropFilter: 'blur(10px)',
+                  transform: { xs: 'none', md: 'rotateY(-5deg) rotateX(2deg)' },
+                  transition: 'transform 0.5s ease',
+                  '&:hover': {
+                    transform: { xs: 'none', md: 'rotateY(0deg) rotateX(0deg)' },
+                  }
+                }}
               >
-                {/* Top Window Actions (fake dot buttons) */}
                 <Box sx={{ display: 'flex', gap: 1, px: 2, py: 1.5, borderBottom: '1px solid rgba(255,255,255,0.05)', backgroundColor: 'rgba(255, 255, 255, 0.01)' }}>
-                   <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ff5f56' }} />
-                   <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ffbd2e' }} />
-                   <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#27c93f' }} />
+                  <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ff5f56' }} />
+                  <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ffbd2e' }} />
+                  <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#27c93f' }} />
                 </Box>
-                
-                {/* Image Wrapper */}
-                <Box 
-                  sx={{ 
-                    bgcolor: '#0f172a' 
+
+                <Box
+                  sx={{
+                    bgcolor: '#0f172a'
                   }}
                 >
-                   <Box
-                     component="img"
-                     src="/aslibooks-dashboard.png"
-                     alt="AsliBooks Dashboard Mockup"
-                     sx={{
-                        width: '100%',
-                        height: 'auto',
-                        display: 'block',
-                        opacity: 0.9,
-                     }}
-                   />
+                  <Box
+                    component="img"
+                    src="/aslibooks-dashboard.png"
+                    alt="AsliBooks Dashboard Mockup"
+                    sx={{
+                      width: '100%',
+                      height: 'auto',
+                      display: 'block',
+                      opacity: 0.9,
+                    }}
+                  />
                 </Box>
               </Box>
             </Box>
           </Grid>
         </Grid>
 
-        {/* Trust Badges Line */}
         <Box
           sx={{
             mt: { xs: 6, md: 8 },
@@ -224,9 +226,9 @@ const Stats = () => {
             justifyContent: 'center',
           }}
         >
-          <Typography 
-            variant="subtitle2" 
-            sx={{ 
+          <Typography
+            variant="subtitle2"
+            sx={{
               color: colors.text.muted,
               letterSpacing: 1,
               fontWeight: 500,

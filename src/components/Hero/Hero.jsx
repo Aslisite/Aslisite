@@ -1,6 +1,11 @@
-import { Box, Container, Typography, Button, Stack, useTheme, useMediaQuery } from '@mui/material';
-import { ArrowForward, PlayArrow } from '@mui/icons-material';
+import { Box, Button, Container, Stack, Typography, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import ArrowForwardImport from '@mui/icons-material/ArrowForward';
+import PlayArrowImport from '@mui/icons-material/PlayArrow';
 import { colors } from '../../theme/theme';
+
+const ArrowForward = ArrowForwardImport.default || ArrowForwardImport;
+const PlayArrow = PlayArrowImport.default || PlayArrowImport;
 
 const Hero = () => {
   const theme = useTheme();
@@ -27,7 +32,6 @@ const Hero = () => {
         borderBottom: `1px solid ${colors.border.light}`,
       }}
     >
-      {/* Animated Background Gradient Orbs */}
       <Box
         sx={{
           position: 'absolute',
@@ -36,7 +40,7 @@ const Hero = () => {
           width: '600px',
           height: '600px',
           borderRadius: '50%',
-          background: `radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%)`,
+          background: 'radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%)',
           filter: 'blur(60px)',
           animation: prefersReducedMotion ? 'none' : 'float 8s ease-in-out infinite',
           '@keyframes float': {
@@ -53,13 +57,12 @@ const Hero = () => {
           width: '500px',
           height: '500px',
           borderRadius: '50%',
-          background: `radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%)`,
+          background: 'radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%)',
           filter: 'blur(60px)',
           animation: prefersReducedMotion ? 'none' : 'float 10s ease-in-out infinite reverse',
         }}
       />
-      
-      {/* Grid Pattern Overlay */}
+
       <Box
         sx={{
           position: 'absolute',
@@ -73,10 +76,10 @@ const Hero = () => {
         }}
       />
 
-      <Container 
-        maxWidth="lg" 
-        sx={{ 
-          position: 'relative', 
+      <Container
+        maxWidth="lg"
+        sx={{
+          position: 'relative',
           zIndex: 1,
           display: 'flex',
           flexDirection: 'column',
@@ -84,7 +87,6 @@ const Hero = () => {
           textAlign: 'center',
         }}
       >
-        {/* Content Wrapper */}
         <Box
           sx={{
             maxWidth: { xs: '100%', sm: '700px', md: '800px' },
@@ -93,7 +95,6 @@ const Hero = () => {
             alignItems: 'center',
           }}
         >
-          {/* Overline Badge */}
           <Typography
             variant="overline"
             sx={{
@@ -105,7 +106,7 @@ const Hero = () => {
               borderRadius: 2,
               backgroundColor: 'rgba(0, 212, 255, 0.1)',
               color: colors.accent.primary,
-              border: `1px solid rgba(0, 212, 255, 0.2)`,
+              border: '1px solid rgba(0, 212, 255, 0.2)',
               fontSize: { xs: '0.7rem', sm: '0.75rem' },
               letterSpacing: '0.1em',
             }}
@@ -113,7 +114,6 @@ const Hero = () => {
             Premium Digital Agency
           </Typography>
 
-          {/* Main Headline */}
           <Typography
             variant="h1"
             sx={{
@@ -141,7 +141,6 @@ const Hero = () => {
             That Drive Growth
           </Typography>
 
-          {/* Subheadline */}
           <Typography
             variant="h6"
             sx={{
@@ -157,7 +156,6 @@ const Hero = () => {
             Aslisite delivers powerful web development, ecommerce solutions, custom software, and SEO services to help your business grow online and achieve fast results.
           </Typography>
 
-          {/* CTA Buttons */}
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
             spacing={2}
@@ -204,7 +202,6 @@ const Hero = () => {
             </Button>
           </Stack>
 
-          {/* Trust Indicators */}
           <Box
             sx={{
               display: 'flex',
@@ -234,7 +231,7 @@ const Hero = () => {
                 display: { xs: 'none', sm: 'block' },
               }}
             >
-              •
+              |
             </Typography>
             <Typography variant="body2" sx={{ color: colors.text.muted }}>
               Trusted by 200+ clients worldwide
@@ -243,7 +240,6 @@ const Hero = () => {
         </Box>
       </Container>
 
-      {/* Scroll Indicator */}
       <Box
         sx={{
           position: 'absolute',
