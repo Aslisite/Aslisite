@@ -5,8 +5,8 @@ const colors = {
   background: {
     primary: '#0a0a0f',
     secondary: '#12121a',
-    elevated: '#1a1a25',
-    card: '#161620',
+    elevated: '#161622',
+    card: '#111118',
   },
   accent: {
     primary: '#00d4ff', // Electric Blue
@@ -17,12 +17,13 @@ const colors = {
   },
   text: {
     primary: '#ffffff',
-    secondary: '#a0a0b0',
-    muted: '#6b6b7b',
+    secondary: 'rgba(255, 255, 255, 0.75)',
+    muted: 'rgba(255, 255, 255, 0.6)',
   },
   border: {
-    light: 'rgba(255, 255, 255, 0.1)',
-    medium: 'rgba(255, 255, 255, 0.15)',
+    light: 'rgba(255, 255, 255, 0.08)',
+    medium: 'rgba(255, 255, 255, 0.12)',
+    accent: 'rgba(123, 97, 255, 0.3)',
   },
 };
 
@@ -156,35 +157,61 @@ let theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
+          borderRadius: 12,
           padding: '12px 28px',
           fontSize: '1rem',
-          transition:
-            'background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         },
         containedPrimary: {
-          background: colors.accent.gradient,
-          boxShadow: '0 4px 20px rgba(0, 212, 255, 0.3)',
+          background: 'linear-gradient(135deg, #00C6FF 0%, #7B61FF 100%)',
+          boxShadow: '0 4px 20px rgba(123, 97, 255, 0.4)',
+          color: '#ffffff',
           '&:hover': {
-            boxShadow: '0 6px 30px rgba(0, 212, 255, 0.4)',
-            transform: 'translateY(-2px)',
+            boxShadow: '0 8px 25px rgba(123, 97, 255, 0.6)',
+            transform: 'translateY(-3px)',
           },
         },
         containedSecondary: {
-          backgroundColor: colors.background.elevated,
-          border: `1px solid ${colors.border.medium}`,
+          backgroundColor: 'rgba(123, 97, 255, 0.02)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(123, 97, 255, 0.5)',
           boxShadow: 'none',
+          color: '#ffffff',
           '&:hover': {
-            backgroundColor: colors.background.card,
-            borderColor: colors.accent.primary,
-            boxShadow: '0 4px 20px rgba(0, 212, 255, 0.15)',
+            backgroundColor: 'rgba(123, 97, 255, 0.08)',
+            borderColor: '#7B61FF',
+            boxShadow: '0 0 15px rgba(123, 97, 255, 0.2)',
+            transform: 'translateY(-3px)',
           },
         },
         outlined: {
-          borderColor: colors.border.medium,
+          borderColor: 'rgba(123, 97, 255, 0.5)',
+          color: '#ffffff',
           '&:hover': {
-            borderColor: colors.accent.primary,
-            backgroundColor: 'rgba(0, 212, 255, 0.05)',
+            borderColor: '#7B61FF',
+            backgroundColor: 'rgba(123, 97, 255, 0.08)',
+            transform: 'translateY(-3px)',
+          },
+        },
+        text: {
+          color: '#7B61FF',
+          position: 'relative',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: '8px',
+            left: '28px',
+            width: '0%',
+            height: '2px',
+            backgroundColor: '#7B61FF',
+            transition: 'width 0.3s ease-in-out',
+          },
+          '&:hover': {
+            backgroundColor: 'transparent',
+            transform: 'translateY(-2px)',
+            '&::after': {
+              width: 'calc(100% - 56px)',
+            },
           },
         },
       },
