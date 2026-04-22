@@ -31,11 +31,11 @@ const features = [
   { icon: <Speed />, text: 'Simple Dashboard Insights' },
 ];
 
-const Stats = () => {
+const Product = () => {
   return (
     <Box
       component="section"
-      id="stats"
+      id="product"
       tabIndex="-1"
       sx={{
         pt: { xs: 6, md: 8 },
@@ -248,4 +248,4 @@ const Stats = () => {
   );
 };
 
-export default Stats;
+export default Product;

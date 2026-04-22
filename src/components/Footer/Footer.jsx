@@ -1,12 +1,4 @@
-import {
-  Box,
-  Container,
-  Divider,
-  Grid,
-  IconButton,
-  Link,
-  Typography,
-} from '@mui/material';
+import { Box, Container, Divider, Grid, IconButton, Link, Typography } from '@mui/material';
 import FacebookImport from '@mui/icons-material/Facebook';
 import InstagramImport from '@mui/icons-material/Instagram';
 import LinkedInImport from '@mui/icons-material/LinkedIn';
@@ -31,7 +23,7 @@ const navigation = {
   ],
   quickLinks: [
     { label: 'Home', href: '#hero' },
-    { label: 'Our Product', href: '#stats' },
+    { label: 'Our Product', href: '#product' },
     { label: 'FAQ', href: '#faq' },
     { label: 'Contact', href: '#contact' },
   ],

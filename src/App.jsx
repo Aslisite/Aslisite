@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 const Services = React.lazy(() => import('./components/Services'));
-const Stats = React.lazy(() => import('./components/Stats'));
+const Product = React.lazy(() => import('./components/Product'));
 const FAQ = React.lazy(() => import('./components/FAQ'));
 const Contact = React.lazy(() => import('./components/Contact'));
 
@@ -32,7 +32,7 @@ function App() {
             <Hero />
             <Suspense fallback={<Box sx={{ minHeight: '100vh' }} />}>
               <Services />
-              <Stats />
+              <Product />
               <FAQ />
               <Contact />
             </Suspense>

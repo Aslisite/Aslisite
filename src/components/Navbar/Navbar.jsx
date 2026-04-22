@@ -23,7 +23,7 @@ const MenuIcon = MenuIconImport.default || MenuIconImport;
 
 const navItems = [
   { label: 'Services', href: '#services' },
-  { label: 'Our Product', href: '#stats' },
+  { label: 'Our Product', href: '#product' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
 ];
