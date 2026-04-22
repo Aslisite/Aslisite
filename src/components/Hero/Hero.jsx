@@ -2,6 +2,7 @@ import { Box, Button, Container, Stack, Typography, useMediaQuery } from '@mui/m
 import ArrowForwardImport from '@mui/icons-material/ArrowForward';
 import PlayArrowImport from '@mui/icons-material/PlayArrow';
 import { colors } from '../../theme/theme';
+import { SectionBadge } from '../common';
 
 const ArrowForward = ArrowForwardImport.default || ArrowForwardImport;
 const PlayArrow = PlayArrowImport.default || PlayArrowImport;
@@ -91,24 +92,7 @@ const Hero = () => {
             alignItems: 'center',
           }}
         >
-          <Typography
-            variant="overline"
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              mb: 3,
-              px: 2.5,
-              py: 1,
-              borderRadius: 2,
-              backgroundColor: 'rgba(0, 212, 255, 0.1)',
-              color: colors.accent.primary,
-              border: '1px solid rgba(0, 212, 255, 0.2)',
-              fontSize: { xs: '0.7rem', sm: '0.75rem' },
-              letterSpacing: '0.1em',
-            }}
-          >
-            Premium Digital Agency
-          </Typography>
+          <SectionBadge sx={{ mb: 3 }}>Premium Digital Agency</SectionBadge>
 
           <Typography
             variant="h1"

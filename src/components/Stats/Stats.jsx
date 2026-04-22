@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import { colors } from '../../theme/theme';
+import { SectionBadge } from '../common';
 import ReceiptLongImport from '@mui/icons-material/ReceiptLong';
 import AccountBalanceImport from '@mui/icons-material/AccountBalance';
 import TrendingUpImport from '@mui/icons-material/TrendingUp';
@@ -62,25 +63,7 @@ const Stats = () => {
 
       <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
         <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 }, maxWidth: '900px', mx: 'auto' }}>
-          <Typography
-            variant="overline"
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              mb: 2,
-              px: 2.5,
-              py: 1,
-              borderRadius: 2,
-              backgroundColor: 'rgba(0, 212, 255, 0.1)',
-              color: colors.accent.primary,
-              border: '1px solid rgba(0, 212, 255, 0.2)',
-              fontSize: { xs: '0.7rem', sm: '0.75rem' },
-              letterSpacing: '0.1em',
-              fontWeight: 600,
-            }}
-          >
-            Our Product
-          </Typography>
+          <SectionBadge>Our Product</SectionBadge>
 
           <Typography
             variant="h2"

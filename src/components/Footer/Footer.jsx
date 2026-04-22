@@ -6,7 +6,6 @@ import {
   IconButton,
   Link,
   Typography,
-  useMediaQuery,
 } from '@mui/material';
 import FacebookImport from '@mui/icons-material/Facebook';
 import InstagramImport from '@mui/icons-material/Instagram';

@@ -18,6 +18,7 @@ import LocationOnImport from '@mui/icons-material/LocationOn';
 import PhoneImport from '@mui/icons-material/Phone';
 import SendImport from '@mui/icons-material/Send';
 import { colors } from '../../theme/theme';
+import { SectionBadge } from '../common';
 
 const Business = BusinessImport.default || BusinessImport;
 const Email = EmailImport.default || EmailImport;
@@ -112,19 +113,7 @@ const Contact = () => {
     >
       <Container maxWidth="lg">
         <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}>
-          <Typography
-            variant="overline"
-            sx={{
-              color: colors.accent.primary,
-              fontWeight: 600,
-              letterSpacing: 2,
-              fontSize: '0.875rem',
-              display: 'block',
-              mb: 2,
-            }}
-          >
-            Get In Touch
-          </Typography>
+          <SectionBadge>Get In Touch</SectionBadge>
           <Typography
             variant="h2"
             sx={{

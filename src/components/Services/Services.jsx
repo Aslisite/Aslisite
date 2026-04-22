@@ -1,9 +1,10 @@
-import { Box, Card, CardContent, Container, Grid, Typography, useMediaQuery } from '@mui/material';
+import { Box, Card, CardContent, Container, Grid, Typography } from '@mui/material';
 import CodeImport from '@mui/icons-material/Code';
 import ShoppingCartImport from '@mui/icons-material/ShoppingCart';
 import BuildImport from '@mui/icons-material/Build';
 import TrendingUpImport from '@mui/icons-material/TrendingUp';
 import { colors } from '../../theme/theme';
+import { SectionBadge } from '../common';
 
 const Code = CodeImport.default || CodeImport;
 const ShoppingCart = ShoppingCartImport.default || ShoppingCartImport;
@@ -76,24 +77,7 @@ const Services = () => {
       <Container maxWidth="lg">
         {/* Section Header */}
         <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}>
-          <Typography
-            variant="overline"
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              mb: 2,
-              px: 2.5,
-              py: 1,
-              borderRadius: 2,
-              backgroundColor: 'rgba(0, 212, 255, 0.1)',
-              color: colors.accent.primary,
-              border: `1px solid rgba(0, 212, 255, 0.2)`,
-              fontSize: { xs: '0.7rem', sm: '0.75rem' },
-              letterSpacing: '0.1em',
-            }}
-          >
-            Our Services
-          </Typography>
+          <SectionBadge>Our Services</SectionBadge>
           <Typography
             variant="h2"
             sx={{
