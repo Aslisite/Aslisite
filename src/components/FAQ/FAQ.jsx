@@ -88,7 +88,8 @@ const FAQ = () => {
               fontSize: { xs: '1rem', md: '1.1rem' },
             }}
           >
-            A quick overview of how Aslisite helps businesses in Kerala and beyond with web development, ecommerce, design, and SEO.
+            A quick overview of how Aslisite helps businesses in Kerala and beyond with web
+            development, ecommerce, design, and SEO.
           </Typography>
         </Box>
 

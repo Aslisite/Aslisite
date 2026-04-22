@@ -1,6 +1,17 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { Alert, Box, Button, CircularProgress, Container, Grid, Paper, Snackbar, TextField, Typography } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Grid,
+  Paper,
+  Snackbar,
+  TextField,
+  Typography,
+} from '@mui/material';
 import BusinessImport from '@mui/icons-material/Business';
 import EmailImport from '@mui/icons-material/Email';
 import LocationOnImport from '@mui/icons-material/LocationOn';
@@ -68,7 +79,7 @@ const Contact = () => {
       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, PUBLIC_KEY);
       setSnackbar({
         open: true,
-        message: 'Thank you for your message! We\'ll get back to you within 24 hours.',
+        message: "Thank you for your message! We'll get back to you within 24 hours.",
         severity: 'success',
       });
       setFormData({ name: '', email: '', company: '', message: '' });
@@ -207,9 +218,7 @@ const Contact = () => {
                             {item.value}
                           </Typography>
                         ) : (
-                          <Typography sx={{ color: colors.text.primary }}>
-                            {item.value}
-                          </Typography>
+                          <Typography sx={{ color: colors.text.primary }}>{item.value}</Typography>
                         )}
                       </Box>
                     </Box>

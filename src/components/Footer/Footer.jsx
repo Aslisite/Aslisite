@@ -1,5 +1,13 @@
-import { Box, Container, Divider, Grid, IconButton, Link, Typography, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import {
+  Box,
+  Container,
+  Divider,
+  Grid,
+  IconButton,
+  Link,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
 import FacebookImport from '@mui/icons-material/Facebook';
 import InstagramImport from '@mui/icons-material/Instagram';
 import LinkedInImport from '@mui/icons-material/LinkedIn';
@@ -37,8 +45,6 @@ const socialLinks = [
 ];
 
 const Footer = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const currentYear = new Date().getFullYear();
 
   return (
@@ -78,10 +84,13 @@ const Footer = () => {
                   mx: { xs: 'auto', md: 0 },
                 }}
               >
-                Premium digital agency crafting exceptional web experiences that drive business growth and transform ideas into reality.
+                Premium digital agency crafting exceptional web experiences that drive business
+                growth and transform ideas into reality.
               </Typography>
 
-              <Box sx={{ display: 'flex', gap: 1, justifyContent: { xs: 'center', md: 'flex-start' } }}>
+              <Box
+                sx={{ display: 'flex', gap: 1, justifyContent: { xs: 'center', md: 'flex-start' } }}
+              >
                 {socialLinks.map((social, index) => {
                   const IconComponent = social.icon;
                   return (
@@ -262,13 +271,24 @@ const Footer = () => {
                     <LocationOn sx={{ fontSize: 18, color: colors.accent.primary, mt: 0.25 }} />
                     <Typography
                       variant="body2"
-                      sx={{ color: colors.text.muted, fontSize: '0.875rem', lineHeight: 1.6, textAlign: { xs: 'center', sm: 'left' } }}
+                      sx={{
+                        color: colors.text.muted,
+                        fontSize: '0.875rem',
+                        lineHeight: 1.6,
+                        textAlign: { xs: 'center', sm: 'left' },
+                      }}
                     >
-                      Aslisite Technologies<br />
-                      Peruvallur<br />
-                      Malappuram, Kerala<br />
-                      India, 676317<br />
-                      <Box component="span" sx={{ fontSize: '0.75rem', color: colors.text.muted }}>GSTIN: 32CYTPP2009K1Z5</Box>
+                      Aslisite Technologies
+                      <br />
+                      Peruvallur
+                      <br />
+                      Malappuram, Kerala
+                      <br />
+                      India, 676317
+                      <br />
+                      <Box component="span" sx={{ fontSize: '0.75rem', color: colors.text.muted }}>
+                        GSTIN: 32CYTPP2009K1Z5
+                      </Box>
                     </Typography>
                   </Box>
                 </Box>

@@ -1,5 +1,4 @@
 import { Box, Button, Container, Stack, Typography, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import ArrowForwardImport from '@mui/icons-material/ArrowForward';
 import PlayArrowImport from '@mui/icons-material/PlayArrow';
 import { colors } from '../../theme/theme';
@@ -8,9 +7,6 @@ const ArrowForward = ArrowForwardImport.default || ArrowForwardImport;
 const PlayArrow = PlayArrowImport.default || PlayArrowImport;
 
 const Hero = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
 
   return (
@@ -153,7 +149,8 @@ const Hero = () => {
               textAlign: 'center',
             }}
           >
-            Aslisite delivers powerful web development, ecommerce solutions, custom software, and SEO services to help your business grow online and achieve fast results.
+            Aslisite delivers powerful web development, ecommerce solutions, custom software, and
+            SEO services to help your business grow online and achieve fast results.
           </Typography>
 
           <Stack

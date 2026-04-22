@@ -1,5 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Box, Button, Container, Drawer, IconButton, List, ListItemButton, ListItemText, Typography, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Drawer,
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemText,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import CloseIconImport from '@mui/icons-material/Close';
 import KeyboardArrowDownIconImport from '@mui/icons-material/KeyboardArrowDown';
@@ -61,7 +72,9 @@ const Navbar = () => {
       }}
     >
       {/* Header with Logo and Close */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2, pt: 3 }}>
+      <Box
+        sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2, pt: 3 }}
+      >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
           <Box
             component="img"
@@ -103,7 +116,7 @@ const Navbar = () => {
 
       {/* Menu Items */}
       <List sx={{ flex: 1, px: 3, pt: 2 }}>
-        {navItems.map((item, index) => (
+        {navItems.map((item) => (
           <Box key={item.label}>
             {item.hasDropdown ? (
               <Box sx={{ width: '100%' }}>
@@ -239,7 +252,8 @@ const Navbar = () => {
           backgroundColor: scrolled ? 'rgba(10, 10, 15, 0.95)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
           borderBottom: scrolled ? `1px solid ${colors.border.light}` : 'none',
-          transition: 'background-color 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease',
+          transition:
+            'background-color 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease',
         }}
       >
         <Container maxWidth="xl">
@@ -316,7 +330,8 @@ const Navbar = () => {
                             sx={{
                               fontSize: '1rem',
                               color: colors.text.secondary,
-                              transform: openDropdown === 'products' ? 'rotate(180deg)' : 'rotate(0)',
+                              transform:
+                                openDropdown === 'products' ? 'rotate(180deg)' : 'rotate(0)',
                               transition: 'transform 0.2s ease',
                             }}
                           />
@@ -375,10 +390,18 @@ const Navbar = () => {
                                 },
                               }}
                             >
-                              <Typography sx={{ color: colors.text.primary, fontWeight: 500, fontSize: '0.875rem' }}>
+                              <Typography
+                                sx={{
+                                  color: colors.text.primary,
+                                  fontWeight: 500,
+                                  fontSize: '0.875rem',
+                                }}
+                              >
                                 {product.label}
                               </Typography>
-                              <Typography sx={{ color: colors.text.secondary, fontSize: '0.75rem', mt: 0.25 }}>
+                              <Typography
+                                sx={{ color: colors.text.secondary, fontSize: '0.75rem', mt: 0.25 }}
+                              >
                                 {product.description}
                               </Typography>
                             </Box>

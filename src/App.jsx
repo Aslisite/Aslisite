@@ -9,6 +9,7 @@ import Stats from './components/Stats';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 const CssBaseline = CssBaselineImport.default || CssBaselineImport;
 
@@ -16,23 +17,25 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box
-        sx={{
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <Navbar />
-        <Box component="main" sx={{ flex: 1 }}>
-          <Hero />
-          <Services />
-          <Stats />
-          <FAQ />
-          <Contact />
+      <ErrorBoundary>
+        <Box
+          sx={{
+            minHeight: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <Navbar />
+          <Box component="main" sx={{ flex: 1 }}>
+            <Hero />
+            <Services />
+            <Stats />
+            <FAQ />
+            <Contact />
+          </Box>
+          <Footer />
         </Box>
-        <Footer />
-      </Box>
+      </ErrorBoundary>
     </ThemeProvider>
   );
 }

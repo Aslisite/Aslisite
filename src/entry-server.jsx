@@ -6,6 +6,6 @@ export function render() {
   return renderToString(
     <React.StrictMode>
       <App />
-    </React.StrictMode>
+    </React.StrictMode>,
   );
 }

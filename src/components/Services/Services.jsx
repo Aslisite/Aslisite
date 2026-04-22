@@ -1,5 +1,4 @@
 import { Box, Card, CardContent, Container, Grid, Typography, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import CodeImport from '@mui/icons-material/Code';
 import ShoppingCartImport from '@mui/icons-material/ShoppingCart';
 import BuildImport from '@mui/icons-material/Build';
@@ -15,33 +14,39 @@ const services = [
   {
     icon: Code,
     title: 'Web Development',
-    description: 'Custom web applications built with cutting-edge technologies. From responsive websites to complex enterprise solutions.',
+    description:
+      'Custom web applications built with cutting-edge technologies. From responsive websites to complex enterprise solutions.',
     features: ['React & Next.js', 'Node.js & Python', 'API Development', 'E-commerce'],
   },
   {
     icon: ShoppingCart,
     title: 'Ecommerce Solutions',
-    description: 'Scalable online stores with secure payment gateways, inventory management, and seamless user experience.',
-    features: ['Shopify & WooCommerce', 'Payment Integration', 'Inventory Management', 'Mobile Responsive'],
+    description:
+      'Scalable online stores with secure payment gateways, inventory management, and seamless user experience.',
+    features: [
+      'Shopify & WooCommerce',
+      'Payment Integration',
+      'Inventory Management',
+      'Mobile Responsive',
+    ],
   },
   {
     icon: Build,
     title: 'Custom Software',
-    description: 'Tailor-made software solutions designed to address your unique business challenges and streamline operations.',
+    description:
+      'Tailor-made software solutions designed to address your unique business challenges and streamline operations.',
     features: ['Enterprise Apps', 'Database Solutions', 'API Integration', 'Cloud Migration'],
   },
   {
     icon: TrendingUp,
     title: 'SEO Services',
-    description: 'Data-driven SEO strategies to boost your search rankings, drive organic traffic, and maximize conversions.',
+    description:
+      'Data-driven SEO strategies to boost your search rankings, drive organic traffic, and maximize conversions.',
     features: ['On-Page SEO', 'Link Building', 'Content Strategy', 'Analytics & Reporting'],
   },
 ];
 
 const Services = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
   return (
     <Box
       component="section"
@@ -153,8 +158,8 @@ const Services = () => {
                     },
                   }}
                 >
-                  <CardContent 
-                    sx={{ 
+                  <CardContent
+                    sx={{
                       p: { xs: 3, md: 4 },
                       display: 'flex',
                       flexDirection: 'column',
@@ -207,10 +212,10 @@ const Services = () => {
                     </Typography>
 
                     {/* Features */}
-                    <Box 
-                      sx={{ 
-                        display: 'flex', 
-                        flexWrap: 'wrap', 
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
                         gap: 1,
                         mt: 'auto',
                       }}

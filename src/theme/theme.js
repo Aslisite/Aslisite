@@ -9,9 +9,9 @@ const colors = {
     card: '#161620',
   },
   accent: {
-    primary: '#00d4ff',      // Electric Blue
+    primary: '#00d4ff', // Electric Blue
     primaryHover: '#33ddff',
-    secondary: '#7c3aed',    // Purple
+    secondary: '#7c3aed', // Purple
     gradient: 'linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%)',
     gradientReverse: 'linear-gradient(135deg, #7c3aed 0%, #00d4ff 100%)',
   },
@@ -159,7 +159,8 @@ let theme = createTheme({
           borderRadius: 8,
           padding: '12px 28px',
           fontSize: '1rem',
-          transition: 'background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition:
+            'background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         },
         containedPrimary: {
           background: colors.accent.gradient,
@@ -194,7 +195,8 @@ let theme = createTheme({
           backgroundColor: colors.background.card,
           border: `1px solid ${colors.border.light}`,
           borderRadius: 16,
-          transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition:
+            'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           '&:hover': {
             transform: 'translateY(-4px)',
             borderColor: colors.border.medium,

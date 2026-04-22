@@ -1,5 +1,15 @@
-import { Box, Button, Container, Grid, List, ListItem, ListItemIcon, ListItemText, Stack, Typography, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { colors } from '../../theme/theme';
 import ReceiptLongImport from '@mui/icons-material/ReceiptLong';
 import AccountBalanceImport from '@mui/icons-material/AccountBalance';
@@ -17,13 +27,10 @@ const features = [
   { icon: <ReceiptLong />, text: 'Easy Invoice Creation' },
   { icon: <AccountBalance />, text: 'GST-Ready Billing' },
   { icon: <TrendingUp />, text: 'Expense & Payment Tracking' },
-  { icon: <Speed />, text: 'Simple Dashboard Insights' }
+  { icon: <Speed />, text: 'Simple Dashboard Insights' },
 ];
 
 const Stats = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
   return (
     <Box
       component="section"
@@ -49,7 +56,7 @@ const Stats = () => {
           height: '800px',
           background: 'radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 60%)',
           filter: 'blur(60px)',
-          pointerEvents: 'none'
+          pointerEvents: 'none',
         }}
       />
 
@@ -82,7 +89,7 @@ const Stats = () => {
               fontWeight: 800,
               mb: 2,
               color: colors.text.primary,
-              lineHeight: 1.2
+              lineHeight: 1.2,
             }}
           >
             AsliBooks - Smart Invoicing & GST Solution for Growing Businesses
@@ -111,8 +118,8 @@ const Stats = () => {
                   sx={{
                     transition: 'transform 0.2s ease',
                     '&:hover': {
-                      transform: 'translateY(-2px)'
-                    }
+                      transform: 'translateY(-2px)',
+                    },
                   }}
                 >
                   <ListItemIcon sx={{ color: colors.accent.primary, minWidth: 40 }}>
@@ -123,7 +130,7 @@ const Stats = () => {
                     primaryTypographyProps={{
                       fontSize: '1rem',
                       fontWeight: 500,
-                      color: colors.text.primary
+                      color: colors.text.primary,
                     }}
                   />
                 </ListItem>
@@ -185,18 +192,33 @@ const Stats = () => {
                   transition: 'transform 0.5s ease',
                   '&:hover': {
                     transform: { xs: 'none', md: 'rotateY(0deg) rotateX(0deg)' },
-                  }
+                  },
                 }}
               >
-                <Box sx={{ display: 'flex', gap: 1, px: 2, py: 1.5, borderBottom: '1px solid rgba(255,255,255,0.05)', backgroundColor: 'rgba(255, 255, 255, 0.01)' }}>
-                  <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ff5f56' }} />
-                  <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ffbd2e' }} />
-                  <Box sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#27c93f' }} />
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: 1,
+                    px: 2,
+                    py: 1.5,
+                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.01)',
+                  }}
+                >
+                  <Box
+                    sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ff5f56' }}
+                  />
+                  <Box
+                    sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#ffbd2e' }}
+                  />
+                  <Box
+                    sx={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#27c93f' }}
+                  />
                 </Box>
 
                 <Box
                   sx={{
-                    bgcolor: '#0f172a'
+                    bgcolor: '#0f172a',
                   }}
                 >
                   <Box
@@ -232,7 +254,7 @@ const Stats = () => {
               color: colors.text.muted,
               letterSpacing: 1,
               fontWeight: 500,
-              fontSize: { xs: '0.8rem', md: '0.9rem' }
+              fontSize: { xs: '0.8rem', md: '0.9rem' },
             }}
           >
             Built for small businesses, freelancers, and startups
