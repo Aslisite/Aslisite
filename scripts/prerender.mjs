@@ -20,7 +20,8 @@ async function renderApp() {
 
   try {
     const { render } = await vite.ssrLoadModule('/src/entry-server.jsx');
-    return render();
+    const { html } = render('/');
+    return html;
   } finally {
     await vite.close();
   }

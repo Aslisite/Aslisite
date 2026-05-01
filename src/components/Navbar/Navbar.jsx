@@ -15,6 +15,7 @@ import { useTheme } from '@mui/material/styles';
 import CloseIconImport from '@mui/icons-material/Close';
 import KeyboardArrowDownIconImport from '@mui/icons-material/KeyboardArrowDown';
 import MenuIconImport from '@mui/icons-material/Menu';
+import { Link } from 'react-router-dom';
 import { colors } from '../../theme/theme';
 
 const CloseIcon = CloseIconImport.default || CloseIconImport;
@@ -22,10 +23,11 @@ const KeyboardArrowDownIcon = KeyboardArrowDownIconImport.default || KeyboardArr
 const MenuIcon = MenuIconImport.default || MenuIconImport;
 
 const navItems = [
-  { label: 'Services', href: '#services' },
-  { label: 'Our Product', href: '#product' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Our Product', href: '/#product' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'FAQ', href: '/#faq' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 const productItems = [
@@ -179,8 +181,9 @@ const Navbar = () => {
               </Box>
             ) : (
               <ListItemButton
-                component="a"
-                href={item.href}
+                component={item.href.startsWith('/#') ? 'a' : Link}
+                href={item.href.startsWith('/#') ? item.href : undefined}
+                to={item.href.startsWith('/#') ? undefined : item.href}
                 onClick={handleDrawerToggle}
                 sx={{
                   py: 2.5,
@@ -268,7 +271,7 @@ const Navbar = () => {
             {/* Logo */}
             <Box
               component="a"
-              href="#hero"
+              href="/#hero"
               sx={{ display: 'flex', alignItems: 'center', gap: 1.5, textDecoration: 'none' }}
             >
               <Box
@@ -338,8 +341,9 @@ const Navbar = () => {
                         </Box>
                       ) : (
                         <Typography
-                          component="a"
-                          href={item.href}
+                          component={item.href.startsWith('/#') ? 'a' : Link}
+                          href={item.href.startsWith('/#') ? item.href : undefined}
+                          to={item.href.startsWith('/#') ? undefined : item.href}
                           sx={{
                             color: colors.text.secondary,
                             textDecoration: 'none',
