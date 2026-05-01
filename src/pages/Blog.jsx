@@ -12,6 +12,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { getBlogs } from '../api/blog';
+import { colors } from '../theme/theme';
+import { SectionBadge } from '../components/common';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -57,9 +59,45 @@ const Blog = () => {
         <meta name="description" content="Read our latest articles, insights, and updates." />
       </Helmet>
 
-      <Typography variant="h2" component="h1" gutterBottom sx={{ mb: 6, fontWeight: 'bold', textAlign: 'center' }}>
-        Our Blog
-      </Typography>
+      <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}>
+        <SectionBadge>Our Blog</SectionBadge>
+        <Typography
+          variant="h2"
+          component="h1"
+          sx={{
+            fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+            fontWeight: 700,
+            mb: 2,
+            color: colors.text.primary,
+          }}
+        >
+          Insights &{' '}
+          <Box
+            component="span"
+            sx={{
+              background: colors.accent.gradient,
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Updates
+          </Box>
+        </Typography>
+        <Typography
+          variant="h6"
+          sx={{
+            color: colors.text.secondary,
+            fontWeight: 400,
+            maxWidth: '600px',
+            mx: 'auto',
+            fontSize: { xs: '1rem', md: '1.125rem' },
+            lineHeight: 1.6,
+          }}
+        >
+          Read our latest articles, insights, and updates to stay ahead.
+        </Typography>
+      </Box>
 
       <Grid container spacing={4}>
         {blogs.map((blog) => (
