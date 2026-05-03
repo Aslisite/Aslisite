@@ -11,6 +11,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
+import { ScrollToTop } from './components/common';
 
 const CssBaseline = CssBaselineImport.default || CssBaselineImport;
 
@@ -26,6 +27,7 @@ function App() {
             flexDirection: 'column',
           }}
         >
+          <ScrollToTop />
           <Navbar />
           <Box component="main" sx={{ flex: 1 }}>
             <Routes>
