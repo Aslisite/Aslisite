@@ -14,14 +14,18 @@ import { Helmet } from 'react-helmet-async';
 import { getBlogs } from '../api/blog';
 import { colors } from '../theme/theme';
 import { SectionBadge } from '../components/common';
+import { useInitialData } from '../context/DataContext';
 
 const Blog = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const initialData = useInitialData();
+  const [blogs, setBlogs] = useState(initialData?.blogs || []);
+  const [loading, setLoading] = useState(!initialData?.blogs);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (initialData?.blogs) return;
+    
     const fetchBlogs = async () => {
       try {
         const data = await getBlogs();
@@ -34,7 +38,7 @@ const Blog = () => {
     };
 
     fetchBlogs();
-  }, []);
+  }, [initialData]);
 
   if (loading) {
     return (

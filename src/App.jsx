@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaselineImport from '@mui/material/CssBaseline';
@@ -8,9 +8,9 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
-const Home = React.lazy(() => import('./pages/Home'));
-const Blog = React.lazy(() => import('./pages/Blog'));
-const BlogDetail = React.lazy(() => import('./pages/BlogDetail'));
+import Home from './pages/Home';
+import Blog from './pages/Blog';
+import BlogDetail from './pages/BlogDetail';
 
 const CssBaseline = CssBaselineImport.default || CssBaselineImport;
 
@@ -28,13 +28,11 @@ function App() {
         >
           <Navbar />
           <Box component="main" sx={{ flex: 1 }}>
-            <Suspense fallback={<Box sx={{ minHeight: '100vh' }} />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogDetail />} />
-              </Routes>
-            </Suspense>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogDetail />} />
+            </Routes>
           </Box>
           <Footer />
         </Box>
