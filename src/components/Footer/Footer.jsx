@@ -6,6 +6,7 @@ import LocationOnImport from '@mui/icons-material/LocationOn';
 import MailImport from '@mui/icons-material/Mail';
 import WhatsAppImport from '@mui/icons-material/WhatsApp';
 import { colors } from '../../theme/theme';
+import { Link as RouterLink } from 'react-router-dom';
 
 const Facebook = FacebookImport.default || FacebookImport;
 const Instagram = InstagramImport.default || InstagramImport;
@@ -306,7 +307,10 @@ const Footer = () => {
           }}
         >
           <Typography variant="caption" sx={{ color: colors.text.muted }}>
-            Copyright {currentYear} Aslisite. All rights reserved.
+            Copyright {currentYear} Aslisite. All rights reserved. |{' '}
+            <Link component={RouterLink} to="/privacy-policy" sx={{ color: 'inherit', textDecoration: 'none', '&:hover': { color: colors.accent.primary } }}>
+              Privacy Policy
+            </Link>
           </Typography>
           <Typography variant="caption" sx={{ color: colors.text.muted }}>
             Web development, ecommerce, UI/UX, and SEO services in Kerala

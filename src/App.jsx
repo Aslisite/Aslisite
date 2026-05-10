@@ -11,6 +11,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import { ScrollToTop } from './components/common';
 
 const CssBaseline = CssBaselineImport.default || CssBaselineImport;
@@ -34,6 +35,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             </Routes>
           </Box>
           <Footer />
