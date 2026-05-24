@@ -1,4 +1,4 @@
-const API_URL = 'https://sheetdb.io/api/v1/uv17gemwuvkgt';
+const API_URL = 'https://sheetdb.io/api/v1/ddub5agvnxhso';
 
 export const getBlogs = async () => {
   try {

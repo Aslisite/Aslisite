@@ -499,8 +499,8 @@ const BlogDetail = () => {
       </Box>
 
       {/* Main Content Area */}
-      <Container maxWidth="lg" sx={{ mt: 8 }}>
-        <Grid container spacing={8}>
+      <Container maxWidth="lg" sx={{ mt: { xs: 4, md: 8 } }}>
+        <Grid container spacing={{ xs: 4, md: 8 }}>
           {/* Main Column */}
           <Grid item xs={12} md={8}>
             {post.image && (
@@ -513,8 +513,8 @@ const BlogDetail = () => {
                   height: 'auto',
                   maxHeight: '600px',
                   objectFit: 'cover',
-                  borderRadius: 4,
-                  mb: 8,
+                  borderRadius: { xs: 2, md: 3 },
+                  mb: { xs: 4, md: 8 },
                   boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)'
                 }}
               />
@@ -537,7 +537,7 @@ const BlogDetail = () => {
                 '& p': { mb: 3 },
                 '& ul, & ol': { mb: 4, pl: 3 },
                 '& li': { mb: 1.5 },
-                '& img': { maxWidth: '100%', height: 'auto', borderRadius: 4, my: 4 },
+                '& img': { maxWidth: '100%', height: 'auto', borderRadius: 2, my: 4 },
                 '& a': { 
                   color: '#00d4ff', 
                   textDecoration: 'none', 
