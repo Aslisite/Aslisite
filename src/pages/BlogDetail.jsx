@@ -514,7 +514,7 @@ const BlogDetail = () => {
                   maxHeight: '600px',
                   objectFit: 'cover',
                   borderRadius: { xs: 2, md: 3 },
-                  mb: { xs: 4, md: 8 },
+                  mb: { xs: 3, md: 6 },
                   boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)'
                 }}
               />
@@ -526,6 +526,9 @@ const BlogDetail = () => {
                 lineHeight: 1.8,
                 fontSize: { xs: '1.05rem', md: '1.125rem' },
                 color: 'rgba(255, 255, 255, 0.85)',
+                '& > *:first-child': {
+                  mt: 0,
+                },
                 '& h2': { 
                   mt: 8, mb: 4, fontWeight: 800, fontSize: '2rem', color: '#fff',
                   scrollMarginTop: '100px'
