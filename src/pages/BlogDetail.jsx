@@ -417,17 +417,17 @@ const BlogDetail = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <Box sx={{ pt: { xs: 12, md: 16 }, pb: { xs: 8, md: 10 }, borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
+      <Box sx={{ pt: { xs: 10, md: 16 }, pb: { xs: 6, md: 10 }, borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
         <Container maxWidth="lg">
           <Button 
             startIcon={<ArrowBackIcon />} 
             onClick={() => navigate('/blog')}
-            sx={{ mb: 6, color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#fff' } }}
+            sx={{ mb: { xs: 4, md: 6 }, color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#fff' } }}
           >
             Back to Blog
           </Button>
           
-          <Grid container spacing={6}>
+          <Grid container spacing={{ xs: 3, md: 6 }}>
             <Grid item xs={12} md={10} lg={8}>
               <Chip 
                 label={post.category || "Digital Strategy"} 
@@ -530,11 +530,11 @@ const BlogDetail = () => {
                   mt: 0,
                 },
                 '& h2': { 
-                  mt: 8, mb: 4, fontWeight: 800, fontSize: '2rem', color: '#fff',
+                  mt: { xs: 5, md: 8 }, mb: 4, fontWeight: 800, fontSize: '2rem', color: '#fff',
                   scrollMarginTop: '100px'
                 },
                 '& h3': { 
-                  mt: 6, mb: 3, fontWeight: 700, fontSize: '1.5rem', color: '#fff',
+                  mt: { xs: 4, md: 6 }, mb: 3, fontWeight: 700, fontSize: '1.5rem', color: '#fff',
                   scrollMarginTop: '100px'
                 },
                 '& p': { mb: 3 },
@@ -569,10 +569,10 @@ const BlogDetail = () => {
 
 
             {/* Bottom Section */}
-            <Divider sx={{ my: 8, borderColor: 'rgba(255, 255, 255, 0.08)' }} />
+            <Divider sx={{ my: { xs: 5, md: 8 }, borderColor: 'rgba(255, 255, 255, 0.08)' }} />
             
             {/* Article Navigation */}
-            <Grid container spacing={3} sx={{ mb: 10 }}>
+            <Grid container spacing={{ xs: 2, md: 3 }} sx={{ mb: { xs: 6, md: 10 } }}>
               <Grid item xs={12} sm={6}>
                 {navigation.prev && (
                   <Box 
@@ -648,7 +648,7 @@ const BlogDetail = () => {
 
       {/* Related Articles Section */}
       {allBlogs.length > 1 && (
-        <Box sx={{ mt: 2, pt: 10, pb: 10, bgcolor: 'rgba(255, 255, 255, 0.02)', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
+        <Box sx={{ mt: 2, pt: { xs: 6, md: 10 }, pb: { xs: 6, md: 10 }, bgcolor: 'rgba(255, 255, 255, 0.02)', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
           <Container maxWidth="lg">
             <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 800, mb: 6, textAlign: 'center' }}>
               Recommended for you
@@ -665,7 +665,7 @@ const BlogDetail = () => {
                         display: 'flex', 
                         flexDirection: 'column',
                         bgcolor: '#111118',
-                        borderRadius: 4,
+                        borderRadius: 3,
                         border: '1px solid rgba(255, 255, 255, 0.08)',
                         transition: '0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '&:hover': {
