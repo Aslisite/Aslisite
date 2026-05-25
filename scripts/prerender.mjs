@@ -36,7 +36,7 @@ async function runBuild() {
 
   // 2. Prepare routes
   const blogs = await fetchBlogs();
-  const routes = ['/', '/blog'];
+  const routes = ['/', '/blog', '/privacy-policy'];
   blogs.forEach((blog) => {
     if (blog.slug) routes.push(`/blog/${blog.slug}`);
   });
@@ -59,12 +59,12 @@ async function runBuild() {
     // 4. Render and save each route
     for (const url of routes) {
       console.log(`Pre-rendering: ${url}`);
-      
+
       const { html, helmet } = render(url, { blogs });
 
       let prerenderedHtml = templateHtml.replace(
         '<div id="root" tabindex="-1"></div>',
-        `<div id="root" tabindex="-1">${html}</div>`
+        `<div id="root" tabindex="-1">${html}</div>`,
       );
 
       // Inject initial data for client-side hydration
@@ -75,16 +75,18 @@ async function runBuild() {
         const helmetTags = `
     ${helmet.title ? helmet.title.toString() : ''}
     ${helmet.meta ? helmet.meta.toString() : ''}
+    ${helmet.link ? helmet.link.toString() : ''}
+    ${helmet.script ? helmet.script.toString() : ''}
 `;
         prerenderedHtml = prerenderedHtml.replace('</head>', `${helmetTags}\n  </head>`);
       }
 
       const routePath = url === '/' ? '' : url;
       const targetDir = path.join(distDir, routePath);
-      
+
       await mkdir(targetDir, { recursive: true });
       const targetFile = path.join(targetDir, 'index.html');
-      
+
       await writeFile(targetFile, prerenderedHtml, 'utf8');
     }
   } catch (err) {
@@ -92,9 +94,9 @@ async function runBuild() {
   } finally {
     await vite.close();
   }
-  
-  console.log('✨ Static Site Generation complete!');
-  
+
+  console.log('Static Site Generation complete!');
+
   // 5. Generate dynamic sitemap.xml
   await generateSitemap(routes);
 }
@@ -106,30 +108,32 @@ async function generateSitemap(routes) {
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes.map(route => {
-  const url = `${baseUrl}${route === '/' ? '' : route}`;
-  let priority = '0.5';
-  let changefreq = 'weekly';
+${routes
+  .map((route) => {
+    const url = `${baseUrl}${route === '/' ? '' : route}`;
+    let priority = '0.5';
+    let changefreq = 'weekly';
 
-  if (route === '/') {
-    priority = '1.0';
-    changefreq = 'daily';
-  } else if (route === '/blog') {
-    priority = '0.8';
-    changefreq = 'daily';
-  }
+    if (route === '/') {
+      priority = '1.0';
+      changefreq = 'daily';
+    } else if (route === '/blog') {
+      priority = '0.8';
+      changefreq = 'daily';
+    }
 
-  return `  <url>
+    return `  <url>
     <loc>${url}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`;
-}).join('\n')}
+  })
+  .join('\n')}
 </urlset>`;
 
   await writeFile(path.join(distDir, 'sitemap.xml'), xml, 'utf8');
-  console.log('✅ sitemap.xml generated in dist/');
+  console.log('sitemap.xml generated in dist/');
 }
 
 await runBuild();

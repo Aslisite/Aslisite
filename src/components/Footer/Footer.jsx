@@ -17,16 +17,16 @@ const WhatsApp = WhatsAppImport.default || WhatsAppImport;
 
 const navigation = {
   services: [
-    { label: 'Web Development', href: '#services' },
-    { label: 'Ecommerce Solutions', href: '#services' },
-    { label: 'Custom Software', href: '#services' },
-    { label: 'SEO Services', href: '#services' },
+    { label: 'Web Development', href: '/#services' },
+    { label: 'Ecommerce Solutions', href: '/#services' },
+    { label: 'Custom Software', href: '/#services' },
+    { label: 'SEO Services', href: '/#services' },
   ],
   quickLinks: [
-    { label: 'Home', href: '#hero' },
-    { label: 'Our Product', href: '#product' },
-    { label: 'FAQ', href: '#faq' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Home', href: '/#hero' },
+    { label: 'Our Product', href: '/#product' },
+    { label: 'FAQ', href: '/#faq' },
+    { label: 'Contact', href: '/#contact' },
   ],
 };
 
@@ -308,7 +308,15 @@ const Footer = () => {
         >
           <Typography variant="caption" sx={{ color: colors.text.muted }}>
             Copyright {currentYear} Aslisite. All rights reserved. |{' '}
-            <Link component={RouterLink} to="/privacy-policy" sx={{ color: 'inherit', textDecoration: 'none', '&:hover': { color: colors.accent.primary } }}>
+            <Link
+              component={RouterLink}
+              to="/privacy-policy"
+              sx={{
+                color: 'inherit',
+                textDecoration: 'none',
+                '&:hover': { color: colors.accent.primary },
+              }}
+            >
               Privacy Policy
             </Link>
           </Typography>

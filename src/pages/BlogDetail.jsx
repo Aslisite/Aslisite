@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { 
-  Container, 
-  Typography, 
-  CircularProgress, 
+import { useState, useEffect, useMemo } from 'react';
+import {
+  Container,
+  Typography,
+  CircularProgress,
   Box,
   Button,
   Grid,
@@ -18,31 +18,24 @@ import {
   useMediaQuery,
   LinearProgress,
   IconButton,
-  Stack
+  Stack,
 } from '@mui/material';
-import { 
-  useParams, 
-  useNavigate, 
-  Link as RouterLink 
-} from 'react-router-dom';
+import { useParams, useNavigate, Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { 
+import {
   ArrowBack as ArrowBackIcon,
   AccessTime as AccessTimeIcon,
   CalendarToday as CalendarTodayIcon,
-  Share as ShareIcon,
   LinkedIn as LinkedInIcon,
   Twitter as TwitterIcon,
   Facebook as FacebookIcon,
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-  Lightbulb as LightbulbIcon,
-  Info as InfoIcon,
-  Warning as WarningIcon
 } from '@mui/icons-material';
 import { getBlogs } from '../api/blog';
 import { useInitialData } from '../context/DataContext';
 import { colors } from '../theme/theme';
+import { absoluteUrl, siteMetadata } from '../seo/siteMetadata';
 
 // --- Helpers ---
 
@@ -58,7 +51,10 @@ const extractTOC = (content = '') => {
   while ((match = regex.exec(content)) !== null) {
     const level = parseInt(match[1]);
     const text = match[2].replace(/<[^>]*>/g, '');
-    const id = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+    const id = text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-');
     items.push({ level, text, id });
   }
   return items;
@@ -67,7 +63,10 @@ const extractTOC = (content = '') => {
 const processContent = (content = '') => {
   // Inject IDs into headings for TOC linking
   return content.replace(/<h([23])([^>]*)>(.*?)<\/h\1>/g, (match, level, attrs, text) => {
-    const id = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+    const id = text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-');
     return `<h${level}${attrs} id="${id}">${text}</h${level}>`;
   });
 };
@@ -91,16 +90,16 @@ const ReadingProgressBar = () => {
 
   return (
     <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 2000 }}>
-      <LinearProgress 
-        variant="determinate" 
-        value={scroll} 
-        sx={{ 
-          height: 3, 
+      <LinearProgress
+        variant="determinate"
+        value={scroll}
+        sx={{
+          height: 3,
           backgroundColor: 'transparent',
           '& .MuiLinearProgress-bar': {
-            background: colors.accent.gradient
-          }
-        }} 
+            background: colors.accent.gradient,
+          },
+        }}
       />
     </Box>
   );
@@ -109,12 +108,12 @@ const ReadingProgressBar = () => {
 const CTASection = ({ type = 'bottom' }) => {
   const isMid = type === 'mid';
   return (
-    <Box 
-      sx={{ 
+    <Box
+      sx={{
         my: isMid ? 6 : 10,
         p: { xs: 4, md: 6 },
         borderRadius: 4,
-        background: isMid 
+        background: isMid
           ? `linear-gradient(135deg, ${colors.background.card} 0%, rgba(0, 212, 255, 0.05) 100%)`
           : colors.accent.gradient,
         border: '1px solid',
@@ -123,60 +122,61 @@ const CTASection = ({ type = 'bottom' }) => {
         boxShadow: isMid ? 'none' : '0 20px 40px rgba(0, 212, 255, 0.2)',
       }}
     >
-      <Typography 
-        variant={isMid ? "h5" : "h3"} 
-        sx={{ 
-          fontWeight: 800, 
+      <Typography
+        variant={isMid ? 'h5' : 'h3'}
+        sx={{
+          fontWeight: 800,
           mb: 2,
-          color: isMid ? '#fff' : '#fff'
+          color: isMid ? '#fff' : '#fff',
         }}
       >
-        {isMid ? "Want a professional website for your business?" : "Ready to scale your digital presence?"}
+        {isMid
+          ? 'Want a professional website for your business?'
+          : 'Ready to scale your digital presence?'}
       </Typography>
-      <Typography 
-        variant="body1" 
-        sx={{ 
-          mb: 4, 
+      <Typography
+        variant="body1"
+        sx={{
+          mb: 4,
           color: isMid ? 'rgba(255, 255, 255, 0.7)' : 'rgba(255, 255, 255, 0.9)',
           maxWidth: '600px',
-          mx: 'auto'
+          mx: 'auto',
         }}
       >
-        {isMid 
-          ? "Our experts at Aslisite can help you build a high-conversion website tailored to your needs."
+        {isMid
+          ? 'Our experts at Aslisite can help you build a high-conversion website tailored to your needs.'
           : "Join hundreds of successful businesses growing with Aslisite. Let's discuss your project today."}
       </Typography>
-      <Stack 
-        direction={{ xs: 'column', sm: 'row' }} 
-        spacing={2} 
-        justifyContent="center"
-      >
-        <Button 
-          variant="contained" 
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
+        <Button
+          variant="contained"
           size="large"
-          sx={{ 
-            bgcolor: isMid ? '#00d4ff' : '#fff', 
+          sx={{
+            bgcolor: isMid ? '#00d4ff' : '#fff',
             color: isMid ? '#0a0a0f' : '#0a0a0f',
             fontWeight: 700,
             px: 4,
-            '&:hover': { bgcolor: isMid ? '#fff' : 'rgba(255, 255, 255, 0.9)' }
+            '&:hover': { bgcolor: isMid ? '#fff' : 'rgba(255, 255, 255, 0.9)' },
           }}
           component="a"
           href="https://wa.me/919495664173"
           target="_blank"
         >
-          {isMid ? "Get Free Consultation" : "Get Started Now"}
+          {isMid ? 'Get Free Consultation' : 'Get Started Now'}
         </Button>
         {!isMid && (
-          <Button 
-            variant="outlined" 
+          <Button
+            variant="outlined"
             size="large"
-            sx={{ 
-              borderColor: '#fff', 
+            sx={{
+              borderColor: '#fff',
               color: '#fff',
               fontWeight: 700,
               px: 4,
-              '&:hover': { borderColor: 'rgba(255, 255, 255, 0.8)', bgcolor: 'rgba(255, 255, 255, 0.1)' }
+              '&:hover': {
+                borderColor: 'rgba(255, 255, 255, 0.8)',
+                bgcolor: 'rgba(255, 255, 255, 0.1)',
+              },
             }}
             component={RouterLink}
             to="/#contact"
@@ -185,38 +185,6 @@ const CTASection = ({ type = 'bottom' }) => {
           </Button>
         )}
       </Stack>
-    </Box>
-  );
-};
-
-const StyledContentBox = ({ children, type = 'tip' }) => {
-  const config = {
-    tip: { icon: <LightbulbIcon />, color: '#00d4ff', label: 'Pro Tip' },
-    info: { icon: <InfoIcon />, color: '#7c3aed', label: 'Important' },
-    warning: { icon: <WarningIcon />, color: '#f59e0b', label: 'Warning' },
-  }[type];
-
-  return (
-    <Box 
-      sx={{ 
-        my: 4, 
-        p: 3, 
-        borderRadius: 3, 
-        bgcolor: 'rgba(255, 255, 255, 0.03)',
-        borderLeft: `4px solid ${config.color}`,
-        display: 'flex',
-        gap: 2
-      }}
-    >
-      <Box sx={{ color: config.color }}>{config.icon}</Box>
-      <Box>
-        <Typography variant="subtitle2" sx={{ fontWeight: 700, color: config.color, mb: 0.5 }}>
-          {config.label}
-        </Typography>
-        <Typography variant="body1" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>
-          {children}
-        </Typography>
-      </Box>
     </Box>
   );
 };
@@ -233,7 +201,7 @@ const TableOfContents = ({ items }) => {
           }
         });
       },
-      { rootMargin: '-100px 0px -70% 0px' }
+      { rootMargin: '-100px 0px -70% 0px' },
     );
 
     items.forEach((item) => {
@@ -255,7 +223,7 @@ const TableOfContents = ({ items }) => {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   };
@@ -264,52 +232,67 @@ const TableOfContents = ({ items }) => {
 
   return (
     <Box sx={{ position: 'sticky', top: 100 }}>
-      <Typography variant="overline" sx={{ fontWeight: 700, color: 'rgba(255, 255, 255, 0.5)', mb: 2, display: 'block' }}>
+      <Typography
+        variant="overline"
+        sx={{ fontWeight: 700, color: 'rgba(255, 255, 255, 0.5)', mb: 2, display: 'block' }}
+      >
         In this article
       </Typography>
       <List sx={{ p: 0 }}>
         {items.map((item) => (
-          <ListItem 
-            key={item.id} 
-            button 
+          <ListItem
+            key={item.id}
+            button
             onClick={() => handleScroll(item.id)}
-            sx={{ 
-              p: 0, 
+            sx={{
+              p: 0,
               mb: 1.5,
               borderLeft: '2px solid',
               borderColor: activeId === item.id ? '#00d4ff' : 'transparent',
               pl: item.level === 3 ? 4 : 2,
-              '&:hover': { bgcolor: 'transparent', borderColor: 'rgba(0, 212, 255, 0.5)' }
+              '&:hover': { bgcolor: 'transparent', borderColor: 'rgba(0, 212, 255, 0.5)' },
             }}
           >
-            <ListItemText 
-              primary={item.text} 
-              primaryTypographyProps={{ 
-                sx: { 
-                  fontSize: '0.9rem', 
+            <ListItemText
+              primary={item.text}
+              primaryTypographyProps={{
+                sx: {
+                  fontSize: '0.9rem',
                   fontWeight: activeId === item.id ? 700 : 500,
                   color: activeId === item.id ? '#fff' : 'rgba(255, 255, 255, 0.6)',
-                  transition: '0.2s'
-                } 
-              }} 
+                  transition: '0.2s',
+                },
+              }}
             />
           </ListItem>
         ))}
       </List>
-      
+
       <Divider sx={{ my: 4, borderColor: 'rgba(255, 255, 255, 0.08)' }} />
-      
-      <Typography variant="overline" sx={{ fontWeight: 700, color: 'rgba(255, 255, 255, 0.5)', mb: 2, display: 'block' }}>
+
+      <Typography
+        variant="overline"
+        sx={{ fontWeight: 700, color: 'rgba(255, 255, 255, 0.5)', mb: 2, display: 'block' }}
+      >
         Share Article
       </Typography>
       <Stack direction="row" spacing={1}>
-        <IconButton size="small" sx={{ color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#00d4ff' } }}>
+        <IconButton
+          size="small"
+          sx={{ color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#00d4ff' } }}
+        >
           <TwitterIcon />
         </IconButton>
-        <IconButton size="small" sx={{ color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#0077b5' } }}>
+        <IconButton
+          size="small"
+          sx={{ color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#0077b5' } }}
+        >
           <LinkedInIcon />
         </IconButton>
-        <IconButton size="small" sx={{ color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#1877f2' } }}>
+        <IconButton
+          size="small"
+          sx={{ color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#1877f2' } }}
+        >
           <FacebookIcon />
         </IconButton>
       </Stack>
@@ -325,11 +308,12 @@ const BlogDetail = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const initialData = useInitialData();
-  
+  const initialPost = initialData?.blogs?.find((b) => b.slug === slug);
+
   const [allBlogs, setAllBlogs] = useState(initialData?.blogs || []);
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState(initialPost || null);
   const [loading, setLoading] = useState(!initialData?.blogs);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(initialData?.blogs && !initialPost ? 'Post not found' : '');
 
   useEffect(() => {
     if (initialData?.blogs) {
@@ -369,20 +353,31 @@ const BlogDetail = () => {
   const tocItems = useMemo(() => extractTOC(post?.content), [post]);
   const processedHtml = useMemo(() => processContent(post?.content), [post]);
   const readTime = useMemo(() => calculateReadTime(post?.content), [post]);
+  const canonicalUrl = absoluteUrl(`/blog/${slug}`);
+  const plainContent = useMemo(
+    () =>
+      post?.content
+        ?.replace(/<[^>]*>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim() || '',
+    [post],
+  );
 
   // Prev/Next Navigation
   const navigation = useMemo(() => {
     if (!post || !allBlogs.length) return { prev: null, next: null };
-    const currentIndex = allBlogs.findIndex(b => b.slug === slug);
+    const currentIndex = allBlogs.findIndex((b) => b.slug === slug);
     return {
       prev: currentIndex > 0 ? allBlogs[currentIndex - 1] : null,
-      next: currentIndex < allBlogs.length - 1 ? allBlogs[currentIndex + 1] : null
+      next: currentIndex < allBlogs.length - 1 ? allBlogs[currentIndex + 1] : null,
     };
   }, [post, allBlogs, slug]);
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+      <Box
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}
+      >
         <CircularProgress thickness={4} size={50} sx={{ color: '#00d4ff' }} />
       </Box>
     );
@@ -390,13 +385,26 @@ const BlogDetail = () => {
 
   if (error || !post) {
     return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '60vh', textAlign: 'center' }}>
-        <Typography variant="h2" sx={{ fontWeight: 800, mb: 2 }}>404</Typography>
-        <Typography color="error" variant="h5" gutterBottom>{error || 'Post not found'}</Typography>
-        <Button 
-          variant="contained" 
-          startIcon={<ArrowBackIcon />} 
-          onClick={() => navigate('/blog')} 
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '60vh',
+          textAlign: 'center',
+        }}
+      >
+        <Typography variant="h2" sx={{ fontWeight: 800, mb: 2 }}>
+          404
+        </Typography>
+        <Typography color="error" variant="h5" gutterBottom>
+          {error || 'Post not found'}
+        </Typography>
+        <Button
+          variant="contained"
+          startIcon={<ArrowBackIcon />}
+          onClick={() => navigate('/blog')}
           sx={{ mt: 4, borderRadius: 2, px: 4 }}
         >
           Back to Articles
@@ -411,40 +419,87 @@ const BlogDetail = () => {
       <Helmet>
         <title>{post.metaTitle || `${post.title} | Aslisite Blog`}</title>
         <meta name="description" content={post.metaDesc || ''} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
         <meta property="og:title" content={post.metaTitle || post.title} />
         <meta property="og:description" content={post.metaDesc} />
         {post.image && <meta property="og:image" content={post.image} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.metaTitle || post.title} />
+        <meta name="twitter:description" content={post.metaDesc || ''} />
+        <meta name="twitter:image" content={post.image || siteMetadata.logo} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': canonicalUrl,
+            },
+            headline: post.title,
+            description: post.metaDesc || '',
+            image: post.image ? [post.image] : [siteMetadata.logo],
+            datePublished: post.date || undefined,
+            dateModified: post.updatedAt || post.date || undefined,
+            author: {
+              '@type': 'Organization',
+              name: siteMetadata.legalName,
+              url: siteMetadata.baseUrl,
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: siteMetadata.legalName,
+              logo: {
+                '@type': 'ImageObject',
+                url: siteMetadata.logo,
+              },
+            },
+            articleSection: post.category || 'Digital Strategy',
+            wordCount: plainContent ? plainContent.split(/\s+/).length : undefined,
+          })}
+        </script>
       </Helmet>
 
       {/* Hero Section */}
-      <Box sx={{ pt: { xs: 10, md: 16 }, pb: { xs: 6, md: 10 }, borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
+      <Box
+        sx={{
+          pt: { xs: 10, md: 16 },
+          pb: { xs: 6, md: 10 },
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        }}
+      >
         <Container maxWidth="lg">
-          <Button 
-            startIcon={<ArrowBackIcon />} 
+          <Button
+            startIcon={<ArrowBackIcon />}
             onClick={() => navigate('/blog')}
-            sx={{ mb: { xs: 4, md: 6 }, color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#fff' } }}
+            sx={{
+              mb: { xs: 4, md: 6 },
+              color: 'rgba(255, 255, 255, 0.6)',
+              '&:hover': { color: '#fff' },
+            }}
           >
             Back to Blog
           </Button>
-          
+
           <Grid container spacing={{ xs: 3, md: 6 }}>
             <Grid item xs={12} md={10} lg={8}>
-              <Chip 
-                label={post.category || "Digital Strategy"} 
-                sx={{ 
-                  mb: 3, 
-                  bgcolor: 'rgba(0, 212, 255, 0.1)', 
-                  color: '#00d4ff', 
+              <Chip
+                label={post.category || 'Digital Strategy'}
+                sx={{
+                  mb: 3,
+                  bgcolor: 'rgba(0, 212, 255, 0.1)',
+                  color: '#00d4ff',
                   fontWeight: 700,
                   fontSize: '0.8rem',
                   textTransform: 'uppercase',
-                  letterSpacing: 1
-                }} 
+                  letterSpacing: 1,
+                }}
               />
-              <Typography 
-                variant="h1" 
-                sx={{ 
-                  fontWeight: 800, 
+              <Typography
+                variant="h1"
+                sx={{
+                  fontWeight: 800,
                   fontSize: { xs: '2.5rem', md: '4rem' },
                   lineHeight: 1.1,
                   mb: 3,
@@ -455,37 +510,49 @@ const BlogDetail = () => {
               >
                 {post.title}
               </Typography>
-              
-              <Typography 
-                variant="h6" 
-                sx={{ 
-                  color: 'rgba(255, 255, 255, 0.6)', 
-                  fontWeight: 400, 
+
+              <Typography
+                variant="h6"
+                sx={{
+                  color: 'rgba(255, 255, 255, 0.6)',
+                  fontWeight: 400,
                   mb: 5,
                   maxWidth: '700px',
-                  lineHeight: 1.6
+                  lineHeight: 1.6,
                 }}
               >
                 {post.metaDesc}
               </Typography>
 
-              <Stack 
-                direction={{ xs: 'column', sm: 'row' }} 
-                spacing={{ xs: 3, sm: 5 }} 
+              <Stack
+                direction={{ xs: 'column', sm: 'row' }}
+                spacing={{ xs: 3, sm: 5 }}
                 alignItems={{ xs: 'flex-start', sm: 'center' }}
               >
                 <Stack direction="row" spacing={1.5} alignItems="center">
-                  <Avatar sx={{ width: 40, height: 40, bgcolor: '#7c3aed', fontWeight: 700 }}>A</Avatar>
+                  <Avatar sx={{ width: 40, height: 40, bgcolor: '#7c3aed', fontWeight: 700 }}>
+                    A
+                  </Avatar>
                   <Box>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>Aslisite Team</Typography>
-                    <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.5)' }}>Digital Experts</Typography>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
+                      Aslisite Team
+                    </Typography>
+                    <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.5)' }}>
+                      Digital Experts
+                    </Typography>
                   </Box>
                 </Stack>
-                
+
                 <Stack direction="row" spacing={3} sx={{ color: 'rgba(255, 255, 255, 0.5)' }}>
                   <Stack direction="row" spacing={1} alignItems="center">
                     <CalendarTodayIcon sx={{ fontSize: 16 }} />
-                    <Typography variant="body2">{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</Typography>
+                    <Typography variant="body2">
+                      {new Date(post.date).toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </Typography>
                   </Stack>
                   <Stack direction="row" spacing={1} alignItems="center">
                     <AccessTimeIcon sx={{ fontSize: 16 }} />
@@ -504,7 +571,7 @@ const BlogDetail = () => {
           {/* Main Column */}
           <Grid item xs={12} md={8}>
             {post.image && (
-              <Box 
+              <Box
                 component="img"
                 src={post.image}
                 alt={post.title}
@@ -515,13 +582,13 @@ const BlogDetail = () => {
                   objectFit: 'cover',
                   borderRadius: { xs: 2, md: 3 },
                   mb: { xs: 3, md: 6 },
-                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)'
+                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
                 }}
               />
             )}
 
-            <Box 
-              sx={{ 
+            <Box
+              sx={{
                 typography: 'body1',
                 lineHeight: 1.8,
                 fontSize: { xs: '1.05rem', md: '1.125rem' },
@@ -529,25 +596,33 @@ const BlogDetail = () => {
                 '& > *:first-child': {
                   mt: 0,
                 },
-                '& h2': { 
-                  mt: { xs: 5, md: 8 }, mb: 4, fontWeight: 800, fontSize: '2rem', color: '#fff',
-                  scrollMarginTop: '100px'
+                '& h2': {
+                  mt: { xs: 5, md: 8 },
+                  mb: 4,
+                  fontWeight: 800,
+                  fontSize: '2rem',
+                  color: '#fff',
+                  scrollMarginTop: '100px',
                 },
-                '& h3': { 
-                  mt: { xs: 4, md: 6 }, mb: 3, fontWeight: 700, fontSize: '1.5rem', color: '#fff',
-                  scrollMarginTop: '100px'
+                '& h3': {
+                  mt: { xs: 4, md: 6 },
+                  mb: 3,
+                  fontWeight: 700,
+                  fontSize: '1.5rem',
+                  color: '#fff',
+                  scrollMarginTop: '100px',
                 },
                 '& p': { mb: 3 },
                 '& ul, & ol': { mb: 4, pl: 3 },
                 '& li': { mb: 1.5 },
                 '& img': { maxWidth: '100%', height: 'auto', borderRadius: 2, my: 4 },
-                '& a': { 
-                  color: '#00d4ff', 
-                  textDecoration: 'none', 
+                '& a': {
+                  color: '#00d4ff',
+                  textDecoration: 'none',
                   fontWeight: 600,
                   borderBottom: '1px solid transparent',
                   transition: '0.2s',
-                  '&:hover': { borderBottomColor: '#00d4ff' } 
+                  '&:hover': { borderBottomColor: '#00d4ff' },
                 },
                 '& blockquote': {
                   borderLeft: '4px solid',
@@ -560,43 +635,59 @@ const BlogDetail = () => {
                   color: '#fff',
                   bgcolor: 'rgba(124, 58, 237, 0.05)',
                   py: 4,
-                  borderRadius: '0 16px 16px 0'
-                }
+                  borderRadius: '0 16px 16px 0',
+                },
               }}
-              dangerouslySetInnerHTML={{ __html: processedHtml }} 
+              dangerouslySetInnerHTML={{ __html: processedHtml }}
             />
-
-
 
             {/* Bottom Section */}
             <Divider sx={{ my: { xs: 5, md: 8 }, borderColor: 'rgba(255, 255, 255, 0.08)' }} />
-            
+
             {/* Article Navigation */}
             <Grid container spacing={{ xs: 2, md: 3 }} sx={{ mb: { xs: 6, md: 10 } }}>
               <Grid item xs={12} sm={6}>
                 {navigation.prev && (
-                  <Box 
-                    component={RouterLink} 
+                  <Box
+                    component={RouterLink}
                     to={`/blog/${navigation.prev.slug}`}
                     onClick={() => window.scrollTo(0, 0)}
-                    sx={{ 
-                      p: 3, 
-                      borderRadius: 3, 
-                      display: 'flex', 
-                      flexDirection: 'column', 
+                    sx={{
+                      p: 3,
+                      borderRadius: 3,
+                      display: 'flex',
+                      flexDirection: 'column',
                       gap: 1,
                       textDecoration: 'none',
                       bgcolor: 'rgba(255, 255, 255, 0.02)',
                       border: '1px solid rgba(255, 255, 255, 0.05)',
                       transition: '0.3s',
-                      '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.05)', borderColor: '#00d4ff' }
+                      '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.05)', borderColor: '#00d4ff' },
                     }}
                   >
-                    <Stack direction="row" spacing={1} alignItems="center" sx={{ color: 'rgba(255, 255, 255, 0.4)' }}>
+                    <Stack
+                      direction="row"
+                      spacing={1}
+                      alignItems="center"
+                      sx={{ color: 'rgba(255, 255, 255, 0.4)' }}
+                    >
                       <ChevronLeftIcon fontSize="small" />
-                      <Typography variant="overline" sx={{ fontWeight: 700 }}>Previous Article</Typography>
+                      <Typography variant="overline" sx={{ fontWeight: 700 }}>
+                        Previous Article
+                      </Typography>
                     </Stack>
-                    <Typography variant="subtitle1" sx={{ color: '#fff', fontWeight: 600, lineClamp: 1, overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 1 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        color: '#fff',
+                        fontWeight: 600,
+                        lineClamp: 1,
+                        overflow: 'hidden',
+                        display: '-webkit-box',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 1,
+                      }}
+                    >
                       {navigation.prev.title}
                     </Typography>
                   </Box>
@@ -604,29 +695,48 @@ const BlogDetail = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 {navigation.next && (
-                  <Box 
-                    component={RouterLink} 
+                  <Box
+                    component={RouterLink}
                     to={`/blog/${navigation.next.slug}`}
                     onClick={() => window.scrollTo(0, 0)}
-                    sx={{ 
-                      p: 3, 
-                      borderRadius: 3, 
-                      display: 'flex', 
-                      flexDirection: 'column', 
+                    sx={{
+                      p: 3,
+                      borderRadius: 3,
+                      display: 'flex',
+                      flexDirection: 'column',
                       alignItems: 'flex-end',
                       gap: 1,
                       textDecoration: 'none',
                       bgcolor: 'rgba(255, 255, 255, 0.02)',
                       border: '1px solid rgba(255, 255, 255, 0.05)',
                       transition: '0.3s',
-                      '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.05)', borderColor: '#00d4ff' }
+                      '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.05)', borderColor: '#00d4ff' },
                     }}
                   >
-                    <Stack direction="row" spacing={1} alignItems="center" sx={{ color: 'rgba(255, 255, 255, 0.4)' }}>
-                      <Typography variant="overline" sx={{ fontWeight: 700 }}>Next Article</Typography>
+                    <Stack
+                      direction="row"
+                      spacing={1}
+                      alignItems="center"
+                      sx={{ color: 'rgba(255, 255, 255, 0.4)' }}
+                    >
+                      <Typography variant="overline" sx={{ fontWeight: 700 }}>
+                        Next Article
+                      </Typography>
                       <ChevronRightIcon fontSize="small" />
                     </Stack>
-                    <Typography variant="subtitle1" sx={{ color: '#fff', fontWeight: 600, textAlign: 'right', lineClamp: 1, overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 1 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        color: '#fff',
+                        fontWeight: 600,
+                        textAlign: 'right',
+                        lineClamp: 1,
+                        overflow: 'hidden',
+                        display: '-webkit-box',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 1,
+                      }}
+                    >
                       {navigation.next.title}
                     </Typography>
                   </Box>
@@ -648,21 +758,34 @@ const BlogDetail = () => {
 
       {/* Related Articles Section */}
       {allBlogs.length > 1 && (
-        <Box sx={{ mt: 2, pt: { xs: 6, md: 10 }, pb: { xs: 6, md: 10 }, bgcolor: 'rgba(255, 255, 255, 0.02)', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
+        <Box
+          sx={{
+            mt: 2,
+            pt: { xs: 6, md: 10 },
+            pb: { xs: 6, md: 10 },
+            bgcolor: 'rgba(255, 255, 255, 0.02)',
+            borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+          }}
+        >
           <Container maxWidth="lg">
-            <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 800, mb: 6, textAlign: 'center' }}>
+            <Typography
+              variant="h4"
+              component="h2"
+              gutterBottom
+              sx={{ fontWeight: 800, mb: 6, textAlign: 'center' }}
+            >
               Recommended for you
             </Typography>
             <Grid container spacing={4}>
               {allBlogs
-                .filter(b => b.slug !== slug)
+                .filter((b) => b.slug !== slug)
                 .slice(0, 3)
                 .map((relatedPost) => (
                   <Grid item key={relatedPost.slug} xs={12} sm={6} md={4}>
-                    <Card 
-                      sx={{ 
-                        height: '100%', 
-                        display: 'flex', 
+                    <Card
+                      sx={{
+                        height: '100%',
+                        display: 'flex',
                         flexDirection: 'column',
                         bgcolor: '#111118',
                         borderRadius: 3,
@@ -671,13 +794,13 @@ const BlogDetail = () => {
                         '&:hover': {
                           transform: 'translateY(-12px)',
                           borderColor: 'rgba(255, 255, 255, 0.2)',
-                          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)'
-                        }
+                          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
+                        },
                       }}
                     >
                       <Box sx={{ overflow: 'hidden' }}>
                         {relatedPost.image && (
-                          <Box 
+                          <Box
                             component="img"
                             src={relatedPost.image}
                             alt={relatedPost.title}
@@ -686,35 +809,58 @@ const BlogDetail = () => {
                               height: '200px',
                               objectFit: 'cover',
                               transition: '0.3s',
-                              '.MuiCard-root:hover &': { transform: 'scale(1.05)' }
+                              '.MuiCard-root:hover &': { transform: 'scale(1.05)' },
                             }}
                           />
                         )}
                       </Box>
                       <CardContent sx={{ flexGrow: 1, p: 3 }}>
-                        <Typography variant="caption" sx={{ color: '#00d4ff', fontWeight: 700, textTransform: 'uppercase', mb: 1, display: 'block' }}>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            color: '#00d4ff',
+                            fontWeight: 700,
+                            textTransform: 'uppercase',
+                            mb: 1,
+                            display: 'block',
+                          }}
+                        >
                           Article
                         </Typography>
-                        <Typography variant="h6" component="h3" sx={{ fontWeight: 700, mb: 2, lineHeight: 1.4 }}>
+                        <Typography
+                          variant="h6"
+                          component="h3"
+                          sx={{ fontWeight: 700, mb: 2, lineHeight: 1.4 }}
+                        >
                           {relatedPost.title}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary" sx={{ 
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          display: '-webkit-box',
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: 'vertical',
-                          lineHeight: 1.6
-                        }}>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          sx={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            display: '-webkit-box',
+                            WebkitLineClamp: 3,
+                            WebkitBoxOrient: 'vertical',
+                            lineHeight: 1.6,
+                          }}
+                        >
                           {relatedPost.metaDesc}
                         </Typography>
-                        <Button 
-                          component={RouterLink} 
+                        <Button
+                          component={RouterLink}
                           to={`/blog/${relatedPost.slug}`}
                           onClick={() => window.scrollTo(0, 0)}
-                          sx={{ mt: 3, p: 0, fontWeight: 700, color: '#00d4ff', '&:hover': { bgcolor: 'transparent', textDecoration: 'underline' } }}
+                          sx={{
+                            mt: 3,
+                            p: 0,
+                            fontWeight: 700,
+                            color: '#00d4ff',
+                            '&:hover': { bgcolor: 'transparent', textDecoration: 'underline' },
+                          }}
                         >
-                          Read Article →
+                          Read Article -&gt;
                         </Button>
                       </CardContent>
                     </Card>

@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Container, 
-  Grid, 
-  Card, 
-  CardContent, 
-  Typography, 
-  Button, 
-  CircularProgress, 
-  Box 
+import { useState, useEffect } from 'react';
+import {
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  CircularProgress,
+  Box,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -15,6 +15,7 @@ import { getBlogs } from '../api/blog';
 import { colors } from '../theme/theme';
 import { SectionBadge } from '../components/common';
 import { useInitialData } from '../context/DataContext';
+import { absoluteUrl, siteMetadata } from '../seo/siteMetadata';
 
 const Blog = () => {
   const initialData = useInitialData();
@@ -25,7 +26,7 @@ const Blog = () => {
 
   useEffect(() => {
     if (initialData?.blogs) return;
-    
+
     const fetchBlogs = async () => {
       try {
         const data = await getBlogs();
@@ -42,7 +43,9 @@ const Blog = () => {
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
+      <Box
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}
+      >
         <CircularProgress />
       </Box>
     );
@@ -50,8 +53,12 @@ const Blog = () => {
 
   if (error) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
-        <Typography color="error" variant="h6">{error}</Typography>
+      <Box
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}
+      >
+        <Typography color="error" variant="h6">
+          {error}
+        </Typography>
       </Box>
     );
   }
@@ -61,6 +68,32 @@ const Blog = () => {
       <Helmet>
         <title>Blog - Aslisite</title>
         <meta name="description" content="Read our latest articles, insights, and updates." />
+        <link rel="canonical" href={absoluteUrl('/blog')} />
+        <meta property="og:url" content={absoluteUrl('/blog')} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Blog - Aslisite" />
+        <meta
+          property="og:description"
+          content="Read our latest articles, insights, and updates."
+        />
+        <meta property="og:image" content={siteMetadata.logo} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Blog - Aslisite" />
+        <meta
+          name="twitter:description"
+          content="Read our latest articles, insights, and updates."
+        />
+        <meta name="twitter:image" content={siteMetadata.logo} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Blog',
+            '@id': `${absoluteUrl('/blog')}#blog`,
+            url: absoluteUrl('/blog'),
+            name: 'Aslisite Blog',
+            description: 'Read our latest articles, insights, and updates.',
+          })}
+        </script>
       </Helmet>
 
       <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}>
@@ -106,41 +139,41 @@ const Blog = () => {
       <Grid container spacing={4}>
         {blogs.map((blog) => (
           <Grid item key={blog.slug || blog.title} xs={12} sm={6} md={4}>
-            <Card 
-              sx={{ 
-                height: '100%', 
-                display: 'flex', 
+            <Card
+              sx={{
+                height: '100%',
+                display: 'flex',
                 flexDirection: 'column',
                 transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
                 '&:hover': {
                   transform: 'translateY(-8px)',
                   boxShadow: (theme) => theme.shadows[8],
-                }
+                },
               }}
             >
               <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                 <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
                   {blog.title}
                 </Typography>
-                
-                <Typography 
-                  variant="body2" 
-                  color="text.secondary" 
-                  sx={{ 
-                    mb: 2, 
+
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
+                    mb: 2,
                     flexGrow: 1,
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     display: '-webkit-box',
                     WebkitLineClamp: 3,
-                    WebkitBoxOrient: 'vertical'
+                    WebkitBoxOrient: 'vertical',
                   }}
                 >
                   {blog.metaDesc}
                 </Typography>
-                
-                <Button 
-                  variant="outlined" 
+
+                <Button
+                  variant="outlined"
                   color="primary"
                   onClick={() => navigate(`/blog/${blog.slug}`)}
                   sx={{ alignSelf: 'flex-start', mt: 'auto' }}

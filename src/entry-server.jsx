@@ -17,7 +17,7 @@ export function render(url, initialData = null) {
           </StaticRouter>
         </HelmetProvider>
       </DataProvider>
-    </React.StrictMode>
+    </React.StrictMode>,
   );
 
   return { html, helmet: helmetContext.helmet };
