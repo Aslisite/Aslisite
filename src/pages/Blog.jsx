@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { getBlogs } from '../api/blog';
+import { filterPublishedBlogs, getBlogs } from '../api/blog';
 import { colors } from '../theme/theme';
 import { SectionBadge } from '../components/common';
 import { useInitialData } from '../context/DataContext';
@@ -19,7 +19,7 @@ import { absoluteUrl, siteMetadata } from '../seo/siteMetadata';
 
 const Blog = () => {
   const initialData = useInitialData();
-  const [blogs, setBlogs] = useState(initialData?.blogs || []);
+  const [blogs, setBlogs] = useState(filterPublishedBlogs(initialData?.blogs || []));
   const [loading, setLoading] = useState(!initialData?.blogs);
   const [error, setError] = useState('');
   const navigate = useNavigate();

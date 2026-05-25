@@ -32,7 +32,7 @@ import {
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
 } from '@mui/icons-material';
-import { getBlogs } from '../api/blog';
+import { filterPublishedBlogs, getBlogs } from '../api/blog';
 import { useInitialData } from '../context/DataContext';
 import { colors } from '../theme/theme';
 import { absoluteUrl, siteMetadata } from '../seo/siteMetadata';
@@ -308,9 +308,10 @@ const BlogDetail = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const initialData = useInitialData();
-  const initialPost = initialData?.blogs?.find((b) => b.slug === slug);
+  const initialBlogs = filterPublishedBlogs(initialData?.blogs || []);
+  const initialPost = initialBlogs.find((b) => b.slug === slug);
 
-  const [allBlogs, setAllBlogs] = useState(initialData?.blogs || []);
+  const [allBlogs, setAllBlogs] = useState(initialBlogs);
   const [post, setPost] = useState(initialPost || null);
   const [loading, setLoading] = useState(!initialData?.blogs);
   const [error, setError] = useState(initialData?.blogs && !initialPost ? 'Post not found' : '');
