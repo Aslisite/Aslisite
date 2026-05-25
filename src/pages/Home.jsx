@@ -7,6 +7,7 @@ import { absoluteUrl, siteMetadata, websiteSchema } from '../seo/siteMetadata';
 
 const Services = React.lazy(() => import('../components/Services'));
 const Product = React.lazy(() => import('../components/Product'));
+const LatestInsights = React.lazy(() => import('../components/LatestInsights'));
 const FAQ = React.lazy(() => import('../components/FAQ'));
 const Contact = React.lazy(() => import('../components/Contact'));
 
@@ -64,6 +65,7 @@ const Home = () => {
       <Suspense fallback={<Box sx={{ minHeight: '100vh' }} />}>
         <Services />
         <Product />
+        <LatestInsights />
         <FAQ />
         <Contact />
       </Suspense>
