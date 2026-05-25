@@ -189,7 +189,7 @@ const CTASection = ({ type = 'bottom' }) => {
   );
 };
 
-const TableOfContents = ({ items }) => {
+const TableOfContents = ({ items, url, title }) => {
   const [activeId, setActiveId] = useState('');
 
   useEffect(() => {
@@ -279,18 +279,30 @@ const TableOfContents = ({ items }) => {
       <Stack direction="row" spacing={1}>
         <IconButton
           size="small"
+          component="a"
+          href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`}
+          target="_blank"
+          rel="noopener noreferrer"
           sx={{ color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#00d4ff' } }}
         >
           <TwitterIcon />
         </IconButton>
         <IconButton
           size="small"
+          component="a"
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`}
+          target="_blank"
+          rel="noopener noreferrer"
           sx={{ color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#0077b5' } }}
         >
           <LinkedInIcon />
         </IconButton>
         <IconButton
           size="small"
+          component="a"
+          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
+          target="_blank"
+          rel="noopener noreferrer"
           sx={{ color: 'rgba(255, 255, 255, 0.6)', '&:hover': { color: '#1877f2' } }}
         >
           <FacebookIcon />
@@ -576,6 +588,8 @@ const BlogDetail = () => {
                 component="img"
                 src={post.image}
                 alt={post.title}
+                loading="eager"
+                fetchPriority="high"
                 sx={{
                   width: '100%',
                   height: 'auto',
@@ -751,7 +765,7 @@ const BlogDetail = () => {
           {/* Sidebar */}
           {!isMobile && (
             <Grid item md={4}>
-              <TableOfContents items={tocItems} />
+              <TableOfContents items={tocItems} url={canonicalUrl} title={post.title} />
             </Grid>
           )}
         </Grid>
@@ -805,6 +819,7 @@ const BlogDetail = () => {
                             component="img"
                             src={relatedPost.image}
                             alt={relatedPost.title}
+                            loading="lazy"
                             sx={{
                               width: '100%',
                               height: '200px',

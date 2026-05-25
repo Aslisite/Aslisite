@@ -141,7 +141,9 @@ const Footer = () => {
                   {navigation.services.map((item, index) => (
                     <Link
                       key={index}
-                      href={item.href}
+                      component={item.href.startsWith('/#') ? 'a' : RouterLink}
+                      href={item.href.startsWith('/#') ? item.href : undefined}
+                      to={item.href.startsWith('/#') ? undefined : item.href}
                       underline="none"
                       sx={{
                         color: colors.text.muted,
@@ -185,7 +187,9 @@ const Footer = () => {
                   {navigation.quickLinks.map((item, index) => (
                     <Link
                       key={index}
-                      href={item.href}
+                      component={item.href.startsWith('/#') ? 'a' : RouterLink}
+                      href={item.href.startsWith('/#') ? item.href : undefined}
+                      to={item.href.startsWith('/#') ? undefined : item.href}
                       underline="none"
                       sx={{
                         color: colors.text.muted,

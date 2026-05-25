@@ -9,7 +9,7 @@ import {
   CircularProgress,
   Box,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { filterPublishedBlogs, getBlogs } from '../api/blog';
 import { colors } from '../theme/theme';
@@ -22,7 +22,6 @@ const Blog = () => {
   const [blogs, setBlogs] = useState(filterPublishedBlogs(initialData?.blogs || []));
   const [loading, setLoading] = useState(!initialData?.blogs);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (initialData?.blogs) return;
@@ -67,21 +66,24 @@ const Blog = () => {
     <Container maxWidth="lg" sx={{ py: 8 }}>
       <Helmet>
         <title>Blog - Aslisite</title>
-        <meta name="description" content="Read our latest articles, insights, and updates." />
+        <meta
+          name="description"
+          content="Read the latest articles from Aslisite on web development, SEO strategy, ecommerce solutions, and digital growth tips for businesses in Kerala and beyond."
+        />
         <link rel="canonical" href={absoluteUrl('/blog')} />
         <meta property="og:url" content={absoluteUrl('/blog')} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Blog - Aslisite" />
         <meta
           property="og:description"
-          content="Read our latest articles, insights, and updates."
+          content="Read the latest articles from Aslisite on web development, SEO strategy, ecommerce solutions, and digital growth tips for businesses in Kerala and beyond."
         />
         <meta property="og:image" content={siteMetadata.logo} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Blog - Aslisite" />
         <meta
           name="twitter:description"
-          content="Read our latest articles, insights, and updates."
+          content="Read the latest articles from Aslisite on web development, SEO strategy, ecommerce solutions, and digital growth tips for businesses in Kerala and beyond."
         />
         <meta name="twitter:image" content={siteMetadata.logo} />
         <script type="application/ld+json">
@@ -91,7 +93,8 @@ const Blog = () => {
             '@id': `${absoluteUrl('/blog')}#blog`,
             url: absoluteUrl('/blog'),
             name: 'Aslisite Blog',
-            description: 'Read our latest articles, insights, and updates.',
+            description:
+              'Read the latest articles from Aslisite on web development, SEO strategy, ecommerce solutions, and digital growth tips for businesses in Kerala and beyond.',
           })}
         </script>
       </Helmet>
@@ -173,9 +176,10 @@ const Blog = () => {
                 </Typography>
 
                 <Button
+                  component={RouterLink}
+                  to={`/blog/${blog.slug}`}
                   variant="outlined"
                   color="primary"
-                  onClick={() => navigate(`/blog/${blog.slug}`)}
                   sx={{ alignSelf: 'flex-start', mt: 'auto' }}
                 >
                   Read More
