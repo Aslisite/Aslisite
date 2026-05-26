@@ -28,6 +28,11 @@ async function getUrlsFromSitemap() {
 
 async function runIndexing() {
   try {
+    if (process.env.VERCEL_ENV === 'preview') {
+      console.log('Skipping Google Indexing API on Vercel preview deployment.');
+      return;
+    }
+
     console.log('Authenticating with Google...');
     let auth;
 
