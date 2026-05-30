@@ -11,7 +11,6 @@ import {
   Stack,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { colors } from '../../theme/theme';
 import { SectionBadge } from '../common';
@@ -20,9 +19,7 @@ import { filterPublishedBlogs, getBlogs } from '../../api/blog';
 
 const LatestInsights = () => {
   const initialData = useInitialData();
-  const [blogs, setBlogs] = useState(
-    filterPublishedBlogs(initialData?.blogs || []).slice(0, 3)
-  );
+  const [blogs, setBlogs] = useState(filterPublishedBlogs(initialData?.blogs || []).slice(0, 3));
 
   useEffect(() => {
     if (initialData?.blogs) return;
@@ -91,7 +88,8 @@ const LatestInsights = () => {
               lineHeight: 1.6,
             }}
           >
-            Stay updated with the latest digital trends, development strategies, and SEO growth hacks
+            Stay updated with the latest digital trends, development strategies, and SEO growth
+            hacks
           </Typography>
         </Box>
 
