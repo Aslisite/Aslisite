@@ -4,3 +4,4 @@ node_modules
 dist
 dist-ssr
 service_account.json
+*.log

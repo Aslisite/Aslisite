@@ -320,27 +320,28 @@ const BlogDetail = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const initialData = useInitialData();
-  const initialBlogs = filterPublishedBlogs(initialData?.blogs || []);
-  const initialPost = initialBlogs.find((b) => b.slug === slug);
+  const initialBlogs = useMemo(() => filterPublishedBlogs(initialData?.blogs || []), [initialData]);
+  const initialPost =
+    initialData?.post?.slug === slug && initialData.post?.content ? initialData.post : null;
 
   const [allBlogs, setAllBlogs] = useState(initialBlogs);
   const [post, setPost] = useState(initialPost || null);
-  const [loading, setLoading] = useState(!initialData?.blogs);
-  const [error, setError] = useState(initialData?.blogs && !initialPost ? 'Post not found' : '');
+  const [loading, setLoading] = useState(!initialPost);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    if (initialData?.blogs) {
-      const foundPost = initialData.blogs.find((b) => b.slug === slug);
-      if (foundPost) {
-        setPost(foundPost);
-        setAllBlogs(initialData.blogs);
-        setError('');
-      } else {
-        setError('Post not found');
-      }
+    const currentInitialPost =
+      initialData?.post?.slug === slug && initialData.post?.content ? initialData.post : null;
+
+    if (currentInitialPost) {
+      setPost(currentInitialPost);
+      setAllBlogs(initialBlogs);
+      setError('');
       setLoading(false);
       return;
     }
+
+    setLoading(true);
 
     const fetchPost = async () => {
       try {
@@ -361,7 +362,7 @@ const BlogDetail = () => {
     };
 
     fetchPost();
-  }, [slug, initialData]);
+  }, [slug, initialData, initialBlogs]);
 
   const tocItems = useMemo(() => extractTOC(post?.content), [post]);
   const processedHtml = useMemo(() => processContent(post?.content), [post]);

@@ -8,6 +8,8 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
 const indexHtmlPath = path.join(distDir, 'index.html');
+const BLOG_API_URL = 'https://sheetdb.io/api/v1/ddub5agvnxhso';
+const BLOG_FETCH_TIMEOUT_MS = 15000;
 
 function isPublishedBlog(blog) {
   return (
@@ -19,16 +21,59 @@ function isPublishedBlog(blog) {
 }
 
 async function fetchBlogs() {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), BLOG_FETCH_TIMEOUT_MS);
+
   try {
     console.log('Fetching blog data from SheetDB...');
-    const res = await fetch('https://sheetdb.io/api/v1/ddub5agvnxhso');
+    const res = await fetch(BLOG_API_URL, { signal: controller.signal });
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
     return data.filter(isPublishedBlog);
   } catch (error) {
     console.error('Error fetching blogs for SSG:', error);
     return [];
+  } finally {
+    clearTimeout(timeout);
   }
+}
+
+function getBlogSummary(blog) {
+  const plainText = blog.content.replace(/<[^>]*>/g, ' ').trim();
+  const words = plainText ? plainText.split(/\s+/).length : 0;
+
+  return {
+    keyword: blog.keyword,
+    title: blog.title,
+    slug: blog.slug,
+    metaTitle: blog.metaTitle,
+    metaDesc: blog.metaDesc,
+    image: blog.image,
+    date: blog.date,
+    status: blog.status,
+    category: blog.category,
+    readTime: Math.max(1, Math.ceil(words / 200)),
+  };
+}
+
+function getInitialDataForRoute(url, blogs, blogSummaries) {
+  if (url.startsWith('/blog/') && url !== '/blog') {
+    const slug = url.replace('/blog/', '');
+    const post = blogs.find((blog) => blog.slug === slug);
+    return { blogs: blogSummaries, post };
+  }
+
+  if (url === '/') {
+    return { blogs: blogSummaries.slice(0, 3) };
+  }
+
+  return { blogs: blogSummaries };
+}
+
+function stripTemplateSeoTags(html) {
+  return html
+    .replace(/\s*<title>[\s\S]*?<\/title>/i, '')
+    .replace(/\s*<meta\s+name="description"[\s\S]*?\/>/i, '');
 }
 
 async function runBuild() {
@@ -45,6 +90,7 @@ async function runBuild() {
 
   // 2. Prepare routes
   const blogs = await fetchBlogs();
+  const blogSummaries = blogs.map(getBlogSummary);
   const routes = ['/', '/blog', '/privacy-policy'];
   blogs.forEach((blog) => {
     if (blog.slug) routes.push(`/blog/${blog.slug}`);
@@ -63,13 +109,14 @@ async function runBuild() {
 
   try {
     const { render } = await vite.ssrLoadModule('/src/entry-server.jsx');
-    const templateHtml = await readFile(indexHtmlPath, 'utf8');
+    const templateHtml = stripTemplateSeoTags(await readFile(indexHtmlPath, 'utf8'));
 
     // 4. Render and save each route
     for (const url of routes) {
       console.log(`Pre-rendering: ${url}`);
 
-      const { html, helmet } = render(url, { blogs });
+      const initialData = getInitialDataForRoute(url, blogs, blogSummaries);
+      const { html, helmet } = render(url, initialData);
 
       let prerenderedHtml = templateHtml.replace(
         '<div id="root" tabindex="-1"></div>',
@@ -77,7 +124,7 @@ async function runBuild() {
       );
 
       // Inject initial data for client-side hydration
-      const initialDataScript = `\n    <script>window.__INITIAL_DATA__ = ${JSON.stringify({ blogs })};</script>`;
+      const initialDataScript = `\n    <script>window.__INITIAL_DATA__ = ${JSON.stringify(initialData)};</script>`;
       prerenderedHtml = prerenderedHtml.replace('</head>', `${initialDataScript}\n  </head>`);
 
       if (helmet) {
