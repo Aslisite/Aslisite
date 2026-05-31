@@ -99,7 +99,7 @@ const LatestInsights = () => {
             // Estimate reading time if not present
             const plainText = post.content?.replace(/<[^>]*>/g, ' ') || '';
             const words = plainText.trim().split(/\s+/).length || 0;
-            const readTime = post.readTime || Math.max(1, Math.ceil(words / 200));
+            const readTime = Math.max(1, Math.ceil(words / 200));
 
             return (
               <Grid item xs={12} sm={6} md={4} key={post.slug}>

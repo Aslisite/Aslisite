@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node ./scripts/prerender.mjs",
+    "build": "node ./scripts/prerender.mjs && node ./scripts/index-urls.mjs",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "index-urls": "node ./scripts/index-urls.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -16,6 +17,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.10",
     "@mui/material": "^5.15.10",
+    "googleapis": "^172.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^3.0.0",
