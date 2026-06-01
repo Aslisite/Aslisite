@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2732" height="1536" viewBox="0 0 2732 1536">
+<defs>
+  <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#6C63FF"/>
+    <stop offset="100%" stop-color="#2F80ED"/>
+  </linearGradient>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-opacity="0.12"/>
+  </filter>
+</defs>
+
+<rect width="2732" height="1536" fill="#F5F7FB"/>
+
+<!-- Sidebar -->
+<rect x="0" y="0" width="420" height="1536" fill="#FFFFFF"/>
+<text x="60" y="90" font-size="56" font-family="Arial" font-weight="700" fill="#3B4CCA">AsliBooks</text>
+
+<rect x="24" y="180" width="340" height="90" rx="20" fill="#EEF2FF"/>
+<text x="60" y="235" font-size="32" font-family="Arial" fill="#3B4CCA">Dashboard</text>
+
+<text x="60" y="350" font-size="30" font-family="Arial" fill="#667085">Invoices</text>
+<text x="60" y="430" font-size="30" font-family="Arial" fill="#667085">Customers</text>
+<text x="60" y="510" font-size="30" font-family="Arial" fill="#667085">Items</text>
+<text x="60" y="590" font-size="30" font-family="Arial" fill="#667085">Reports</text>
+<text x="60" y="670" font-size="30" font-family="Arial" fill="#667085">Settings</text>
+
+<!-- Header -->
+<text x="500" y="120" font-size="64" font-family="Arial" font-weight="700" fill="#101828">Business Dashboard</text>
+<text x="500" y="170" font-size="28" font-family="Arial" fill="#667085">Modern invoicing and accounting platform</text>
+
+<rect x="2180" y="70" width="300" height="80" rx="20" fill="url(#g1)" filter="url(#shadow)"/>
+<text x="2240" y="122" font-size="30" font-family="Arial" font-weight="700" fill="white">Create Invoice</text>
+
+<!-- KPI Cards -->
+<rect x="500" y="250" width="700" height="330" rx="28" fill="url(#g1)" filter="url(#shadow)"/>
+<text x="560" y="330" font-size="34" fill="white" font-family="Arial">Revenue</text>
+<text x="560" y="430" font-size="80" fill="white" font-family="Arial" font-weight="700">₹ 6,990</text>
+<path d="M560 500 C700 420,820 580,940 500 S1120 520,1160 450" stroke="white" stroke-width="8" fill="none"/>
+
+<rect x="1250" y="250" width="420" height="330" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
+<text x="1300" y="330" font-size="34" fill="#667085">Collected</text>
+<text x="1300" y="430" font-size="68" fill="#16A34A" font-weight="700">₹ 6,990</text>
+
+<rect x="1710" y="250" width="420" height="330" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
+<text x="1760" y="330" font-size="34" fill="#667085">Outstanding</text>
+<text x="1760" y="430" font-size="68" fill="#F59E0B" font-weight="700">₹ 0</text>
+
+<rect x="2170" y="250" width="420" height="330" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
+<text x="2220" y="330" font-size="34" fill="#667085">Customers</text>
+<text x="2220" y="430" font-size="68" fill="#7C3AED" font-weight="700">124</text>
+
+<!-- Table -->
+<rect x="500" y="650" width="1350" height="560" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
+<text x="560" y="740" font-size="44" font-family="Arial" font-weight="700" fill="#101828">Recent Invoices</text>
+
+<line x1="540" y1="800" x2="1800" y2="800" stroke="#E5E7EB" stroke-width="2"/>
+<text x="560" y="860" font-size="28">INV-001</text>
+<text x="900" y="860" font-size="28">Acme Corp</text>
+<text x="1300" y="860" font-size="28">₹2,500</text>
+<text x="1600" y="860" font-size="28" fill="#16A34A">Paid</text>
+
+<text x="560" y="960" font-size="28">INV-002</text>
+<text x="900" y="960" font-size="28">Tech Solutions</text>
+<text x="1300" y="960" font-size="28">₹1,990</text>
+<text x="1600" y="960" font-size="28" fill="#16A34A">Paid</text>
+
+<text x="560" y="1060" font-size="28">INV-003</text>
+<text x="900" y="1060" font-size="28">Global Trade</text>
+<text x="1300" y="1060" font-size="28">₹2,500</text>
+<text x="1600" y="1060" font-size="28" fill="#16A34A">Paid</text>
+
+<!-- Donut Chart -->
+<rect x="1900" y="650" width="690" height="560" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
+<text x="1960" y="740" font-size="44" font-weight="700" fill="#101828">Invoice Overview</text>
+<circle cx="2230" cy="930" r="120" fill="none" stroke="#E5E7EB" stroke-width="40"/>
+<circle cx="2230" cy="930" r="120" fill="none" stroke="#22C55E" stroke-width="40"
+stroke-dasharray="650 120" transform="rotate(-90 2230 930)"/>
+
+<!-- Bottom chart -->
+<rect x="500" y="1260" width="2090" height="220" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
+<text x="560" y="1335" font-size="40" font-weight="700" fill="#101828">Revenue Growth</text>
+<path d="M620 1420 L900 1400 L1180 1370 L1460 1340 L1740 1280 L2020 1200 L2300 1140"
+stroke="#4F46E5" stroke-width="8" fill="none"/>
+
+</svg>

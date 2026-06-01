@@ -133,7 +133,7 @@ const Product = () => {
         }}
       />
 
-      <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Box
           component={motion.div}
           initial="hidden"
@@ -175,11 +175,11 @@ const Product = () => {
             </Typography>
           </Box>
 
-          <Grid container spacing={{ xs: 6, md: 3 }} alignItems="center">
+          <Grid container spacing={{ xs: 6, md: 5 }} alignItems="center" justifyContent="center">
             <Grid
               item
               xs={12}
-              md={6}
+              md={5}
               component={motion.div}
               variants={leftColumnVariants}
               sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
@@ -249,12 +249,12 @@ const Product = () => {
               </Box>
             </Grid>
 
-            <Grid item xs={12} md={6} component={motion.div} variants={rightColumnVariants}>
+            <Grid item xs={12} md={5} component={motion.div} variants={rightColumnVariants}>
               <Box
                 sx={{
                   position: 'relative',
                   display: 'flex',
-                  justifyContent: { xs: 'center', md: 'flex-start' },
+                  justifyContent: 'center',
                   alignItems: 'center',
                   perspective: '1000px',
                 }}
@@ -263,7 +263,7 @@ const Product = () => {
                   sx={{
                     position: 'relative',
                     width: '100%',
-                    maxWidth: { xs: '100%', md: '600px' },
+                    maxWidth: { xs: '100%', md: '640px' },
                     borderRadius: 2,
                     overflow: 'hidden',
                     background: 'rgba(255, 255, 255, 0.03)',
@@ -320,8 +320,8 @@ const Product = () => {
                   >
                     <Box
                       component="img"
-                      src="/aslibooks-dashboard.png"
-                      alt="AsliBooks Dashboard Mockup"
+                      src="/aslibooks-vector-dashboard.svg"
+                      alt="AsliBooks Dashboard"
                       sx={{
                         width: '100%',
                         height: 'auto',
