@@ -79,7 +79,7 @@ stroke-dasharray="650 120" transform="rotate(-90 2230 930)"/>
 <!-- Bottom chart -->
 <rect x="500" y="1260" width="2090" height="220" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
 <text x="560" y="1335" font-size="40" font-weight="700" fill="#101828">Revenue Growth</text>
-<path d="M620 1420 L900 1400 L1180 1370 L1460 1340 L1740 1280 L2020 1200 L2300 1140"
+<path d="M620 1420 L900 1400 L1180 1370 L1460 1340 L1740 1310 L2020 1285 L2240 1265"
 stroke="#4F46E5" stroke-width="8" fill="none"/>
 
 </svg>
