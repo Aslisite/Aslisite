@@ -1,11 +1,36 @@
 import { Box, Button, Container, Stack, Typography, useMediaQuery } from '@mui/material';
 import ArrowForwardImport from '@mui/icons-material/ArrowForward';
 import PlayArrowImport from '@mui/icons-material/PlayArrow';
+import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
 import { SectionBadge } from '../common';
 
 const ArrowForward = ArrowForwardImport.default || ArrowForwardImport;
 const PlayArrow = PlayArrowImport.default || PlayArrowImport;
+
+const headingLineVariants = {
+  hidden: { y: '100%' },
+  visible: (delay = 0) => ({
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: 'easeOut',
+      delay,
+    },
+  }),
+};
+
+const descriptionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.65,
+      ease: 'easeOut',
+      delay: 0.85,
+    },
+  },
+};
 
 const Hero = () => {
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
@@ -105,24 +130,69 @@ const Hero = () => {
               textAlign: 'center',
             }}
           >
-            We Build{' '}
             <Box
               component="span"
               sx={{
-                background: colors.accent.gradient,
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
+                display: 'block',
+                overflow: 'hidden',
+                pb: '0.04em',
               }}
             >
-              Digital Experiences
+              <Box
+                component={motion.span}
+                custom={0}
+                initial={prefersReducedMotion ? false : 'hidden'}
+                animate="visible"
+                variants={headingLineVariants}
+                sx={{
+                  display: 'block',
+                  willChange: prefersReducedMotion ? 'auto' : 'transform',
+                }}
+              >
+                We Build{' '}
+                <Box
+                  component="span"
+                  sx={{
+                    background: colors.accent.gradient,
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                >
+                  Digital Experiences
+                </Box>
+              </Box>
             </Box>
-            <br />
-            That Drive Growth
+            <Box
+              component="span"
+              sx={{
+                display: 'block',
+                overflow: 'hidden',
+                pb: '0.04em',
+              }}
+            >
+              <Box
+                component={motion.span}
+                custom={0.12}
+                initial={prefersReducedMotion ? false : 'hidden'}
+                animate="visible"
+                variants={headingLineVariants}
+                sx={{
+                  display: 'block',
+                  willChange: prefersReducedMotion ? 'auto' : 'transform',
+                }}
+              >
+                That Drive Growth
+              </Box>
+            </Box>
           </Typography>
 
           <Typography
+            component={motion.p}
             variant="h6"
+            initial={prefersReducedMotion ? false : 'hidden'}
+            animate="visible"
+            variants={descriptionVariants}
             sx={{
               color: colors.text.secondary,
               fontWeight: 400,

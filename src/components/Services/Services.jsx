@@ -3,6 +3,7 @@ import CodeImport from '@mui/icons-material/Code';
 import ShoppingCartImport from '@mui/icons-material/ShoppingCart';
 import BuildImport from '@mui/icons-material/Build';
 import TrendingUpImport from '@mui/icons-material/TrendingUp';
+import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
 import { SectionBadge } from '../common';
 
@@ -10,6 +11,40 @@ const Code = CodeImport.default || CodeImport;
 const ShoppingCart = ShoppingCartImport.default || ShoppingCartImport;
 const Build = BuildImport.default || BuildImport;
 const TrendingUp = TrendingUpImport.default || TrendingUpImport;
+
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const cardsContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: 'easeOut',
+    },
+  },
+};
 
 const services = [
   {
@@ -76,9 +111,19 @@ const Services = () => {
 
       <Container maxWidth="lg">
         {/* Section Header */}
-        <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}>
-          <SectionBadge>Our Services</SectionBadge>
+        <Box
+          component={motion.div}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.35 }}
+          sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}
+        >
+          <Box component={motion.div} variants={fadeUpVariants}>
+            <SectionBadge>Our Services</SectionBadge>
+          </Box>
           <Typography
+            component={motion.h2}
+            variants={fadeUpVariants}
             variant="h2"
             sx={{
               fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
@@ -101,6 +146,8 @@ const Services = () => {
             </Box>
           </Typography>
           <Typography
+            component={motion.p}
+            variants={fadeUpVariants}
             variant="h6"
             sx={{
               color: colors.text.secondary,
@@ -116,12 +163,22 @@ const Services = () => {
         </Box>
 
         {/* Services Grid */}
-        <Grid container spacing={{ xs: 3, md: 4 }}>
+        <Grid
+          component={motion.div}
+          container
+          spacing={{ xs: 3, md: 4 }}
+          variants={cardsContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+        >
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
               <Grid item xs={12} sm={6} lg={3} key={index}>
                 <Card
+                  component={motion.div}
+                  variants={cardVariants}
                   sx={{
                     height: '100%',
                     backgroundColor: colors.background.card,

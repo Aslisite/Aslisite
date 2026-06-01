@@ -1,6 +1,63 @@
 import { Box, Container, Grid, Paper, Typography } from '@mui/material';
+import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
 import { SectionBadge } from '../common';
+
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const headingRevealVariants = {
+  hidden: { y: '100%' },
+  visible: {
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const descriptionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.65,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const faqGridVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const faqItemVariants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.65,
+      ease: 'easeOut',
+    },
+  },
+};
 
 const faqs = [
   {
@@ -50,72 +107,90 @@ const FAQ = () => {
       }}
     >
       <Container maxWidth="lg">
-        <Box sx={{ textAlign: 'center', mb: { xs: 5, md: 8 }, maxWidth: '760px', mx: 'auto' }}>
-          <SectionBadge>FAQ</SectionBadge>
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: { xs: '2rem', sm: '2.4rem', md: '3rem' },
-              fontWeight: 700,
-              mb: 2,
-              color: colors.text.primary,
-            }}
-          >
-            Questions Businesses Ask Before Hiring a Web & SEO Agency
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{
-              color: colors.text.secondary,
-              fontWeight: 400,
-              lineHeight: 1.7,
-              fontSize: { xs: '1rem', md: '1.1rem' },
-            }}
-          >
-            A quick overview of how Aslisite helps businesses in Kerala and beyond with web
-            development, ecommerce, design, and SEO.
-          </Typography>
-        </Box>
-
-        <Grid container spacing={3}>
-          {faqs.map((item) => (
-            <Grid item xs={12} md={6} key={item.question}>
-              <Paper
-                elevation={0}
+        <Box
+          component={motion.div}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+        >
+          <Box sx={{ textAlign: 'center', mb: { xs: 5, md: 8 }, maxWidth: '760px', mx: 'auto' }}>
+            <Box component={motion.div} variants={fadeUpVariants}>
+              <SectionBadge>FAQ</SectionBadge>
+            </Box>
+            <Box sx={{ overflow: 'hidden', mb: 2, pb: '0.04em' }}>
+              <Typography
+                component={motion.h2}
+                variants={headingRevealVariants}
+                variant="h2"
                 sx={{
-                  height: '100%',
-                  p: { xs: 3, md: 3.5 },
-                  backgroundColor: colors.background.primary,
-                  border: `1px solid ${colors.border.light}`,
-                  borderRadius: 3,
+                  fontSize: { xs: '2rem', sm: '2.4rem', md: '3rem' },
+                  fontWeight: 700,
+                  color: colors.text.primary,
                 }}
               >
-                <Typography
-                  variant="h3"
+                Questions Businesses Ask Before Hiring a Web & SEO Agency
+              </Typography>
+            </Box>
+            <Typography
+              component={motion.p}
+              variants={descriptionVariants}
+              variant="h6"
+              sx={{
+                color: colors.text.secondary,
+                fontWeight: 400,
+                lineHeight: 1.7,
+                fontSize: { xs: '1rem', md: '1.1rem' },
+              }}
+            >
+              A quick overview of how Aslisite helps businesses in Kerala and beyond with web
+              development, ecommerce, design, and SEO.
+            </Typography>
+          </Box>
+
+          <Grid component={motion.div} container spacing={3} variants={faqGridVariants}>
+            {faqs.map((item) => (
+              <Grid item xs={12} md={6} key={item.question}>
+                <Paper
+                  component={motion.div}
+                  variants={faqItemVariants}
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  elevation={0}
                   sx={{
-                    fontSize: { xs: '1.05rem', md: '1.15rem' },
-                    fontWeight: 600,
-                    color: colors.text.primary,
-                    mb: 1.5,
-                    lineHeight: 1.4,
+                    height: '100%',
+                    p: { xs: 3, md: 3.5 },
+                    backgroundColor: colors.background.primary,
+                    border: `1px solid ${colors.border.light}`,
+                    borderRadius: 3,
                   }}
                 >
-                  {item.question}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: colors.text.secondary,
-                    lineHeight: 1.8,
-                    fontSize: '0.98rem',
-                  }}
-                >
-                  {item.answer}
-                </Typography>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
+                  <Typography
+                    variant="h3"
+                    sx={{
+                      fontSize: { xs: '1.05rem', md: '1.15rem' },
+                      fontWeight: 600,
+                      color: colors.text.primary,
+                      mb: 1.5,
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    {item.question}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: colors.text.secondary,
+                      lineHeight: 1.8,
+                      fontSize: '0.98rem',
+                    }}
+                  >
+                    {item.answer}
+                  </Typography>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </Container>
     </Box>
   );
