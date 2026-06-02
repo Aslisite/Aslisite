@@ -17,7 +17,7 @@ const Mail = MailImport.default || MailImport;
 const WhatsApp = WhatsAppImport.default || WhatsAppImport;
 
 const fadeInVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0.35 },
   visible: {
     opacity: 1,
     transition: {
@@ -28,7 +28,7 @@ const fadeInVariants = {
 };
 
 const revealUpVariants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0.35, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
@@ -50,7 +50,7 @@ const columnsContainerVariants = {
 };
 
 const columnVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0.35, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
@@ -62,7 +62,7 @@ const columnVariants = {
 };
 
 const copyrightVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0.35 },
   visible: {
     opacity: 1,
     transition: {

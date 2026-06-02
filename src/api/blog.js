@@ -9,8 +9,23 @@ export const isPublishedBlog = (blog) => {
   );
 };
 
+const getBlogTimestamp = (blog) => {
+  const candidate = blog?.updatedAt || blog?.date || blog?.publishedAt || blog?.createdAt;
+  const timestamp = Date.parse(candidate);
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+};
+
+export const sortBlogsByRecent = (blogs = []) => {
+  return [...blogs].sort((a, b) => {
+    const delta = getBlogTimestamp(b) - getBlogTimestamp(a);
+    if (delta !== 0) return delta;
+
+    return (b?.title || '').localeCompare(a?.title || '');
+  });
+};
+
 export const filterPublishedBlogs = (blogs = []) => {
-  return blogs.filter(isPublishedBlog);
+  return sortBlogsByRecent(blogs.filter(isPublishedBlog));
 };
 
 export const getBlogs = async () => {

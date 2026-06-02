@@ -597,6 +597,7 @@ const BlogDetail = () => {
                 alt={post.title}
                 loading="eager"
                 fetchPriority="high"
+                referrerPolicy="no-referrer"
                 sx={{
                   width: '100%',
                   height: 'auto',
@@ -827,6 +828,7 @@ const BlogDetail = () => {
                             src={relatedPost.image}
                             alt={relatedPost.title}
                             loading="lazy"
+                            referrerPolicy="no-referrer"
                             sx={{
                               width: '100%',
                               height: '200px',

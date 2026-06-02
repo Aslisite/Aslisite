@@ -13,7 +13,7 @@ const Build = BuildImport.default || BuildImport;
 const TrendingUp = TrendingUpImport.default || TrendingUpImport;
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0.35, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
@@ -35,7 +35,7 @@ const cardsContainerVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0.35, y: 24 },
   visible: {
     opacity: 1,
     y: 0,

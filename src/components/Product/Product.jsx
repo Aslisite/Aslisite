@@ -26,7 +26,7 @@ const Speed = SpeedImport.default || SpeedImport;
 const ArrowForward = ArrowForwardImport.default || ArrowForwardImport;
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0.35, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
@@ -38,7 +38,7 @@ const fadeUpVariants = {
 };
 
 const leftColumnVariants = {
-  hidden: { opacity: 0, x: -28 },
+  hidden: { opacity: 0.35, x: -28 },
   visible: {
     opacity: 1,
     x: 0,
@@ -50,7 +50,7 @@ const leftColumnVariants = {
 };
 
 const rightColumnVariants = {
-  hidden: { opacity: 0, x: 28 },
+  hidden: { opacity: 0.35, x: 28 },
   visible: {
     opacity: 1,
     x: 0,
@@ -72,7 +72,7 @@ const featureListVariants = {
 };
 
 const featureItemVariants = {
-  hidden: { opacity: 0, y: 14 },
+  hidden: { opacity: 0.35, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
@@ -84,7 +84,7 @@ const featureItemVariants = {
 };
 
 const ctaVariants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0.35, y: 16 },
   visible: {
     opacity: 1,
     y: 0,

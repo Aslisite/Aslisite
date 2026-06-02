@@ -4,7 +4,7 @@ import { colors } from '../../theme/theme';
 import { SectionBadge } from '../common';
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0.35, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
@@ -27,7 +27,7 @@ const headingRevealVariants = {
 };
 
 const descriptionVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0.35 },
   visible: {
     opacity: 1,
     transition: {
@@ -48,7 +48,7 @@ const faqGridVariants = {
 };
 
 const faqItemVariants = {
-  hidden: { opacity: 0, y: 22 },
+  hidden: { opacity: 0.35, y: 22 },
   visible: {
     opacity: 1,
     y: 0,

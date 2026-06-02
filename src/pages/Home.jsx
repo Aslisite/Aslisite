@@ -1,5 +1,4 @@
 import React, { Suspense, useEffect } from 'react';
-import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
@@ -62,7 +61,7 @@ const Home = () => {
         </script>
       </Helmet>
       <Hero />
-      <Suspense fallback={<Box sx={{ minHeight: '100vh' }} />}>
+      <Suspense fallback={null}>
         <Services />
         <Product />
         <LatestInsights />

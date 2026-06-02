@@ -2,6 +2,7 @@ import { build, createServer } from 'vite';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { filterPublishedBlogs } from '../src/api/blog.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,22 +10,13 @@ const projectRoot = path.resolve(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
 const indexHtmlPath = path.join(distDir, 'index.html');
 
-function isPublishedBlog(blog) {
-  return (
-    blog?.status?.toLowerCase() === 'deployed' &&
-    Boolean(blog?.title?.trim()) &&
-    Boolean(blog?.slug?.trim()) &&
-    Boolean(blog?.content?.trim())
-  );
-}
-
 async function fetchBlogs() {
   try {
     console.log('Fetching blog data from SheetDB...');
     const res = await fetch('https://sheetdb.io/api/v1/ddub5agvnxhso');
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
-    return data.filter(isPublishedBlog);
+    return filterPublishedBlogs(data);
   } catch (error) {
     console.error('Error fetching blogs for SSG:', error);
     return [];

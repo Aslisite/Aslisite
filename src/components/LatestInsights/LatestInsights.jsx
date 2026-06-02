@@ -13,13 +13,16 @@ import {
 import { motion } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import CalendarTodayImport from '@mui/icons-material/CalendarToday';
 import { colors } from '../../theme/theme';
 import { SectionBadge } from '../common';
 import { useInitialData } from '../../context/DataContext';
 import { filterPublishedBlogs, getBlogs } from '../../api/blog';
 
+const CalendarTodayIcon = CalendarTodayImport.default || CalendarTodayImport;
+
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0.35, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
@@ -41,7 +44,7 @@ const cardsContainerVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0.35, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
@@ -50,6 +53,19 @@ const cardVariants = {
       ease: 'easeOut',
     },
   },
+};
+
+const formatPostDate = (post) => {
+  const candidate = post?.updatedAt || post?.date || post?.publishedAt || post?.createdAt;
+  const date = new Date(candidate);
+
+  if (Number.isNaN(date.getTime())) return '';
+
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
 };
 
 const LatestInsights = () => {
@@ -91,9 +107,8 @@ const LatestInsights = () => {
           component={motion.div}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.25 }}
         >
-          {/* Section Header */}
           <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 } }}>
             <Box component={motion.div} variants={fadeUpVariants}>
               <SectionBadge>Recent Insights</SectionBadge>
@@ -140,13 +155,13 @@ const LatestInsights = () => {
             </Typography>
           </Box>
 
-          {/* Blog Grid */}
           <Grid component={motion.div} container spacing={4} variants={cardsContainerVariants}>
             {blogs.map((post) => {
               // Estimate reading time if not present
               const plainText = post.content?.replace(/<[^>]*>/g, ' ') || '';
               const words = plainText.trim().split(/\s+/).length || 0;
               const readTime = Math.max(1, Math.ceil(words / 200));
+              const postDate = formatPostDate(post);
 
               return (
                 <Grid item xs={12} sm={6} md={4} key={post.slug}>
@@ -179,6 +194,7 @@ const LatestInsights = () => {
                           src={post.image}
                           alt={post.title}
                           loading="lazy"
+                          referrerPolicy="no-referrer"
                           sx={{
                             width: '100%',
                             height: '100%',
@@ -226,10 +242,18 @@ const LatestInsights = () => {
                         />
                         <Stack
                           direction="row"
-                          spacing={1.5}
+                          spacing={1}
                           alignItems="center"
-                          sx={{ color: colors.text.muted }}
+                          flexWrap="wrap"
+                          justifyContent="flex-end"
+                          sx={{ color: colors.text.muted, rowGap: 0.5 }}
                         >
+                          {postDate && (
+                            <Stack direction="row" spacing={0.5} alignItems="center">
+                              <CalendarTodayIcon sx={{ fontSize: '0.85rem' }} />
+                              <Typography variant="caption">{postDate}</Typography>
+                            </Stack>
+                          )}
                           <Stack direction="row" spacing={0.5} alignItems="center">
                             <AccessTimeIcon sx={{ fontSize: '0.85rem' }} />
                             <Typography variant="caption">{readTime} min</Typography>
