@@ -22,20 +22,27 @@ import {
 } from '@mui/material';
 import { useParams, useNavigate, Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import {
-  ArrowBack as ArrowBackIcon,
-  AccessTime as AccessTimeIcon,
-  CalendarToday as CalendarTodayIcon,
-  LinkedIn as LinkedInIcon,
-  Twitter as TwitterIcon,
-  Facebook as FacebookIcon,
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-} from '@mui/icons-material';
+import ArrowBackImport from '@mui/icons-material/ArrowBack';
+import AccessTimeImport from '@mui/icons-material/AccessTime';
+import CalendarTodayImport from '@mui/icons-material/CalendarToday';
+import LinkedInImport from '@mui/icons-material/LinkedIn';
+import TwitterImport from '@mui/icons-material/Twitter';
+import FacebookImport from '@mui/icons-material/Facebook';
+import ChevronLeftImport from '@mui/icons-material/ChevronLeft';
+import ChevronRightImport from '@mui/icons-material/ChevronRight';
 import { filterPublishedBlogs, getBlogs } from '../api/blog';
 import { useInitialData } from '../context/DataContext';
 import { colors } from '../theme/theme';
 import { absoluteUrl, siteMetadata } from '../seo/siteMetadata';
+
+const ArrowBackIcon = ArrowBackImport.default || ArrowBackImport;
+const AccessTimeIcon = AccessTimeImport.default || AccessTimeImport;
+const CalendarTodayIcon = CalendarTodayImport.default || CalendarTodayImport;
+const LinkedInIcon = LinkedInImport.default || LinkedInImport;
+const TwitterIcon = TwitterImport.default || TwitterImport;
+const FacebookIcon = FacebookImport.default || FacebookImport;
+const ChevronLeftIcon = ChevronLeftImport.default || ChevronLeftImport;
+const ChevronRightIcon = ChevronRightImport.default || ChevronRightImport;
 
 // --- Helpers ---
 
