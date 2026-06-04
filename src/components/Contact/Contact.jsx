@@ -167,7 +167,7 @@ const Contact = () => {
       tabIndex="-1"
       sx={{
         py: { xs: 6, md: 8 },
-        backgroundColor: colors.background.secondary,
+        backgroundColor: colors.background.elevated,
         position: 'relative',
         scrollMarginTop: '80px',
       }}
@@ -296,7 +296,7 @@ const Contact = () => {
                   sx={{
                     mt: 4,
                     height: 200,
-                    backgroundColor: colors.background.primary,
+                    backgroundColor: colors.background.secondary,
                     border: `1px solid ${colors.border.light}`,
                     borderRadius: 3,
                     display: 'flex',
@@ -328,7 +328,7 @@ const Contact = () => {
                 onSubmit={handleSubmit}
                 sx={{
                   p: { xs: 3, md: 4 },
-                  backgroundColor: colors.background.primary,
+                  backgroundColor: colors.background.secondary,
                   border: `1px solid ${colors.border.light}`,
                   borderRadius: 3,
                   height: '100%',
@@ -511,7 +511,7 @@ const Contact = () => {
                           background: colors.accent.gradient,
                           opacity: 0.9,
                           transform: 'translateY(-2px)',
-                          boxShadow: '0 8px 25px rgba(0, 212, 255, 0.3)',
+                          boxShadow: '0 8px 25px rgba(139, 163, 106, 0.25)',
                         },
                         transition: 'opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease',
                         '&:disabled': {
@@ -541,7 +541,7 @@ const Contact = () => {
           severity={snackbar.severity}
           sx={{
             width: '100%',
-            backgroundColor: colors.background.secondary,
+            backgroundColor: colors.background.elevated,
             color: colors.text.primary,
             border: `1px solid ${colors.accent.primary}`,
           }}

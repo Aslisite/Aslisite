@@ -101,7 +101,7 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor: colors.background.secondary,
+        backgroundColor: colors.background.primary,
         borderTop: `1px solid ${colors.border.light}`,
         pt: { xs: 6, md: 10 },
         pb: { xs: 4, md: 6 },
@@ -172,7 +172,7 @@ const Footer = () => {
                           '&:hover': {
                             color: colors.accent.primary,
                             borderColor: colors.accent.primary,
-                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                            backgroundColor: 'rgba(139, 163, 106, 0.1)',
                           },
                         }}
                       >

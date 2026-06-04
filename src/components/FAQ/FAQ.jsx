@@ -100,7 +100,7 @@ const FAQ = () => {
       tabIndex="-1"
       sx={{
         py: { xs: 6, md: 8 },
-        backgroundColor: colors.background.secondary,
+        backgroundColor: colors.background.primary,
         position: 'relative',
         scrollMarginTop: '80px',
         borderBottom: `1px solid ${colors.border.light}`,
@@ -159,7 +159,7 @@ const FAQ = () => {
                   sx={{
                     height: '100%',
                     p: { xs: 3, md: 3.5 },
-                    backgroundColor: colors.background.primary,
+                    backgroundColor: colors.background.elevated,
                     border: `1px solid ${colors.border.light}`,
                     borderRadius: 3,
                   }}

@@ -112,7 +112,7 @@ const Product = () => {
       sx={{
         pt: { xs: 6, md: 8 },
         pb: { xs: 6, md: 8 },
-        backgroundColor: colors.background.primary,
+        backgroundColor: colors.background.elevated,
         position: 'relative',
         overflow: 'hidden',
         scrollMarginTop: '80px',
@@ -127,7 +127,7 @@ const Product = () => {
           transform: 'translate(20%, -50%)',
           width: '800px',
           height: '800px',
-          background: 'radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(circle, rgba(139, 163, 106, 0.1) 0%, transparent 60%)',
           filter: 'blur(60px)',
           pointerEvents: 'none',
         }}
@@ -234,11 +234,11 @@ const Product = () => {
                       fontWeight: 600,
                       background: colors.accent.gradient,
                       borderRadius: 2,
-                      boxShadow: '0 4px 20px rgba(0, 212, 255, 0.3)',
+                      boxShadow: '0 4px 20px rgba(139, 163, 106, 0.28)',
                       transition: 'background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
                       '&:hover': {
                         background: colors.accent.gradient,
-                        boxShadow: '0 6px 28px rgba(0, 212, 255, 0.45)',
+                        boxShadow: '0 6px 28px rgba(139, 163, 106, 0.34)',
                         transform: 'translateY(-2px)',
                       },
                     }}
@@ -266,7 +266,7 @@ const Product = () => {
                     maxWidth: { xs: '100%', md: '640px' },
                     borderRadius: 2,
                     overflow: 'hidden',
-                    background: 'rgba(255, 255, 255, 0.03)',
+                    background: 'rgba(245, 241, 232, 0.03)',
                     border: '1px solid rgba(255, 255, 255, 0.1)',
                     boxShadow: '0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)',
                     backdropFilter: 'blur(10px)',
@@ -315,7 +315,7 @@ const Product = () => {
 
                   <Box
                     sx={{
-                      bgcolor: '#0f172a',
+                      bgcolor: colors.background.secondary,
                     }}
                   >
                     <Box

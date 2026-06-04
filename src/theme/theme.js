@@ -1,29 +1,29 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-// Color Palette - Liquid Architect Dark Theme
+// Color Palette - Charcoal Ivory Olive Theme
 const colors = {
   background: {
-    primary: '#0a0a0f',
-    secondary: '#12121a',
-    elevated: '#161622',
-    card: '#111118',
+    primary: '#0b0d10',
+    secondary: '#11151a',
+    elevated: '#151a20',
+    card: '#11161b',
   },
   accent: {
-    primary: '#00d4ff', // Electric Blue
-    primaryHover: '#33ddff',
-    secondary: '#7c3aed', // Purple
-    gradient: 'linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%)',
-    gradientReverse: 'linear-gradient(135deg, #7c3aed 0%, #00d4ff 100%)',
+    primary: '#8ba36a',
+    primaryHover: '#9db57b',
+    secondary: '#6f7d54',
+    gradient: 'linear-gradient(135deg, #8ba36a 0%, #c8d2b0 100%)',
+    gradientReverse: 'linear-gradient(135deg, #c8d2b0 0%, #8ba36a 100%)',
   },
   text: {
-    primary: '#ffffff',
-    secondary: 'rgba(255, 255, 255, 0.75)',
-    muted: 'rgba(255, 255, 255, 0.6)',
+    primary: '#f5f1e8',
+    secondary: 'rgba(245, 241, 232, 0.76)',
+    muted: 'rgba(245, 241, 232, 0.58)',
   },
   border: {
-    light: 'rgba(255, 255, 255, 0.08)',
-    medium: 'rgba(255, 255, 255, 0.12)',
-    accent: 'rgba(123, 97, 255, 0.3)',
+    light: 'rgba(245, 241, 232, 0.09)',
+    medium: 'rgba(245, 241, 232, 0.14)',
+    accent: 'rgba(139, 163, 106, 0.35)',
   },
 };
 
@@ -38,14 +38,14 @@ let theme = createTheme({
     primary: {
       main: colors.accent.primary,
       light: colors.accent.primaryHover,
-      dark: '#00a8cc',
-      contrastText: '#0a0a0f',
+      dark: '#6f7d54',
+      contrastText: '#0b0d10',
     },
     secondary: {
       main: colors.accent.secondary,
-      light: '#9f67f0',
-      dark: '#5b21b6',
-      contrastText: '#ffffff',
+      light: '#8f9b78',
+      dark: '#556143',
+      contrastText: '#f5f1e8',
     },
     text: {
       primary: colors.text.primary,
@@ -56,66 +56,81 @@ let theme = createTheme({
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
+      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 800,
-      letterSpacing: '-0.02em',
+      letterSpacing: '0',
       lineHeight: 1.1,
     },
     h2: {
+      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 700,
-      letterSpacing: '-0.01em',
+      letterSpacing: '0',
       lineHeight: 1.2,
     },
     h3: {
+      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 600,
-      letterSpacing: '-0.01em',
+      letterSpacing: '0',
       lineHeight: 1.3,
     },
     h4: {
+      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 600,
       letterSpacing: '0',
       lineHeight: 1.35,
     },
     h5: {
-      fontWeight: 500,
+      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontWeight: 600,
+      letterSpacing: '0',
       lineHeight: 1.4,
     },
     h6: {
-      fontWeight: 500,
-      lineHeight: 1.4,
+      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontWeight: 600,
+      letterSpacing: '0',
+      lineHeight: 1.45,
     },
     subtitle1: {
+      fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 500,
       letterSpacing: '0.01em',
-      lineHeight: 1.5,
+      lineHeight: 1.55,
     },
     subtitle2: {
+      fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 500,
       letterSpacing: '0.01em',
-      lineHeight: 1.5,
+      lineHeight: 1.55,
     },
     body1: {
+      fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 400,
       letterSpacing: '0',
-      lineHeight: 1.6,
+      lineHeight: 1.7,
     },
     body2: {
+      fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 400,
       letterSpacing: '0',
-      lineHeight: 1.6,
+      lineHeight: 1.7,
     },
     button: {
+      fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 600,
-      letterSpacing: '0.02em',
+      letterSpacing: '0.01em',
       textTransform: 'none',
     },
     caption: {
+      fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 400,
-      letterSpacing: '0.02em',
-      lineHeight: 1.5,
+      letterSpacing: '0.01em',
+      lineHeight: 1.45,
     },
     overline: {
+      fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 600,
-      letterSpacing: '0.08em',
+      letterSpacing: '0.09em',
       lineHeight: 1.5,
       textTransform: 'uppercase',
     },
@@ -163,38 +178,38 @@ let theme = createTheme({
           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         },
         containedPrimary: {
-          background: 'linear-gradient(135deg, #00C6FF 0%, #7B61FF 100%)',
-          boxShadow: '0 4px 20px rgba(123, 97, 255, 0.4)',
-          color: '#ffffff',
+          background: 'linear-gradient(135deg, #8ba36a 0%, #c8d2b0 100%)',
+          boxShadow: '0 4px 20px rgba(139, 163, 106, 0.28)',
+          color: '#0b0d10',
           '&:hover': {
-            boxShadow: '0 8px 25px rgba(123, 97, 255, 0.6)',
+            boxShadow: '0 8px 25px rgba(139, 163, 106, 0.34)',
             transform: 'translateY(-3px)',
           },
         },
         containedSecondary: {
-          backgroundColor: 'rgba(123, 97, 255, 0.02)',
+          backgroundColor: 'rgba(245, 241, 232, 0.03)',
           backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(123, 97, 255, 0.5)',
+          border: '1px solid rgba(245, 241, 232, 0.14)',
           boxShadow: 'none',
-          color: '#ffffff',
+          color: '#f5f1e8',
           '&:hover': {
-            backgroundColor: 'rgba(123, 97, 255, 0.08)',
-            borderColor: '#7B61FF',
-            boxShadow: '0 0 15px rgba(123, 97, 255, 0.2)',
+            backgroundColor: 'rgba(245, 241, 232, 0.06)',
+            borderColor: '#9db57b',
+            boxShadow: '0 0 15px rgba(139, 163, 106, 0.16)',
             transform: 'translateY(-3px)',
           },
         },
         outlined: {
-          borderColor: 'rgba(123, 97, 255, 0.5)',
-          color: '#ffffff',
+          borderColor: 'rgba(245, 241, 232, 0.16)',
+          color: '#f5f1e8',
           '&:hover': {
-            borderColor: '#7B61FF',
-            backgroundColor: 'rgba(123, 97, 255, 0.08)',
+            borderColor: '#8ba36a',
+            backgroundColor: 'rgba(139, 163, 106, 0.08)',
             transform: 'translateY(-3px)',
           },
         },
         text: {
-          color: '#7B61FF',
+          color: '#8ba36a',
           position: 'relative',
           '&::after': {
             content: '""',
@@ -203,7 +218,7 @@ let theme = createTheme({
             left: '28px',
             width: '0%',
             height: '2px',
-            backgroundColor: '#7B61FF',
+            backgroundColor: '#8ba36a',
             transition: 'width 0.3s ease-in-out',
           },
           '&:hover': {
@@ -237,7 +252,7 @@ let theme = createTheme({
         root: {
           transition: 'background-color 0.2s ease, color 0.2s ease',
           '&:hover': {
-            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+            backgroundColor: 'rgba(139, 163, 106, 0.1)',
             color: colors.accent.primary,
           },
         },
@@ -258,7 +273,7 @@ let theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgba(10, 10, 15, 0.8)',
+          backgroundColor: 'rgba(11, 13, 16, 0.84)',
           backdropFilter: 'blur(20px)',
           borderBottom: `1px solid ${colors.border.light}`,
         },

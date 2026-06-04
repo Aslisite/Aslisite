@@ -1,36 +1,27 @@
 import { Box, Button, Container, Stack, Typography, useMediaQuery } from '@mui/material';
 import ArrowForwardImport from '@mui/icons-material/ArrowForward';
-import PlayArrowImport from '@mui/icons-material/PlayArrow';
+import CheckCircleImport from '@mui/icons-material/CheckCircle';
 import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
 import { SectionBadge } from '../common';
 
 const ArrowForward = ArrowForwardImport.default || ArrowForwardImport;
-const PlayArrow = PlayArrowImport.default || PlayArrowImport;
+const CheckCircle = CheckCircleImport.default || CheckCircleImport;
 
-const headingLineVariants = {
-  hidden: { y: '100%' },
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 22 },
   visible: (delay = 0) => ({
+    opacity: 1,
     y: 0,
     transition: {
-      duration: 0.7,
+      duration: 0.72,
       ease: 'easeOut',
       delay,
     },
   }),
 };
 
-const descriptionVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.65,
-      ease: 'easeOut',
-      delay: 0.85,
-    },
-  },
-};
+const systemSteps = ['Strategy', 'Website', 'SEO', 'Conversion'];
 
 const Hero = () => {
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
@@ -41,177 +32,122 @@ const Hero = () => {
       id="hero"
       tabIndex="-1"
       sx={{
-        minHeight: { xs: '100vh', md: 'calc(100vh - 64px)' },
+        minHeight: { xs: 'auto', md: 'calc(100vh - 64px)' },
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
-        background: `linear-gradient(135deg, ${colors.background.primary} 0%, ${colors.background.secondary} 50%, ${colors.background.primary} 100%)`,
-        pt: { xs: '80px', md: '64px' },
-        pb: { xs: 6, md: 8 },
+        backgroundColor: '#08090b',
+        pt: { xs: 13, md: 14 },
+        pb: { xs: 7, md: 10 },
         scrollMarginTop: '64px',
         borderBottom: `1px solid ${colors.border.light}`,
-      }}
-    >
-      <Box
-        sx={{
-          position: 'absolute',
-          top: '10%',
-          left: '-10%',
-          width: '600px',
-          height: '600px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-          animation: prefersReducedMotion ? 'none' : 'float 8s ease-in-out infinite',
-          '@keyframes float': {
-            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
-            '50%': { transform: 'translateY(-30px) rotate(5deg)' },
-          },
-        }}
-      />
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: '10%',
-          right: '-10%',
-          width: '500px',
-          height: '500px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-          animation: prefersReducedMotion ? 'none' : 'float 10s ease-in-out infinite reverse',
-        }}
-      />
-
-      <Box
-        sx={{
+        '&::before': {
+          content: '""',
           position: 'absolute',
           inset: 0,
           backgroundImage: `
-            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)
+            linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px)
           `,
-          backgroundSize: '60px 60px',
-          opacity: 0.5,
-        }}
-      />
-
-      <Container
-        maxWidth="lg"
-        sx={{
-          position: 'relative',
-          zIndex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
-        }}
-      >
+          backgroundSize: '88px 88px',
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 76%)',
+          opacity: 0.45,
+        },
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          left: '50%',
+          top: '18%',
+          width: { xs: 280, md: 520 },
+          height: { xs: 280, md: 520 },
+          transform: 'translateX(-50%)',
+          background: 'radial-gradient(circle, rgba(139, 163, 106, 0.13), transparent 68%)',
+          pointerEvents: 'none',
+        },
+      }}
+    >
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Box
           sx={{
-            maxWidth: { xs: '100%', sm: '700px', md: '800px' },
+            maxWidth: 930,
+            mx: 'auto',
+            textAlign: 'center',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <SectionBadge sx={{ mb: 3 }}>Premium Digital Agency</SectionBadge>
+          <Box
+            component={motion.div}
+            initial={prefersReducedMotion ? false : 'hidden'}
+            animate="visible"
+            custom={0}
+            variants={fadeUpVariants}
+          >
+            <SectionBadge
+              sx={{
+                mb: 3,
+                color: colors.accent.primary,
+                borderColor: 'rgba(139, 163, 106, 0.24)',
+                backgroundColor: 'rgba(139, 163, 106, 0.07)',
+              }}
+            >
+              Digital Growth Studio
+            </SectionBadge>
+          </Box>
 
           <Typography
+            component={motion.h1}
+            initial={prefersReducedMotion ? false : 'hidden'}
+            animate="visible"
+            custom={0.08}
+            variants={fadeUpVariants}
             variant="h1"
             sx={{
-              fontSize: { xs: '2.25rem', sm: '2.75rem', md: '3.5rem', lg: '4rem' },
-              fontWeight: 800,
-              lineHeight: 1.15,
-              mb: 3,
               color: colors.text.primary,
-              textAlign: 'center',
+              fontSize: { xs: '2.45rem', sm: '3.25rem', md: '4.35rem', lg: '5rem' },
+              fontWeight: 800,
+              lineHeight: 1.02,
+              letterSpacing: 0,
+              maxWidth: 820,
+              mb: 3.2,
             }}
           >
-            <Box
-              component="span"
-              sx={{
-                display: 'block',
-                overflow: 'hidden',
-                pb: '0.04em',
-              }}
-            >
-              <Box
-                component={motion.span}
-                custom={0}
-                initial={prefersReducedMotion ? false : 'hidden'}
-                animate="visible"
-                variants={headingLineVariants}
-                sx={{
-                  display: 'block',
-                  willChange: prefersReducedMotion ? 'auto' : 'transform',
-                }}
-              >
-                We Build{' '}
-                <Box
-                  component="span"
-                  sx={{
-                    background: colors.accent.gradient,
-                    backgroundClip: 'text',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                  }}
-                >
-                  Digital Experiences
-                </Box>
-              </Box>
-            </Box>
-            <Box
-              component="span"
-              sx={{
-                display: 'block',
-                overflow: 'hidden',
-                pb: '0.04em',
-              }}
-            >
-              <Box
-                component={motion.span}
-                custom={0.12}
-                initial={prefersReducedMotion ? false : 'hidden'}
-                animate="visible"
-                variants={headingLineVariants}
-                sx={{
-                  display: 'block',
-                  willChange: prefersReducedMotion ? 'auto' : 'transform',
-                }}
-              >
-                That Drive Growth
-              </Box>
-            </Box>
+            Digital systems for serious growth.
           </Typography>
 
           <Typography
             component={motion.p}
-            variant="h6"
             initial={prefersReducedMotion ? false : 'hidden'}
             animate="visible"
-            variants={descriptionVariants}
+            custom={0.18}
+            variants={fadeUpVariants}
+            variant="h6"
             sx={{
               color: colors.text.secondary,
               fontWeight: 400,
-              lineHeight: 1.7,
-              mb: 4,
-              maxWidth: '600px',
-              fontSize: { xs: '1rem', sm: '1.1rem', md: '1.2rem' },
-              textAlign: 'center',
+              lineHeight: 1.72,
+              maxWidth: 620,
+              mb: 4.5,
+              fontSize: { xs: '1rem', md: '1.1rem' },
+              letterSpacing: 0,
             }}
           >
-            Aslisite delivers powerful web development, ecommerce solutions, custom software, and
-            SEO services to help your business grow online and achieve fast results.
+            Aslisite builds websites, ecommerce, software and SEO foundations that bring better
+            traffic, better leads and better business flow.
           </Typography>
 
           <Stack
+            component={motion.div}
+            initial={prefersReducedMotion ? false : 'hidden'}
+            animate="visible"
+            custom={0.28}
+            variants={fadeUpVariants}
             direction={{ xs: 'column', sm: 'row' }}
             spacing={2}
             sx={{
-              mb: 5,
+              mb: { xs: 5, md: 6 },
               width: { xs: '100%', sm: 'auto' },
               '& .MuiButton-root': {
                 width: { xs: '100%', sm: 'auto' },
@@ -228,119 +164,88 @@ const Hero = () => {
               rel="noopener noreferrer"
               endIcon={<ArrowForward />}
               sx={{
-                py: 1.5,
+                py: 1.55,
                 px: 4,
                 fontSize: '1rem',
-                fontWeight: 600,
+                fontWeight: 700,
+                background: 'linear-gradient(135deg, #8ba36a 0%, #c8d2b0 100%)',
+                color: '#06100d',
+                boxShadow: '0 18px 40px rgba(139, 163, 106, 0.2)',
               }}
             >
-              Start Your Project
+              Start a Project
             </Button>
             <Button
               variant="contained"
               color="secondary"
               size="large"
-              startIcon={<PlayArrow />}
+              href="#services"
               sx={{
-                py: 1.5,
+                py: 1.55,
                 px: 4,
                 fontSize: '1rem',
-                fontWeight: 600,
+                fontWeight: 700,
                 color: colors.text.primary,
+                backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.13)',
+                boxShadow: 'none',
               }}
             >
-              Watch Showreel
+              View Services
             </Button>
           </Stack>
 
           <Box
+            component={motion.div}
+            initial={prefersReducedMotion ? false : 'hidden'}
+            animate="visible"
+            custom={0.36}
+            variants={fadeUpVariants}
             sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', sm: 'row' },
-              alignItems: 'center',
-              gap: { xs: 1.5, sm: 3 },
+              width: '100%',
+              maxWidth: 760,
+              p: { xs: 1.5, sm: 2 },
+              borderRadius: 2,
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              backgroundColor: 'rgba(255, 255, 255, 0.035)',
+              backdropFilter: 'blur(14px)',
             }}
           >
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Box
-                sx={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  backgroundColor: '#22c55e',
-                  boxShadow: '0 0 10px rgba(34, 197, 94, 0.5)',
-                }}
-              />
-              <Typography variant="body2" sx={{ color: colors.text.muted }}>
-                Available for new projects
-              </Typography>
-            </Box>
-            <Typography
-              variant="body2"
+            <Box
               sx={{
-                color: colors.text.muted,
-                display: { xs: 'none', sm: 'block' },
+                display: 'grid',
+                gridTemplateColumns: {
+                  xs: '1fr',
+                  sm: 'repeat(4, minmax(0, 1fr))',
+                },
+                gap: 1,
               }}
             >
-              |
-            </Typography>
-            <Typography variant="body2" sx={{ color: colors.text.muted }}>
-              Trusted by 200+ clients worldwide
-            </Typography>
+              {systemSteps.map((step, index) => (
+                <Box
+                  key={step}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: { xs: 'flex-start', sm: 'center' },
+                    gap: 1,
+                    px: 1.5,
+                    py: 1.3,
+                    minHeight: 48,
+                    borderRadius: 1.5,
+                    color: index === 0 ? colors.accent.primary : colors.text.secondary,
+                    backgroundColor:
+                      index === 0 ? 'rgba(139, 163, 106, 0.08)' : 'rgba(255, 255, 255, 0.035)',
+                  }}
+                >
+                  <CheckCircle sx={{ fontSize: 17 }} />
+                  <Typography sx={{ fontSize: '0.86rem', fontWeight: 700 }}>{step}</Typography>
+                </Box>
+              ))}
+            </Box>
           </Box>
         </Box>
       </Container>
-
-      <Box
-        sx={{
-          position: 'absolute',
-          right: { xs: 16, md: 40 },
-          top: '50%',
-          transform: 'translateY(-50%)',
-          display: { xs: 'none', md: 'flex' },
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 1,
-          zIndex: 10,
-          animation: prefersReducedMotion ? 'none' : 'bounce 2s ease-in-out infinite',
-          '@keyframes bounce': {
-            '0%, 100%': { transform: 'translateY(-50%)' },
-            '50%': { transform: 'translateY(calc(-50% + 10px))' },
-          },
-        }}
-      >
-        <Typography
-          variant="caption"
-          sx={{ color: colors.text.muted, textTransform: 'uppercase', letterSpacing: 2 }}
-        >
-          Scroll
-        </Typography>
-        <Box
-          sx={{
-            width: 24,
-            height: 40,
-            borderRadius: 12,
-            border: `2px solid ${colors.border.medium}`,
-            display: 'flex',
-            justifyContent: 'center',
-            pt: 1,
-          }}
-        >
-          <Box
-            sx={{
-              width: 4,
-              height: 8,
-              borderRadius: 2,
-              backgroundColor: colors.accent.primary,
-              animation: prefersReducedMotion ? 'none' : 'scroll 2s ease-in-out infinite',
-              '@keyframes scroll': {
-                '0%, 100%': { opacity: 1, transform: 'translateY(0)' },
-                '50%': { opacity: 0.5, transform: 'translateY(8px)' },
-              },
-            }}
-          />
-        </Box>
-      </Box>
     </Box>
   );
 };

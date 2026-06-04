@@ -191,7 +191,7 @@ const Services = () => {
                     '&:hover': {
                       transform: 'translateY(-8px)',
                       borderColor: colors.accent.primary,
-                      boxShadow: `0 20px 40px rgba(0, 212, 255, 0.15)`,
+                      boxShadow: `0 20px 40px rgba(139, 163, 106, 0.15)`,
                       '& .service-icon': {
                         transform: 'scale(1.1)',
                         color: colors.accent.primary,
@@ -214,7 +214,7 @@ const Services = () => {
                         width: 56,
                         height: 56,
                         borderRadius: 2,
-                        backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                        backgroundColor: 'rgba(139, 163, 106, 0.1)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',

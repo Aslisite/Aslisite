@@ -96,7 +96,7 @@ const LatestInsights = () => {
       tabIndex="-1"
       sx={{
         py: { xs: 8, md: 10 },
-        backgroundColor: colors.background.primary,
+        backgroundColor: colors.background.secondary,
         position: 'relative',
         scrollMarginTop: '80px',
         borderBottom: `1px solid ${colors.border.light}`,
@@ -178,8 +178,8 @@ const LatestInsights = () => {
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                       '&:hover': {
                         transform: 'translateY(-10px)',
-                        borderColor: 'rgba(255, 255, 255, 0.2)',
-                        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
+                        borderColor: 'rgba(139, 163, 106, 0.24)',
+                        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.42)',
                       },
                     }}
                   >
@@ -233,7 +233,7 @@ const LatestInsights = () => {
                           label={post.category || 'Digital Strategy'}
                           size="small"
                           sx={{
-                            bgcolor: 'rgba(0, 212, 255, 0.08)',
+                            bgcolor: 'rgba(139, 163, 106, 0.08)',
                             color: colors.accent.primary,
                             fontWeight: 700,
                             fontSize: '0.75rem',
@@ -342,13 +342,13 @@ const LatestInsights = () => {
               fontWeight: 700,
               borderRadius: 2.5,
               color: '#fff',
-              borderColor: 'rgba(255, 255, 255, 0.15)',
+              borderColor: 'rgba(245, 241, 232, 0.16)',
               transition: 'all 0.3s ease',
               '&:hover': {
                 borderColor: colors.accent.primary,
-                backgroundColor: 'rgba(0, 212, 255, 0.05)',
+                backgroundColor: 'rgba(139, 163, 106, 0.05)',
                 transform: 'translateY(-2px)',
-                boxShadow: '0 4px 20px rgba(0, 212, 255, 0.15)',
+                boxShadow: '0 4px 20px rgba(139, 163, 106, 0.15)',
               },
             }}
           >
