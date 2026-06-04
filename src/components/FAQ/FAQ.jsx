@@ -1,23 +1,12 @@
 import { Box, Container, Grid, Paper, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
-import { SectionBadge } from '../common';
+import { BlurText, SectionBadge } from '../common';
 
 const fadeUpVariants = {
   hidden: { opacity: 0.35, y: 18 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: 'easeOut',
-    },
-  },
-};
-
-const headingRevealVariants = {
-  hidden: { y: '100%' },
-  visible: {
     y: 0,
     transition: {
       duration: 0.7,
@@ -118,28 +107,35 @@ const FAQ = () => {
               <SectionBadge>FAQ</SectionBadge>
             </Box>
             <Box sx={{ overflow: 'hidden', mb: 2, pb: '0.04em' }}>
-              <Typography
-                component={motion.h2}
-                variants={headingRevealVariants}
-                variant="h2"
+              <BlurText
+                component="h2"
+                text="Questions Businesses Ask Before Hiring a Web & SEO Agency"
+                animateBy="words"
+                direction="top"
+                delay={65}
+                stepDuration={0.3}
                 sx={{
-                  fontSize: { xs: '2rem', sm: '2.4rem', md: '3rem' },
+                  fontSize: { xs: '1.95rem', sm: '2.35rem', md: '2.8rem' },
                   fontWeight: 700,
+                  lineHeight: 1.18,
                   color: colors.text.primary,
+                  textAlign: 'center',
+                  maxWidth: '760px',
+                  mx: 'auto',
                 }}
-              >
-                Questions Businesses Ask Before Hiring a Web & SEO Agency
-              </Typography>
+              />
             </Box>
             <Typography
               component={motion.p}
               variants={descriptionVariants}
-              variant="h6"
+              variant="body1"
               sx={{
                 color: colors.text.secondary,
-                fontWeight: 400,
-                lineHeight: 1.7,
-                fontSize: { xs: '1rem', md: '1.1rem' },
+                fontWeight: 450,
+                lineHeight: 1.8,
+                fontSize: { xs: '0.98rem', md: '1.06rem' },
+                maxWidth: '620px',
+                mx: 'auto',
               }}
             >
               A quick overview of how Aslisite helps businesses in Kerala and beyond with web
@@ -162,16 +158,18 @@ const FAQ = () => {
                     backgroundColor: colors.background.elevated,
                     border: `1px solid ${colors.border.light}`,
                     borderRadius: 3,
+                    transition: 'transform 0.25s ease',
+                    '&:hover': { transform: 'translateY(-4px)' },
                   }}
                 >
                   <Typography
                     variant="h3"
                     sx={{
-                      fontSize: { xs: '1.05rem', md: '1.15rem' },
-                      fontWeight: 600,
+                      fontSize: { xs: '1.02rem', md: '1.1rem' },
+                      fontWeight: 650,
                       color: colors.text.primary,
                       mb: 1.5,
-                      lineHeight: 1.4,
+                      lineHeight: 1.5,
                     }}
                   >
                     {item.question}
@@ -180,8 +178,8 @@ const FAQ = () => {
                     variant="body1"
                     sx={{
                       color: colors.text.secondary,
-                      lineHeight: 1.8,
-                      fontSize: '0.98rem',
+                      lineHeight: 1.85,
+                      fontSize: '0.96rem',
                     }}
                   >
                     {item.answer}

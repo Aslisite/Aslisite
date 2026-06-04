@@ -3,7 +3,7 @@ import ArrowForwardImport from '@mui/icons-material/ArrowForward';
 import CheckCircleImport from '@mui/icons-material/CheckCircle';
 import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
-import { SectionBadge } from '../common';
+import { BlurText, SectionBadge } from '../common';
 
 const ArrowForward = ArrowForwardImport.default || ArrowForwardImport;
 const CheckCircle = CheckCircleImport.default || CheckCircleImport;
@@ -26,11 +26,27 @@ const systemSteps = ['Strategy', 'Website', 'SEO', 'Conversion'];
 const Hero = () => {
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
 
+  const handlePointerMove = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+    event.currentTarget.style.setProperty('--mx', `${x}%`);
+    event.currentTarget.style.setProperty('--my', `${y}%`);
+  };
+
+  const handlePointerLeave = (event) => {
+    event.currentTarget.style.setProperty('--mx', '50%');
+    event.currentTarget.style.setProperty('--my', '38%');
+  };
+
   return (
     <Box
       component="section"
       id="hero"
       tabIndex="-1"
+      onMouseMove={handlePointerMove}
+      onMouseLeave={handlePointerLeave}
       sx={{
         minHeight: { xs: 'auto', md: 'calc(100vh - 64px)' },
         display: 'flex',
@@ -38,6 +54,8 @@ const Hero = () => {
         position: 'relative',
         overflow: 'hidden',
         backgroundColor: '#08090b',
+        '--mx': '50%',
+        '--my': '38%',
         pt: { xs: 13, md: 14 },
         pb: { xs: 7, md: 10 },
         scrollMarginTop: '64px',
@@ -54,19 +72,59 @@ const Hero = () => {
           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 76%)',
           opacity: 0.45,
         },
-        '&::after': {
-          content: '""',
-          position: 'absolute',
-          left: '50%',
-          top: '18%',
-          width: { xs: 280, md: 520 },
-          height: { xs: 280, md: 520 },
-          transform: 'translateX(-50%)',
-          background: 'radial-gradient(circle, rgba(139, 163, 106, 0.13), transparent 68%)',
-          pointerEvents: 'none',
-        },
       }}
     >
+      <Box
+        aria-hidden="true"
+        sx={{
+          position: 'absolute',
+          left: 'var(--mx)',
+          top: 'var(--my)',
+          width: 'clamp(380px, 52vw, 860px)',
+          height: 'clamp(380px, 52vw, 860px)',
+          transform: 'translate(-50%, -50%)',
+          borderRadius: '50%',
+          background:
+            'radial-gradient(circle, rgba(139, 163, 106, 0.28) 0%, rgba(139, 163, 106, 0.14) 26%, rgba(139, 163, 106, 0.04) 52%, transparent 72%)',
+          filter: 'blur(42px)',
+          opacity: 0.75,
+          mixBlendMode: 'screen',
+          pointerEvents: 'none',
+          animation: prefersReducedMotion ? 'none' : 'livingGlow 14s ease-in-out infinite',
+          '@keyframes livingGlow': {
+            '0%, 100%': {
+              transform: 'translate(-50%, -50%) scale(0.98)',
+              opacity: 0.6,
+            },
+            '50%': {
+              transform: 'translate(-50%, -50%) scale(1.06)',
+              opacity: 0.92,
+            },
+          },
+        }}
+      />
+
+      <Box
+        aria-hidden="true"
+        sx={{
+          position: 'absolute',
+          inset: '-10%',
+          background:
+            'linear-gradient(135deg, transparent 10%, rgba(245, 241, 232, 0.03) 42%, transparent 62%)',
+          transform: 'translate3d(0, 0, 0)',
+          opacity: 0.72,
+          filter: 'blur(18px)',
+          pointerEvents: 'none',
+          animation: prefersReducedMotion
+            ? 'none'
+            : 'fieldDrift 16s ease-in-out infinite alternate',
+          '@keyframes fieldDrift': {
+            '0%': { transform: 'translate3d(-2%, -1%, 0) scale(1)' },
+            '100%': { transform: 'translate3d(2%, 1%, 0) scale(1.04)' },
+          },
+        }}
+      />
+
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Box
           sx={{
@@ -97,25 +155,33 @@ const Hero = () => {
             </SectionBadge>
           </Box>
 
-          <Typography
-            component={motion.h1}
+          <Box
+            component={motion.div}
             initial={prefersReducedMotion ? false : 'hidden'}
             animate="visible"
             custom={0.08}
             variants={fadeUpVariants}
-            variant="h1"
-            sx={{
-              color: colors.text.primary,
-              fontSize: { xs: '2.45rem', sm: '3.25rem', md: '4.35rem', lg: '5rem' },
-              fontWeight: 800,
-              lineHeight: 1.02,
-              letterSpacing: 0,
-              maxWidth: 820,
-              mb: 3.2,
-            }}
+            sx={{ width: '100%', display: 'flex', justifyContent: 'center', mb: 3.2 }}
           >
-            Digital systems for serious growth.
-          </Typography>
+            <BlurText
+              component="h1"
+              text="Digital systems for serious growth."
+              animateBy="words"
+              direction="top"
+              delay={130}
+              stepDuration={0.32}
+              sx={{
+                color: colors.text.primary,
+                fontSize: { xs: '2.45rem', sm: '3.25rem', md: '4.35rem', lg: '5rem' },
+                fontWeight: 800,
+                lineHeight: 1.02,
+                letterSpacing: 0,
+                maxWidth: 820,
+                textAlign: 'center',
+                wordBreak: 'keep-all',
+              }}
+            />
+          </Box>
 
           <Typography
             component={motion.p}

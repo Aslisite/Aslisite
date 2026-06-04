@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
-import { SectionBadge } from '../common';
+import { BlurText, SectionBadge } from '../common';
 import ReceiptLongImport from '@mui/icons-material/ReceiptLong';
 import AccountBalanceImport from '@mui/icons-material/AccountBalance';
 import TrendingUpImport from '@mui/icons-material/TrendingUp';
@@ -145,30 +145,36 @@ const Product = () => {
               <SectionBadge>Our Product</SectionBadge>
             </Box>
 
-            <Typography
-              component={motion.h2}
-              variants={fadeUpVariants}
-              variant="h2"
+            <BlurText
+              component="h2"
+              text="AsliBooks - Smart Invoicing & GST Solution for Growing Businesses"
+              animateBy="words"
+              direction="top"
+              delay={75}
+              stepDuration={0.3}
               sx={{
-                fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
+                fontSize: { xs: '1.65rem', sm: '2.05rem', md: '2.4rem' },
                 fontWeight: 800,
                 mb: 2,
                 color: colors.text.primary,
-                lineHeight: 1.2,
+                lineHeight: 1.14,
+                textAlign: 'center',
+                maxWidth: '780px',
+                mx: 'auto',
               }}
-            >
-              AsliBooks - Smart Invoicing & GST Solution for Growing Businesses
-            </Typography>
+            />
 
             <Typography
               component={motion.p}
               variants={fadeUpVariants}
-              variant="h6"
+              variant="body1"
               sx={{
                 color: colors.text.secondary,
-                fontWeight: 400,
-                fontSize: { xs: '1rem', md: '1.125rem' },
-                lineHeight: 1.6,
+                fontWeight: 450,
+                fontSize: { xs: '0.98rem', md: '1.06rem' },
+                lineHeight: 1.75,
+                maxWidth: '600px',
+                mx: 'auto',
               }}
             >
               Simplify billing, manage GST, and track your business finances - all in one place.
@@ -208,9 +214,10 @@ const Product = () => {
                     <ListItemText
                       primary={feature.text}
                       primaryTypographyProps={{
-                        fontSize: '1rem',
-                        fontWeight: 500,
+                        fontSize: '0.98rem',
+                        fontWeight: 600,
                         color: colors.text.primary,
+                        lineHeight: 1.4,
                       }}
                     />
                   </ListItem>
@@ -350,9 +357,9 @@ const Product = () => {
             variant="subtitle2"
             sx={{
               color: colors.text.muted,
-              letterSpacing: 1,
-              fontWeight: 500,
-              fontSize: { xs: '0.8rem', md: '0.9rem' },
+              letterSpacing: '0.12em',
+              fontWeight: 600,
+              fontSize: { xs: '0.72rem', md: '0.8rem' },
             }}
           >
             Built for small businesses, freelancers, and startups

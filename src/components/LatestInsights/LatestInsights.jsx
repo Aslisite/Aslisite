@@ -15,7 +15,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CalendarTodayImport from '@mui/icons-material/CalendarToday';
 import { colors } from '../../theme/theme';
-import { SectionBadge } from '../common';
+import { BlurText, SectionBadge } from '../common';
 import { useInitialData } from '../../context/DataContext';
 import { filterPublishedBlogs, getBlogs } from '../../api/blog';
 
@@ -113,41 +113,35 @@ const LatestInsights = () => {
             <Box component={motion.div} variants={fadeUpVariants}>
               <SectionBadge>Recent Insights</SectionBadge>
             </Box>
-            <Typography
-              component={motion.h2}
-              variants={fadeUpVariants}
-              variant="h2"
+            <BlurText
+              component="h2"
+              text="Latest from Our Blog"
+              animateBy="words"
+              direction="top"
+              delay={110}
+              stepDuration={0.32}
               sx={{
-                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
-                fontWeight: 700,
+                fontSize: { xs: '2rem', sm: '2.45rem', md: '2.85rem' },
+                fontWeight: 650,
+                lineHeight: 1.12,
                 mb: 2,
-                color: colors.text.primary,
+                color: colors.text.secondary,
+                textAlign: 'center',
+                maxWidth: '640px',
+                mx: 'auto',
               }}
-            >
-              Latest from Our{' '}
-              <Box
-                component="span"
-                sx={{
-                  background: colors.accent.gradient,
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                Blog
-              </Box>
-            </Typography>
+            />
             <Typography
               component={motion.p}
               variants={fadeUpVariants}
-              variant="h6"
+              variant="body1"
               sx={{
                 color: colors.text.secondary,
-                fontWeight: 400,
-                maxWidth: '600px',
+                fontWeight: 450,
+                maxWidth: '540px',
                 mx: 'auto',
-                fontSize: { xs: '1rem', md: '1.125rem' },
-                lineHeight: 1.6,
+                fontSize: { xs: '0.98rem', md: '1.06rem' },
+                lineHeight: 1.78,
               }}
             >
               Stay updated with the latest digital trends, development strategies, and SEO growth
@@ -233,10 +227,11 @@ const LatestInsights = () => {
                           label={post.category || 'Digital Strategy'}
                           size="small"
                           sx={{
-                            bgcolor: 'rgba(139, 163, 106, 0.08)',
-                            color: colors.accent.primary,
-                            fontWeight: 700,
-                            fontSize: '0.75rem',
+                            bgcolor: 'rgba(245, 241, 232, 0.05)',
+                            color: colors.text.secondary,
+                            fontWeight: 600,
+                            fontSize: '0.7rem',
+                            letterSpacing: '0.08em',
                             textTransform: 'uppercase',
                           }}
                         />
@@ -267,8 +262,8 @@ const LatestInsights = () => {
                         to={`/blog/${post.slug}`}
                         sx={{
                           fontWeight: 700,
-                          fontSize: '1.25rem',
-                          lineHeight: 1.4,
+                          fontSize: '1.18rem',
+                          lineHeight: 1.45,
                           color: colors.text.primary,
                           textDecoration: 'none',
                           mb: 1.5,
@@ -291,7 +286,8 @@ const LatestInsights = () => {
                         sx={{
                           color: colors.text.secondary,
                           mb: 3,
-                          lineHeight: 1.6,
+                          lineHeight: 1.72,
+                          fontSize: '0.96rem',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
                           display: '-webkit-box',
@@ -308,7 +304,8 @@ const LatestInsights = () => {
                         sx={{
                           mt: 'auto',
                           p: 0,
-                          fontWeight: 700,
+                          fontWeight: 600,
+                          fontSize: '0.92rem',
                           color: colors.accent.primary,
                           alignSelf: 'flex-start',
                           transition: 'all 0.2s ease',

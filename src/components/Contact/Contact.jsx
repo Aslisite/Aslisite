@@ -19,7 +19,7 @@ import LocationOnImport from '@mui/icons-material/LocationOn';
 import PhoneImport from '@mui/icons-material/Phone';
 import SendImport from '@mui/icons-material/Send';
 import { colors } from '../../theme/theme';
-import { SectionBadge } from '../common';
+import { BlurText, SectionBadge } from '../common';
 
 const Business = BusinessImport.default || BusinessImport;
 const Email = EmailImport.default || EmailImport;
@@ -31,17 +31,6 @@ const fadeUpVariants = {
   hidden: { opacity: 0.35, y: 18 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: 'easeOut',
-    },
-  },
-};
-
-const headingRevealVariants = {
-  hidden: { y: '100%' },
-  visible: {
     y: 0,
     transition: {
       duration: 0.7,
@@ -184,18 +173,23 @@ const Contact = () => {
               <SectionBadge>Get In Touch</SectionBadge>
             </Box>
             <Box sx={{ overflow: 'hidden', mb: 3, pb: '0.04em' }}>
-              <Typography
-                component={motion.h2}
-                variants={headingRevealVariants}
-                variant="h2"
+              <BlurText
+                component="h2"
+                text="Let's Build Something Amazing Together"
+                animateBy="words"
+                direction="top"
+                delay={85}
+                stepDuration={0.3}
                 sx={{
                   color: colors.text.primary,
-                  fontWeight: 700,
-                  fontSize: { xs: '2rem', md: '2.75rem' },
+                  fontWeight: 800,
+                  fontSize: { xs: '2.1rem', sm: '2.55rem', md: '3.15rem' },
+                  lineHeight: 1.08,
+                  textAlign: 'center',
+                  maxWidth: '720px',
+                  mx: 'auto',
                 }}
-              >
-                Let&apos;s Build Something Amazing Together
-              </Typography>
+              />
             </Box>
             <Typography
               component={motion.p}
@@ -205,8 +199,9 @@ const Contact = () => {
                 color: colors.text.secondary,
                 maxWidth: '600px',
                 mx: 'auto',
-                lineHeight: 1.8,
-                fontSize: { xs: '1rem', md: '1.125rem' },
+                lineHeight: 1.82,
+                fontSize: { xs: '0.98rem', md: '1.06rem' },
+                fontWeight: 450,
               }}
             >
               Ready to transform your digital presence? We&apos;d love to hear about your project.
@@ -221,9 +216,10 @@ const Contact = () => {
                   variant="h4"
                   sx={{
                     color: colors.text.primary,
-                    fontWeight: 600,
+                    fontWeight: 700,
                     mb: 4,
-                    fontSize: { xs: '1.25rem', md: '1.5rem' },
+                    fontSize: { xs: '1.15rem', md: '1.35rem' },
+                    letterSpacing: '0.01em',
                   }}
                 >
                   Contact Information
@@ -260,7 +256,10 @@ const Contact = () => {
                             sx={{
                               color: colors.text.muted,
                               mb: 0.5,
-                              fontWeight: 500,
+                              fontWeight: 700,
+                              fontSize: '0.72rem',
+                              letterSpacing: '0.08em',
+                              textTransform: 'uppercase',
                             }}
                           >
                             {item.label}
@@ -272,6 +271,8 @@ const Contact = () => {
                               sx={{
                                 color: colors.text.primary,
                                 textDecoration: 'none',
+                                fontSize: '0.98rem',
+                                lineHeight: 1.6,
                                 transition: 'color 0.2s ease',
                                 '&:hover': {
                                   color: colors.accent.primary,
@@ -281,7 +282,13 @@ const Contact = () => {
                               {item.value}
                             </Typography>
                           ) : (
-                            <Typography sx={{ color: colors.text.primary }}>
+                            <Typography
+                              sx={{
+                                color: colors.text.primary,
+                                fontSize: '0.98rem',
+                                lineHeight: 1.6,
+                              }}
+                            >
                               {item.value}
                             </Typography>
                           )}
@@ -338,9 +345,10 @@ const Contact = () => {
                   variant="h4"
                   sx={{
                     color: colors.text.primary,
-                    fontWeight: 600,
+                    fontWeight: 700,
                     mb: 4,
-                    fontSize: { xs: '1.25rem', md: '1.5rem' },
+                    fontSize: { xs: '1.15rem', md: '1.35rem' },
+                    letterSpacing: '0.01em',
                   }}
                 >
                   Send Us a Message

@@ -5,7 +5,7 @@ import BuildImport from '@mui/icons-material/Build';
 import TrendingUpImport from '@mui/icons-material/TrendingUp';
 import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
-import { SectionBadge } from '../common';
+import { BlurText, SectionBadge } from '../common';
 
 const Code = CodeImport.default || CodeImport;
 const ShoppingCart = ShoppingCartImport.default || ShoppingCartImport;
@@ -121,41 +121,35 @@ const Services = () => {
           <Box component={motion.div} variants={fadeUpVariants}>
             <SectionBadge>Our Services</SectionBadge>
           </Box>
-          <Typography
-            component={motion.h2}
-            variants={fadeUpVariants}
-            variant="h2"
+          <BlurText
+            component="h2"
+            text="Solutions That Transform"
+            animateBy="words"
+            direction="top"
+            delay={110}
+            stepDuration={0.32}
             sx={{
-              fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
-              fontWeight: 700,
+              fontSize: { xs: '2.15rem', sm: '2.75rem', md: '3.35rem' },
+              fontWeight: 800,
+              lineHeight: 1.05,
               mb: 2,
               color: colors.text.primary,
+              textAlign: 'center',
+              maxWidth: '760px',
+              mx: 'auto',
             }}
-          >
-            Solutions That{' '}
-            <Box
-              component="span"
-              sx={{
-                background: colors.accent.gradient,
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Transform
-            </Box>
-          </Typography>
+          />
           <Typography
             component={motion.p}
             variants={fadeUpVariants}
-            variant="h6"
+            variant="body1"
             sx={{
               color: colors.text.secondary,
-              fontWeight: 400,
-              maxWidth: '600px',
+              fontWeight: 450,
+              maxWidth: '560px',
               mx: 'auto',
-              fontSize: { xs: '1rem', md: '1.125rem' },
-              lineHeight: 1.6,
+              fontSize: { xs: '1rem', md: '1.08rem' },
+              lineHeight: 1.75,
             }}
           >
             Comprehensive digital services tailored to accelerate your business growth
@@ -230,10 +224,11 @@ const Services = () => {
                     <Typography
                       variant="h5"
                       sx={{
-                        fontWeight: 600,
+                        fontWeight: 700,
                         mb: 2,
                         color: colors.text.primary,
-                        fontSize: { xs: '1.125rem', md: '1.25rem' },
+                        fontSize: { xs: '1.1rem', md: '1.22rem' },
+                        lineHeight: 1.25,
                       }}
                     >
                       {service.title}
@@ -245,7 +240,8 @@ const Services = () => {
                       sx={{
                         color: colors.text.secondary,
                         mb: 3,
-                        lineHeight: 1.7,
+                        lineHeight: 1.8,
+                        fontSize: '0.95rem',
                         flexGrow: 1,
                       }}
                     >
@@ -274,7 +270,12 @@ const Services = () => {
                         >
                           <Typography
                             variant="caption"
-                            sx={{ color: colors.text.muted, fontSize: '0.75rem' }}
+                            sx={{
+                              color: colors.text.muted,
+                              fontSize: '0.72rem',
+                              letterSpacing: '0.04em',
+                              textTransform: 'uppercase',
+                            }}
                           >
                             {feature}
                           </Typography>
