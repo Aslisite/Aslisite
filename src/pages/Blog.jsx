@@ -8,14 +8,41 @@ import {
   Button,
   CircularProgress,
   Box,
+  Chip,
+  Stack,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import AccessTimeImport from '@mui/icons-material/AccessTime';
+import CalendarTodayImport from '@mui/icons-material/CalendarToday';
 import { filterPublishedBlogs, getBlogs } from '../api/blog';
 import { colors } from '../theme/theme';
 import { SectionBadge } from '../components/common';
 import { useInitialData } from '../context/DataContext';
 import { absoluteUrl, siteMetadata } from '../seo/siteMetadata';
+
+const CalendarTodayIcon = CalendarTodayImport.default || CalendarTodayImport;
+const AccessTimeIcon = AccessTimeImport.default || AccessTimeImport;
+
+const formatPostDate = (post) => {
+  const candidate = post?.updatedAt || post?.date || post?.publishedAt || post?.createdAt;
+  const date = new Date(candidate);
+
+  if (Number.isNaN(date.getTime())) return '';
+
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+};
+
+const getReadTime = (post) => {
+  const plainText = post.content?.replace(/<[^>]*>/g, ' ') || post.metaDesc || '';
+  const words = plainText.trim().split(/\s+/).filter(Boolean).length;
+
+  return Math.max(1, Math.ceil(words / 200));
+};
 
 const Blog = () => {
   const initialData = useInitialData();
@@ -140,54 +167,177 @@ const Blog = () => {
       </Box>
 
       <Grid container spacing={4}>
-        {blogs.map((blog) => (
-          <Grid item key={blog.slug || blog.title} xs={12} sm={6} md={4}>
-            <Card
-              sx={{
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-                '&:hover': {
-                  transform: 'translateY(-8px)',
-                  boxShadow: (theme) => theme.shadows[8],
-                },
-              }}
-            >
-              <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
-                  {blog.title}
-                </Typography>
+        {blogs.map((blog) => {
+          const postDate = formatPostDate(blog);
+          const readTime = getReadTime(blog);
 
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{
-                    mb: 2,
-                    flexGrow: 1,
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    display: '-webkit-box',
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: 'vertical',
-                  }}
-                >
-                  {blog.metaDesc}
-                </Typography>
-
-                <Button
+          return (
+            <Grid item key={blog.slug || blog.title} xs={12} sm={6} md={4}>
+              <Card
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  overflow: 'hidden',
+                  '&:hover': {
+                    '& .blog-card-image': {
+                      transform: 'scale(1.04)',
+                    },
+                  },
+                }}
+              >
+                <Box
                   component={RouterLink}
                   to={`/blog/${blog.slug}`}
-                  variant="outlined"
-                  color="primary"
-                  sx={{ alignSelf: 'flex-start', mt: 'auto' }}
+                  sx={{
+                    display: 'block',
+                    aspectRatio: '16/10',
+                    overflow: 'hidden',
+                    background: colors.accent.gradient,
+                  }}
                 >
-                  Read More
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
+                  {blog.image ? (
+                    <Box
+                      component="img"
+                      className="blog-card-image"
+                      src={blog.image}
+                      alt={blog.title}
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                      sx={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        transition: 'transform 0.5s ease',
+                      }}
+                    />
+                  ) : (
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: '100%',
+                        background:
+                          'linear-gradient(135deg, rgba(139, 163, 106, 0.24) 0%, rgba(245, 241, 232, 0.08) 100%)',
+                      }}
+                    />
+                  )}
+                </Box>
+
+                <CardContent
+                  sx={{
+                    p: 3.5,
+                    flexGrow: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    sx={{ mb: 2, gap: 1.5 }}
+                  >
+                    <Chip
+                      label={blog.category || 'Digital Strategy'}
+                      size="small"
+                      sx={{
+                        bgcolor: 'rgba(245, 241, 232, 0.05)',
+                        color: colors.text.secondary,
+                        fontWeight: 600,
+                        fontSize: '0.7rem',
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                      }}
+                    />
+                    <Stack
+                      direction="row"
+                      spacing={1}
+                      alignItems="center"
+                      flexWrap="wrap"
+                      justifyContent="flex-end"
+                      sx={{ color: colors.text.muted, rowGap: 0.5 }}
+                    >
+                      {postDate && (
+                        <Stack direction="row" spacing={0.5} alignItems="center">
+                          <CalendarTodayIcon sx={{ fontSize: '0.85rem' }} />
+                          <Typography variant="caption">{postDate}</Typography>
+                        </Stack>
+                      )}
+                      <Stack direction="row" spacing={0.5} alignItems="center">
+                        <AccessTimeIcon sx={{ fontSize: '0.85rem' }} />
+                        <Typography variant="caption">{readTime} min</Typography>
+                      </Stack>
+                    </Stack>
+                  </Stack>
+
+                  <Typography
+                    variant="h5"
+                    component={RouterLink}
+                    to={`/blog/${blog.slug}`}
+                    sx={{
+                      fontWeight: 700,
+                      fontSize: '1.18rem',
+                      lineHeight: 1.45,
+                      color: colors.text.primary,
+                      textDecoration: 'none',
+                      mb: 1.5,
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      transition: 'color 0.2s ease',
+                      '&:hover': {
+                        color: colors.accent.primary,
+                      },
+                    }}
+                  >
+                    {blog.title}
+                  </Typography>
+
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: colors.text.secondary,
+                      mb: 3,
+                      lineHeight: 1.72,
+                      fontSize: '0.96rem',
+                      flexGrow: 1,
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: 'vertical',
+                    }}
+                  >
+                    {blog.metaDesc}
+                  </Typography>
+
+                  <Button
+                    component={RouterLink}
+                    to={`/blog/${blog.slug}`}
+                    sx={{
+                      mt: 'auto',
+                      p: 0,
+                      fontWeight: 600,
+                      fontSize: '0.92rem',
+                      color: colors.accent.primary,
+                      alignSelf: 'flex-start',
+                      transition: 'color 0.2s ease, transform 0.2s ease',
+                      '&:hover': {
+                        bgcolor: 'transparent',
+                        color: colors.text.primary,
+                        transform: 'translateX(4px)',
+                      },
+                    }}
+                  >
+                    Read Article &rarr;
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+          );
+        })}
       </Grid>
     </Container>
   );

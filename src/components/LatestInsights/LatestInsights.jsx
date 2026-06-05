@@ -169,11 +169,12 @@ const LatestInsights = () => {
                       backgroundColor: colors.background.card,
                       border: `1px solid ${colors.border.light}`,
                       borderRadius: 3,
-                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      transition:
+                        'transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1)',
                       '&:hover': {
-                        transform: 'translateY(-10px)',
-                        borderColor: 'rgba(139, 163, 106, 0.24)',
-                        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.42)',
+                        transform: 'translateY(-6px)',
+                        borderColor: colors.border.accent,
+                        boxShadow: '0 18px 36px rgba(0, 0, 0, 0.34)',
                       },
                     }}
                   >

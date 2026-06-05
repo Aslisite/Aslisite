@@ -178,16 +178,17 @@ const Services = () => {
                     backgroundColor: colors.background.card,
                     border: `1px solid ${colors.border.light}`,
                     borderRadius: 3,
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transition:
+                      'transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1)',
                     cursor: 'pointer',
                     display: 'flex',
                     flexDirection: 'column',
                     '&:hover': {
-                      transform: 'translateY(-8px)',
-                      borderColor: colors.accent.primary,
-                      boxShadow: `0 20px 40px rgba(139, 163, 106, 0.15)`,
+                      transform: 'translateY(-6px)',
+                      borderColor: colors.border.accent,
+                      boxShadow: '0 18px 36px rgba(0, 0, 0, 0.34)',
                       '& .service-icon': {
-                        transform: 'scale(1.1)',
+                        transform: 'scale(1.06)',
                         color: colors.accent.primary,
                       },
                     },

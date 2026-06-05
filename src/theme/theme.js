@@ -235,14 +235,16 @@ let theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: colors.background.card,
+          backgroundImage:
+            'linear-gradient(180deg, rgba(245, 241, 232, 0.035) 0%, rgba(245, 241, 232, 0) 58%)',
           border: `1px solid ${colors.border.light}`,
           borderRadius: 16,
           transition:
-            'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            'transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.28s cubic-bezier(0.4, 0, 0.2, 1)',
           '&:hover': {
             transform: 'translateY(-4px)',
-            borderColor: colors.border.medium,
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)',
+            borderColor: colors.border.accent,
+            boxShadow: '0 18px 36px rgba(0, 0, 0, 0.34)',
           },
         },
       },
