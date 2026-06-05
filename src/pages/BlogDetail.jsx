@@ -503,13 +503,14 @@ const BlogDetail = () => {
           </Button>
 
           <Grid container spacing={{ xs: 3, md: 6 }}>
-            <Grid item xs={12} md={10} lg={8}>
+            <Grid item xs={12} lg={11}>
               <Chip
                 label={post.category || 'Digital Strategy'}
                 sx={{
                   mb: 3,
-                  bgcolor: 'rgba(0, 212, 255, 0.1)',
-                  color: '#00d4ff',
+                  bgcolor: 'rgba(139, 163, 106, 0.12)',
+                  color: colors.accent.primary,
+                  border: `1px solid ${colors.border.accent}`,
                   fontWeight: 700,
                   fontSize: '0.8rem',
                   textTransform: 'uppercase',
@@ -520,9 +521,10 @@ const BlogDetail = () => {
                 variant="h1"
                 sx={{
                   fontWeight: 800,
-                  fontSize: { xs: '2.5rem', md: '4rem' },
-                  lineHeight: 1.1,
+                  fontSize: { xs: '2.15rem', sm: '2.6rem', md: '3.35rem' },
+                  lineHeight: 1.08,
                   mb: 3,
+                  maxWidth: '1120px',
                   background: 'linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
@@ -537,7 +539,7 @@ const BlogDetail = () => {
                   color: 'rgba(255, 255, 255, 0.6)',
                   fontWeight: 400,
                   mb: 5,
-                  maxWidth: '700px',
+                  maxWidth: '880px',
                   lineHeight: 1.6,
                 }}
               >
@@ -563,7 +565,12 @@ const BlogDetail = () => {
                   </Box>
                 </Stack>
 
-                <Stack direction="row" spacing={3} sx={{ color: 'rgba(255, 255, 255, 0.5)' }}>
+                <Stack
+                  direction="row"
+                  spacing={3}
+                  flexWrap="wrap"
+                  sx={{ color: 'rgba(255, 255, 255, 0.5)', rowGap: 1 }}
+                >
                   <Stack direction="row" spacing={1} alignItems="center">
                     <CalendarTodayIcon sx={{ fontSize: 16 }} />
                     <Typography variant="body2">
