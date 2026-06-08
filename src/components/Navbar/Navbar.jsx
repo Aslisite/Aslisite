@@ -9,9 +9,7 @@ import {
   ListItemButton,
   ListItemText,
   Typography,
-  useMediaQuery,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import CloseIconImport from '@mui/icons-material/Close';
 import KeyboardArrowDownIconImport from '@mui/icons-material/KeyboardArrowDown';
 import MenuIconImport from '@mui/icons-material/Menu';
@@ -39,8 +37,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpenProducts, setMobileOpenProducts] = useState(false);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -296,54 +292,25 @@ const Navbar = () => {
             </Box>
 
             {/* Desktop Navigation */}
-            {!isMobile && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                <Box component="nav" sx={{ display: 'flex', gap: 3 }}>
-                  {navItems.map((item) => (
-                    <Box
-                      key={item.label}
-                      sx={{ position: 'relative', py: 1 }}
-                      onMouseEnter={() => item.hasDropdown && setOpenDropdown('products')}
-                      onMouseLeave={() => item.hasDropdown && setOpenDropdown(null)}
-                    >
-                      {item.hasDropdown ? (
-                        <Box
-                          sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 0.5,
-                            cursor: 'pointer',
-                          }}
-                        >
-                          <Typography
-                            sx={{
-                              color: colors.text.secondary,
-                              textDecoration: 'none',
-                              fontWeight: 500,
-                              fontSize: '0.9375rem',
-                              transition: 'color 0.2s ease',
-                              '&:hover': {
-                                color: colors.accent.primary,
-                              },
-                            }}
-                          >
-                            {item.label}
-                          </Typography>
-                          <KeyboardArrowDownIcon
-                            sx={{
-                              fontSize: '1rem',
-                              color: colors.text.secondary,
-                              transform:
-                                openDropdown === 'products' ? 'rotate(180deg)' : 'rotate(0)',
-                              transition: 'transform 0.2s ease',
-                            }}
-                          />
-                        </Box>
-                      ) : (
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 4 }}>
+              <Box component="nav" sx={{ display: 'flex', gap: 3 }}>
+                {navItems.map((item) => (
+                  <Box
+                    key={item.label}
+                    sx={{ position: 'relative', py: 1 }}
+                    onMouseEnter={() => item.hasDropdown && setOpenDropdown('products')}
+                    onMouseLeave={() => item.hasDropdown && setOpenDropdown(null)}
+                  >
+                    {item.hasDropdown ? (
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 0.5,
+                          cursor: 'pointer',
+                        }}
+                      >
                         <Typography
-                          component={item.href.startsWith('/#') ? 'a' : Link}
-                          href={item.href.startsWith('/#') ? item.href : undefined}
-                          to={item.href.startsWith('/#') ? undefined : item.href}
                           sx={{
                             color: colors.text.secondary,
                             textDecoration: 'none',
@@ -357,93 +324,118 @@ const Navbar = () => {
                         >
                           {item.label}
                         </Typography>
-                      )}
-                      {item.hasDropdown && openDropdown === 'products' && (
-                        <Box
+                        <KeyboardArrowDownIcon
                           sx={{
-                            position: 'absolute',
-                            top: '100%',
-                            left: 0,
-                            mt: 0.5,
-                            pt: 1,
-                            py: 1,
-                            px: 1,
-                            minWidth: 220,
-                            backgroundColor: colors.background.primary,
-                            border: `1px solid ${colors.border.light}`,
-                            borderRadius: 2,
-                            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
-                            zIndex: 1001,
+                            fontSize: '1rem',
+                            color: colors.text.secondary,
+                            transform: openDropdown === 'products' ? 'rotate(180deg)' : 'rotate(0)',
+                            transition: 'transform 0.2s ease',
                           }}
-                        >
-                          {productItems.map((product) => (
-                            <Box
-                              key={product.label}
-                              component="a"
-                              href={product.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                        />
+                      </Box>
+                    ) : (
+                      <Typography
+                        component={item.href.startsWith('/#') ? 'a' : Link}
+                        href={item.href.startsWith('/#') ? item.href : undefined}
+                        to={item.href.startsWith('/#') ? undefined : item.href}
+                        sx={{
+                          color: colors.text.secondary,
+                          textDecoration: 'none',
+                          fontWeight: 500,
+                          fontSize: '0.9375rem',
+                          transition: 'color 0.2s ease',
+                          '&:hover': {
+                            color: colors.accent.primary,
+                          },
+                        }}
+                      >
+                        {item.label}
+                      </Typography>
+                    )}
+                    {item.hasDropdown && openDropdown === 'products' && (
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          top: '100%',
+                          left: 0,
+                          mt: 0.5,
+                          pt: 1,
+                          py: 1,
+                          px: 1,
+                          minWidth: 220,
+                          backgroundColor: colors.background.primary,
+                          border: `1px solid ${colors.border.light}`,
+                          borderRadius: 2,
+                          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+                          zIndex: 1001,
+                        }}
+                      >
+                        {productItems.map((product) => (
+                          <Box
+                            key={product.label}
+                            component="a"
+                            href={product.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={{
+                              display: 'block',
+                              px: 2,
+                              py: 1.25,
+                              borderRadius: 1,
+                              textDecoration: 'none',
+                              '&:hover': {
+                                backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                              },
+                            }}
+                          >
+                            <Typography
                               sx={{
-                                display: 'block',
-                                px: 2,
-                                py: 1.25,
-                                borderRadius: 1,
-                                textDecoration: 'none',
-                                '&:hover': {
-                                  backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                                },
+                                color: colors.text.primary,
+                                fontWeight: 500,
+                                fontSize: '0.875rem',
                               }}
                             >
-                              <Typography
-                                sx={{
-                                  color: colors.text.primary,
-                                  fontWeight: 500,
-                                  fontSize: '0.875rem',
-                                }}
-                              >
-                                {product.label}
-                              </Typography>
-                              <Typography
-                                sx={{ color: colors.text.secondary, fontSize: '0.75rem', mt: 0.25 }}
-                              >
-                                {product.description}
-                              </Typography>
-                            </Box>
-                          ))}
-                        </Box>
-                      )}
-                    </Box>
-                  ))}
-                </Box>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="medium"
-                  component="a"
-                  href="https://wa.me/919495664173?text=Hi%20Aslisite,%20I'm%20interested%20in%20starting%20a%20project!"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{ py: 1, px: 3 }}
-                >
-                  Get Started
-                </Button>
+                              {product.label}
+                            </Typography>
+                            <Typography
+                              sx={{ color: colors.text.secondary, fontSize: '0.75rem', mt: 0.25 }}
+                            >
+                              {product.description}
+                            </Typography>
+                          </Box>
+                        ))}
+                      </Box>
+                    )}
+                  </Box>
+                ))}
               </Box>
-            )}
+              <Button
+                variant="contained"
+                color="primary"
+                size="medium"
+                component="a"
+                href="https://wa.me/919495664173?text=Hi%20Aslisite,%20I'm%20interested%20in%20starting%20a%20project!"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ py: 1, px: 3 }}
+              >
+                Get Started
+              </Button>
+            </Box>
 
             {/* Mobile Menu Button */}
-            {isMobile && (
-              <IconButton
-                aria-label="Open menu"
-                onClick={handleDrawerToggle}
-                sx={{
-                  color: colors.text.primary,
-                  border: `1px solid ${colors.border.light}`,
-                  borderRadius: 2,
-                }}
-              >
-                <MenuIcon />
-              </IconButton>
-            )}
+            <IconButton
+              aria-label="Open menu"
+              onClick={handleDrawerToggle}
+              sx={{
+                display: { xs: 'inline-flex', md: 'none' },
+                color: colors.text.primary,
+                border: `1px solid ${colors.border.light}`,
+                borderRadius: 2,
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
           </Box>
         </Container>
       </Box>
