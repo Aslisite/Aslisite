@@ -328,26 +328,9 @@ const Hero = () => {
                 alignItems: { xs: 'stretch', sm: 'center' },
                 justifyContent: { sm: 'center' },
                 gap: { xs: 0, sm: 0 },
-                // Mobile: relative for timeline line
                 position: 'relative',
               }}
             >
-              {/* Mobile timeline line (left side) */}
-              <Box
-                aria-hidden="true"
-                sx={{
-                  display: { xs: 'block', sm: 'none' },
-                  position: 'absolute',
-                  left: 20,
-                  top: 24,
-                  bottom: 24,
-                  width: '2px',
-                  background: `linear-gradient(to bottom, ${colors.accent.primary}, rgba(245, 241, 232, 0.1) 40%, rgba(245, 241, 232, 0.06))`,
-                  borderRadius: 1,
-                  zIndex: 0,
-                }}
-              />
-
               {systemSteps.map((step, index) => (
                 <Box
                   key={step}
@@ -373,10 +356,8 @@ const Hero = () => {
                       // Desktop: allow items to flex evenly
                       flex: { sm: '1 1 0' },
                       justifyContent: { xs: 'flex-start', sm: 'center' },
-                      // Mobile: offset for timeline
                       position: 'relative',
                       zIndex: 1,
-                      ml: { xs: 2.5, sm: 0 },
                       mb: { xs: 0.5, sm: 0 },
                       '&:last-of-type': {
                         mb: 0,
