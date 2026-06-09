@@ -9,6 +9,7 @@ import {
   Button,
   Chip,
   Stack,
+  Skeleton,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
@@ -68,12 +69,60 @@ const formatPostDate = (post) => {
   });
 };
 
+const SkeletonCard = () => (
+  <Grid item xs={12} sm={6} md={4}>
+    <Card
+      sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: colors.background.card,
+        border: `1px solid ${colors.border.light}`,
+        borderRadius: 3,
+      }}
+    >
+      <Skeleton
+        variant="rectangular"
+        sx={{
+          aspectRatio: '16/10',
+          width: '100%',
+          height: 200,
+          bgcolor: 'rgba(245,241,232,0.06)',
+        }}
+      />
+      <CardContent sx={{ p: 3.5, flexGrow: 1 }}>
+        <Skeleton
+          variant="text"
+          sx={{ bgcolor: 'rgba(245,241,232,0.06)', width: '40%', mb: 2, fontSize: '0.7rem' }}
+        />
+        <Skeleton
+          variant="text"
+          sx={{ bgcolor: 'rgba(245,241,232,0.06)', width: '80%', mb: 1, fontSize: '1.18rem' }}
+        />
+        <Skeleton
+          variant="text"
+          sx={{ bgcolor: 'rgba(245,241,232,0.06)', width: '100%', mb: 0.5 }}
+        />
+        <Skeleton
+          variant="text"
+          sx={{ bgcolor: 'rgba(245,241,232,0.06)', width: '100%', mb: 0.5 }}
+        />
+        <Skeleton variant="text" sx={{ bgcolor: 'rgba(245,241,232,0.06)', width: '30%', mt: 2 }} />
+      </CardContent>
+    </Card>
+  </Grid>
+);
+
 const LatestInsights = () => {
   const initialData = useInitialData();
   const [blogs, setBlogs] = useState(filterPublishedBlogs(initialData?.blogs || []).slice(0, 3));
+  const [loading, setLoading] = useState(!initialData?.blogs);
 
   useEffect(() => {
-    if (initialData?.blogs) return;
+    if (initialData?.blogs) {
+      setLoading(false);
+      return;
+    }
 
     const fetchBlogs = async () => {
       try {
@@ -81,13 +130,17 @@ const LatestInsights = () => {
         setBlogs(data.slice(0, 3));
       } catch (err) {
         console.error('Failed to load blog posts:', err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchBlogs();
   }, [initialData]);
 
-  if (!blogs || blogs.length === 0) return null;
+  const showSkeletons = loading && blogs.length === 0;
+
+  if (!loading && (!blogs || blogs.length === 0)) return null;
 
   return (
     <Box
@@ -150,180 +203,216 @@ const LatestInsights = () => {
           </Box>
 
           <Grid component={motion.div} container spacing={4} variants={cardsContainerVariants}>
-            {blogs.map((post) => {
-              // Estimate reading time if not present
-              const plainText = post.content?.replace(/<[^>]*>/g, ' ') || '';
-              const words = plainText.trim().split(/\s+/).length || 0;
-              const readTime = Math.max(1, Math.ceil(words / 200));
-              const postDate = formatPostDate(post);
+            {showSkeletons
+              ? [0, 1, 2].map((i) => <SkeletonCard key={i} />)
+              : blogs.map((post) => {
+                  // Estimate reading time if not present
+                  const plainText = post.content?.replace(/<[^>]*>/g, ' ') || '';
+                  const words = plainText.trim().split(/\s+/).length || 0;
+                  const readTime = Math.max(1, Math.ceil(words / 200));
+                  const postDate = formatPostDate(post);
 
-              return (
-                <Grid item xs={12} sm={6} md={4} key={post.slug}>
-                  <Card
-                    component={motion.div}
-                    variants={cardVariants}
-                    sx={{
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      backgroundColor: colors.background.card,
-                      border: `1px solid ${colors.border.light}`,
-                      borderRadius: 3,
-                      transition:
-                        'transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1)',
-                      '&:hover': {
-                        transform: 'translateY(-6px)',
-                        borderColor: colors.border.accent,
-                        boxShadow: '0 18px 36px rgba(0, 0, 0, 0.34)',
-                      },
-                    }}
-                  >
-                    <Box
-                      component={RouterLink}
-                      to={`/blog/${post.slug}`}
-                      sx={{ overflow: 'hidden', display: 'block', aspectRatio: '16/10' }}
-                    >
-                      {post.image ? (
-                        <Box
-                          component="img"
-                          src={post.image}
-                          alt={post.title}
-                          loading="lazy"
-                          referrerPolicy="no-referrer"
-                          sx={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            transition: 'transform 0.5s ease',
-                            '&:hover': { transform: 'scale(1.05)' },
-                          }}
-                        />
-                      ) : (
-                        <Box
-                          sx={{
-                            width: '100%',
-                            height: '100%',
-                            background: colors.accent.gradient,
-                            opacity: 0.15,
-                          }}
-                        />
-                      )}
-                    </Box>
-
-                    <CardContent
-                      sx={{
-                        p: 3.5,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        flexGrow: 1,
-                      }}
-                    >
-                      <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        sx={{ mb: 2 }}
+                  return (
+                    <Grid item xs={12} sm={6} md={4} key={post.slug}>
+                      <Card
+                        component={motion.div}
+                        variants={cardVariants}
+                        sx={{
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          backgroundColor: colors.background.card,
+                          border: `1px solid ${colors.border.light}`,
+                          borderRadius: 3,
+                          overflow: 'hidden',
+                          transition:
+                            'transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1)',
+                          '&:hover': {
+                            transform: 'translateY(-6px)',
+                            borderColor: colors.border.accent,
+                            boxShadow: '0 18px 36px rgba(0, 0, 0, 0.34)',
+                            '& .insights-card-image': {
+                              transform: 'scale(1.06)',
+                            },
+                            '& .insights-card-overlay': {
+                              opacity: 0.15,
+                            },
+                            '& .insights-card-read-link': {
+                              opacity: 1,
+                              transform: 'translateY(0)',
+                            },
+                          },
+                        }}
                       >
-                        <Chip
-                          label={post.category || 'Digital Strategy'}
-                          size="small"
+                        <Box
+                          component={RouterLink}
+                          to={`/blog/${post.slug}`}
                           sx={{
-                            bgcolor: 'rgba(245, 241, 232, 0.05)',
-                            color: colors.text.secondary,
-                            fontWeight: 600,
-                            fontSize: '0.7rem',
-                            letterSpacing: '0.08em',
-                            textTransform: 'uppercase',
+                            overflow: 'hidden',
+                            display: 'block',
+                            aspectRatio: '16/10',
+                            position: 'relative',
                           }}
-                        />
-                        <Stack
-                          direction="row"
-                          spacing={1}
-                          alignItems="center"
-                          flexWrap="wrap"
-                          justifyContent="flex-end"
-                          sx={{ color: colors.text.muted, rowGap: 0.5 }}
                         >
-                          {postDate && (
-                            <Stack direction="row" spacing={0.5} alignItems="center">
-                              <CalendarTodayIcon sx={{ fontSize: '0.85rem' }} />
-                              <Typography variant="caption">{postDate}</Typography>
-                            </Stack>
+                          {post.image ? (
+                            <>
+                              <Box
+                                component="img"
+                                className="insights-card-image"
+                                src={post.image}
+                                alt={post.title}
+                                loading="lazy"
+                                referrerPolicy="no-referrer"
+                                sx={{
+                                  width: '100%',
+                                  height: '100%',
+                                  objectFit: 'cover',
+                                  transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                }}
+                              />
+                              <Box
+                                className="insights-card-overlay"
+                                sx={{
+                                  position: 'absolute',
+                                  inset: 0,
+                                  background:
+                                    'linear-gradient(to top, rgba(11,13,16,0.55) 0%, transparent 60%)',
+                                  transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                  opacity: 0.45,
+                                  pointerEvents: 'none',
+                                }}
+                              />
+                            </>
+                          ) : (
+                            <Box
+                              sx={{
+                                width: '100%',
+                                height: '100%',
+                                background: colors.accent.gradient,
+                                opacity: 0.15,
+                              }}
+                            />
                           )}
-                          <Stack direction="row" spacing={0.5} alignItems="center">
-                            <AccessTimeIcon sx={{ fontSize: '0.85rem' }} />
-                            <Typography variant="caption">{readTime} min</Typography>
+                        </Box>
+
+                        <CardContent
+                          sx={{
+                            p: 3.5,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            flexGrow: 1,
+                          }}
+                        >
+                          <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                            sx={{ mb: 2 }}
+                          >
+                            <Chip
+                              label={post.category || 'Digital Strategy'}
+                              size="small"
+                              sx={{
+                                bgcolor: 'rgba(245, 241, 232, 0.05)',
+                                color: colors.text.secondary,
+                                fontWeight: 600,
+                                fontSize: '0.7rem',
+                                letterSpacing: '0.08em',
+                                textTransform: 'uppercase',
+                              }}
+                            />
+                            <Stack
+                              direction="row"
+                              spacing={1}
+                              alignItems="center"
+                              flexWrap="wrap"
+                              justifyContent="flex-end"
+                              sx={{ color: colors.text.muted, rowGap: 0.5 }}
+                            >
+                              {postDate && (
+                                <Stack direction="row" spacing={0.5} alignItems="center">
+                                  <CalendarTodayIcon sx={{ fontSize: '0.85rem' }} />
+                                  <Typography variant="caption">{postDate}</Typography>
+                                </Stack>
+                              )}
+                              <Stack direction="row" spacing={0.5} alignItems="center">
+                                <AccessTimeIcon sx={{ fontSize: '0.85rem' }} />
+                                <Typography variant="caption">{readTime} min</Typography>
+                              </Stack>
+                            </Stack>
                           </Stack>
-                        </Stack>
-                      </Stack>
 
-                      <Typography
-                        variant="h5"
-                        component={RouterLink}
-                        to={`/blog/${post.slug}`}
-                        sx={{
-                          fontWeight: 700,
-                          fontSize: '1.18rem',
-                          lineHeight: 1.45,
-                          color: colors.text.primary,
-                          textDecoration: 'none',
-                          mb: 1.5,
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          display: '-webkit-box',
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: 'vertical',
-                          transition: 'color 0.2s ease',
-                          '&:hover': {
-                            color: colors.accent.primary,
-                          },
-                        }}
-                      >
-                        {post.title}
-                      </Typography>
+                          <Typography
+                            variant="h5"
+                            component={RouterLink}
+                            to={`/blog/${post.slug}`}
+                            sx={{
+                              fontWeight: 700,
+                              fontSize: '1.18rem',
+                              lineHeight: 1.45,
+                              color: colors.text.primary,
+                              textDecoration: 'none',
+                              mb: 1.5,
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                              display: '-webkit-box',
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: 'vertical',
+                              transition: 'color 0.2s ease',
+                              '&:hover': {
+                                color: colors.accent.primary,
+                              },
+                            }}
+                          >
+                            {post.title}
+                          </Typography>
 
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          color: colors.text.secondary,
-                          mb: 3,
-                          lineHeight: 1.72,
-                          fontSize: '0.96rem',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          display: '-webkit-box',
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: 'vertical',
-                        }}
-                      >
-                        {post.metaDesc}
-                      </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              color: colors.text.secondary,
+                              mb: 3,
+                              lineHeight: 1.72,
+                              fontSize: '0.96rem',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                              display: '-webkit-box',
+                              WebkitLineClamp: 3,
+                              WebkitBoxOrient: 'vertical',
+                            }}
+                          >
+                            {post.metaDesc}
+                          </Typography>
 
-                      <Button
-                        component={RouterLink}
-                        to={`/blog/${post.slug}`}
-                        sx={{
-                          mt: 'auto',
-                          p: 0,
-                          fontWeight: 600,
-                          fontSize: '0.92rem',
-                          color: colors.accent.primary,
-                          alignSelf: 'flex-start',
-                          transition: 'all 0.2s ease',
-                          '&:hover': {
-                            bgcolor: 'transparent',
-                            color: '#fff',
-                            transform: 'translateX(4px)',
-                          },
-                        }}
-                      >
-                        Read Article &rarr;
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              );
-            })}
+                          <Button
+                            className="insights-card-read-link"
+                            component={RouterLink}
+                            to={`/blog/${post.slug}`}
+                            sx={{
+                              mt: 'auto',
+                              p: 0,
+                              fontWeight: 600,
+                              fontSize: '0.92rem',
+                              color: colors.accent.primary,
+                              alignSelf: 'flex-start',
+                              opacity: 0.6,
+                              transform: 'translateY(6px)',
+                              transition:
+                                'color 0.2s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease',
+                              '&:hover': {
+                                bgcolor: 'transparent',
+                                color: '#fff',
+                                transform: 'translateX(4px)',
+                              },
+                            }}
+                          >
+                            Read Article &rarr;
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  );
+                })}
           </Grid>
         </Box>
 

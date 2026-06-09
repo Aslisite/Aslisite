@@ -1,7 +1,18 @@
-import { Box, Container, Grid, Paper, Typography } from '@mui/material';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Container,
+  Typography,
+} from '@mui/material';
+import * as ExpandMoreImport from '@mui/icons-material/ExpandMore';
+import { AnimatePresence, motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
 import { BlurText, SectionBadge } from '../common';
+
+const ExpandMore = ExpandMoreImport.default || ExpandMoreImport;
 
 const fadeUpVariants = {
   hidden: { opacity: 0.35, y: 18 },
@@ -26,7 +37,7 @@ const descriptionVariants = {
   },
 };
 
-const faqGridVariants = {
+const faqListVariants = {
   hidden: {},
   visible: {
     transition: {
@@ -45,6 +56,20 @@ const faqItemVariants = {
       duration: 0.65,
       ease: 'easeOut',
     },
+  },
+};
+
+const answerFadeVariants = {
+  hidden: { opacity: 0, y: -6 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: 'easeOut' },
+  },
+  exit: {
+    opacity: 0,
+    y: -6,
+    transition: { duration: 0.2, ease: 'easeIn' },
   },
 };
 
@@ -82,6 +107,12 @@ const faqs = [
 ];
 
 const FAQ = () => {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (panel) => (_event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   return (
     <Box
       component="section"
@@ -143,51 +174,134 @@ const FAQ = () => {
             </Typography>
           </Box>
 
-          <Grid component={motion.div} container spacing={3} variants={faqGridVariants}>
-            {faqs.map((item) => (
-              <Grid item xs={12} md={6} key={item.question}>
-                <Paper
-                  component={motion.div}
-                  variants={faqItemVariants}
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
-                  elevation={0}
-                  sx={{
-                    height: '100%',
-                    p: { xs: 3, md: 3.5 },
-                    backgroundColor: colors.background.elevated,
-                    border: `1px solid ${colors.border.light}`,
-                    borderRadius: 3,
-                    transition: 'transform 0.25s ease',
-                    '&:hover': { transform: 'translateY(-4px)' },
-                  }}
-                >
-                  <Typography
-                    variant="h3"
+          {/* Accordion Stack */}
+          <Box
+            component={motion.div}
+            variants={faqListVariants}
+            sx={{ maxWidth: '850px', mx: 'auto' }}
+          >
+            {faqs.map((item, index) => {
+              const panelId = `faq-panel-${index}`;
+              const isActive = expanded === panelId;
+
+              return (
+                <Box component={motion.div} variants={faqItemVariants} key={item.question}>
+                  <Accordion
+                    expanded={isActive}
+                    onChange={handleChange(panelId)}
+                    disableGutters
+                    elevation={0}
+                    square={false}
                     sx={{
-                      fontSize: { xs: '1.02rem', md: '1.1rem' },
-                      fontWeight: 650,
-                      color: colors.text.primary,
+                      backgroundColor: colors.background.elevated,
+                      border: `1px solid ${colors.border.light}`,
+                      borderLeft: isActive
+                        ? `3px solid ${colors.accent.primary}`
+                        : `3px solid transparent`,
+                      borderRadius: '12px !important',
                       mb: 1.5,
-                      lineHeight: 1.5,
+                      overflow: 'hidden',
+                      transition:
+                        'border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease',
+                      '&:before': { display: 'none' },
+                      '&:hover': {
+                        borderColor: isActive ? colors.border.light : colors.border.accent,
+                        boxShadow: isActive ? 'none' : `0 4px 20px rgba(0, 0, 0, 0.25)`,
+                        transform: isActive ? 'none' : 'translateY(-2px)',
+                      },
+                      '&.Mui-expanded': {
+                        my: 0,
+                        mb: 1.5,
+                      },
                     }}
                   >
-                    {item.question}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: colors.text.secondary,
-                      lineHeight: 1.85,
-                      fontSize: '0.96rem',
-                    }}
-                  >
-                    {item.answer}
-                  </Typography>
-                </Paper>
-              </Grid>
-            ))}
-          </Grid>
+                    <AccordionSummary
+                      expandIcon={
+                        <ExpandMore
+                          sx={{
+                            color: isActive ? colors.accent.primary : colors.text.muted,
+                            transition: 'color 0.3s ease, transform 0.3s ease',
+                          }}
+                        />
+                      }
+                      sx={{
+                        px: { xs: 2.5, md: 3.5 },
+                        py: { xs: 1, md: 1.5 },
+                        minHeight: 'unset',
+                        '& .MuiAccordionSummary-content': {
+                          my: 1.5,
+                          alignItems: 'center',
+                          gap: { xs: 1.5, md: 2 },
+                        },
+                      }}
+                    >
+                      {/* Numbered index */}
+                      <Typography
+                        component="span"
+                        sx={{
+                          fontFamily: '"Sora", "Inter", sans-serif',
+                          fontSize: { xs: '0.82rem', md: '0.88rem' },
+                          fontWeight: 600,
+                          color: isActive ? colors.accent.primary : colors.text.muted,
+                          minWidth: '28px',
+                          transition: 'color 0.3s ease',
+                          userSelect: 'none',
+                        }}
+                      >
+                        {String(index + 1).padStart(2, '0')}
+                      </Typography>
+
+                      <Typography
+                        variant="h3"
+                        sx={{
+                          fontSize: { xs: '1rem', md: '1.08rem' },
+                          fontWeight: 620,
+                          color: isActive ? colors.text.primary : colors.text.secondary,
+                          lineHeight: 1.5,
+                          transition: 'color 0.3s ease',
+                        }}
+                      >
+                        {item.question}
+                      </Typography>
+                    </AccordionSummary>
+
+                    <AccordionDetails
+                      sx={{
+                        px: { xs: 2.5, md: 3.5 },
+                        pt: 0,
+                        pb: { xs: 2.5, md: 3 },
+                        // Offset for the numbered index column
+                        pl: { xs: `calc(20px + 28px)`, md: `calc(28px + 28px)` },
+                      }}
+                    >
+                      <AnimatePresence mode="wait">
+                        {isActive && (
+                          <motion.div
+                            key={panelId}
+                            variants={answerFadeVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                          >
+                            <Typography
+                              variant="body1"
+                              sx={{
+                                color: colors.text.secondary,
+                                lineHeight: 1.85,
+                                fontSize: '0.96rem',
+                              }}
+                            >
+                              {item.answer}
+                            </Typography>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </AccordionDetails>
+                  </Accordion>
+                </Box>
+              );
+            })}
+          </Box>
         </Box>
       </Container>
     </Box>

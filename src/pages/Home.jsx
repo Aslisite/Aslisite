@@ -7,6 +7,7 @@ import { absoluteUrl, siteMetadata, websiteSchema } from '../seo/siteMetadata';
 const Services = React.lazy(() => import('../components/Services'));
 const Product = React.lazy(() => import('../components/Product'));
 const LatestInsights = React.lazy(() => import('../components/LatestInsights'));
+const Testimonials = React.lazy(() => import('../components/Testimonials'));
 const FAQ = React.lazy(() => import('../components/FAQ'));
 const Contact = React.lazy(() => import('../components/Contact'));
 
@@ -65,6 +66,7 @@ const Home = () => {
         <Services />
         <Product />
         <LatestInsights />
+        <Testimonials />
         <FAQ />
         <Contact />
       </Suspense>

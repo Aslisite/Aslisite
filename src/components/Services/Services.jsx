@@ -28,22 +28,28 @@ const cardsContainerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      staggerChildren: 0.22,
+      delayChildren: 0.15,
     },
   },
 };
 
-const cardVariants = {
-  hidden: { opacity: 0.35, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: 'easeOut',
+const getCardVariants = (index) => {
+  // Alternate entrance directions: left, right, left, right
+  const xOffset = index % 2 === 0 ? -30 : 30;
+  return {
+    hidden: { opacity: 0, y: 20, x: xOffset, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: 0.75,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      },
     },
-  },
+  };
 };
 
 const services = [
@@ -168,13 +174,16 @@ const Services = () => {
         >
           {services.map((service, index) => {
             const IconComponent = service.icon;
+            const cardIndex = String(index + 1).padStart(2, '0');
             return (
               <Grid item xs={12} sm={6} lg={3} key={index}>
                 <Card
                   component={motion.div}
-                  variants={cardVariants}
+                  variants={getCardVariants(index)}
                   sx={{
                     height: '100%',
+                    position: 'relative',
+                    overflow: 'hidden',
                     backgroundColor: colors.background.card,
                     border: `1px solid ${colors.border.light}`,
                     borderRadius: 3,
@@ -183,17 +192,62 @@ const Services = () => {
                     cursor: 'pointer',
                     display: 'flex',
                     flexDirection: 'column',
+                    /* Gradient border pseudo-element */
+                    '&::after': {
+                      content: '""',
+                      position: 'absolute',
+                      inset: 0,
+                      borderRadius: 'inherit',
+                      padding: '1px',
+                      background: 'linear-gradient(135deg, #8ba36a 0%, #c8d2b0 100%)',
+                      WebkitMask:
+                        'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                      WebkitMaskComposite: 'xor',
+                      maskComposite: 'exclude',
+                      opacity: 0,
+                      transition: 'opacity 0.35s ease',
+                      pointerEvents: 'none',
+                      zIndex: 1,
+                    },
                     '&:hover': {
                       transform: 'translateY(-6px)',
-                      borderColor: colors.border.accent,
+                      borderColor: 'transparent',
                       boxShadow: '0 18px 36px rgba(0, 0, 0, 0.34)',
+                      '&::after': {
+                        opacity: 1,
+                      },
                       '& .service-icon': {
                         transform: 'scale(1.06)',
                         color: colors.accent.primary,
                       },
+                      '& .service-icon-glow': {
+                        opacity: 1,
+                      },
+                      '& .card-index': {
+                        opacity: 0.08,
+                      },
                     },
                   }}
                 >
+                  {/* Numbered Index Overlay */}
+                  <Typography
+                    className="card-index"
+                    sx={{
+                      position: 'absolute',
+                      top: -4,
+                      right: 12,
+                      fontSize: '3.5rem',
+                      fontWeight: 800,
+                      color: 'rgba(245,241,232,0.04)',
+                      lineHeight: 1,
+                      userSelect: 'none',
+                      pointerEvents: 'none',
+                      zIndex: 0,
+                      transition: 'opacity 0.35s ease',
+                    }}
+                  >
+                    {cardIndex}
+                  </Typography>
                   <CardContent
                     sx={{
                       p: { xs: 3, md: 4 },
@@ -203,22 +257,44 @@ const Services = () => {
                     }}
                   >
                     {/* Icon */}
-                    <Box
-                      className="service-icon"
-                      sx={{
-                        width: 56,
-                        height: 56,
-                        borderRadius: 2,
-                        backgroundColor: 'rgba(139, 163, 106, 0.1)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        mb: 3,
-                        transition: 'all 0.3s ease',
-                        color: colors.accent.primary,
-                      }}
-                    >
-                      <IconComponent sx={{ fontSize: 28 }} />
+                    <Box sx={{ position: 'relative', width: 56, height: 56, mb: 3 }}>
+                      {/* Soft glow behind icon */}
+                      <Box
+                        className="service-icon-glow"
+                        sx={{
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                          width: 80,
+                          height: 80,
+                          borderRadius: '50%',
+                          background:
+                            'radial-gradient(circle, rgba(139, 163, 106, 0.15) 0%, transparent 70%)',
+                          opacity: 0,
+                          transition: 'opacity 0.35s ease',
+                          pointerEvents: 'none',
+                          zIndex: 0,
+                        }}
+                      />
+                      <Box
+                        className="service-icon"
+                        sx={{
+                          position: 'relative',
+                          width: 56,
+                          height: 56,
+                          borderRadius: 2,
+                          backgroundColor: 'rgba(139, 163, 106, 0.1)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          transition: 'all 0.3s ease',
+                          color: colors.accent.primary,
+                          zIndex: 1,
+                        }}
+                      >
+                        <IconComponent sx={{ fontSize: 28 }} />
+                      </Box>
                     </Box>
 
                     {/* Title */}

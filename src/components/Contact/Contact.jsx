@@ -306,22 +306,55 @@ const Contact = () => {
                     backgroundColor: colors.background.secondary,
                     border: `1px solid ${colors.border.light}`,
                     borderRadius: 3,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     overflow: 'hidden',
+                    position: 'relative',
                   }}
                 >
                   <Box
+                    component="iframe"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.5!2d76.1!3d11.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sPeruvallur%2C+Malappuram%2C+Kerala!5e0!3m2!1sen!2sin!4v1700000000000"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen=""
+                    title="Aslisite Technologies Location - Peruvallur, Malappuram, Kerala"
                     sx={{
-                      textAlign: 'center',
-                      color: colors.text.muted,
+                      width: '100%',
+                      height: '100%',
+                      border: 'none',
+                      filter: 'grayscale(100%) invert(92%) contrast(83%)',
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      background:
+                        'linear-gradient(to top, rgba(11, 13, 16, 0.85) 0%, rgba(11, 13, 16, 0.4) 60%, transparent 100%)',
+                      px: 2,
+                      py: 1.5,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1,
                     }}
                   >
-                    <LocationOn sx={{ fontSize: 48, mb: 1, opacity: 0.5 }} />
-                    <Typography variant="body2">Interactive Map</Typography>
-                    <Typography variant="caption" sx={{ display: 'block' }}>
-                      Peruvallur, Malappuram, Kerala
+                    <LocationOn
+                      sx={{
+                        fontSize: 18,
+                        color: colors.accent.primary,
+                        flexShrink: 0,
+                      }}
+                    />
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: colors.text.secondary,
+                        fontSize: '0.75rem',
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      Peruvallur, Malappuram, Kerala, India 676317
                     </Typography>
                   </Box>
                 </Paper>

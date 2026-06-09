@@ -181,7 +181,14 @@ const Blog = () => {
                   overflow: 'hidden',
                   '&:hover': {
                     '& .blog-card-image': {
-                      transform: 'scale(1.04)',
+                      transform: 'scale(1.06)',
+                    },
+                    '& .blog-card-overlay': {
+                      opacity: 0.15,
+                    },
+                    '& .blog-card-read-link': {
+                      opacity: 1,
+                      transform: 'translateY(0)',
                     },
                   },
                 }}
@@ -193,24 +200,39 @@ const Blog = () => {
                     display: 'block',
                     aspectRatio: '16/10',
                     overflow: 'hidden',
+                    position: 'relative',
                     background: colors.accent.gradient,
                   }}
                 >
                   {blog.image ? (
-                    <Box
-                      component="img"
-                      className="blog-card-image"
-                      src={blog.image}
-                      alt={blog.title}
-                      loading="lazy"
-                      referrerPolicy="no-referrer"
-                      sx={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        transition: 'transform 0.5s ease',
-                      }}
-                    />
+                    <>
+                      <Box
+                        component="img"
+                        className="blog-card-image"
+                        src={blog.image}
+                        alt={blog.title}
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        sx={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                        }}
+                      />
+                      <Box
+                        className="blog-card-overlay"
+                        sx={{
+                          position: 'absolute',
+                          inset: 0,
+                          background:
+                            'linear-gradient(to top, rgba(11,13,16,0.55) 0%, transparent 60%)',
+                          transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                          opacity: 0.45,
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </>
                   ) : (
                     <Box
                       sx={{
@@ -314,6 +336,7 @@ const Blog = () => {
                   </Typography>
 
                   <Button
+                    className="blog-card-read-link"
                     component={RouterLink}
                     to={`/blog/${blog.slug}`}
                     sx={{
@@ -323,7 +346,10 @@ const Blog = () => {
                       fontSize: '0.92rem',
                       color: colors.accent.primary,
                       alignSelf: 'flex-start',
-                      transition: 'color 0.2s ease, transform 0.2s ease',
+                      opacity: 0.6,
+                      transform: 'translateY(6px)',
+                      transition:
+                        'color 0.2s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease',
                       '&:hover': {
                         bgcolor: 'transparent',
                         color: colors.text.primary,

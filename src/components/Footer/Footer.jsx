@@ -83,6 +83,7 @@ const navigation = {
   quickLinks: [
     { label: 'Home', href: '/#hero' },
     { label: 'Our Product', href: '/#product' },
+    { label: 'Reviews', href: '/#testimonials' },
     { label: 'FAQ', href: '/#faq' },
     { label: 'Contact', href: '/#contact' },
   ],
@@ -95,8 +96,6 @@ const socialLinks = [
 ];
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
     <Box
       component="footer"
@@ -393,7 +392,7 @@ const Footer = () => {
             }}
           >
             <Typography variant="caption" sx={{ color: colors.text.muted }}>
-              Copyright {currentYear} Aslisite. All rights reserved. |{' '}
+              Copyright 2023 Aslisite. All rights reserved. |{' '}
               <Link
                 component={RouterLink}
                 to="/privacy-policy"

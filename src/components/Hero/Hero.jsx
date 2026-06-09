@@ -1,12 +1,14 @@
 import { Box, Button, Container, Stack, Typography, useMediaQuery } from '@mui/material';
 import ArrowForwardImport from '@mui/icons-material/ArrowForward';
 import CheckCircleImport from '@mui/icons-material/CheckCircle';
+import ChevronRightImport from '@mui/icons-material/ChevronRight';
 import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
 import { BlurText, SectionBadge } from '../common';
 
 const ArrowForward = ArrowForwardImport.default || ArrowForwardImport;
 const CheckCircle = CheckCircleImport.default || CheckCircleImport;
+const ChevronRight = ChevronRightImport.default || ChevronRightImport;
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 22 },
@@ -19,6 +21,42 @@ const fadeUpVariants = {
       delay,
     },
   }),
+};
+
+// Stagger animation for individual pipeline steps
+const stepContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.36,
+    },
+  },
+};
+
+const stepItemVariants = {
+  hidden: { opacity: 0, y: 16, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.52,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+};
+
+const connectorVariants = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.36,
+      ease: 'easeOut',
+    },
+  },
 };
 
 const systemSteps = ['Strategy', 'Website', 'SEO', 'Conversion'];
@@ -261,6 +299,7 @@ const Hero = () => {
             </Button>
           </Stack>
 
+          {/* System Steps Pipeline */}
           <Box
             component={motion.div}
             initial={prefersReducedMotion ? false : 'hidden'}
@@ -278,34 +317,105 @@ const Hero = () => {
             }}
           >
             <Box
+              component={motion.div}
+              initial={prefersReducedMotion ? false : 'hidden'}
+              animate="visible"
+              variants={stepContainerVariants}
               sx={{
-                display: 'grid',
-                gridTemplateColumns: {
-                  xs: '1fr',
-                  sm: 'repeat(4, minmax(0, 1fr))',
-                },
-                gap: 1,
+                // Desktop (sm+): horizontal flex pipeline
+                display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
+                alignItems: { xs: 'stretch', sm: 'center' },
+                justifyContent: { sm: 'center' },
+                gap: { xs: 0, sm: 0 },
+                // Mobile: relative for timeline line
+                position: 'relative',
               }}
             >
+              {/* Mobile timeline line (left side) */}
+              <Box
+                aria-hidden="true"
+                sx={{
+                  display: { xs: 'block', sm: 'none' },
+                  position: 'absolute',
+                  left: 20,
+                  top: 24,
+                  bottom: 24,
+                  width: '2px',
+                  background: `linear-gradient(to bottom, ${colors.accent.primary}, rgba(245, 241, 232, 0.1) 40%, rgba(245, 241, 232, 0.06))`,
+                  borderRadius: 1,
+                  zIndex: 0,
+                }}
+              />
+
               {systemSteps.map((step, index) => (
                 <Box
                   key={step}
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: { xs: 'flex-start', sm: 'center' },
-                    gap: 1,
-                    px: 1.5,
-                    py: 1.3,
-                    minHeight: 48,
-                    borderRadius: 1.5,
-                    color: index === 0 ? colors.accent.primary : colors.text.secondary,
-                    backgroundColor:
-                      index === 0 ? 'rgba(139, 163, 106, 0.08)' : 'rgba(255, 255, 255, 0.035)',
+                    display: 'contents',
                   }}
                 >
-                  <CheckCircle sx={{ fontSize: 17 }} />
-                  <Typography sx={{ fontSize: '0.86rem', fontWeight: 700 }}>{step}</Typography>
+                  {/* Step item */}
+                  <Box
+                    component={motion.div}
+                    variants={stepItemVariants}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1,
+                      px: { xs: 1.5, sm: 1.5 },
+                      py: 1.3,
+                      minHeight: 48,
+                      borderRadius: 1.5,
+                      color: index === 0 ? colors.accent.primary : colors.text.secondary,
+                      backgroundColor:
+                        index === 0 ? 'rgba(139, 163, 106, 0.08)' : 'rgba(255, 255, 255, 0.035)',
+                      // Desktop: allow items to flex evenly
+                      flex: { sm: '1 1 0' },
+                      justifyContent: { xs: 'flex-start', sm: 'center' },
+                      // Mobile: offset for timeline
+                      position: 'relative',
+                      zIndex: 1,
+                      ml: { xs: 2.5, sm: 0 },
+                      mb: { xs: 0.5, sm: 0 },
+                      '&:last-of-type': {
+                        mb: 0,
+                      },
+                      transition: 'background-color 0.22s ease, color 0.22s ease',
+                      '&:hover': {
+                        backgroundColor:
+                          index === 0 ? 'rgba(139, 163, 106, 0.13)' : 'rgba(255, 255, 255, 0.06)',
+                      },
+                    }}
+                  >
+                    <CheckCircle sx={{ fontSize: 17 }} />
+                    <Typography sx={{ fontSize: '0.86rem', fontWeight: 700 }}>{step}</Typography>
+                  </Box>
+
+                  {/* Desktop chevron connector (between steps, not after the last) */}
+                  {index < systemSteps.length - 1 && (
+                    <Box
+                      component={motion.div}
+                      variants={connectorVariants}
+                      aria-hidden="true"
+                      sx={{
+                        // Hide on mobile, show on desktop
+                        display: { xs: 'none', sm: 'flex' },
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        px: 0.25,
+                      }}
+                    >
+                      <ChevronRight
+                        sx={{
+                          fontSize: 18,
+                          color: colors.text.muted,
+                          opacity: 0.6,
+                        }}
+                      />
+                    </Box>
+                  )}
                 </Box>
               ))}
             </Box>
