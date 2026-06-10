@@ -59,7 +59,7 @@ const services = [
     title: 'Web Development',
     description:
       'Custom web applications built with cutting-edge technologies. From responsive websites to complex enterprise solutions.',
-    features: ['React & Next.js', 'Node.js & Python', 'API Development', 'E-commerce'],
+    features: ['React & Next.js', 'Node & Express', 'MongoDB Database', 'MERN Stack'],
   },
   {
     icon: ShoppingCart,
@@ -68,9 +68,9 @@ const services = [
       'Scalable online stores with secure payment gateways, inventory management, and seamless user experience.',
     features: [
       'WooCommerce & Custom',
+      'Next.js & React Store',
       'Payment Integration',
-      'Inventory Management',
-      'Mobile Responsive',
+      'Node & REST APIs',
     ],
   },
   {
@@ -78,7 +78,7 @@ const services = [
     title: 'Custom Software',
     description:
       'Tailor-made software solutions designed to address your unique business challenges and streamline operations.',
-    features: ['Enterprise Apps', 'Database Solutions', 'API Integration', 'Cloud Migration'],
+    features: ['MERN Stack Apps', 'MongoDB Solutions', 'JWT Auth & APIs', 'Cloud Migration'],
   },
   {
     icon: TrendingUp,
