@@ -341,8 +341,8 @@ const Services = () => {
                       {/* Features */}
                       <Box
                         sx={{
-                          display: 'flex',
-                          flexWrap: 'wrap',
+                          display: 'grid',
+                          gridTemplateColumns: 'repeat(2, 1fr)',
                           gap: 1,
                           mt: 'auto',
                         }}
@@ -351,20 +351,27 @@ const Services = () => {
                           <Box
                             key={idx}
                             sx={{
-                              px: 1.5,
-                              py: 0.5,
+                              px: 1,
+                              py: 0.75,
                               borderRadius: 1,
                               backgroundColor: colors.background.elevated,
                               border: `1px solid ${colors.border.light}`,
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              textAlign: 'center',
+                              minHeight: 34,
                             }}
                           >
                             <Typography
                               variant="caption"
                               sx={{
                                 color: colors.text.muted,
-                                fontSize: '0.72rem',
-                                letterSpacing: '0.04em',
+                                fontSize: '0.7rem',
+                                letterSpacing: '0.02em',
                                 textTransform: 'uppercase',
+                                fontWeight: 600,
+                                lineHeight: 1.2,
                               }}
                             >
                               {feature}
