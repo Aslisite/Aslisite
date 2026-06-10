@@ -1,4 +1,4 @@
-const API_URL = '...';
+const API_URL = 'https://sheetdb.io/api/v1/ddub5agvnxhso';
 
 export const isPublishedBlog = (blog) => {
   return (
