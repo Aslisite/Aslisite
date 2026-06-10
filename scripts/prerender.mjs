@@ -13,7 +13,7 @@ const indexHtmlPath = path.join(distDir, 'index.html');
 async function fetchBlogs() {
   try {
     console.log('Fetching blog data from SheetDB...');
-    const res = await fetch('...');
+    const res = await fetch('https://sheetdb.io/api/v1/ddub5agvnxhso');
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
     return filterPublishedBlogs(data);
