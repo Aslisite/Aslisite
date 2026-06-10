@@ -58,14 +58,14 @@ const services = [
     icon: Code,
     title: 'Web Development',
     description:
-      'Custom web applications built with cutting-edge technologies. From responsive websites to complex enterprise solutions.',
+      'Tailor-made web systems built using modern frameworks. From responsive websites to high-performance web apps.',
     features: ['React & Next.js', 'Node & Express', 'MongoDB Database', 'MERN Stack'],
   },
   {
     icon: ShoppingCart,
     title: 'Ecommerce Solutions',
     description:
-      'Scalable online stores with secure payment gateways, inventory management, and seamless user experience.',
+      'Scalable online stores with secure checkout portals, product catalog syncs, and seamless buying experiences.',
     features: [
       'WooCommerce & Custom',
       'Next.js & React Store',
@@ -77,14 +77,14 @@ const services = [
     icon: Build,
     title: 'Custom Software',
     description:
-      'Tailor-made software solutions designed to address your unique business challenges and streamline operations.',
+      'Bespoke digital platforms engineered to automate manual business processes and improve operational efficiency.',
     features: ['MERN Stack Apps', 'MongoDB Solutions', 'JWT Auth & APIs', 'Cloud Migration'],
   },
   {
     icon: TrendingUp,
     title: 'SEO Services',
     description:
-      'Data-driven SEO strategies to boost your search rankings, drive organic traffic, and maximize conversions.',
+      'Data-driven SEO roadmaps built to increase organic search positions, capture traffic, and raise conversions.',
     features: ['On-Page SEO', 'Link Building', 'Content Strategy', 'Analytics & Reporting'],
   },
 ];
