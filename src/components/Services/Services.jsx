@@ -341,8 +341,9 @@ const Services = () => {
                       {/* Features */}
                       <Box
                         sx={{
-                          display: 'grid',
-                          gridTemplateColumns: 'repeat(2, 1fr)',
+                          display: { xs: 'grid', md: 'flex' },
+                          gridTemplateColumns: { xs: 'repeat(2, 1fr)', md: 'none' },
+                          flexWrap: { md: 'wrap' },
                           gap: 1,
                           mt: 'auto',
                         }}
@@ -351,8 +352,8 @@ const Services = () => {
                           <Box
                             key={idx}
                             sx={{
-                              px: 1,
-                              py: 0.75,
+                              px: { xs: 1, md: 1.5 },
+                              py: { xs: 0.75, md: 0.5 },
                               borderRadius: 1,
                               backgroundColor: colors.background.elevated,
                               border: `1px solid ${colors.border.light}`,
@@ -360,18 +361,17 @@ const Services = () => {
                               alignItems: 'center',
                               justifyContent: 'center',
                               textAlign: 'center',
-                              minHeight: 34,
+                              minHeight: { xs: 34, md: 'auto' },
                             }}
                           >
                             <Typography
                               variant="caption"
                               sx={{
                                 color: colors.text.muted,
-                                fontSize: '0.7rem',
-                                letterSpacing: '0.02em',
+                                fontSize: '0.72rem',
+                                letterSpacing: '0.04em',
                                 textTransform: 'uppercase',
-                                fontWeight: 600,
-                                lineHeight: 1.2,
+                                fontWeight: 650,
                               }}
                             >
                               {feature}
