@@ -13,7 +13,7 @@ const indexHtmlPath = path.join(distDir, 'index.html');
 async function fetchBlogs() {
   try {
     console.log('Fetching blog data from SheetDB...');
-    const res = await fetch('https://sheetdb.io/api/v1/ddub5agvnxhso');
+    const res = await fetch('...');
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
     return filterPublishedBlogs(data);
@@ -37,7 +37,15 @@ async function runBuild() {
 
   // 2. Prepare routes
   const blogs = await fetchBlogs();
-  const routes = ['/', '/blog', '/privacy-policy'];
+  const routes = [
+    '/',
+    '/blog',
+    '/privacy-policy',
+    '/services/web-development',
+    '/services/ecommerce-solutions',
+    '/services/custom-software',
+    '/services/seo-services',
+  ];
   blogs.forEach((blog) => {
     if (blog.slug) routes.push(`/blog/${blog.slug}`);
   });
