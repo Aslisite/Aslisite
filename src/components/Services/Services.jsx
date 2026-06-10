@@ -341,9 +341,8 @@ const Services = () => {
                       {/* Features */}
                       <Box
                         sx={{
-                          display: { xs: 'grid', md: 'flex' },
-                          gridTemplateColumns: { xs: 'repeat(2, 1fr)', md: 'none' },
-                          flexWrap: { md: 'wrap' },
+                          display: 'flex',
+                          flexWrap: 'wrap',
                           gap: 1,
                           mt: 'auto',
                         }}
@@ -361,6 +360,7 @@ const Services = () => {
                               alignItems: 'center',
                               justifyContent: 'center',
                               textAlign: 'center',
+                              width: { xs: 'calc(50% - 4px)', md: 'auto' },
                               minHeight: { xs: 34, md: 'auto' },
                             }}
                           >
