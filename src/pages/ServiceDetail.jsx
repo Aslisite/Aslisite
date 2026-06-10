@@ -107,9 +107,9 @@ const serviceData = {
     badge: 'Conversion & Growth',
     subtitle: 'Scalable online stores designed to turn casual browsers into loyal customers.',
     description:
-      'We build beautiful, highly secure ecommerce platforms engineered to increase average order value and reduce cart abandonment. From custom headless shopping carts to robust Shopify implementations, we align tech with sales.',
+      'We build beautiful, highly secure ecommerce platforms engineered to increase average order value and reduce cart abandonment. From custom headless shopping carts to robust WooCommerce implementations, we align tech with sales.',
     metaDescription:
-      'Custom, secure ecommerce development by Aslisite. From Shopify customization to headless storefronts, we build stores designed for high sales.',
+      'Custom, secure ecommerce development by Aslisite. From WooCommerce customization to headless storefronts, we build stores designed for high sales.',
     benefits: [
       {
         title: 'Conversion First',
@@ -126,8 +126,8 @@ const serviceData = {
     ],
     features: [
       {
-        title: 'Custom Shopify Setup',
-        desc: 'Tailored Shopify themes and custom liquid developments that bypass standard template limitations.',
+        title: 'Custom WooCommerce Setup',
+        desc: 'Tailored WooCommerce layouts and custom plugin developments that bypass standard template limitations.',
       },
       {
         title: 'Headless Commerce',
@@ -143,8 +143,8 @@ const serviceData = {
       },
     ],
     techStack: [
-      'Shopify Liquid',
       'WooCommerce',
+      'WordPress & PHP',
       'Next.js Commerce',
       'GraphQL',
       'Stripe',

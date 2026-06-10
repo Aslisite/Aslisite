@@ -67,7 +67,7 @@ const services = [
     description:
       'Scalable online stores with secure payment gateways, inventory management, and seamless user experience.',
     features: [
-      'Shopify & WooCommerce',
+      'WooCommerce & Custom',
       'Payment Integration',
       'Inventory Management',
       'Mobile Responsive',
