@@ -16,6 +16,19 @@ import MenuIconImport from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import { colors } from '../../theme/theme';
 
+const shinyGradientStyle = {
+  background: colors.accent.brandGradient,
+  backgroundSize: '200% auto',
+  backgroundClip: 'text',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  animation: 'shine 6s linear infinite',
+  '@keyframes shine': {
+    '0%': { backgroundPosition: '200% center' },
+    '100%': { backgroundPosition: '-200% center' },
+  },
+};
+
 const CloseIcon = CloseIconImport.default || CloseIconImport;
 const KeyboardArrowDownIcon = KeyboardArrowDownIconImport.default || KeyboardArrowDownIconImport;
 const MenuIcon = MenuIconImport.default || MenuIconImport;
@@ -83,13 +96,11 @@ const Navbar = () => {
           />
           <Typography
             sx={{
-              fontFamily: '"Sora", "Inter", sans-serif',
-              fontWeight: 800,
+              ...shinyGradientStyle,
+              fontFamily: '"Orbitron", "Sora", sans-serif',
+              fontWeight: 900,
+              letterSpacing: '0.05em',
               fontSize: '1.25rem',
-              background: colors.accent.brandGradient,
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
             }}
           >
             Aslisite
@@ -135,7 +146,11 @@ const Navbar = () => {
                   <ListItemText
                     primary={item.label}
                     primaryTypographyProps={{
-                      sx: { color: colors.text.primary, fontWeight: 500, fontSize: '1.25rem' },
+                      sx: {
+                        ...shinyGradientStyle,
+                        fontWeight: 600,
+                        fontSize: '1.25rem',
+                      },
                     }}
                   />
                   <KeyboardArrowDownIcon
@@ -195,7 +210,11 @@ const Navbar = () => {
                 <ListItemText
                   primary={item.label}
                   primaryTypographyProps={{
-                    sx: { color: colors.text.primary, fontWeight: 500, fontSize: '1.25rem' },
+                    sx: {
+                      ...shinyGradientStyle,
+                      fontWeight: 600,
+                      fontSize: '1.25rem',
+                    },
                   }}
                 />
               </ListItemButton>
@@ -280,11 +299,10 @@ const Navbar = () => {
               <Typography
                 variant="h6"
                 sx={{
-                  fontWeight: 800,
-                  background: colors.accent.brandGradient,
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
+                  ...shinyGradientStyle,
+                  fontFamily: '"Orbitron", "Sora", sans-serif',
+                  fontWeight: 900,
+                  letterSpacing: '0.05em',
                   fontSize: { xs: '1.25rem', md: '1.5rem' },
                 }}
               >
@@ -313,13 +331,14 @@ const Navbar = () => {
                       >
                         <Typography
                           sx={{
-                            color: colors.text.secondary,
+                            ...shinyGradientStyle,
                             textDecoration: 'none',
-                            fontWeight: 500,
+                            fontWeight: 600,
                             fontSize: '0.9375rem',
-                            transition: 'color 0.2s ease',
+                            opacity: 0.85,
+                            transition: 'opacity 0.25s ease',
                             '&:hover': {
-                              color: colors.accent.primary,
+                              opacity: 1,
                             },
                           }}
                         >
@@ -339,13 +358,14 @@ const Navbar = () => {
                         component={Link}
                         to={item.href}
                         sx={{
-                          color: colors.text.secondary,
+                          ...shinyGradientStyle,
                           textDecoration: 'none',
-                          fontWeight: 500,
+                          fontWeight: 600,
                           fontSize: '0.9375rem',
-                          transition: 'color 0.2s ease',
+                          opacity: 0.85,
+                          transition: 'opacity 0.25s ease',
                           '&:hover': {
-                            color: colors.accent.primary,
+                            opacity: 1,
                           },
                         }}
                       >

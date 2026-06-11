@@ -9,6 +9,19 @@ import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
 import { Link as RouterLink } from 'react-router-dom';
 
+const shinyGradientStyle = {
+  background: colors.accent.brandGradient,
+  backgroundSize: '200% auto',
+  backgroundClip: 'text',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  animation: 'shine 6s linear infinite',
+  '@keyframes shine': {
+    '0%': { backgroundPosition: '200% center' },
+    '100%': { backgroundPosition: '-200% center' },
+  },
+};
+
 const Facebook = FacebookImport.default || FacebookImport;
 const Instagram = InstagramImport.default || InstagramImport;
 const LinkedIn = LinkedInImport.default || LinkedInImport;
@@ -121,11 +134,10 @@ const Footer = () => {
                   variants={fadeInVariants}
                   variant="h5"
                   sx={{
-                    fontWeight: 800,
-                    background: colors.accent.brandGradient,
-                    backgroundClip: 'text',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
+                    ...shinyGradientStyle,
+                    fontFamily: '"Orbitron", "Sora", sans-serif',
+                    fontWeight: 900,
+                    letterSpacing: '0.05em',
                     mb: 2,
                   }}
                 >
