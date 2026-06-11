@@ -86,7 +86,7 @@ const Navbar = () => {
               fontFamily: '"Sora", "Inter", sans-serif',
               fontWeight: 800,
               fontSize: '1.25rem',
-              background: colors.accent.gradient,
+              background: colors.accent.brandGradient,
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -281,7 +281,7 @@ const Navbar = () => {
                 variant="h6"
                 sx={{
                   fontWeight: 800,
-                  background: colors.accent.gradient,
+                  background: colors.accent.brandGradient,
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',

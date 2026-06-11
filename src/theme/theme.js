@@ -14,6 +14,7 @@ const colors = {
     secondary: '#06b6d4',
     gradient: 'linear-gradient(135deg, #a855f7 0%, #06b6d4 100%)',
     gradientReverse: 'linear-gradient(135deg, #06b6d4 0%, #a855f7 100%)',
+    brandGradient: 'linear-gradient(135deg, #ffffff 0%, #b8b8b8 50%, #ffffff 100%)',
   },
   text: {
     primary: '#f1f5f9',

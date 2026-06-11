@@ -122,7 +122,7 @@ const Footer = () => {
                   variant="h5"
                   sx={{
                     fontWeight: 800,
-                    background: colors.accent.gradient,
+                    background: colors.accent.brandGradient,
                     backgroundClip: 'text',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
