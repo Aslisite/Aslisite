@@ -135,9 +135,8 @@ const Footer = () => {
                   variant="h5"
                   sx={{
                     ...shinyGradientStyle,
-                    fontFamily: 'sans-serif',
-                    fontWeight: 900,
-                    letterSpacing: '0.05em',
+                    fontFamily: '"Sora", "Inter", sans-serif',
+                    fontWeight: 800,
                     mb: 2,
                   }}
                 >
