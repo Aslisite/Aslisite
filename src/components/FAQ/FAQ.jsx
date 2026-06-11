@@ -145,9 +145,10 @@ const FAQ = () => {
                 direction="top"
                 delay={65}
                 stepDuration={0.3}
+                highlightWords={['Web', 'SEO', 'Agency']}
                 sx={{
                   fontSize: { xs: '1.95rem', sm: '2.35rem', md: '2.8rem' },
-                  fontWeight: 700,
+                  fontWeight: 800,
                   lineHeight: 1.18,
                   color: colors.text.primary,
                   textAlign: 'center',

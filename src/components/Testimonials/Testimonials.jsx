@@ -178,7 +178,7 @@ const Testimonials = () => {
           transform: 'translate(-50%, -50%)',
           borderRadius: '50%',
           background:
-            'radial-gradient(circle, rgba(139, 163, 106, 0.07) 0%, rgba(139, 163, 106, 0.02) 40%, transparent 70%)',
+            'radial-gradient(circle, rgba(168, 85, 247, 0.07) 0%, rgba(168, 85, 247, 0.02) 40%, transparent 70%)',
           filter: 'blur(60px)',
           pointerEvents: 'none',
         }}
@@ -204,6 +204,7 @@ const Testimonials = () => {
               direction="top"
               delay={90}
               stepDuration={0.3}
+              highlightWords={['Results']}
               sx={{
                 fontSize: { xs: '2.1rem', sm: '2.6rem', md: '3.25rem' },
                 fontWeight: 800,
@@ -431,7 +432,7 @@ const TestimonialCard = ({ item }) => {
             background: colors.accent.gradient,
             fontSize: '0.85rem',
             fontWeight: 700,
-            color: '#0b0d10',
+            color: '#ffffff',
           }}
         >
           {initials}

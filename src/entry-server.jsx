@@ -4,6 +4,7 @@ import { StaticRouter } from 'react-router-dom/server';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App.jsx';
 import { DataProvider } from './context/DataContext.jsx';
+import './index.css';
 
 export function render(url, initialData = null) {
   const helmetContext = {};

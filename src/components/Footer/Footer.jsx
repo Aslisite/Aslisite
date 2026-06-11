@@ -75,10 +75,10 @@ const copyrightVariants = {
 
 const navigation = {
   services: [
-    { label: 'Web Development', href: '/#services' },
-    { label: 'Ecommerce Solutions', href: '/#services' },
-    { label: 'Custom Software', href: '/#services' },
-    { label: 'SEO Services', href: '/#services' },
+    { label: 'Web Development', href: '/services/web-development' },
+    { label: 'Ecommerce Solutions', href: '/services/ecommerce-solutions' },
+    { label: 'Custom Software', href: '/services/custom-software' },
+    { label: 'SEO Services', href: '/services/seo-services' },
   ],
   quickLinks: [
     { label: 'Home', href: '/#hero' },
@@ -171,7 +171,7 @@ const Footer = () => {
                           '&:hover': {
                             color: colors.accent.primary,
                             borderColor: colors.accent.primary,
-                            backgroundColor: 'rgba(139, 163, 106, 0.1)',
+                            backgroundColor: 'rgba(168, 85, 247, 0.1)',
                           },
                         }}
                       >
@@ -217,9 +217,8 @@ const Footer = () => {
                     {navigation.services.map((item, index) => (
                       <Link
                         key={index}
-                        component={item.href.startsWith('/#') ? 'a' : RouterLink}
-                        href={item.href.startsWith('/#') ? item.href : undefined}
-                        to={item.href.startsWith('/#') ? undefined : item.href}
+                        component={RouterLink}
+                        to={item.href}
                         underline="none"
                         sx={{
                           color: colors.text.muted,
@@ -263,9 +262,8 @@ const Footer = () => {
                     {navigation.quickLinks.map((item, index) => (
                       <Link
                         key={index}
-                        component={item.href.startsWith('/#') ? 'a' : RouterLink}
-                        href={item.href.startsWith('/#') ? item.href : undefined}
-                        to={item.href.startsWith('/#') ? undefined : item.href}
+                        component={RouterLink}
+                        to={item.href}
                         underline="none"
                         sx={{
                           color: colors.text.muted,

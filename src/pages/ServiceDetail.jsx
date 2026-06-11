@@ -370,7 +370,7 @@ const ServiceDetail = () => {
             transform: 'translate(-50%, -50%)',
             borderRadius: '50%',
             background:
-              'radial-gradient(circle, rgba(139, 163, 106, 0.15) 0%, rgba(139, 163, 106, 0.05) 50%, transparent 80%)',
+              'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(168, 85, 247, 0.05) 50%, transparent 80%)',
             filter: 'blur(50px)',
             opacity: 0.8,
             pointerEvents: 'none',
@@ -404,7 +404,7 @@ const ServiceDetail = () => {
                 '&:hover': {
                   color: colors.accent.primary,
                   borderColor: colors.border.accent,
-                  backgroundColor: 'rgba(139, 163, 106, 0.05)',
+                  backgroundColor: 'rgba(168, 85, 247, 0.05)',
                   transform: 'translateX(-4px)',
                 },
               }}
@@ -427,8 +427,8 @@ const ServiceDetail = () => {
                   sx={{
                     mb: 2.5,
                     color: colors.accent.primary,
-                    borderColor: 'rgba(139, 163, 106, 0.24)',
-                    backgroundColor: 'rgba(139, 163, 106, 0.07)',
+                    borderColor: 'rgba(168, 85, 247, 0.24)',
+                    backgroundColor: 'rgba(168, 85, 247, 0.07)',
                   }}
                 >
                   {service.badge}
@@ -445,7 +445,21 @@ const ServiceDetail = () => {
                     letterSpacing: '-0.02em',
                   }}
                 >
-                  {service.title}
+                  {service.title.split(' ').slice(0, -1).join(' ')}{' '}
+                  <Box
+                    component="span"
+                    sx={{
+                      background: colors.accent.gradient,
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      display: 'inline-block',
+                      pb: '0.15em',
+                      mb: '-0.15em',
+                    }}
+                  >
+                    {service.title.split(' ').slice(-1)[0]}
+                  </Box>
                 </Typography>
                 <Typography
                   variant="h6"
@@ -494,8 +508,8 @@ const ServiceDetail = () => {
                     px: 3.8,
                     fontWeight: 700,
                     background: colors.accent.gradient,
-                    color: '#06100d',
-                    boxShadow: '0 18px 40px rgba(139, 163, 106, 0.16)',
+                    color: '#ffffff',
+                    boxShadow: '0 18px 40px rgba(168, 85, 247, 0.16)',
                   }}
                 >
                   Discuss Project
@@ -693,9 +707,9 @@ const ServiceDetail = () => {
                   key={tech}
                   label={tech}
                   sx={{
-                    backgroundColor: 'rgba(139, 163, 106, 0.07)',
+                    backgroundColor: 'rgba(168, 85, 247, 0.07)',
                     color: colors.accent.primary,
-                    border: '1px solid rgba(139, 163, 106, 0.16)',
+                    border: '1px solid rgba(168, 85, 247, 0.16)',
                     fontSize: '0.82rem',
                     fontWeight: 650,
                     px: 1.2,
@@ -703,7 +717,7 @@ const ServiceDetail = () => {
                     borderRadius: 1.5,
                     transition: 'all 0.2s ease',
                     '&:hover': {
-                      backgroundColor: 'rgba(139, 163, 106, 0.16)',
+                      backgroundColor: 'rgba(168, 85, 247, 0.16)',
                       borderColor: colors.accent.primary,
                     },
                   }}
@@ -825,8 +839,7 @@ const ServiceDetail = () => {
                 width: 380,
                 height: 380,
                 transform: 'translate(-50%, -50%)',
-                background:
-                  'radial-gradient(circle, rgba(139, 163, 106, 0.08) 0%, transparent 68%)',
+                background: 'radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 68%)',
                 filter: 'blur(30px)',
                 pointerEvents: 'none',
                 zIndex: 0,

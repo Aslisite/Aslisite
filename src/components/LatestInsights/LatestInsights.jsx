@@ -173,12 +173,13 @@ const LatestInsights = () => {
               direction="top"
               delay={110}
               stepDuration={0.32}
+              highlightWords={['Blog']}
               sx={{
                 fontSize: { xs: '2rem', sm: '2.45rem', md: '2.85rem' },
-                fontWeight: 650,
+                fontWeight: 800,
                 lineHeight: 1.12,
                 mb: 2,
-                color: colors.text.secondary,
+                color: colors.text.primary,
                 textAlign: 'center',
                 maxWidth: '640px',
                 mx: 'auto',
@@ -433,9 +434,9 @@ const LatestInsights = () => {
               transition: 'all 0.3s ease',
               '&:hover': {
                 borderColor: colors.accent.primary,
-                backgroundColor: 'rgba(139, 163, 106, 0.05)',
+                backgroundColor: 'rgba(168, 85, 247, 0.05)',
                 transform: 'translateY(-2px)',
-                boxShadow: '0 4px 20px rgba(139, 163, 106, 0.15)',
+                boxShadow: '0 4px 20px rgba(168, 85, 247, 0.15)',
               },
             }}
           >

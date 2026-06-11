@@ -28,6 +28,8 @@ const BlurText = ({
   stepDuration = 0.35,
   component = 'p',
   sx = {},
+  highlightWords = [],
+  highlightSx = {},
 }) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
@@ -102,11 +104,16 @@ const BlurText = ({
           ease: easing,
         };
 
+        const cleanSegment = segment.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '');
+        const isHighlighted = highlightWords.some(
+          (w) => w.toLowerCase() === cleanSegment.toLowerCase(),
+        );
+
         return (
           <Box
             component={motion.span}
             aria-hidden="true"
-            className="inline-block will-change-[transform,filter,opacity]"
+            className={`inline-block will-change-[transform,filter,opacity] ${isHighlighted ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400' : ''}`}
             key={index}
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}
@@ -114,6 +121,9 @@ const BlurText = ({
             onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
             sx={{
               display: 'inline-block',
+              pb: isHighlighted ? '0.15em' : 0,
+              mb: isHighlighted ? '-0.15em' : 0,
+              ...(isHighlighted ? highlightSx : {}),
             }}
           >
             {segment === ' ' ? '\u00A0' : segment}

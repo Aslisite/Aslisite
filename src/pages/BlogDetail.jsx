@@ -508,7 +508,7 @@ const BlogDetail = () => {
                 label={post.category || 'Digital Strategy'}
                 sx={{
                   mb: 3,
-                  bgcolor: 'rgba(139, 163, 106, 0.12)',
+                  bgcolor: 'rgba(168, 85, 247, 0.12)',
                   color: colors.accent.primary,
                   border: `1px solid ${colors.border.accent}`,
                   fontWeight: 700,

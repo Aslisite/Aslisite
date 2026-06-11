@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Box, Button, Container, Stack, Typography, useMediaQuery } from '@mui/material';
 import ArrowForwardImport from '@mui/icons-material/ArrowForward';
 import CheckCircleImport from '@mui/icons-material/CheckCircle';
@@ -5,6 +6,7 @@ import ChevronRightImport from '@mui/icons-material/ChevronRight';
 import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
 import { BlurText, SectionBadge } from '../common';
+import { Sparkles } from 'lucide-react';
 
 const ArrowForward = ArrowForwardImport.default || ArrowForwardImport;
 const CheckCircle = CheckCircleImport.default || CheckCircleImport;
@@ -63,19 +65,17 @@ const systemSteps = ['Strategy', 'Website', 'SEO', 'Conversion'];
 
 const Hero = () => {
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  const handlePointerMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 100;
-    const y = ((event.clientY - rect.top) / rect.height) * 100;
-
-    event.currentTarget.style.setProperty('--mx', `${x}%`);
-    event.currentTarget.style.setProperty('--my', `${y}%`);
+  const handlePointerMove = (e) => {
+    const { clientX, clientY } = e;
+    const x = (clientX - window.innerWidth / 2) / 25;
+    const y = (clientY - window.innerHeight / 2) / 25;
+    setMousePosition({ x, y });
   };
 
-  const handlePointerLeave = (event) => {
-    event.currentTarget.style.setProperty('--mx', '50%');
-    event.currentTarget.style.setProperty('--my', '38%');
+  const handlePointerLeave = () => {
+    setMousePosition({ x: 0, y: 0 });
   };
 
   return (
@@ -91,9 +91,7 @@ const Hero = () => {
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
-        backgroundColor: '#08090b',
-        '--mx': '50%',
-        '--my': '38%',
+        backgroundColor: '#0c0f17',
         pt: { xs: 13, md: 14 },
         pb: { xs: 7, md: 10 },
         scrollMarginTop: '64px',
@@ -112,56 +110,81 @@ const Hero = () => {
         },
       }}
     >
-      <Box
-        aria-hidden="true"
-        sx={{
-          position: 'absolute',
-          left: 'var(--mx)',
-          top: 'var(--my)',
-          width: 'clamp(380px, 52vw, 860px)',
-          height: 'clamp(380px, 52vw, 860px)',
-          transform: 'translate(-50%, -50%)',
-          borderRadius: '50%',
-          background:
-            'radial-gradient(circle, rgba(139, 163, 106, 0.28) 0%, rgba(139, 163, 106, 0.14) 26%, rgba(139, 163, 106, 0.04) 52%, transparent 72%)',
-          filter: 'blur(42px)',
-          opacity: 0.75,
-          mixBlendMode: 'screen',
-          pointerEvents: 'none',
-          animation: prefersReducedMotion ? 'none' : 'livingGlow 14s ease-in-out infinite',
-          '@keyframes livingGlow': {
-            '0%, 100%': {
-              transform: 'translate(-50%, -50%) scale(0.98)',
-              opacity: 0.6,
-            },
-            '50%': {
-              transform: 'translate(-50%, -50%) scale(1.06)',
-              opacity: 0.92,
-            },
-          },
+      {/* Dynamic Glowing Mesh Background influenced by mouse position */}
+      <div
+        className="absolute inset-0 pointer-events-none transition-transform duration-500 ease-out z-0"
+        style={{
+          transform: `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0)`,
         }}
-      />
+      >
+        <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-purple-600/10 blur-[130px] rounded-full" />
+        <div className="absolute top-1/3 right-1/4 w-[380px] h-[380px] bg-cyan-600/10 blur-[130px] rounded-full" />
+        <div className="absolute bottom-10 left-1/3 w-[300px] h-[300px] bg-pink-500/5 blur-[100px] rounded-full" />
+      </div>
 
-      <Box
-        aria-hidden="true"
-        sx={{
-          position: 'absolute',
-          inset: '-10%',
-          background:
-            'linear-gradient(135deg, transparent 10%, rgba(245, 241, 232, 0.03) 42%, transparent 62%)',
-          transform: 'translate3d(0, 0, 0)',
-          opacity: 0.72,
-          filter: 'blur(18px)',
-          pointerEvents: 'none',
-          animation: prefersReducedMotion
-            ? 'none'
-            : 'fieldDrift 16s ease-in-out infinite alternate',
-          '@keyframes fieldDrift': {
-            '0%': { transform: 'translate3d(-2%, -1%, 0) scale(1)' },
-            '100%': { transform: 'translate3d(2%, 1%, 0) scale(1.04)' },
-          },
-        }}
-      />
+      {/* High-quality SVG vector grid constellation */}
+      <div className="absolute inset-x-0 top-0 h-full pointer-events-none opacity-20 z-0">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="grad-1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#0c0f17" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+
+          {/* Constellation line connections */}
+          <line
+            x1="10%"
+            y1="15%"
+            x2="25%"
+            y2="30%"
+            stroke="#a855f7"
+            strokeWidth="0.5"
+            strokeDasharray="4 4"
+          />
+          <line x1="25%" y1="30%" x2="40%" y2="20%" stroke="#a855f7" strokeWidth="0.5" />
+          <line
+            x1="40%"
+            y1="20%"
+            x2="55%"
+            y2="35%"
+            stroke="#06b6d4"
+            strokeWidth="0.5"
+            strokeDasharray="2 2"
+          />
+          <line x1="55%" y1="35%" x2="70%" y2="15%" stroke="#a855f7" strokeWidth="0.5" />
+          <line x1="70%" y1="15%" x2="85%" y2="25%" stroke="#06b6d4" strokeWidth="0.5" />
+
+          {/* Node pulse loops */}
+          <circle
+            cx="10%"
+            cy="15%"
+            r="3"
+            fill="#a855f7"
+            className="animate-ping"
+            style={{ animationDuration: '3s' }}
+          />
+          <circle cx="25%" cy="30%" r="4" fill="#06b6d4" />
+          <circle cx="40%" cy="20%" r="3" fill="#a855f7" />
+          <circle
+            cx="55%"
+            cy="35%"
+            r="5"
+            fill="#f59e0b"
+            className="animate-pulse"
+            style={{ animationDuration: '2s' }}
+          />
+          <circle cx="70%" cy="15%" r="4" fill="#a855f7" />
+          <circle
+            cx="85%"
+            cy="25%"
+            r="3"
+            fill="#06b6d4"
+            className="animate-ping"
+            style={{ animationDuration: '4s' }}
+          />
+        </svg>
+      </div>
 
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Box
@@ -185,10 +208,16 @@ const Hero = () => {
               sx={{
                 mb: 3,
                 color: colors.accent.primary,
-                borderColor: 'rgba(139, 163, 106, 0.24)',
-                backgroundColor: 'rgba(139, 163, 106, 0.07)',
+                borderColor: 'rgba(168, 85, 247, 0.24)',
+                backgroundColor: 'rgba(168, 85, 247, 0.07)',
+                gap: 1,
               }}
             >
+              <Sparkles
+                size={14}
+                className="animate-spin text-purple-400"
+                style={{ animationDuration: '4s' }}
+              />
               Digital Growth Studio
             </SectionBadge>
           </Box>
@@ -208,6 +237,7 @@ const Hero = () => {
               direction="top"
               delay={130}
               stepDuration={0.32}
+              highlightWords={['serious', 'growth']}
               sx={{
                 color: colors.text.primary,
                 fontSize: { xs: '2.45rem', sm: '3.25rem', md: '4.35rem', lg: '5rem' },
@@ -272,9 +302,13 @@ const Hero = () => {
                 px: 4,
                 fontSize: '1rem',
                 fontWeight: 700,
-                background: 'linear-gradient(135deg, #8ba36a 0%, #c8d2b0 100%)',
-                color: '#06100d',
-                boxShadow: '0 18px 40px rgba(139, 163, 106, 0.2)',
+                background: 'linear-gradient(135deg, #a855f7 0%, #06b6d4 100%)',
+                color: '#ffffff',
+                boxShadow: '0 18px 40px rgba(168, 85, 247, 0.2)',
+                '&:hover': {
+                  background: 'linear-gradient(135deg, #c084fc 0%, #22d3ee 100%)',
+                  boxShadow: '0 18px 40px rgba(168, 85, 247, 0.35)',
+                },
               }}
             >
               Start a Project
@@ -293,6 +327,10 @@ const Hero = () => {
                 backgroundColor: 'rgba(255, 255, 255, 0.04)',
                 border: '1px solid rgba(255, 255, 255, 0.13)',
                 boxShadow: 'none',
+                '&:hover': {
+                  borderColor: '#06b6d4',
+                  boxShadow: '0 0 15px rgba(6, 182, 212, 0.16)',
+                },
               }}
             >
               View Services
@@ -350,9 +388,11 @@ const Hero = () => {
                       py: 1.3,
                       minHeight: 48,
                       borderRadius: 1.5,
+                      border: '1px solid',
+                      borderColor: index === 0 ? 'rgba(168, 85, 247, 0.15)' : 'transparent',
                       color: index === 0 ? colors.accent.primary : colors.text.secondary,
                       backgroundColor:
-                        index === 0 ? 'rgba(139, 163, 106, 0.08)' : 'rgba(255, 255, 255, 0.035)',
+                        index === 0 ? 'rgba(168, 85, 247, 0.08)' : 'rgba(255, 255, 255, 0.035)',
                       // Desktop: allow items to flex evenly
                       flex: { sm: '1 1 0' },
                       justifyContent: { xs: 'flex-start', sm: 'center' },
@@ -362,10 +402,16 @@ const Hero = () => {
                       '&:last-of-type': {
                         mb: 0,
                       },
-                      transition: 'background-color 0.22s ease, color 0.22s ease',
+                      transition:
+                        'background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.22s ease',
+                      cursor: 'pointer',
                       '&:hover': {
+                        transform: 'translateY(-2px)',
+                        color: index === 0 ? colors.accent.secondary : colors.accent.primary,
                         backgroundColor:
-                          index === 0 ? 'rgba(139, 163, 106, 0.13)' : 'rgba(255, 255, 255, 0.06)',
+                          index === 0 ? 'rgba(6, 182, 212, 0.08)' : 'rgba(168, 85, 247, 0.08)',
+                        borderColor:
+                          index === 0 ? 'rgba(6, 182, 212, 0.25)' : 'rgba(168, 85, 247, 0.25)',
                       },
                     }}
                   >

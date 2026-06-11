@@ -239,7 +239,7 @@ const Blog = () => {
                         width: '100%',
                         height: '100%',
                         background:
-                          'linear-gradient(135deg, rgba(139, 163, 106, 0.24) 0%, rgba(245, 241, 232, 0.08) 100%)',
+                          'linear-gradient(135deg, rgba(168, 85, 247, 0.24) 0%, rgba(245, 241, 232, 0.08) 100%)',
                       }}
                     />
                   )}

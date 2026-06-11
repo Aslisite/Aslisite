@@ -127,7 +127,7 @@ const Product = () => {
           transform: 'translate(20%, -50%)',
           width: '800px',
           height: '800px',
-          background: 'radial-gradient(circle, rgba(139, 163, 106, 0.1) 0%, transparent 60%)',
+          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 60%)',
           filter: 'blur(60px)',
           pointerEvents: 'none',
         }}
@@ -152,6 +152,7 @@ const Product = () => {
               direction="top"
               delay={75}
               stepDuration={0.3}
+              highlightWords={['AsliBooks']}
               sx={{
                 fontSize: { xs: '1.65rem', sm: '2.05rem', md: '2.4rem' },
                 fontWeight: 800,
@@ -241,11 +242,11 @@ const Product = () => {
                       fontWeight: 600,
                       background: colors.accent.gradient,
                       borderRadius: 2,
-                      boxShadow: '0 4px 20px rgba(139, 163, 106, 0.28)',
+                      boxShadow: '0 4px 20px rgba(168, 85, 247, 0.28)',
                       transition: 'background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
                       '&:hover': {
                         background: colors.accent.gradient,
-                        boxShadow: '0 6px 28px rgba(139, 163, 106, 0.34)',
+                        boxShadow: '0 6px 28px rgba(168, 85, 247, 0.34)',
                         transform: 'translateY(-2px)',
                       },
                     }}

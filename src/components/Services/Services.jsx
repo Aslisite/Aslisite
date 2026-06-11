@@ -143,6 +143,7 @@ const Services = () => {
             direction="top"
             delay={110}
             stepDuration={0.32}
+            highlightWords={['Transform']}
             sx={{
               fontSize: { xs: '2.15rem', sm: '2.75rem', md: '3.35rem' },
               fontWeight: 800,
@@ -212,7 +213,7 @@ const Services = () => {
                         inset: 0,
                         borderRadius: 'inherit',
                         padding: '1px',
-                        background: 'linear-gradient(135deg, #8ba36a 0%, #c8d2b0 100%)',
+                        background: 'linear-gradient(135deg, #a855f7 0%, #06b6d4 100%)',
                         WebkitMask:
                           'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                         WebkitMaskComposite: 'xor',
@@ -283,7 +284,7 @@ const Services = () => {
                             height: 80,
                             borderRadius: '50%',
                             background:
-                              'radial-gradient(circle, rgba(139, 163, 106, 0.15) 0%, transparent 70%)',
+                              'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%)',
                             opacity: 0,
                             transition: 'opacity 0.35s ease',
                             pointerEvents: 'none',
@@ -297,7 +298,7 @@ const Services = () => {
                             width: 56,
                             height: 56,
                             borderRadius: 2,
-                            backgroundColor: 'rgba(139, 163, 106, 0.1)',
+                            backgroundColor: 'rgba(168, 85, 247, 0.1)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',

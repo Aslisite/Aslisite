@@ -180,6 +180,7 @@ const Contact = () => {
                 direction="top"
                 delay={85}
                 stepDuration={0.3}
+                highlightWords={['Amazing', 'Together']}
                 sx={{
                   color: colors.text.primary,
                   fontWeight: 800,
@@ -552,7 +553,7 @@ const Contact = () => {
                           background: colors.accent.gradient,
                           opacity: 0.9,
                           transform: 'translateY(-2px)',
-                          boxShadow: '0 8px 25px rgba(139, 163, 106, 0.25)',
+                          boxShadow: '0 8px 25px rgba(168, 85, 247, 0.25)',
                         },
                         transition: 'opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease',
                         '&:disabled': {

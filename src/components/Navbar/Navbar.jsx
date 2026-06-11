@@ -83,6 +83,7 @@ const Navbar = () => {
           />
           <Typography
             sx={{
+              fontFamily: '"Sora", "Inter", sans-serif',
               fontWeight: 800,
               fontSize: '1.25rem',
               background: colors.accent.gradient,
@@ -178,9 +179,8 @@ const Navbar = () => {
               </Box>
             ) : (
               <ListItemButton
-                component={item.href.startsWith('/#') ? 'a' : Link}
-                href={item.href.startsWith('/#') ? item.href : undefined}
-                to={item.href.startsWith('/#') ? undefined : item.href}
+                component={Link}
+                to={item.href}
                 onClick={handleDrawerToggle}
                 sx={{
                   py: 2.5,
@@ -267,8 +267,8 @@ const Navbar = () => {
           >
             {/* Logo */}
             <Box
-              component="a"
-              href="/#hero"
+              component={Link}
+              to="/#hero"
               sx={{ display: 'flex', alignItems: 'center', gap: 1.5, textDecoration: 'none' }}
             >
               <Box
@@ -336,9 +336,8 @@ const Navbar = () => {
                       </Box>
                     ) : (
                       <Typography
-                        component={item.href.startsWith('/#') ? 'a' : Link}
-                        href={item.href.startsWith('/#') ? item.href : undefined}
-                        to={item.href.startsWith('/#') ? undefined : item.href}
+                        component={Link}
+                        to={item.href}
                         sx={{
                           color: colors.text.secondary,
                           textDecoration: 'none',

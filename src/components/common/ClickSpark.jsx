@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { Box } from '@mui/material';
 
 const ClickSpark = ({
-  sparkColor = '#8ba36a',
+  sparkColor = '#a855f7',
   sparkSize = 10,
   sparkRadius = 15,
   sparkCount = 8,

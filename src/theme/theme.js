@@ -1,29 +1,29 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-// Color Palette - Charcoal Ivory Olive Theme
+// Color Palette - Cyberpunk Theme (Neon Purple/Cyan)
 const colors = {
   background: {
-    primary: '#0b0d10',
-    secondary: '#11151a',
-    elevated: '#151a20',
-    card: '#11161b',
+    primary: '#0c0f17',
+    secondary: '#0d111c',
+    elevated: '#131824',
+    card: '#0d111c',
   },
   accent: {
-    primary: '#8ba36a',
-    primaryHover: '#9db57b',
-    secondary: '#6f7d54',
-    gradient: 'linear-gradient(135deg, #8ba36a 0%, #c8d2b0 100%)',
-    gradientReverse: 'linear-gradient(135deg, #c8d2b0 0%, #8ba36a 100%)',
+    primary: '#a855f7',
+    primaryHover: '#c084fc',
+    secondary: '#06b6d4',
+    gradient: 'linear-gradient(135deg, #a855f7 0%, #06b6d4 100%)',
+    gradientReverse: 'linear-gradient(135deg, #06b6d4 0%, #a855f7 100%)',
   },
   text: {
-    primary: '#f5f1e8',
-    secondary: 'rgba(245, 241, 232, 0.76)',
-    muted: 'rgba(245, 241, 232, 0.58)',
+    primary: '#f1f5f9',
+    secondary: 'rgba(241, 245, 249, 0.76)',
+    muted: 'rgba(241, 245, 249, 0.58)',
   },
   border: {
-    light: 'rgba(245, 241, 232, 0.09)',
-    medium: 'rgba(245, 241, 232, 0.14)',
-    accent: 'rgba(139, 163, 106, 0.35)',
+    light: 'rgba(255, 255, 255, 0.08)',
+    medium: 'rgba(255, 255, 255, 0.14)',
+    accent: 'rgba(168, 85, 247, 0.35)',
   },
 };
 
@@ -38,14 +38,14 @@ let theme = createTheme({
     primary: {
       main: colors.accent.primary,
       light: colors.accent.primaryHover,
-      dark: '#6f7d54',
-      contrastText: '#0b0d10',
+      dark: '#7e22ce',
+      contrastText: '#ffffff',
     },
     secondary: {
       main: colors.accent.secondary,
-      light: '#8f9b78',
-      dark: '#556143',
-      contrastText: '#f5f1e8',
+      light: '#22d3ee',
+      dark: '#0891b2',
+      contrastText: '#ffffff',
     },
     text: {
       primary: colors.text.primary,
@@ -178,38 +178,39 @@ let theme = createTheme({
           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         },
         containedPrimary: {
-          background: 'linear-gradient(135deg, #8ba36a 0%, #c8d2b0 100%)',
-          boxShadow: '0 4px 20px rgba(139, 163, 106, 0.28)',
-          color: '#0b0d10',
+          background: 'linear-gradient(135deg, #a855f7 0%, #06b6d4 100%)',
+          boxShadow: '0 4px 20px rgba(168, 85, 247, 0.28)',
+          color: '#ffffff',
           '&:hover': {
-            boxShadow: '0 8px 25px rgba(139, 163, 106, 0.34)',
+            boxShadow: '0 8px 25px rgba(168, 85, 247, 0.34)',
             transform: 'translateY(-3px)',
+            background: 'linear-gradient(135deg, #c084fc 0%, #22d3ee 100%)',
           },
         },
         containedSecondary: {
-          backgroundColor: 'rgba(245, 241, 232, 0.03)',
+          backgroundColor: 'rgba(241, 245, 249, 0.03)',
           backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(245, 241, 232, 0.14)',
+          border: '1px solid rgba(241, 245, 249, 0.14)',
           boxShadow: 'none',
-          color: '#f5f1e8',
+          color: '#f1f5f9',
           '&:hover': {
-            backgroundColor: 'rgba(245, 241, 232, 0.06)',
-            borderColor: '#9db57b',
-            boxShadow: '0 0 15px rgba(139, 163, 106, 0.16)',
+            backgroundColor: 'rgba(241, 245, 249, 0.06)',
+            borderColor: '#06b6d4',
+            boxShadow: '0 0 15px rgba(6, 182, 212, 0.16)',
             transform: 'translateY(-3px)',
           },
         },
         outlined: {
-          borderColor: 'rgba(245, 241, 232, 0.16)',
-          color: '#f5f1e8',
+          borderColor: 'rgba(241, 245, 249, 0.16)',
+          color: '#f1f5f9',
           '&:hover': {
-            borderColor: '#8ba36a',
-            backgroundColor: 'rgba(139, 163, 106, 0.08)',
+            borderColor: '#a855f7',
+            backgroundColor: 'rgba(168, 85, 247, 0.08)',
             transform: 'translateY(-3px)',
           },
         },
         text: {
-          color: '#8ba36a',
+          color: '#a855f7',
           position: 'relative',
           '&::after': {
             content: '""',
@@ -218,7 +219,7 @@ let theme = createTheme({
             left: '28px',
             width: '0%',
             height: '2px',
-            backgroundColor: '#8ba36a',
+            backgroundColor: '#a855f7',
             transition: 'width 0.3s ease-in-out',
           },
           '&:hover': {
@@ -254,7 +255,7 @@ let theme = createTheme({
         root: {
           transition: 'background-color 0.2s ease, color 0.2s ease',
           '&:hover': {
-            backgroundColor: 'rgba(139, 163, 106, 0.1)',
+            backgroundColor: 'rgba(168, 85, 247, 0.1)',
             color: colors.accent.primary,
           },
         },
