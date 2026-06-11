@@ -97,7 +97,7 @@ const Navbar = () => {
           <Typography
             sx={{
               ...shinyGradientStyle,
-              fontFamily: '"Orbitron", "Sora", sans-serif',
+              fontFamily: '"Poppins", "Sora", sans-serif',
               fontWeight: 900,
               letterSpacing: '0.05em',
               fontSize: '1.25rem',
@@ -300,7 +300,7 @@ const Navbar = () => {
                 variant="h6"
                 sx={{
                   ...shinyGradientStyle,
-                  fontFamily: '"Orbitron", "Sora", sans-serif',
+                  fontFamily: '"Poppins", "Sora", sans-serif',
                   fontWeight: 900,
                   letterSpacing: '0.05em',
                   fontSize: { xs: '1.25rem', md: '1.5rem' },
