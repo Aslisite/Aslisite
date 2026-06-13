@@ -31,12 +31,15 @@ const BlurText = ({
   highlightWords = [],
   highlightSx = {},
 }) => {
-  const elements = animateBy === 'words' ? text.split(' ') : text.split('');
+  const elements = useMemo(
+    () => (animateBy === 'words' ? text.split(' ') : text.split('')),
+    [animateBy, text],
+  );
   const [inView, setInView] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
-    if (!ref.current) return undefined;
+    if (!ref.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -78,7 +81,10 @@ const BlurText = ({
     stepCount === 1 ? 0 : index / (stepCount - 1),
   );
 
-  const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
+  const animateKeyframes = useMemo(
+    () => buildKeyframes(fromSnapshot, toSnapshots),
+    [fromSnapshot, toSnapshots],
+  );
 
   return (
     <Box

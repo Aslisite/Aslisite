@@ -103,6 +103,7 @@ function useCountUp(end, duration = 2000, startOnView = false) {
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
   const ref = useRef(null);
+  const observerRef = useRef(null);
 
   useEffect(() => {
     if (!startOnView) return;
@@ -116,12 +117,15 @@ function useCountUp(end, duration = 2000, startOnView = false) {
       { threshold: 0.3 },
     );
 
-    const current = ref.current;
-    if (current) observer.observe(current);
+    observerRef.current = observer;
+    if (ref.current) observer.observe(ref.current);
+
     return () => {
-      if (current) observer.unobserve(current);
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
     };
-  }, [startOnView, hasStarted]);
+  }, [startOnView]);
 
   useEffect(() => {
     if (!hasStarted && startOnView) return;

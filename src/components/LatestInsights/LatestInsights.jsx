@@ -340,12 +340,16 @@ const LatestInsights = () => {
                               {postDate && (
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                                   <CalendarTodayIcon sx={{ fontSize: '0.85rem' }} />
-                                  <Typography variant="caption" sx={{ lineHeight: 1 }}>{postDate}</Typography>
+                                  <Typography variant="caption" sx={{ lineHeight: 1 }}>
+                                    {postDate}
+                                  </Typography>
                                 </Box>
                               )}
                               <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                                 <AccessTimeIcon sx={{ fontSize: '0.85rem' }} />
-                                <Typography variant="caption" sx={{ lineHeight: 1 }}>{readTime} min</Typography>
+                                <Typography variant="caption" sx={{ lineHeight: 1 }}>
+                                  {readTime} min
+                                </Typography>
                               </Box>
                             </Box>
                           </Box>
