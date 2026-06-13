@@ -50,6 +50,25 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpenProducts, setMobileOpenProducts] = useState(false);
+  const [safeAreaTop, setSafeAreaTop] = useState('0px');
+
+  // Read safe-area-inset-top ONCE on mount as a fixed px value.
+  // Using env() directly on a position:fixed element causes Chrome Android
+  // to reset it to 0 when the browser address bar collapses during scroll.
+  useEffect(() => {
+    const el = document.createElement('div');
+    el.style.position = 'fixed';
+    el.style.top = '0';
+    el.style.paddingTop = 'env(safe-area-inset-top, 0px)';
+    el.style.visibility = 'hidden';
+    el.style.pointerEvents = 'none';
+    document.body.appendChild(el);
+    const value = getComputedStyle(el).paddingTop;
+    document.body.removeChild(el);
+    if (value && value !== '0px') {
+      setSafeAreaTop(value);
+    }
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -248,7 +267,7 @@ const Navbar = () => {
     <>
       <Box
         component="header"
-        style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+        style={{ paddingTop: safeAreaTop }}
         sx={{
           position: 'fixed',
           top: 0,
