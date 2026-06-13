@@ -8,7 +8,6 @@ import {
   Typography,
   Button,
   Chip,
-  Stack,
   Skeleton,
 } from '@mui/material';
 import { motion } from 'framer-motion';

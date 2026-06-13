@@ -30,7 +30,13 @@ const PrivacyPolicy = () => {
         <meta name="twitter:image" content={siteMetadata.logo} />
       </Helmet>
 
-      <Box sx={{ py: { xs: 8, md: 12 }, backgroundColor: colors.background.primary }}>
+      <Box
+        sx={{
+          pt: { xs: 12, md: 16 },
+          pb: { xs: 8, md: 12 },
+          backgroundColor: colors.background.primary,
+        }}
+      >
         <Container maxWidth="md">
           <Paper
             elevation={0}

@@ -9,7 +9,6 @@ import {
   CircularProgress,
   Box,
   Chip,
-  Stack,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -90,7 +89,7 @@ const Blog = () => {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
+    <Container maxWidth="lg" sx={{ pt: { xs: 12, md: 16 }, pb: 8 }}>
       <Helmet>
         <title>Blog - Aslisite</title>
         <meta
