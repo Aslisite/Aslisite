@@ -272,7 +272,7 @@ const Navbar = () => {
           borderBottom: scrolled ? `1px solid ${colors.border.light}` : 'none',
           paddingTop: {
             xs: scrolled
-              ? 'calc(env(safe-area-inset-top, 0px) + 20px)'
+              ? 'max(20px, env(safe-area-inset-top))'
               : 'env(safe-area-inset-top, 0px)',
             md: 0,
           },
