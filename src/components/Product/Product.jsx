@@ -194,7 +194,14 @@ const Product = () => {
               <List
                 component={motion.ul}
                 variants={featureListVariants}
-                sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 1,
+                  mx: { xs: 'auto', md: 0 },
+                  width: { xs: 'fit-content', md: '100%' },
+                  alignItems: 'flex-start',
+                }}
               >
                 {features.map((feature, idx) => (
                   <ListItem

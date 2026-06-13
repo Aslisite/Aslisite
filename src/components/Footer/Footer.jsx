@@ -201,179 +201,96 @@ const Footer = () => {
                 spacing={{ xs: 3, md: 4 }}
                 variants={columnsContainerVariants}
               >
-                <Grid item xs={6} sm={4} component={motion.div} variants={columnVariants}>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      fontWeight: 600,
-                      color: colors.text.primary,
-                      mb: 2,
-                      textTransform: 'uppercase',
-                      letterSpacing: 1,
-                      fontSize: '0.75rem',
-                      textAlign: { xs: 'center', sm: 'left' },
-                    }}
-                  >
-                    Services
-                  </Typography>
-                  <Box
-                    component="nav"
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 1.5,
-                      alignItems: { xs: 'center', sm: 'flex-start' },
-                    }}
-                  >
-                    {navigation.services.map((item, index) => (
-                      <Link
-                        key={index}
-                        component={RouterLink}
-                        to={item.href}
-                        underline="none"
-                        sx={{
-                          color: colors.text.muted,
-                          fontSize: '0.875rem',
-                          transition: 'color 0.2s ease',
-                          '&:hover': {
-                            color: colors.accent.primary,
-                          },
-                        }}
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </Box>
-                </Grid>
-
-                <Grid item xs={6} sm={4} component={motion.div} variants={columnVariants}>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      fontWeight: 600,
-                      color: colors.text.primary,
-                      mb: 2,
-                      textTransform: 'uppercase',
-                      letterSpacing: 1,
-                      fontSize: '0.75rem',
-                      textAlign: { xs: 'center', sm: 'left' },
-                    }}
-                  >
-                    Quick Links
-                  </Typography>
-                  <Box
-                    component="nav"
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 1.5,
-                      alignItems: { xs: 'center', sm: 'flex-start' },
-                    }}
-                  >
-                    {navigation.quickLinks.map((item, index) => (
-                      <Link
-                        key={index}
-                        component={RouterLink}
-                        to={item.href}
-                        underline="none"
-                        sx={{
-                          color: colors.text.muted,
-                          fontSize: '0.875rem',
-                          transition: 'color 0.2s ease',
-                          '&:hover': {
-                            color: colors.accent.primary,
-                          },
-                        }}
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </Box>
-                </Grid>
-
-                <Grid item xs={12} sm={4} component={motion.div} variants={columnVariants}>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      fontWeight: 600,
-                      color: colors.text.primary,
-                      mb: 2,
-                      textTransform: 'uppercase',
-                      letterSpacing: 1,
-                      fontSize: '0.75rem',
-                      textAlign: { xs: 'center', sm: 'left' },
-                    }}
-                  >
-                    Get In Touch
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 2,
-                      alignItems: { xs: 'center', sm: 'flex-start' },
-                    }}
-                  >
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                      <Mail sx={{ fontSize: 18, color: colors.accent.primary }} />
-                      <Link
-                        href="mailto:info@aslisite.com"
-                        underline="none"
-                        sx={{
-                          color: colors.text.muted,
-                          fontSize: '0.875rem',
-                          '&:hover': {
-                            color: colors.accent.primary,
-                          },
-                        }}
-                      >
-                        info@aslisite.com
-                      </Link>
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                      <WhatsApp sx={{ fontSize: 18, color: colors.accent.primary }} />
-                      <Link
-                        href="https://wa.me/919495664173?text=Hi%20Aslisite,%20I'm%20interested%20in%20starting%20a%20project!"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        underline="none"
-                        sx={{
-                          color: colors.text.muted,
-                          fontSize: '0.875rem',
-                          '&:hover': {
-                            color: colors.accent.primary,
-                          },
-                        }}
-                      >
-                        91 9495664173
-                      </Link>
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
-                      <LocationOn sx={{ fontSize: 18, color: colors.accent.primary, mt: 0.25 }} />
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          color: colors.text.muted,
-                          fontSize: '0.875rem',
-                          lineHeight: 1.6,
-                          textAlign: { xs: 'center', sm: 'left' },
-                        }}
-                      >
-                        Aslisite Technologies
-                        <br />
-                        Peruvallur
-                        <br />
-                        Malappuram, Kerala
-                        <br />
-                        India, 676317
-                        <br />
-                        <Box
-                          component="span"
-                          sx={{ fontSize: '0.75rem', color: colors.text.muted }}
+                <Grid item xs={6} sm={6} md={4} component={motion.div} variants={columnVariants}>
+                  <Box sx={{ pl: { xs: '16px', sm: 0 } }}>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{
+                        fontWeight: 600,
+                        color: colors.text.primary,
+                        mb: 2,
+                        textTransform: 'uppercase',
+                        letterSpacing: 1,
+                        fontSize: '0.75rem',
+                        textAlign: 'left',
+                      }}
+                    >
+                      Services
+                    </Typography>
+                    <Box
+                      component="nav"
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 1.5,
+                        alignItems: 'flex-start',
+                      }}
+                    >
+                      {navigation.services.map((item, index) => (
+                        <Link
+                          key={index}
+                          component={RouterLink}
+                          to={item.href}
+                          underline="none"
+                          sx={{
+                            color: colors.text.muted,
+                            fontSize: '0.875rem',
+                            transition: 'color 0.2s ease',
+                            '&:hover': {
+                              color: colors.accent.primary,
+                            },
+                          }}
                         >
-                          GSTIN: 32CYTPP2009K1Z5
-                        </Box>
-                      </Typography>
+                          {item.label}
+                        </Link>
+                      ))}
+                    </Box>
+                  </Box>
+                </Grid>
+
+                <Grid item xs={6} sm={6} md={4} component={motion.div} variants={columnVariants}>
+                  <Box sx={{ pl: { xs: '16px', sm: 0 } }}>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{
+                        fontWeight: 600,
+                        color: colors.text.primary,
+                        mb: 2,
+                        textTransform: 'uppercase',
+                        letterSpacing: 1,
+                        fontSize: '0.75rem',
+                        textAlign: 'left',
+                      }}
+                    >
+                      Quick Links
+                    </Typography>
+                    <Box
+                      component="nav"
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 1.5,
+                        alignItems: 'flex-start',
+                      }}
+                    >
+                      {navigation.quickLinks.map((item, index) => (
+                        <Link
+                          key={index}
+                          component={RouterLink}
+                          to={item.href}
+                          underline="none"
+                          sx={{
+                            color: colors.text.muted,
+                            fontSize: '0.875rem',
+                            transition: 'color 0.2s ease',
+                            '&:hover': {
+                              color: colors.accent.primary,
+                            },
+                          }}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
                     </Box>
                   </Box>
                 </Grid>

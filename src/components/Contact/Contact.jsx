@@ -373,6 +373,8 @@ const Contact = () => {
                   border: `1px solid ${colors.border.light}`,
                   borderRadius: 3,
                   height: '100%',
+                  margin: { xs: '0 auto', md: 0 },
+                  maxWidth: { xs: '480px', sm: '600px', md: '100%' },
                 }}
               >
                 <Typography

@@ -253,11 +253,15 @@ const Blog = () => {
                     flexDirection: 'column',
                   }}
                 >
-                  <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    sx={{ mb: 2, gap: 1.5 }}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      flexWrap: 'wrap',
+                      gap: 1.5,
+                      mb: 2,
+                    }}
                   >
                     <Chip
                       label={blog.category || 'Digital Strategy'}
@@ -269,28 +273,31 @@ const Blog = () => {
                         fontSize: '0.7rem',
                         letterSpacing: '0.08em',
                         textTransform: 'uppercase',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        height: '24px',
                       }}
                     />
-                    <Stack
-                      direction="row"
-                      spacing={1}
-                      alignItems="center"
-                      flexWrap="wrap"
-                      justifyContent="flex-end"
-                      sx={{ color: colors.text.muted, rowGap: 0.5 }}
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 1.5,
+                        color: colors.text.muted,
+                      }}
                     >
                       {postDate && (
-                        <Stack direction="row" spacing={0.5} alignItems="center">
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                           <CalendarTodayIcon sx={{ fontSize: '0.85rem' }} />
-                          <Typography variant="caption">{postDate}</Typography>
-                        </Stack>
+                          <Typography variant="caption" sx={{ lineHeight: 1 }}>{postDate}</Typography>
+                        </Box>
                       )}
-                      <Stack direction="row" spacing={0.5} alignItems="center">
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                         <AccessTimeIcon sx={{ fontSize: '0.85rem' }} />
-                        <Typography variant="caption">{readTime} min</Typography>
-                      </Stack>
-                    </Stack>
-                  </Stack>
+                        <Typography variant="caption" sx={{ lineHeight: 1 }}>{readTime} min</Typography>
+                      </Box>
+                    </Box>
+                  </Box>
 
                   <Typography
                     variant="h5"
@@ -303,11 +310,11 @@ const Blog = () => {
                       color: colors.text.primary,
                       textDecoration: 'none',
                       mb: 1.5,
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
+                      overflow: { xs: 'visible', md: 'hidden' },
+                      textOverflow: { xs: 'clip', md: 'ellipsis' },
+                      display: { xs: 'block', md: '-webkit-box' },
+                      WebkitLineClamp: { xs: 'none', md: 2 },
+                      WebkitBoxOrient: { xs: 'none', md: 'vertical' },
                       transition: 'color 0.2s ease',
                       '&:hover': {
                         color: colors.accent.primary,
@@ -341,13 +348,17 @@ const Blog = () => {
                     to={`/blog/${blog.slug}`}
                     sx={{
                       mt: 'auto',
-                      p: 0,
+                      p: { xs: '12px 16px', md: 0 },
+                      ml: { xs: '-16px', md: 0 },
+                      minHeight: { xs: '48px', md: 'auto' },
+                      display: 'inline-flex',
+                      alignItems: 'center',
                       fontWeight: 600,
                       fontSize: '0.92rem',
                       color: colors.accent.primary,
                       alignSelf: 'flex-start',
-                      opacity: 0.6,
-                      transform: 'translateY(6px)',
+                      opacity: { xs: 0.85, md: 0.6 },
+                      transform: { xs: 'none', md: 'translateY(6px)' },
                       transition:
                         'color 0.2s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease',
                       '&:hover': {

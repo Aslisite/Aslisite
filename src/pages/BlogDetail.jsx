@@ -886,7 +886,11 @@ const BlogDetail = () => {
                           onClick={() => window.scrollTo(0, 0)}
                           sx={{
                             mt: 3,
-                            p: 0,
+                            p: { xs: '12px 16px', md: 0 },
+                            ml: { xs: '-16px', md: 0 },
+                            minHeight: { xs: '48px', md: 'auto' },
+                            display: 'inline-flex',
+                            alignItems: 'center',
                             fontWeight: 700,
                             color: '#00d4ff',
                             '&:hover': { bgcolor: 'transparent', textDecoration: 'underline' },

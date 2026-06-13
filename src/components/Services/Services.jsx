@@ -344,8 +344,9 @@ const Services = () => {
                         sx={{
                           display: 'flex',
                           flexWrap: 'wrap',
-                          gap: 1,
+                          gap: { xs: '8px', md: 1 },
                           mt: 'auto',
+                          justifyContent: { xs: 'flex-start', md: 'initial' },
                         }}
                       >
                         {service.features.map((feature, idx) => (
@@ -361,7 +362,7 @@ const Services = () => {
                               alignItems: 'center',
                               justifyContent: 'center',
                               textAlign: 'center',
-                              width: { xs: 'calc(50% - 4px)', md: 'auto' },
+                              width: { xs: 'auto', md: 'auto' },
                               minHeight: { xs: 34, md: 'auto' },
                             }}
                           >
