@@ -91,7 +91,7 @@ const BlurText = ({
       ref={ref}
       component={component}
       aria-label={text}
-      className={className}
+      className={className || undefined}
       sx={{
         display: 'flex',
         flexWrap: 'wrap',
@@ -119,7 +119,6 @@ const BlurText = ({
           <Box
             component={motion.span}
             aria-hidden="true"
-            className={`inline-block will-change-[transform,filter,opacity] ${isHighlighted ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400' : ''}`}
             key={index}
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}
@@ -127,6 +126,15 @@ const BlurText = ({
             onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
             sx={{
               display: 'inline-block',
+              willChange: 'transform, filter, opacity',
+              ...(isHighlighted
+                ? {
+                    color: 'transparent',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    backgroundImage: 'linear-gradient(90deg, #c084fc, #f472b6, #22d3ee)',
+                  }
+                : {}),
               pb: isHighlighted ? '0.15em' : 0,
               mb: isHighlighted ? '-0.15em' : 0,
               ...(isHighlighted ? highlightSx : {}),

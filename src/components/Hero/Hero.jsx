@@ -63,6 +63,26 @@ const connectorVariants = {
 
 const systemSteps = ['Strategy', 'Website', 'SEO', 'Conversion'];
 
+const pulseAnimation = {
+  '@keyframes heroPulse': {
+    '0%, 100%': { opacity: 1 },
+    '50%': { opacity: 0.5 },
+  },
+};
+
+const pingAnimation = {
+  '@keyframes heroPing': {
+    '0%': { transform: 'scale(1)', opacity: 1 },
+    '75%, 100%': { transform: 'scale(2)', opacity: 0 },
+  },
+};
+
+const spinAnimation = {
+  '@keyframes heroSpin': {
+    to: { transform: 'rotate(360deg)' },
+  },
+};
+
 const Hero = () => {
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -96,6 +116,9 @@ const Hero = () => {
         pb: { xs: 7, md: 10 },
         scrollMarginTop: '64px',
         borderBottom: `1px solid ${colors.border.light}`,
+        ...pulseAnimation,
+        ...pingAnimation,
+        ...spinAnimation,
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -111,20 +134,72 @@ const Hero = () => {
       }}
     >
       {/* Dynamic Glowing Mesh Background influenced by mouse position */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-transform duration-500 ease-out z-0"
-        style={{
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          transition: 'transform 500ms ease-out',
+          zIndex: 0,
           transform: `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0)`,
         }}
       >
-        <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-purple-600/10 blur-[130px] rounded-full" />
-        <div className="absolute top-1/3 right-1/4 w-[380px] h-[380px] bg-cyan-600/10 blur-[130px] rounded-full" />
-        <div className="absolute bottom-10 left-1/3 w-[300px] h-[300px] bg-pink-500/5 blur-[100px] rounded-full" />
-      </div>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '25%',
+            left: '25%',
+            width: 450,
+            height: 450,
+            bgcolor: 'rgba(147, 51, 234, 0.1)',
+            filter: 'blur(130px)',
+            borderRadius: '50%',
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '33.333%',
+            right: '25%',
+            width: 380,
+            height: 380,
+            bgcolor: 'rgba(8, 145, 178, 0.1)',
+            filter: 'blur(130px)',
+            borderRadius: '50%',
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: 40,
+            left: '33.333%',
+            width: 300,
+            height: 300,
+            bgcolor: 'rgba(236, 72, 153, 0.05)',
+            filter: 'blur(100px)',
+            borderRadius: '50%',
+          }}
+        />
+      </Box>
 
       {/* High-quality SVG vector grid constellation */}
-      <div className="absolute inset-x-0 top-0 h-full pointer-events-none opacity-20 z-0">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <Box
+        sx={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          top: 0,
+          height: '100%',
+          pointerEvents: 'none',
+          opacity: 0.2,
+          zIndex: 0,
+        }}
+      >
+        <Box
+          component="svg"
+          sx={{ width: '100%', height: '100%' }}
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <defs>
             <radialGradient id="grad-1" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.2" />
@@ -161,8 +236,12 @@ const Hero = () => {
             cy="15%"
             r="3"
             fill="#a855f7"
-            className="animate-ping"
-            style={{ animationDuration: '3s' }}
+            style={{
+              transformOrigin: '10% 15%',
+              animation: prefersReducedMotion
+                ? 'none'
+                : 'heroPing 3s cubic-bezier(0, 0, 0.2, 1) infinite',
+            }}
           />
           <circle cx="25%" cy="30%" r="4" fill="#06b6d4" />
           <circle cx="40%" cy="20%" r="3" fill="#a855f7" />
@@ -171,8 +250,11 @@ const Hero = () => {
             cy="35%"
             r="5"
             fill="#f59e0b"
-            className="animate-pulse"
-            style={{ animationDuration: '2s' }}
+            style={{
+              animation: prefersReducedMotion
+                ? 'none'
+                : 'heroPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            }}
           />
           <circle cx="70%" cy="15%" r="4" fill="#a855f7" />
           <circle
@@ -180,11 +262,15 @@ const Hero = () => {
             cy="25%"
             r="3"
             fill="#06b6d4"
-            className="animate-ping"
-            style={{ animationDuration: '4s' }}
+            style={{
+              transformOrigin: '85% 25%',
+              animation: prefersReducedMotion
+                ? 'none'
+                : 'heroPing 4s cubic-bezier(0, 0, 0.2, 1) infinite',
+            }}
           />
-        </svg>
-      </div>
+        </Box>
+      </Box>
 
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Box
@@ -215,8 +301,10 @@ const Hero = () => {
             >
               <Sparkles
                 size={14}
-                className="animate-spin text-purple-400"
-                style={{ animationDuration: '4s' }}
+                color="#c084fc"
+                style={{
+                  animation: prefersReducedMotion ? 'none' : 'heroSpin 4s linear infinite',
+                }}
               />
               Digital Growth Studio
             </SectionBadge>
