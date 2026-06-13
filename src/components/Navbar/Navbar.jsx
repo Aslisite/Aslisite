@@ -257,10 +257,6 @@ const Navbar = () => {
           backgroundColor: 'rgba(10, 10, 15, 0.95)',
           backdropFilter: 'blur(20px)',
           borderBottom: `1px solid ${colors.border.light}`,
-          paddingTop: {
-            xs: 'env(safe-area-inset-top, 0px)',
-            md: 0,
-          },
         }}
       >
         <Container maxWidth="xl">
