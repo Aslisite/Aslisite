@@ -48,8 +48,21 @@ const productItems = [
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpenProducts, setMobileOpenProducts] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scrolled]);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -257,6 +270,11 @@ const Navbar = () => {
           backgroundColor: 'rgba(10, 10, 15, 0.95)',
           backdropFilter: 'blur(20px)',
           borderBottom: `1px solid ${colors.border.light}`,
+          paddingTop: {
+            xs: scrolled ? 'env(safe-area-inset-top, 0px)' : 0,
+            md: 0,
+          },
+          transition: 'padding-top 0.3s ease',
         }}
       >
         <Container maxWidth="xl">

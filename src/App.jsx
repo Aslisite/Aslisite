@@ -22,7 +22,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <ErrorBoundary>
-        <Navbar />
         <ClickSpark>
           <Box
             sx={{
@@ -32,6 +31,7 @@ function App() {
             }}
           >
             <ScrollToTop />
+            <Navbar />
             <Box component="main" sx={{ flex: 1 }}>
               <Routes>
                 <Route path="/" element={<Home />} />
