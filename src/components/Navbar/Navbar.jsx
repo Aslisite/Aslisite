@@ -270,7 +270,12 @@ const Navbar = () => {
           backgroundColor: scrolled ? 'rgba(10, 10, 15, 0.95)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
           borderBottom: scrolled ? `1px solid ${colors.border.light}` : 'none',
-          paddingTop: { xs: 'calc(env(safe-area-inset-top, 0px) + 16px)', md: 0 },
+          paddingTop: {
+            xs: scrolled
+              ? 'calc(env(safe-area-inset-top, 0px) + 20px)'
+              : 'env(safe-area-inset-top, 0px)',
+            md: 0,
+          },
           transition:
             'background-color 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease, padding-top 0.3s ease',
         }}
