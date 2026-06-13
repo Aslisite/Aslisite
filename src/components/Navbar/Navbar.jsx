@@ -51,6 +51,7 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpenProducts, setMobileOpenProducts] = useState(false);
   const [safeAreaTop, setSafeAreaTop] = useState('0px');
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // Read safe-area-inset-top ONCE on mount as a fixed px value.
   // Using env() directly on a position:fixed element causes Chrome Android
@@ -68,6 +69,16 @@ const Navbar = () => {
     if (value && value !== '0px') {
       setSafeAreaTop(value);
     }
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 12);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleDrawerToggle = () => {
@@ -274,9 +285,15 @@ const Navbar = () => {
           left: 0,
           right: 0,
           zIndex: 1000,
-          backgroundColor: 'rgba(10, 10, 15, 0.95)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: `1px solid ${colors.border.light}`,
+          backgroundColor: isScrolled ? 'rgba(10, 10, 15, 0.78)' : 'rgba(10, 10, 15, 0)',
+          backdropFilter: isScrolled ? 'blur(20px)' : 'blur(0px)',
+          WebkitBackdropFilter: isScrolled ? 'blur(20px)' : 'blur(0px)',
+          borderBottom: `1px solid ${
+            isScrolled ? colors.border.light : 'rgba(255, 255, 255, 0)'
+          }`,
+          boxShadow: isScrolled ? '0 14px 40px rgba(0, 0, 0, 0.18)' : 'none',
+          transition:
+            'background-color 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, backdrop-filter 0.28s ease',
         }}
       >
         <Container maxWidth="xl">
