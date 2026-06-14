@@ -240,7 +240,7 @@ const FAQ = () => {
                       <Typography
                         component="span"
                         sx={{
-                          fontFamily: '"Sora", "Inter", sans-serif',
+                          fontFamily: '"Space Grotesk", "Inter", sans-serif',
                           fontSize: { xs: '0.82rem', md: '0.88rem' },
                           fontWeight: 600,
                           color: isActive ? colors.accent.primary : colors.text.muted,

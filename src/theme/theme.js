@@ -57,37 +57,37 @@ let theme = createTheme({
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
-      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"Space Grotesk", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 800,
       letterSpacing: '0',
       lineHeight: 1.1,
     },
     h2: {
-      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"Space Grotesk", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 700,
       letterSpacing: '0',
       lineHeight: 1.2,
     },
     h3: {
-      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"Space Grotesk", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 600,
       letterSpacing: '0',
       lineHeight: 1.3,
     },
     h4: {
-      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"Space Grotesk", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 600,
       letterSpacing: '0',
       lineHeight: 1.35,
     },
     h5: {
-      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"Space Grotesk", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 600,
       letterSpacing: '0',
       lineHeight: 1.4,
     },
     h6: {
-      fontFamily: '"Sora", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"Space Grotesk", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 600,
       letterSpacing: '0',
       lineHeight: 1.45,

@@ -74,7 +74,7 @@ const serviceData = {
       'MongoDB',
       'MERN Stack',
       'MUI',
-      'Tailwind CSS',
+      'Responsive CSS',
       'REST APIs',
       'Vercel',
     ],
@@ -437,7 +437,7 @@ const ServiceDetail = () => {
                   variant="h1"
                   sx={{
                     fontWeight: 800,
-                    fontFamily: 'Sora',
+                    fontFamily: 'Space Grotesk',
                     fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.2rem' },
                     lineHeight: 1.1,
                     mb: 3,
@@ -588,7 +588,7 @@ const ServiceDetail = () => {
                   variant="h2"
                   sx={{
                     fontWeight: 700,
-                    fontFamily: 'Sora',
+                    fontFamily: 'Space Grotesk',
                     fontSize: { xs: '2rem', md: '2.8rem' },
                     lineHeight: 1.2,
                     mb: 3,
@@ -683,7 +683,7 @@ const ServiceDetail = () => {
               variant="h5"
               sx={{
                 fontWeight: 750,
-                fontFamily: 'Sora',
+                fontFamily: 'Space Grotesk',
                 mb: 1.5,
                 color: colors.text.primary,
               }}
@@ -741,7 +741,7 @@ const ServiceDetail = () => {
                 variant="h2"
                 sx={{
                   fontWeight: 700,
-                  fontFamily: 'Sora',
+                  fontFamily: 'Space Grotesk',
                   fontSize: { xs: '2rem', md: '2.8rem' },
                   color: colors.text.primary,
                 }}
@@ -775,7 +775,7 @@ const ServiceDetail = () => {
                       fontWeight: 800,
                       color: colors.accent.primary,
                       opacity: 0.9,
-                      fontFamily: 'Sora',
+                      fontFamily: 'Space Grotesk',
                       minWidth: { xs: 36, md: 48 },
                       lineHeight: 1,
                       fontSize: { xs: '1.8rem', md: '2.5rem' },
@@ -852,7 +852,7 @@ const ServiceDetail = () => {
                 sx={{
                   fontWeight: 800,
                   mb: 2.5,
-                  fontFamily: 'Sora',
+                  fontFamily: 'Space Grotesk',
                   color: colors.text.primary,
                   fontSize: { xs: '1.8rem', sm: '2.4rem', md: '2.8rem' },
                 }}
@@ -870,7 +870,7 @@ const ServiceDetail = () => {
                   lineHeight: 1.7,
                 }}
               >
-                Let’s collaborate to build high-performance solutions custom-tailored to your
+                Letâ€™s collaborate to build high-performance solutions custom-tailored to your
                 business flow. Reach out today for a free project scoping session.
               </Typography>
               <Stack

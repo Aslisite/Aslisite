@@ -13,7 +13,7 @@ import {
 import CloseIconImport from '@mui/icons-material/Close';
 import KeyboardArrowDownIconImport from '@mui/icons-material/KeyboardArrowDown';
 import MenuIconImport from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { colors } from '../../theme/theme';
 
 const shinyGradientStyle = {
@@ -47,11 +47,14 @@ const productItems = [
 ];
 
 const Navbar = () => {
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpenProducts, setMobileOpenProducts] = useState(false);
   const [safeAreaTop, setSafeAreaTop] = useState('0px');
   const [isScrolled, setIsScrolled] = useState(false);
+  const isHomePage = location.pathname === '/';
+  const isTransparent = isHomePage && !isScrolled;
 
   // Read safe-area-inset-top ONCE on mount as a fixed px value.
   // Using env() directly on a position:fixed element causes Chrome Android
@@ -114,7 +117,7 @@ const Navbar = () => {
           <Typography
             sx={{
               ...shinyGradientStyle,
-              fontFamily: '"Sora", "Inter", sans-serif',
+              fontFamily: '"Space Grotesk", "Inter", sans-serif',
               fontWeight: 800,
               fontSize: '1.25rem',
             }}
@@ -285,13 +288,13 @@ const Navbar = () => {
           left: 0,
           right: 0,
           zIndex: 1000,
-          backgroundColor: isScrolled ? 'rgba(10, 10, 15, 0.78)' : 'rgba(10, 10, 15, 0)',
-          backdropFilter: isScrolled ? 'blur(20px)' : 'blur(0px)',
-          WebkitBackdropFilter: isScrolled ? 'blur(20px)' : 'blur(0px)',
+          backgroundColor: isTransparent ? 'rgba(10, 10, 15, 0)' : 'rgba(10, 10, 15, 0.78)',
+          backdropFilter: isTransparent ? 'blur(0px)' : 'blur(20px)',
+          WebkitBackdropFilter: isTransparent ? 'blur(0px)' : 'blur(20px)',
           borderBottom: `1px solid ${
-            isScrolled ? colors.border.light : 'rgba(255, 255, 255, 0)'
+            isTransparent ? 'rgba(255, 255, 255, 0)' : colors.border.light
           }`,
-          boxShadow: isScrolled ? '0 14px 40px rgba(0, 0, 0, 0.18)' : 'none',
+          boxShadow: isTransparent ? 'none' : '0 14px 40px rgba(0, 0, 0, 0.18)',
           transition:
             'background-color 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, backdrop-filter 0.28s ease',
         }}
@@ -321,7 +324,7 @@ const Navbar = () => {
                 variant="h6"
                 sx={{
                   ...shinyGradientStyle,
-                  fontFamily: '"Sora", "Inter", sans-serif',
+                  fontFamily: '"Space Grotesk", "Inter", sans-serif',
                   fontWeight: 800,
                   fontSize: { xs: '1.25rem', md: '1.5rem' },
                 }}

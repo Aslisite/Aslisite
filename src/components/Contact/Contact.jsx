@@ -231,25 +231,59 @@ const Contact = () => {
                     return (
                       <Box
                         key={index}
+                        component={item.href ? 'a' : 'div'}
+                        href={item.href || undefined}
                         sx={{
                           display: 'flex',
                           alignItems: 'flex-start',
                           gap: 2,
+                          p: 1.4,
+                          mx: -1.4,
+                          borderRadius: 2,
+                          textDecoration: 'none',
+                          border: '1px solid transparent',
+                          backgroundColor: 'rgba(255, 255, 255, 0)',
+                          transition:
+                            'background-color 0.22s ease, border-color 0.22s ease, transform 0.22s ease',
+                          ...(item.href
+                            ? {
+                                cursor: 'pointer',
+                                '&:hover': {
+                                  backgroundColor: 'rgba(255, 255, 255, 0.025)',
+                                  borderColor: 'rgba(255, 255, 255, 0.08)',
+                                  transform: 'translateX(2px)',
+                                },
+                              }
+                            : {}),
+                          '&:hover .contact-icon-chip': {
+                            color: colors.accent.primary,
+                            borderColor: 'rgba(168, 85, 247, 0.36)',
+                            backgroundColor: 'rgba(168, 85, 247, 0.08)',
+                            boxShadow: '0 10px 28px rgba(168, 85, 247, 0.14)',
+                            transform: 'translateY(-2px)',
+                          },
                         }}
                       >
                         <Box
+                          className="contact-icon-chip"
                           sx={{
                             width: 48,
                             height: 48,
                             borderRadius: 2,
-                            background: colors.accent.gradient,
+                            color: colors.accent.secondary,
+                            backgroundColor: 'rgba(255, 255, 255, 0.025)',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+                            backdropFilter: 'blur(10px)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             flexShrink: 0,
+                            transition:
+                              'background-color 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, color 0.22s ease, transform 0.22s ease',
                           }}
                         >
-                          <IconComponent sx={{ fontSize: 22, color: '#fff' }} />
+                          <IconComponent sx={{ fontSize: 22, color: 'currentColor' }} />
                         </Box>
                         <Box>
                           <Typography
@@ -267,17 +301,10 @@ const Contact = () => {
                           </Typography>
                           {item.href ? (
                             <Typography
-                              component="a"
-                              href={item.href}
                               sx={{
                                 color: colors.text.primary,
-                                textDecoration: 'none',
                                 fontSize: '0.98rem',
                                 lineHeight: 1.6,
-                                transition: 'color 0.2s ease',
-                                '&:hover': {
-                                  color: colors.accent.primary,
-                                },
                               }}
                             >
                               {item.value}
@@ -544,23 +571,49 @@ const Contact = () => {
                       disabled={loading}
                       endIcon={loading ? <CircularProgress size={20} color="inherit" /> : <Send />}
                       sx={{
-                        background: colors.accent.gradient,
-                        color: '#fff',
-                        fontWeight: 600,
+                        position: 'relative',
+                        overflow: 'hidden',
+                        backgroundColor: 'rgba(255, 255, 255, 0.045)',
+                        backgroundImage:
+                          'linear-gradient(135deg, rgba(168, 85, 247, 0.16), rgba(6, 182, 212, 0.12))',
+                        color: colors.text.primary,
+                        border: '1px solid rgba(6, 182, 212, 0.34)',
+                        boxShadow: '0 14px 34px rgba(6, 182, 212, 0.1)',
+                        backdropFilter: 'blur(10px)',
+                        fontWeight: 700,
                         px: 4,
                         py: 1.5,
                         fontSize: '1rem',
                         textTransform: 'none',
-                        '&:hover': {
-                          background: colors.accent.gradient,
-                          opacity: 0.9,
-                          transform: 'translateY(-2px)',
-                          boxShadow: '0 8px 25px rgba(168, 85, 247, 0.25)',
+                        '&::before': {
+                          content: '""',
+                          position: 'absolute',
+                          inset: 0,
+                          background:
+                            'linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.16), transparent)',
+                          transform: 'translateX(-120%)',
+                          transition: 'transform 0.55s ease',
                         },
-                        transition: 'opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease',
+                        '&:hover': {
+                          backgroundColor: 'rgba(255, 255, 255, 0.065)',
+                          backgroundImage:
+                            'linear-gradient(135deg, rgba(192, 132, 252, 0.22), rgba(34, 211, 238, 0.18))',
+                          borderColor: 'rgba(168, 85, 247, 0.5)',
+                          transform: 'translateY(-2px)',
+                          boxShadow:
+                            '0 18px 38px rgba(6, 182, 212, 0.14), 0 0 24px rgba(168, 85, 247, 0.1)',
+                          '&::before': {
+                            transform: 'translateX(120%)',
+                          },
+                        },
+                        transition:
+                          'background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease',
                         '&:disabled': {
-                          background: colors.accent.gradient,
-                          opacity: 0.7,
+                          color: colors.text.secondary,
+                          borderColor: 'rgba(255, 255, 255, 0.12)',
+                          backgroundColor: 'rgba(255, 255, 255, 0.035)',
+                          backgroundImage: 'none',
+                          opacity: 0.75,
                         },
                       }}
                     >

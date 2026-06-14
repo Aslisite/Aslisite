@@ -108,6 +108,16 @@ const socialLinks = [
   { icon: Instagram, href: 'https://www.instagram.com/aslisite_', label: 'Instagram' },
 ];
 
+const contactLinks = [
+  {
+    icon: WhatsApp,
+    label: '+91 94956 64173',
+    href: 'https://wa.me/919495664173?text=Hi%20Aslisite,%20I%27d%20like%20to%20start%20a%20project.',
+  },
+  { icon: Mail, label: 'info@aslisite.com', href: 'mailto:info@aslisite.com' },
+  { icon: LocationOn, label: 'Kerala, India', href: '/#contact' },
+];
+
 const Footer = () => {
   return (
     <Box
@@ -135,7 +145,7 @@ const Footer = () => {
                   variant="h5"
                   sx={{
                     ...shinyGradientStyle,
-                    fontFamily: '"Sora", "Inter", sans-serif',
+                    fontFamily: '"Space Grotesk", "Inter", sans-serif',
                     fontWeight: 800,
                     mb: 2,
                   }}
@@ -292,6 +302,62 @@ const Footer = () => {
                         </Link>
                       ))}
                     </Box>
+                  </Box>
+                </Grid>
+
+                <Grid
+                  item
+                  md={4}
+                  component={motion.div}
+                  variants={columnVariants}
+                  sx={{ display: { xs: 'none', md: 'block' } }}
+                >
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      fontWeight: 600,
+                      color: colors.text.primary,
+                      mb: 2,
+                      textTransform: 'uppercase',
+                      letterSpacing: 1,
+                      fontSize: '0.75rem',
+                      textAlign: 'left',
+                    }}
+                  >
+                    Start a Project
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.6 }}>
+                    {contactLinks.map((item) => {
+                      const IconComponent = item.icon;
+
+                      return (
+                        <Link
+                          key={item.label}
+                          component={item.href.startsWith('/') ? RouterLink : 'a'}
+                          to={item.href.startsWith('/') ? item.href : undefined}
+                          href={item.href.startsWith('/') ? undefined : item.href}
+                          target={item.href.startsWith('http') ? '_blank' : undefined}
+                          rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          underline="none"
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1.2,
+                            color: colors.text.muted,
+                            fontSize: '0.875rem',
+                            lineHeight: 1.5,
+                            transition: 'color 0.2s ease, transform 0.2s ease',
+                            '&:hover': {
+                              color: colors.accent.primary,
+                              transform: 'translateX(2px)',
+                            },
+                          }}
+                        >
+                          <IconComponent sx={{ fontSize: 18, flexShrink: 0 }} />
+                          {item.label}
+                        </Link>
+                      );
+                    })}
                   </Box>
                 </Grid>
               </Grid>
