@@ -94,8 +94,8 @@ const Navbar = () => {
       sx={{
         width: '100%',
         height: '100%',
-        backgroundColor: 'rgba(10, 10, 15, 0.95)',
-        backdropFilter: 'blur(20px)',
+        backgroundColor: 'rgba(2, 6, 23, 0.96)',
+        backdropFilter: 'blur(12px)',
         display: 'flex',
         flexDirection: 'column',
         '@keyframes fadeIn': {
@@ -119,7 +119,9 @@ const Navbar = () => {
             sx={{
               ...shinyGradientStyle,
               fontFamily: '"Inter", sans-serif',
-              fontWeight: 800,
+              background: 'none',
+              WebkitTextFillColor: '#ffffff',
+              fontWeight: 600,
               fontSize: '1.25rem',
             }}
           >
@@ -168,6 +170,8 @@ const Navbar = () => {
                     primaryTypographyProps={{
                       sx: {
                         ...shinyGradientStyle,
+                        background: 'none',
+                        WebkitTextFillColor: '#cbd5e1',
                         fontWeight: 600,
                         fontSize: '1.25rem',
                       },
@@ -175,7 +179,7 @@ const Navbar = () => {
                   />
                   <KeyboardArrowDownIcon
                     sx={{
-                      color: colors.accent.primary,
+                      color: '#94a3b8',
                       fontSize: 20,
                       transform: mobileOpenProducts ? 'rotate(180deg)' : 'rotate(0)',
                       transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -200,7 +204,7 @@ const Navbar = () => {
                           color: colors.text.secondary,
                           transition: 'color 0.2s ease',
                           '&:hover': {
-                            color: colors.accent.primary,
+                            color: '#ffffff',
                           },
                         }}
                       >
@@ -239,6 +243,8 @@ const Navbar = () => {
                   primaryTypographyProps={{
                     sx: {
                       ...shinyGradientStyle,
+                      background: 'none',
+                      WebkitTextFillColor: '#cbd5e1',
                       fontWeight: 600,
                       fontSize: '1.25rem',
                     },
@@ -297,13 +303,15 @@ const Navbar = () => {
           left: 0,
           right: 0,
           zIndex: 1000,
-          backgroundColor: isTransparent ? 'rgba(10, 10, 15, 0)' : 'rgba(10, 10, 15, 0.78)',
-          backdropFilter: isTransparent ? 'blur(0px)' : 'blur(20px)',
-          WebkitBackdropFilter: isTransparent ? 'blur(0px)' : 'blur(20px)',
+          backgroundColor: isTransparent ? 'transparent' : 'rgba(2, 6, 23, 0.8)',
+          backdropFilter: isTransparent ? 'blur(0px)' : 'blur(12px)',
+          WebkitBackdropFilter: isTransparent ? 'blur(0px)' : 'blur(12px)',
           borderBottom: `1px solid ${
-            isTransparent ? 'rgba(255, 255, 255, 0)' : colors.border.light
+            isTransparent ? 'rgba(30, 41, 59, 0)' : 'rgba(30, 41, 59, 0.6)'
           }`,
-          boxShadow: isTransparent ? 'none' : '0 14px 40px rgba(0, 0, 0, 0.18)',
+          boxShadow: isTransparent
+            ? 'none'
+            : '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
           transition:
             'background-color 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, backdrop-filter 0.28s ease',
         }}
@@ -314,7 +322,7 @@ const Navbar = () => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              py: { xs: 2, md: 2.5 },
+              py: isTransparent ? 2.5 : 1.75,
             }}
           >
             {/* Logo */}
@@ -327,14 +335,14 @@ const Navbar = () => {
                 component="img"
                 src="/AslisiteLogo.svg"
                 alt="Aslisite"
-                sx={{ width: { xs: 32, md: 40 }, height: { xs: 32, md: 40 } }}
+                sx={{ width: 36, height: 36 }}
               />
               <Typography
                 variant="h6"
                 sx={{
-                  ...shinyGradientStyle,
                   fontFamily: '"Inter", sans-serif',
-                  fontWeight: 800,
+                  color: '#ffffff',
+                  fontWeight: 600,
                   fontSize: { xs: '1.25rem', md: '1.5rem' },
                 }}
               >
@@ -363,14 +371,13 @@ const Navbar = () => {
                       >
                         <Typography
                           sx={{
-                            ...shinyGradientStyle,
+                            color: '#cbd5e1',
                             textDecoration: 'none',
                             fontWeight: 600,
                             fontSize: '0.9375rem',
-                            opacity: 0.85,
-                            transition: 'opacity 0.25s ease',
+                            transition: 'color 0.25s ease',
                             '&:hover': {
-                              opacity: 1,
+                              color: '#ffffff',
                             },
                           }}
                         >
@@ -379,7 +386,7 @@ const Navbar = () => {
                         <KeyboardArrowDownIcon
                           sx={{
                             fontSize: '1rem',
-                            color: colors.text.secondary,
+                            color: '#94a3b8',
                             transform: openDropdown === 'products' ? 'rotate(180deg)' : 'rotate(0)',
                             transition: 'transform 0.2s ease',
                           }}
@@ -390,14 +397,13 @@ const Navbar = () => {
                         component={Link}
                         to={item.href}
                         sx={{
-                          ...shinyGradientStyle,
+                          color: '#cbd5e1',
                           textDecoration: 'none',
                           fontWeight: 600,
                           fontSize: '0.9375rem',
-                          opacity: 0.85,
-                          transition: 'opacity 0.25s ease',
+                          transition: 'color 0.25s ease',
                           '&:hover': {
-                            opacity: 1,
+                            color: '#ffffff',
                           },
                         }}
                       >
@@ -415,8 +421,8 @@ const Navbar = () => {
                           py: 1,
                           px: 1,
                           minWidth: 220,
-                          backgroundColor: colors.background.primary,
-                          border: `1px solid ${colors.border.light}`,
+                          backgroundColor: 'rgba(2, 6, 23, 0.96)',
+                          border: '1px solid rgba(30, 41, 59, 0.6)',
                           borderRadius: 2,
                           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
                           zIndex: 1001,
@@ -475,7 +481,20 @@ const Navbar = () => {
                 href="https://wa.me/919495664173?text=Hi%20Aslisite,%20I'm%20interested%20in%20starting%20a%20project!"
                 target="_blank"
                 rel="noopener noreferrer"
-                sx={{ py: 1, px: 3, fontFamily: '"Inter", sans-serif' }}
+                sx={{
+                  py: 1,
+                  px: 3,
+                  color: '#ffffff',
+                  fontFamily: '"Inter", sans-serif',
+                  fontWeight: 700,
+                  background: 'linear-gradient(90deg, #9333ea 0%, #0891b2 100%)',
+                  borderRadius: 2,
+                  boxShadow: 'none',
+                  '&:hover': {
+                    background: 'linear-gradient(90deg, #a855f7 0%, #06b6d4 100%)',
+                    boxShadow: '0 0 15px rgba(6, 182, 212, 0.25)',
+                  },
+                }}
               >
                 Get Started
               </Button>
@@ -487,9 +506,14 @@ const Navbar = () => {
               onClick={handleDrawerToggle}
               sx={{
                 display: { xs: 'inline-flex', md: 'none' },
-                color: colors.text.primary,
-                border: `1px solid ${colors.border.light}`,
+                color: '#94a3b8',
+                backgroundColor: '#0f172a',
+                border: '1px solid #1e293b',
                 borderRadius: 2,
+                '&:hover': {
+                  color: '#ffffff',
+                  backgroundColor: '#0f172a',
+                },
               }}
             >
               <MenuIcon />
