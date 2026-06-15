@@ -120,8 +120,8 @@ const Navbar = () => {
               ...shinyGradientStyle,
               fontFamily: '"Inter", sans-serif',
               background: 'none',
-              WebkitTextFillColor: '#ffffff',
-              fontWeight: 600,
+              WebkitTextFillColor: '#cbd5e1',
+              fontWeight: 800,
               fontSize: '1.25rem',
             }}
           >
@@ -341,9 +341,10 @@ const Navbar = () => {
                 variant="h6"
                 sx={{
                   fontFamily: '"Inter", sans-serif',
-                  color: '#ffffff',
-                  fontWeight: 600,
+                  color: '#cbd5e1',
+                  fontWeight: 800,
                   fontSize: { xs: '1.25rem', md: '1.5rem' },
+                  display: { xs: 'none', md: 'block' },
                 }}
               >
                 Aslisite

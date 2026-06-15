@@ -146,7 +146,7 @@ const Footer = () => {
                   sx={{
                     ...shinyGradientStyle,
                     fontFamily: '"Inter", sans-serif',
-                    fontWeight: 600,
+                    fontWeight: 800,
                     mb: 2,
                   }}
                 >
