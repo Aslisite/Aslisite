@@ -17,6 +17,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { colors } from '../../theme/theme';
 
 const shinyGradientStyle = {
+  fontFamily: '"Inter", sans-serif',
   background: colors.accent.brandGradient,
   backgroundSize: '200% auto',
   backgroundClip: 'text',
@@ -117,7 +118,7 @@ const Navbar = () => {
           <Typography
             sx={{
               ...shinyGradientStyle,
-              fontFamily: '"Space Grotesk", "Inter", sans-serif',
+              fontFamily: '"Inter", sans-serif',
               fontWeight: 800,
               fontSize: '1.25rem',
             }}
@@ -203,7 +204,14 @@ const Navbar = () => {
                           },
                         }}
                       >
-                        <Typography sx={{ fontWeight: 500, fontSize: '1rem', color: 'inherit' }}>
+                        <Typography
+                          sx={{
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 500,
+                            fontSize: '1rem',
+                            color: 'inherit',
+                          }}
+                        >
                           {product.label}
                         </Typography>
                       </Box>
@@ -259,6 +267,7 @@ const Navbar = () => {
           sx={{
             py: 2.2,
             fontSize: '1.1rem',
+            fontFamily: '"Inter", sans-serif',
             fontWeight: 600,
             background: colors.accent.gradient,
             borderRadius: 2.5,
@@ -324,7 +333,7 @@ const Navbar = () => {
                 variant="h6"
                 sx={{
                   ...shinyGradientStyle,
-                  fontFamily: '"Space Grotesk", "Inter", sans-serif',
+                  fontFamily: '"Inter", sans-serif',
                   fontWeight: 800,
                   fontSize: { xs: '1.25rem', md: '1.5rem' },
                 }}
@@ -434,6 +443,7 @@ const Navbar = () => {
                             <Typography
                               sx={{
                                 color: colors.text.primary,
+                                fontFamily: '"Inter", sans-serif',
                                 fontWeight: 500,
                                 fontSize: '0.875rem',
                               }}
@@ -441,7 +451,12 @@ const Navbar = () => {
                               {product.label}
                             </Typography>
                             <Typography
-                              sx={{ color: colors.text.secondary, fontSize: '0.75rem', mt: 0.25 }}
+                              sx={{
+                                color: colors.text.secondary,
+                                fontFamily: '"Inter", sans-serif',
+                                fontSize: '0.75rem',
+                                mt: 0.25,
+                              }}
                             >
                               {product.description}
                             </Typography>
@@ -460,7 +475,7 @@ const Navbar = () => {
                 href="https://wa.me/919495664173?text=Hi%20Aslisite,%20I'm%20interested%20in%20starting%20a%20project!"
                 target="_blank"
                 rel="noopener noreferrer"
-                sx={{ py: 1, px: 3 }}
+                sx={{ py: 1, px: 3, fontFamily: '"Inter", sans-serif' }}
               >
                 Get Started
               </Button>
