@@ -13,6 +13,8 @@ import BlogDetail from './pages/BlogDetail';
 import ServiceDetail from './pages/ServiceDetail';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import NotFound from './pages/NotFound';
+import SheetAutomation from './pages/SheetAutomation';
+import SheetAutomationWelcome from './pages/SheetAutomationWelcome';
 import { ClickSpark, ScrollToTop } from './components/common';
 
 const CssBaseline = CssBaselineImport.default || CssBaselineImport;
@@ -39,6 +41,11 @@ function App() {
                 <Route path="/blog/:slug" element={<BlogDetail />} />
                 <Route path="/services/:slug" element={<ServiceDetail />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/products/sheet-automation" element={<SheetAutomation />} />
+                <Route
+                  path="/products/sheet-automation/welcome"
+                  element={<SheetAutomationWelcome />}
+                />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Box>

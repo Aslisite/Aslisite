@@ -45,6 +45,8 @@ async function runBuild() {
     '/services/ecommerce-solutions',
     '/services/custom-software',
     '/services/seo-services',
+    '/products/sheet-automation',
+    '/products/sheet-automation/welcome',
   ];
   blogs.forEach((blog) => {
     if (blog.slug) routes.push(`/blog/${blog.slug}`);
@@ -115,9 +117,11 @@ async function generateSitemap(routes) {
   const baseUrl = 'https://aslisite.com';
   const today = new Date().toISOString().split('T')[0];
 
+  const sitemapRoutes = routes.filter((r) => r !== '/products/sheet-automation/welcome');
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes
+${sitemapRoutes
   .map((route) => {
     const url = `${baseUrl}${route === '/' ? '' : route}`;
     let priority = '0.5';

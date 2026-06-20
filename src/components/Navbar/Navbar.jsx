@@ -36,7 +36,7 @@ const MenuIcon = MenuIconImport.default || MenuIconImport;
 
 const navItems = [
   { label: 'Services', href: '/#services' },
-  { label: 'Our Product', href: '/#product' },
+  { label: 'Products', href: '/#aslibooks', hasDropdown: true },
   { label: 'Reviews', href: '/#testimonials' },
   { label: 'Blog', href: '/blog' },
   { label: 'FAQ', href: '/#faq' },
@@ -44,7 +44,12 @@ const navItems = [
 ];
 
 const productItems = [
-  { label: 'Aslibooks', href: 'https://www.aslibooks.com/', description: 'Invoice Software' },
+  { label: 'AsliBooks', href: '/#aslibooks', description: 'Smart Invoicing & GST Solution' },
+  {
+    label: 'Sheet Automation',
+    href: '/products/sheet-automation',
+    description: 'Automated AR & Invoice Chaser',
+  },
 ];
 
 const Navbar = () => {
@@ -191,11 +196,12 @@ const Navbar = () => {
                     {productItems.map((product) => (
                       <Box
                         key={product.label}
-                        component="a"
-                        href={product.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={handleDrawerToggle}
+                        component={Link}
+                        to={product.href}
+                        onClick={() => {
+                          handleDrawerToggle();
+                          setMobileOpenProducts(false);
+                        }}
                         sx={{
                           display: 'block',
                           py: 1.5,
@@ -432,10 +438,9 @@ const Navbar = () => {
                         {productItems.map((product) => (
                           <Box
                             key={product.label}
-                            component="a"
-                            href={product.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            component={Link}
+                            to={product.href}
+                            onClick={() => setOpenDropdown(null)}
                             sx={{
                               display: 'block',
                               px: 2,

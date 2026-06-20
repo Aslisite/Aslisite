@@ -95,7 +95,7 @@ const navigation = {
   ],
   quickLinks: [
     { label: 'Home', href: '/#hero' },
-    { label: 'Our Product', href: '/#product' },
+    { label: 'AsliBooks', href: '/#aslibooks' },
     { label: 'Reviews', href: '/#testimonials' },
     { label: 'FAQ', href: '/#faq' },
     { label: 'Contact', href: '/#contact' },
