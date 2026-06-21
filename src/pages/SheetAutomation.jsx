@@ -63,7 +63,7 @@ const SheetAutomation = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          amount: 299900, // paise (₹2999)
+          amount: 49900, // paise (₹499)
           currency: 'INR',
         }),
       });
@@ -79,7 +79,7 @@ const SheetAutomation = () => {
       const keyId = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_placeholder';
       const options = {
         key: keyId,
-        amount: 299900,
+        amount: 49900,
         currency: 'INR',
         name: 'Sheet Automation',
         description: 'AR & Invoice Chaser - Lifetime License',

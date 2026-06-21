@@ -21,9 +21,9 @@ export default async function handler(req, res) {
       return res.status(200).json({
         id: mockOrderId,
         entity: 'order',
-        amount: amount || 299900,
+        amount: amount || 49900,
         amount_paid: 0,
-        amount_due: amount || 299900,
+        amount_due: amount || 49900,
         currency: currency || 'INR',
         receipt: 'receipt_sheet_automation',
         status: 'created',
@@ -42,7 +42,7 @@ export default async function handler(req, res) {
         Authorization: `Basic ${authString}`,
       },
       body: JSON.stringify({
-        amount: amount || 299900,
+        amount: amount || 49900,
         currency: currency || 'INR',
         receipt: 'receipt_sheet_automation',
       }),
