@@ -152,7 +152,7 @@ const SheetAutomationWelcome = () => {
                   </Box>
                   <Button
                     variant="contained"
-                    href="https://docs.google.com/spreadsheets/d/18M-UOSGTXf9CA9ycCZ72Waj75NLomVbzW_kRq-EPKwg/copy"
+                    href="https://docs.google.com/spreadsheets/d/1JkLIo-TJQwOWhEldERmNWnj-R8yOFxgXZmdW5lfUoKc/copy"
                     target="_blank"
                     rel="noopener noreferrer"
                     endIcon={<ExternalLink size={16} />}
