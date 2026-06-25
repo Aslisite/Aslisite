@@ -27,7 +27,6 @@ const SheetAutomationWelcome = () => {
     folder1: false,
     folder2: false,
     sampleInvoice: false,
-    copyTemplate: false,
     pasteKey: false,
     testTrigger: false,
   });
@@ -441,41 +440,7 @@ const SheetAutomationWelcome = () => {
                     </Box>
                   </Box>
 
-                  {/* Step 5: Configure Spreadsheet Settings */}
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      p: 1.5,
-                      borderRadius: 2,
-                      border: `1px solid ${steps.copyTemplate ? 'rgba(6, 182, 212, 0.15)' : 'rgba(255, 255, 255, 0.02)'}`,
-                      backgroundColor: steps.copyTemplate
-                        ? 'rgba(6, 182, 212, 0.02)'
-                        : 'transparent',
-                      transition: 'all 0.2s ease',
-                    }}
-                  >
-                    <Checkbox
-                      checked={steps.copyTemplate}
-                      onChange={() => handleStepChange('copyTemplate')}
-                      sx={{
-                        color: colors.border.medium,
-                        '&.Mui-checked': { color: colors.accent.secondary },
-                        pt: 0,
-                      }}
-                    />
-                    <Box>
-                      <Typography variant="subtitle2" sx={{ color: '#fff', fontWeight: 650 }}>
-                        Configure Spreadsheet Settings
-                      </Typography>
-                      <Typography variant="body2" sx={{ color: colors.text.secondary }}>
-                        Paste the folder IDs of both created Drive folders into the configuration
-                        block of your new Spreadsheet template.
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  {/* Step 6: Activate Apps Script Triggers */}
+                  {/* Step 5: Activate Apps Script Triggers */}
                   <Box
                     sx={{
                       display: 'flex',
@@ -508,7 +473,7 @@ const SheetAutomationWelcome = () => {
                     </Box>
                   </Box>
 
-                  {/* Step 7: Run Initial Manual Sync Test */}
+                  {/* Step 6: Run Initial Manual Sync Test */}
                   <Box
                     sx={{
                       display: 'flex',
