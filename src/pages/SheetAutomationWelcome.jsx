@@ -19,8 +19,10 @@ import { Video, ClipboardList, CheckCircle2, PlayCircle, ExternalLink } from 'lu
 
 const SheetAutomationWelcome = () => {
   const [steps, setSteps] = useState({
+    copySheet: false,
     folder1: false,
     folder2: false,
+    sampleInvoice: false,
     copyTemplate: false,
     pasteKey: false,
     testTrigger: false,
@@ -102,7 +104,7 @@ const SheetAutomationWelcome = () => {
                 mb: 2,
               }}
             >
-              Welcome to Sheet Automation
+              Welcome to Payment Reminder Automation
             </Typography>
             <Typography
               variant="body1"
@@ -291,6 +293,38 @@ const SheetAutomationWelcome = () => {
                 <Divider sx={{ mb: 3, borderColor: colors.border.light }} />
 
                 <FormGroup sx={{ gap: 2 }}>
+                  {/* Step 1: Copy Google Sheet */}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      p: 1.5,
+                      borderRadius: 2,
+                      border: `1px solid ${steps.copySheet ? 'rgba(6, 182, 212, 0.15)' : 'rgba(255, 255, 255, 0.02)'}`,
+                      backgroundColor: steps.copySheet ? 'rgba(6, 182, 212, 0.02)' : 'transparent',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    <Checkbox
+                      checked={steps.copySheet}
+                      onChange={() => handleStepChange('copySheet')}
+                      sx={{
+                        color: colors.border.medium,
+                        '&.Mui-checked': { color: colors.accent.secondary },
+                        pt: 0,
+                      }}
+                    />
+                    <Box>
+                      <Typography variant="subtitle2" sx={{ color: '#fff', fontWeight: 650 }}>
+                        Copy Google Sheet after successful payment
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: colors.text.secondary }}>
+                        Make a copy of the master automation spreadsheet to your own Google Drive using the template link.
+                      </Typography>
+                    </Box>
+                  </Box>
+
+                  {/* Step 2: Create 'Invoices to Send' Folder */}
                   <Box
                     sx={{
                       display: 'flex',
@@ -322,6 +356,7 @@ const SheetAutomationWelcome = () => {
                     </Box>
                   </Box>
 
+                  {/* Step 3: Create 'Sent Invoices' Folder */}
                   <Box
                     sx={{
                       display: 'flex',
@@ -353,6 +388,38 @@ const SheetAutomationWelcome = () => {
                     </Box>
                   </Box>
 
+                  {/* Step 4: Insert a Sample Invoice for Testing Purpose */}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      p: 1.5,
+                      borderRadius: 2,
+                      border: `1px solid ${steps.sampleInvoice ? 'rgba(6, 182, 212, 0.15)' : 'rgba(255, 255, 255, 0.02)'}`,
+                      backgroundColor: steps.sampleInvoice ? 'rgba(6, 182, 212, 0.02)' : 'transparent',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    <Checkbox
+                      checked={steps.sampleInvoice}
+                      onChange={() => handleStepChange('sampleInvoice')}
+                      sx={{
+                        color: colors.border.medium,
+                        '&.Mui-checked': { color: colors.accent.secondary },
+                        pt: 0,
+                      }}
+                    />
+                    <Box>
+                      <Typography variant="subtitle2" sx={{ color: '#fff', fontWeight: 650 }}>
+                        Insert a Sample Invoice for Testing Purpose
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: colors.text.secondary }}>
+                        Upload a sample PDF invoice to the `Invoices to Send` folder to test the automated payment reminder system.
+                      </Typography>
+                    </Box>
+                  </Box>
+
+                  {/* Step 5: Configure Spreadsheet Settings */}
                   <Box
                     sx={{
                       display: 'flex',
@@ -386,6 +453,7 @@ const SheetAutomationWelcome = () => {
                     </Box>
                   </Box>
 
+                  {/* Step 6: Activate Apps Script Triggers */}
                   <Box
                     sx={{
                       display: 'flex',
@@ -418,6 +486,7 @@ const SheetAutomationWelcome = () => {
                     </Box>
                   </Box>
 
+                  {/* Step 7: Run Initial Manual Sync Test */}
                   <Box
                     sx={{
                       display: 'flex',
