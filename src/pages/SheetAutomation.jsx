@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -37,6 +37,36 @@ const SheetAutomation = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState({ open: false, message: '', severity: 'info' });
+  const [pricing, setPricing] = useState({
+    symbol: '₹',
+    value: '499',
+    amount: 49900,
+    currency: 'INR',
+    label: 'One-time commercial license fee',
+  });
+
+  useEffect(() => {
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const isIndian =
+        tz &&
+        (tz.toLowerCase().includes('kolkata') ||
+          tz.toLowerCase().includes('calcutta') ||
+          tz.toLowerCase().includes('asia/kolkata'));
+
+      if (!isIndian) {
+        setPricing({
+          symbol: '$',
+          value: '9.99',
+          amount: 999, // cents (USD)
+          currency: 'USD',
+          label: 'One-time commercial license fee (Global)',
+        });
+      }
+    } catch (e) {
+      console.warn('Failed to auto-detect timezone, defaulting to INR:', e);
+    }
+  }, []);
 
   const showToast = (message, severity = 'info') => {
     setToast({ open: true, message, severity });
@@ -63,8 +93,8 @@ const SheetAutomation = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          amount: 49900, // paise (₹499)
-          currency: 'INR',
+          amount: pricing.amount,
+          currency: pricing.currency,
         }),
       });
 
@@ -79,8 +109,8 @@ const SheetAutomation = () => {
       const keyId = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_placeholder';
       const options = {
         key: keyId,
-        amount: 49900,
-        currency: 'INR',
+        amount: pricing.amount,
+        currency: pricing.currency,
         name: 'Sheet Automation',
         description: 'AR & Invoice Chaser - Lifetime License',
         image: '/AslisiteLogo.svg',
@@ -534,10 +564,11 @@ const SheetAutomation = () => {
                       mb: 0.5,
                     }}
                   >
-                    ₹499
+                    {pricing.symbol}
+                    {pricing.value}
                   </Typography>
                   <Typography variant="body2" sx={{ color: colors.text.muted }}>
-                    One-time commercial license fee
+                    {pricing.label}
                   </Typography>
                 </Box>
 
