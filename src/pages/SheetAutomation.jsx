@@ -179,7 +179,7 @@ const SheetAutomation = () => {
     }
   };
 
-  const pageTitle = 'Sheet Automation: Automated AR & Invoice Chaser';
+  const pageTitle = 'Sheet Automation: Automated Payment Reminder & Invoice Chaser';
   const pageDescription =
     'Automatically dispatch invoices, track days pending, and trigger smart escalation reminders out of your self-hosted Google Sheets.';
 
@@ -287,7 +287,7 @@ const SheetAutomation = () => {
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                Automated AR & Invoice Chaser
+                Automated Payment Reminder & Invoice Chaser
               </span>
             </motion.h1>
 
