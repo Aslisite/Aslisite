@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -18,6 +19,9 @@ import { absoluteUrl } from '../seo/siteMetadata';
 import { Video, ClipboardList, CheckCircle2, PlayCircle, ExternalLink } from 'lucide-react';
 
 const SheetAutomationWelcome = () => {
+  const [isVerified, setIsVerified] = useState(false);
+  const [checking, setChecking] = useState(true);
+
   const [steps, setSteps] = useState({
     copySheet: false,
     folder1: false,
@@ -27,6 +31,20 @@ const SheetAutomationWelcome = () => {
     pasteKey: false,
     testTrigger: false,
   });
+
+  useEffect(() => {
+    const verified = sessionStorage.getItem('sheet_automation_payment_verified') === 'true';
+    setIsVerified(verified);
+    setChecking(false);
+  }, []);
+
+  if (checking) {
+    return null;
+  }
+
+  if (!isVerified) {
+    return <Navigate to="/products/sheet-automation" replace />;
+  }
 
   const handleStepChange = (step) => {
     setSteps({ ...steps, [step]: !steps[step] });
@@ -319,7 +337,8 @@ const SheetAutomationWelcome = () => {
                         Copy Google Sheet after successful payment
                       </Typography>
                       <Typography variant="body2" sx={{ color: colors.text.secondary }}>
-                        Make a copy of the master automation spreadsheet to your own Google Drive using the template link.
+                        Make a copy of the master automation spreadsheet to your own Google Drive
+                        using the template link.
                       </Typography>
                     </Box>
                   </Box>
@@ -396,7 +415,9 @@ const SheetAutomationWelcome = () => {
                       p: 1.5,
                       borderRadius: 2,
                       border: `1px solid ${steps.sampleInvoice ? 'rgba(6, 182, 212, 0.15)' : 'rgba(255, 255, 255, 0.02)'}`,
-                      backgroundColor: steps.sampleInvoice ? 'rgba(6, 182, 212, 0.02)' : 'transparent',
+                      backgroundColor: steps.sampleInvoice
+                        ? 'rgba(6, 182, 212, 0.02)'
+                        : 'transparent',
                       transition: 'all 0.2s ease',
                     }}
                   >
@@ -414,7 +435,8 @@ const SheetAutomationWelcome = () => {
                         Insert a Sample Invoice for Testing Purpose
                       </Typography>
                       <Typography variant="body2" sx={{ color: colors.text.secondary }}>
-                        Upload a sample PDF invoice to the `Invoices to Send` folder to test the automated payment reminder system.
+                        Upload a sample PDF invoice to the `Invoices to Send` folder to test the
+                        automated payment reminder system.
                       </Typography>
                     </Box>
                   </Box>

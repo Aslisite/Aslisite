@@ -131,6 +131,7 @@ const SheetAutomation = () => {
             });
 
             if (verifyRes.ok) {
+              sessionStorage.setItem('sheet_automation_payment_verified', 'true');
               showToast('Payment verified successfully! Redirecting...', 'success');
               setTimeout(() => {
                 navigate('/products/sheet-automation/welcome');
@@ -165,6 +166,7 @@ const SheetAutomation = () => {
       // Fallback checkout simulation if Razorpay configuration variables are missing (for easy review & testing)
       const keyId = import.meta.env.VITE_RAZORPAY_KEY_ID;
       if (!keyId || keyId === 'rzp_test_placeholder' || keyId.includes('YOUR_')) {
+        sessionStorage.setItem('sheet_automation_payment_verified', 'true');
         showToast('Local/Test Mode: Simulating checkout flow verification...', 'info');
         setTimeout(() => {
           navigate('/products/sheet-automation/welcome');
