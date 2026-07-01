@@ -21,6 +21,7 @@ import { Video, ClipboardList, CheckCircle2, PlayCircle, ExternalLink } from 'lu
 const SheetAutomationWelcome = () => {
   const [isVerified, setIsVerified] = useState(false);
   const [checking, setChecking] = useState(true);
+  const [playVideo, setPlayVideo] = useState(false);
 
   const [steps, setSteps] = useState({
     copySheet: false,
@@ -216,54 +217,68 @@ const SheetAutomationWelcome = () => {
                   Setup Walkthrough Guide
                 </Typography>
 
-                {/* Loom Video Mockup Frame */}
-                <Box
-                  sx={{
-                    width: '100%',
-                    aspectRatio: '16/9',
-                    borderRadius: 2,
-                    background:
-                      'radial-gradient(circle, rgba(13, 17, 28, 0.9) 0%, rgba(2, 6, 23, 0.95) 100%)',
-                    border: `1px solid ${colors.border.light}`,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    cursor: 'pointer',
-                    transition: 'border-color 0.3s ease',
-                    '&:hover': {
-                      borderColor: colors.accent.primary,
-                    },
-                  }}
-                >
-                  <PlayCircle
-                    size={64}
-                    color={colors.accent.primary}
-                    style={{ opacity: 0.85, zIndex: 3 }}
-                  />
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ color: colors.text.primary, mt: 2, fontWeight: 600, zIndex: 3 }}
-                  >
-                    Watch Loom Setup Walkthrough
-                  </Typography>
-                  <Typography variant="caption" sx={{ color: colors.text.muted, zIndex: 3 }}>
-                    3 minutes step-by-step setup overview
-                  </Typography>
+                {/* YouTube Video Play Container */}
+                {!playVideo ? (
                   <Box
+                    onClick={() => setPlayVideo(true)}
                     sx={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
                       width: '100%',
-                      height: '100%',
-                      background: 'rgba(168, 85, 247, 0.03)',
-                      zIndex: 1,
+                      aspectRatio: '16/9',
+                      borderRadius: 2,
+                      backgroundImage: `linear-gradient(rgba(2, 6, 23, 0.5), rgba(2, 6, 23, 0.75)), url(https://img.youtube.com/vi/jNQRqG67rq0/maxresdefault.jpg)`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      border: `1px solid ${colors.border.light}`,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        borderColor: colors.accent.primary,
+                        transform: 'scale(1.005)',
+                        '& .play-icon': {
+                          transform: 'scale(1.15)',
+                          color: colors.accent.primary,
+                        },
+                      },
+                    }}
+                  >
+                    <PlayCircle
+                      className="play-icon"
+                      size={64}
+                      color="#fff"
+                      style={{ opacity: 0.95, zIndex: 3, transition: 'all 0.3s ease' }}
+                    />
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ color: colors.text.primary, mt: 2, fontWeight: 600, zIndex: 3 }}
+                    >
+                      Watch Setup Walkthrough
+                    </Typography>
+                    <Typography variant="caption" sx={{ color: colors.text.muted, zIndex: 3 }}>
+                      Step-by-step setup overview
+                    </Typography>
+                  </Box>
+                ) : (
+                  <Box
+                    component="iframe"
+                    src="https://www.youtube.com/embed/jNQRqG67rq0?autoplay=1"
+                    title="Sheet Automation Setup Walkthrough"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    sx={{
+                      width: '100%',
+                      aspectRatio: '16/9',
+                      borderRadius: 2,
+                      border: `1px solid ${colors.border.light}`,
                     }}
                   />
-                </Box>
+                )}
               </CardContent>
             </Card>
 
