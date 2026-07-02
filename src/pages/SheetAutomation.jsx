@@ -519,7 +519,7 @@ const SheetAutomation = () => {
                           width: '100%',
                           aspectRatio: '16/9',
                           borderRadius: 2,
-                          backgroundImage: `linear-gradient(rgba(2, 6, 23, 0.5), rgba(2, 6, 23, 0.75)), url(https://img.youtube.com/vi/jNQRqG67rq0/maxresdefault.jpg)`,
+                          backgroundImage: `linear-gradient(rgba(2, 6, 23, 0.5), rgba(2, 6, 23, 0.75)), url(https://img.youtube.com/vi/rM0u-fF5loQ/maxresdefault.jpg)`,
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
                           border: `1px solid ${colors.border.light}`,
