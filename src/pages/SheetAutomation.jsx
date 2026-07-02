@@ -555,7 +555,7 @@ const SheetAutomation = () => {
                     ) : (
                       <Box
                         component="iframe"
-                        src="https://youtu.be/rM0u-fF5loQ?si=i8FMXr4KG8Q2lW4K"
+                        src="https://www.youtube.com/embed/rM0u-fF5loQ?autoplay=1"
                         title="Apps Script Payment Reminder Setup Guide"
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
