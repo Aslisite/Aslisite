@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /products/sheet-automation/welcome
 
 Sitemap: https://aslisite.com/sitemap.xml

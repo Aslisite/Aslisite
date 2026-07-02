@@ -48,7 +48,7 @@ const productItems = [
   {
     label: 'Sheet Automation',
     href: '/products/sheet-automation',
-    description: 'Automated Payment Reminder',
+    description: 'Free Payment Reminder script',
   },
 ];
 
