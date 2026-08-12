@@ -199,14 +199,16 @@ const InlineTOC = ({ items }) => {
   const [open, setOpen] = useState(false);
 
   const handleScroll = (id) => {
-    const element = document.getElementById(id);
-    if (!element) return;
-    // Calculate target position before collapsing the TOC
-    const offset = 100;
-    const elementTop = element.getBoundingClientRect().top + window.pageYOffset - offset;
     setOpen(false);
-    // Scroll to the pre-calculated position
-    window.scrollTo({ top: elementTop, behavior: 'smooth' });
+    // Wait for MUI Collapse animation to finish (~300ms) before scrolling
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        const offset = 100;
+        const elementTop = element.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: elementTop, behavior: 'smooth' });
+      }
+    }, 350);
   };
 
   if (!items.length) return null;
