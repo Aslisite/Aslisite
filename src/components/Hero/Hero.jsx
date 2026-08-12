@@ -131,7 +131,7 @@ const Hero = () => {
             variants={fadeUpVariants}
             sx={{
               color: colors.text.primary,
-              fontSize: { xs: '2.8rem', sm: '3.8rem', md: '4.8rem', lg: '5.5rem' },
+              fontSize: { xs: '2.5rem', sm: '3.8rem', md: '4.8rem', lg: '5.5rem' },
               fontWeight: 800,
               lineHeight: 1.0,
               letterSpacing: '-0.04em',

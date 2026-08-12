@@ -28,15 +28,16 @@ const TrustStrip = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5 }}
-          direction={{ xs: 'column', sm: 'row' }}
-          spacing={{ xs: 3, sm: 0 }}
+          direction={{ xs: 'row', sm: 'row' }}
+          spacing={{ xs: 0, sm: 0 }}
           justifyContent="space-between"
           alignItems="center"
+          sx={{ flexWrap: { xs: 'wrap', sm: 'nowrap' } }}
           divider={
             <Box
               sx={{
-                width: { xs: '40px', sm: '1px' },
-                height: { xs: '1px', sm: '40px' },
+                width: '1px',
+                height: '40px',
                 backgroundColor: colors.border.medium,
                 display: { xs: 'none', sm: 'block' },
               }}
@@ -44,7 +45,7 @@ const TrustStrip = () => {
           }
         >
           {stats.map((stat) => (
-            <Box key={stat.label} sx={{ textAlign: 'center', flex: 1 }}>
+            <Box key={stat.label} sx={{ textAlign: 'center', flex: { xs: '0 0 50%', sm: 1 }, py: { xs: 1.5, sm: 0 } }}>
               <Typography
                 sx={{
                   fontSize: { xs: '1.8rem', md: '2.2rem' },

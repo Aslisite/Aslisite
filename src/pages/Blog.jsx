@@ -216,8 +216,8 @@ const ArticleCard = ({ blog }) => {
       <Box
         sx={{
           width: { xs: '100%', sm: 200, md: 240 },
-          minHeight: { xs: 170, sm: 'auto' },
-          aspectRatio: { xs: '16/9', sm: 'auto' },
+          minHeight: { xs: 140, sm: 'auto' },
+          aspectRatio: { xs: '16/8', sm: 'auto' },
           overflow: 'hidden',
           flexShrink: 0,
         }}
