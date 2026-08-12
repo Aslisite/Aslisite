@@ -27,35 +27,35 @@ const Phone = PhoneImport.default || PhoneImport;
 const Send = SendImport.default || SendImport;
 
 const fadeUpVariants = {
-  hidden: { opacity: 0.35, y: 18 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.7,
+      duration: 0.5,
       ease: 'easeOut',
     },
   },
 };
 
 const descriptionVariants = {
-  hidden: { opacity: 0.35 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.65,
+      duration: 0.5,
       ease: 'easeOut',
     },
   },
 };
 
 const leftPanelVariants = {
-  hidden: { opacity: 0.35, x: -28 },
+  hidden: { opacity: 0, x: -20 },
   visible: {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.75,
+      duration: 0.5,
       ease: 'easeOut',
       delay: 0.1,
     },
@@ -63,14 +63,14 @@ const leftPanelVariants = {
 };
 
 const rightPanelVariants = {
-  hidden: { opacity: 0.35, x: 28 },
+  hidden: { opacity: 0, x: 20 },
   visible: {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.75,
+      duration: 0.5,
       ease: 'easeOut',
-      delay: 0.18,
+      delay: 0.15,
     },
   },
 };
