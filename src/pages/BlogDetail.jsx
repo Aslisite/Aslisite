@@ -60,18 +60,17 @@ const generateSlug = (text, index) => {
 };
 
 const extractTOC = (content = '') => {
-  const regex = /<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi;
   const items = [];
-  let match;
   let index = 0;
-  while ((match = regex.exec(content)) !== null) {
-    const level = parseInt(match[1]);
-    const text = match[3].replace(/<[^>]*>/g, '').trim();
-    if (!text) continue;
+  const processed = content.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, level, attrs, innerHTML) => {
+    const text = innerHTML.replace(/<[^>]*>/g, '').trim();
     const id = generateSlug(text, index);
-    items.push({ level, text, id });
+    if (text) {
+      items.push({ level: parseInt(level), text, id });
+    }
     index++;
-  }
+    return match;
+  });
   return items;
 };
 
