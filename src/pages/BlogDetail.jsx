@@ -49,32 +49,38 @@ const calculateReadTime = (content = '') => {
   return Math.ceil(words / 225);
 };
 
-const generateSlug = (text) =>
-  text
+const generateSlug = (text, index) => {
+  const base = text
     .toLowerCase()
     .replace(/[^\w\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
+  return `${base}-${index}`;
+};
 
 const extractTOC = (content = '') => {
   const regex = /<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi;
   const items = [];
   let match;
+  let index = 0;
   while ((match = regex.exec(content)) !== null) {
     const level = parseInt(match[1]);
     const text = match[3].replace(/<[^>]*>/g, '').trim();
     if (!text) continue;
-    const id = generateSlug(text);
+    const id = generateSlug(text, index);
     items.push({ level, text, id });
+    index++;
   }
   return items;
 };
 
 const processContent = (content = '') => {
+  let index = 0;
   return content.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, level, attrs, innerHTML) => {
     const plainText = innerHTML.replace(/<[^>]*>/g, '').trim();
-    const id = generateSlug(plainText);
+    const id = generateSlug(plainText, index);
+    index++;
     // Remove any existing id attribute to avoid duplicates
     const cleanAttrs = attrs.replace(/\s*id\s*=\s*["'][^"']*["']/gi, '');
     return `<h${level}${cleanAttrs} id="${id}">${innerHTML}</h${level}>`;
