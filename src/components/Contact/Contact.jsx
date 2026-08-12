@@ -19,7 +19,6 @@ import LocationOnImport from '@mui/icons-material/LocationOn';
 import PhoneImport from '@mui/icons-material/Phone';
 import SendImport from '@mui/icons-material/Send';
 import { colors } from '../../theme/theme';
-import { BlurText, SectionBadge } from '../common';
 
 const Business = BusinessImport.default || BusinessImport;
 const Email = EmailImport.default || EmailImport;
@@ -169,6 +168,21 @@ const Contact = () => {
           viewport={{ once: true, amount: 0.25 }}
         >
           <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}>
+            <Typography
+              component={motion.div}
+              variants={fadeUpVariants}
+              variant="overline"
+              sx={{
+                color: colors.accent.primary,
+                fontWeight: 700,
+                fontSize: '0.75rem',
+                letterSpacing: '0.08em',
+                mb: 2,
+                display: 'block',
+              }}
+            >
+              Get In Touch
+            </Typography>
             <Typography
               component={motion.h2}
               variants={fadeUpVariants}
@@ -577,49 +591,24 @@ const Contact = () => {
                       disabled={loading}
                       endIcon={loading ? <CircularProgress size={20} color="inherit" /> : <Send />}
                       sx={{
-                        position: 'relative',
-                        overflow: 'hidden',
-                        backgroundColor: '#f8fafc',
-                        backgroundImage:
-                          'linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(8, 145, 178, 0.08))',
-                        color: colors.text.primary,
-                        border: `1px solid ${colors.border.light}`,
-                        boxShadow: '0 4px 15px rgba(124, 58, 237, 0.08)',
-                        backdropFilter: 'blur(10px)',
+                        backgroundColor: colors.accent.primary,
+                        color: '#ffffff',
                         fontWeight: 700,
                         px: 4,
                         py: 1.5,
                         fontSize: '1rem',
                         textTransform: 'none',
-                        '&::before': {
-                          content: '""',
-                          position: 'absolute',
-                          inset: 0,
-                          background:
-                            'linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.5), transparent)',
-                          transform: 'translateX(-120%)',
-                          transition: 'transform 0.55s ease',
-                        },
+                        boxShadow: '0 2px 8px rgba(109, 40, 217, 0.15)',
                         '&:hover': {
-                          backgroundColor: '#ffffff',
-                          backgroundImage:
-                            'linear-gradient(135deg, rgba(124, 58, 237, 0.14), rgba(8, 145, 178, 0.1))',
-                          borderColor: 'rgba(124, 58, 237, 0.4)',
+                          backgroundColor: colors.accent.primaryHover,
                           transform: 'translateY(-2px)',
-                          boxShadow:
-                            '0 12px 30px rgba(124, 58, 237, 0.12)',
-                          '&::before': {
-                            transform: 'translateX(120%)',
-                          },
+                          boxShadow: '0 4px 14px rgba(109, 40, 217, 0.22)',
                         },
-                        transition:
-                          'background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease',
+                        transition: 'all 0.2s ease',
                         '&:disabled': {
+                          backgroundColor: '#e4e4e7',
                           color: colors.text.muted,
-                          borderColor: colors.border.light,
-                          backgroundColor: '#f1f5f9',
-                          backgroundImage: 'none',
-                          opacity: 0.75,
+                          boxShadow: 'none',
                         },
                       }}
                     >
