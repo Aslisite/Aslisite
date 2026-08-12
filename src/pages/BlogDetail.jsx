@@ -67,7 +67,8 @@ const extractTOC = (content = '') => {
 
 const processContent = (content = '') => {
   return content.replace(/<h([23])([^>]*)>(.*?)<\/h\1>/g, (match, level, attrs, text) => {
-    const id = text
+    const plainText = text.replace(/<[^>]*>/g, '');
+    const id = plainText
       .toLowerCase()
       .replace(/[^\w\s-]/g, '')
       .replace(/\s+/g, '-');
@@ -191,9 +192,8 @@ const InlineTOC = ({ items }) => {
     const element = document.getElementById(id);
     if (element) {
       const offset = 100;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      window.scrollTo({ top: elementRect - bodyRect - offset, behavior: 'smooth' });
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
     }
     setOpen(false);
   };
