@@ -199,14 +199,14 @@ const InlineTOC = ({ items }) => {
   const [open, setOpen] = useState(false);
 
   const handleScroll = (id) => {
-    // Small delay to allow Collapse animation to finish and DOM to settle
-    setTimeout(() => {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
+    const element = document.getElementById(id);
+    if (!element) return;
+    // Calculate target position before collapsing the TOC
+    const offset = 100;
+    const elementTop = element.getBoundingClientRect().top + window.pageYOffset - offset;
     setOpen(false);
+    // Scroll to the pre-calculated position
+    window.scrollTo({ top: elementTop, behavior: 'smooth' });
   };
 
   if (!items.length) return null;
