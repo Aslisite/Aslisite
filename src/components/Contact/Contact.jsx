@@ -245,7 +245,7 @@ const Contact = () => {
                 >
                   Contact Information
                 </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                   {contactInfo.map((item, index) => {
                     const IconComponent = item.icon;
                     return (
