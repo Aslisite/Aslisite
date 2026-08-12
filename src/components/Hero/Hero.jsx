@@ -45,12 +45,12 @@ const Hero = () => {
       sx={{
         minHeight: { xs: 'auto', md: '100vh' },
         display: 'flex',
-        alignItems: 'center',
+        alignItems: { xs: 'flex-start', md: 'center' },
         position: 'relative',
         overflow: 'hidden',
         backgroundColor: colors.background.primary,
-        pt: { xs: 14, md: 0 },
-        pb: { xs: 8, md: 0 },
+        pt: { xs: 14, md: 16 },
+        pb: { xs: 8, md: 10 },
         scrollMarginTop: '64px',
       }}
     >
