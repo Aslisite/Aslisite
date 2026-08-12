@@ -49,30 +49,35 @@ const calculateReadTime = (content = '') => {
   return Math.ceil(words / 225);
 };
 
+const generateSlug = (text) =>
+  text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+
 const extractTOC = (content = '') => {
-  const regex = /<h([23])[^>]*>(.*?)<\/h\1>/g;
+  const regex = /<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi;
   const items = [];
   let match;
   while ((match = regex.exec(content)) !== null) {
     const level = parseInt(match[1]);
-    const text = match[2].replace(/<[^>]*>/g, '');
-    const id = text
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-');
+    const text = match[3].replace(/<[^>]*>/g, '').trim();
+    if (!text) continue;
+    const id = generateSlug(text);
     items.push({ level, text, id });
   }
   return items;
 };
 
 const processContent = (content = '') => {
-  return content.replace(/<h([23])([^>]*)>(.*?)<\/h\1>/g, (match, level, attrs, text) => {
-    const plainText = text.replace(/<[^>]*>/g, '');
-    const id = plainText
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-');
-    return `<h${level}${attrs} id="${id}">${text}</h${level}>`;
+  return content.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, level, attrs, innerHTML) => {
+    const plainText = innerHTML.replace(/<[^>]*>/g, '').trim();
+    const id = generateSlug(plainText);
+    // Remove any existing id attribute to avoid duplicates
+    const cleanAttrs = attrs.replace(/\s*id\s*=\s*["'][^"']*["']/gi, '');
+    return `<h${level}${cleanAttrs} id="${id}">${innerHTML}</h${level}>`;
   });
 };
 
@@ -189,12 +194,13 @@ const InlineTOC = ({ items }) => {
   const [open, setOpen] = useState(false);
 
   const handleScroll = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
-    }
+    // Small delay to allow Collapse animation to finish and DOM to settle
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
     setOpen(false);
   };
 
