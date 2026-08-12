@@ -62,7 +62,7 @@ const generateSlug = (text, index) => {
 const extractTOC = (content = '') => {
   const items = [];
   let index = 0;
-  const processed = content.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, level, attrs, innerHTML) => {
+  content.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, level, attrs, innerHTML) => {
     const text = innerHTML.replace(/<[^>]*>/g, '').trim();
     const id = generateSlug(text, index);
     if (text) {
