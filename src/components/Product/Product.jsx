@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Chip,
   Container,
   Grid,
   List,
@@ -12,7 +13,6 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { colors } from '../../theme/theme';
-import { BlurText, SectionBadge } from '../common';
 import ReceiptLongImport from '@mui/icons-material/ReceiptLong';
 import AccountBalanceImport from '@mui/icons-material/AccountBalance';
 import TrendingUpImport from '@mui/icons-material/TrendingUp';
@@ -127,7 +127,7 @@ const Product = () => {
           transform: 'translate(20%, -50%)',
           width: '800px',
           height: '800px',
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 60%)',
+          background: 'radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 60%)',
           filter: 'blur(60px)',
           pointerEvents: 'none',
         }}
@@ -138,23 +138,31 @@ const Product = () => {
           component={motion.div}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.25 }}
         >
           <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 }, maxWidth: '900px', mx: 'auto' }}>
             <Box component={motion.div} variants={fadeUpVariants}>
-              <SectionBadge>Our Product</SectionBadge>
+              <Chip
+                label="Product Spotlight"
+                size="small"
+                sx={{
+                  mb: 2.5,
+                  height: 28,
+                  fontWeight: 700,
+                  fontSize: '0.7rem',
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  background: colors.accent.gradient,
+                  color: '#fff',
+                }}
+              />
             </Box>
 
-            <BlurText
-              component="h2"
-              text="AsliBooks - Smart Invoicing & GST Solution for Growing Businesses"
-              animateBy="words"
-              direction="top"
-              delay={75}
-              stepDuration={0.3}
-              highlightWords={['AsliBooks']}
+            <Typography
+              component={motion.h2}
+              variants={fadeUpVariants}
               sx={{
-                fontSize: { xs: '1.65rem', sm: '2.05rem', md: '2.4rem' },
+                fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.6rem' },
                 fontWeight: 800,
                 mb: 2,
                 color: colors.text.primary,
@@ -162,8 +170,23 @@ const Product = () => {
                 textAlign: 'center',
                 maxWidth: '780px',
                 mx: 'auto',
+                letterSpacing: '-0.02em',
+                fontFamily: '"Space Grotesk", "Inter", sans-serif',
               }}
-            />
+            >
+              <Box
+                component="span"
+                sx={{
+                  background: colors.accent.gradient,
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                AsliBooks
+              </Box>
+              {' '}— Smart Invoicing & GST for Growing Businesses
+            </Typography>
 
             <Typography
               component={motion.p}
@@ -249,11 +272,11 @@ const Product = () => {
                       fontWeight: 600,
                       background: colors.accent.gradient,
                       borderRadius: 2,
-                      boxShadow: '0 4px 20px rgba(168, 85, 247, 0.28)',
+                      boxShadow: '0 4px 20px rgba(124, 58, 237, 0.2)',
                       transition: 'background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
                       '&:hover': {
                         background: colors.accent.gradient,
-                        boxShadow: '0 6px 28px rgba(168, 85, 247, 0.34)',
+                        boxShadow: '0 6px 28px rgba(124, 58, 237, 0.28)',
                         transform: 'translateY(-2px)',
                       },
                     }}
@@ -281,9 +304,9 @@ const Product = () => {
                     maxWidth: { xs: '100%', md: '640px' },
                     borderRadius: 2,
                     overflow: 'hidden',
-                    background: 'rgba(245, 241, 232, 0.03)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)',
+                    background: '#f8fafc',
+                    border: `1px solid ${colors.border.light}`,
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8)',
                     backdropFilter: 'blur(10px)',
                     transform: { xs: 'none', md: 'rotateY(-5deg) rotateX(2deg)' },
                     transition: 'transform 0.5s ease',
@@ -298,8 +321,8 @@ const Product = () => {
                       gap: 1,
                       px: 2,
                       py: 1.5,
-                      borderBottom: '1px solid rgba(255,255,255,0.05)',
-                      backgroundColor: 'rgba(255, 255, 255, 0.01)',
+                      borderBottom: `1px solid ${colors.border.light}`,
+                      backgroundColor: '#f1f5f9',
                     }}
                   >
                     <Box

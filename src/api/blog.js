@@ -28,16 +28,38 @@ export const filterPublishedBlogs = (blogs = []) => {
   return sortBlogsByRecent(blogs.filter(isPublishedBlog));
 };
 
+// Simple in-memory cache to avoid redundant API calls
+let cachedBlogs = null;
+let cacheTimestamp = 0;
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+let pendingRequest = null;
+
 export const getBlogs = async () => {
-  try {
-    const response = await fetch(API_URL);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch blogs: ${response.statusText}`);
-    }
-    const data = await response.json();
-    return filterPublishedBlogs(data);
-  } catch (error) {
-    console.error('Error fetching blogs:', error);
-    throw error;
+  // Return cached data if fresh
+  if (cachedBlogs && Date.now() - cacheTimestamp < CACHE_TTL) {
+    return cachedBlogs;
   }
+
+  // Deduplicate concurrent requests
+  if (pendingRequest) return pendingRequest;
+
+  pendingRequest = (async () => {
+    try {
+      const response = await fetch(API_URL);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch blogs: ${response.statusText}`);
+      }
+      const data = await response.json();
+      cachedBlogs = filterPublishedBlogs(data);
+      cacheTimestamp = Date.now();
+      return cachedBlogs;
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+      throw error;
+    } finally {
+      pendingRequest = null;
+    }
+  })();
+
+  return pendingRequest;
 };

@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
+import TrustStrip from '../components/TrustStrip';
 import { absoluteUrl, siteMetadata, websiteSchema } from '../seo/siteMetadata';
 
 const Services = React.lazy(() => import('../components/Services'));
@@ -34,11 +35,12 @@ const Home = () => {
         </script>
       </Helmet>
       <Hero />
+      <TrustStrip />
       <Suspense fallback={null}>
         <Services />
         <Product />
-        <LatestInsights />
         <Testimonials />
+        <LatestInsights />
         <FAQ />
         <Contact />
       </Suspense>

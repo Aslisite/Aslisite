@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { Box } from '@mui/material';
 
 const ClickSpark = ({
-  sparkColor = '#a855f7',
+  sparkColor = '#7c3aed',
   sparkSize = 10,
   sparkRadius = 15,
   sparkCount = 8,
@@ -13,6 +13,8 @@ const ClickSpark = ({
 }) => {
   const canvasRef = useRef(null);
   const sparksRef = useRef([]);
+  const animationIdRef = useRef(null);
+  const isRunningRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -66,23 +68,21 @@ const ClickSpark = ({
     [easing],
   );
 
-  useEffect(() => {
+  const startLoop = useCallback(() => {
+    if (isRunningRef.current) return;
+    isRunningRef.current = true;
+
     const canvas = canvasRef.current;
-    if (!canvas) return undefined;
-
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    if (!ctx) return undefined;
-
-    let animationId;
+    if (!ctx) return;
 
     const draw = (timestamp) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       sparksRef.current = sparksRef.current.filter((spark) => {
         const elapsed = timestamp - spark.startTime;
-        if (elapsed >= duration) {
-          return false;
-        }
+        if (elapsed >= duration) return false;
 
         const progress = elapsed / duration;
         const eased = easeFunc(progress);
@@ -105,13 +105,23 @@ const ClickSpark = ({
         return true;
       });
 
-      animationId = requestAnimationFrame(draw);
+      // Stop the loop when no sparks remain
+      if (sparksRef.current.length > 0) {
+        animationIdRef.current = requestAnimationFrame(draw);
+      } else {
+        isRunningRef.current = false;
+        animationIdRef.current = null;
+      }
     };
 
-    animationId = requestAnimationFrame(draw);
-
-    return () => cancelAnimationFrame(animationId);
+    animationIdRef.current = requestAnimationFrame(draw);
   }, [sparkColor, sparkSize, sparkRadius, duration, easeFunc, extraScale]);
+
+  useEffect(() => {
+    return () => {
+      if (animationIdRef.current) cancelAnimationFrame(animationIdRef.current);
+    };
+  }, []);
 
   const handleClick = (event) => {
     const canvas = canvasRef.current;
@@ -130,6 +140,7 @@ const ClickSpark = ({
     }));
 
     sparksRef.current.push(...newSparks);
+    startLoop();
   };
 
   return (

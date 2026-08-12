@@ -131,31 +131,34 @@ const FAQ = () => {
           component={motion.div}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
         >
           <Box sx={{ textAlign: 'center', mb: { xs: 5, md: 8 }, maxWidth: '760px', mx: 'auto' }}>
             <Box component={motion.div} variants={fadeUpVariants}>
-              <SectionBadge>FAQ</SectionBadge>
-            </Box>
-            <Box sx={{ overflow: 'hidden', mb: 2, pb: '0.04em' }}>
-              <BlurText
-                component="h2"
-                text="Questions Businesses Ask Before Hiring a Web & SEO Agency"
-                animateBy="words"
-                direction="top"
-                delay={65}
-                stepDuration={0.3}
-                highlightWords={['Web', 'SEO', 'Agency']}
+              <Typography
+                variant="h2"
                 sx={{
-                  fontSize: { xs: '1.95rem', sm: '2.35rem', md: '2.8rem' },
                   fontWeight: 800,
-                  lineHeight: 1.18,
+                  fontSize: { xs: '1.95rem', sm: '2.35rem', md: '2.8rem' },
+                  lineHeight: 1.15,
                   color: colors.text.primary,
-                  textAlign: 'center',
-                  maxWidth: '760px',
-                  mx: 'auto',
+                  mb: 2,
+                  letterSpacing: '-0.03em',
                 }}
-              />
+              >
+                Questions? We&apos;ve got{' '}
+                <Box
+                  component="span"
+                  sx={{
+                    textDecoration: 'underline',
+                    textDecorationColor: colors.accent.primary,
+                    textUnderlineOffset: '6px',
+                    textDecorationThickness: '3px',
+                  }}
+                >
+                  answers.
+                </Box>
+              </Typography>
             </Box>
             <Typography
               component={motion.p}
@@ -170,8 +173,7 @@ const FAQ = () => {
                 mx: 'auto',
               }}
             >
-              A quick overview of how Aslisite helps businesses in Kerala and beyond with web
-              development, ecommerce, design, and SEO.
+              Common questions from businesses considering web development, ecommerce, and SEO services.
             </Typography>
           </Box>
 
@@ -207,7 +209,7 @@ const FAQ = () => {
                       '&:before': { display: 'none' },
                       '&:hover': {
                         borderColor: isActive ? colors.border.light : colors.border.accent,
-                        boxShadow: isActive ? 'none' : `0 4px 20px rgba(0, 0, 0, 0.25)`,
+                        boxShadow: isActive ? 'none' : `0 4px 20px rgba(0, 0, 0, 0.06)`,
                         transform: isActive ? 'none' : 'translateY(-2px)',
                       },
                       '&.Mui-expanded': {

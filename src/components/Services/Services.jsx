@@ -1,101 +1,54 @@
-import { Box, Card, CardContent, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography, Stack, Chip } from '@mui/material';
 import CodeImport from '@mui/icons-material/Code';
 import ShoppingCartImport from '@mui/icons-material/ShoppingCart';
 import BuildImport from '@mui/icons-material/Build';
 import TrendingUpImport from '@mui/icons-material/TrendingUp';
+import ArrowForwardImport from '@mui/icons-material/ArrowForward';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { colors } from '../../theme/theme';
-import { BlurText, SectionBadge } from '../common';
+import { SectionBadge } from '../common';
 
 const Code = CodeImport.default || CodeImport;
 const ShoppingCart = ShoppingCartImport.default || ShoppingCartImport;
 const Build = BuildImport.default || BuildImport;
 const TrendingUp = TrendingUpImport.default || TrendingUpImport;
-
-const fadeUpVariants = {
-  hidden: { opacity: 0.35, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: 'easeOut',
-    },
-  },
-};
-
-const cardsContainerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.22,
-      delayChildren: 0.15,
-    },
-  },
-};
-
-const getCardVariants = (index) => {
-  // Alternate entrance directions: left, right, left, right
-  const xOffset = index % 2 === 0 ? -30 : 30;
-  return {
-    hidden: { opacity: 0, y: 20, x: xOffset, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      x: 0,
-      scale: 1,
-      transition: {
-        duration: 0.75,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  };
-};
+const ArrowForward = ArrowForwardImport.default || ArrowForwardImport;
 
 const services = [
   {
     icon: Code,
     title: 'Web Development',
     description:
-      'Tailor-made web systems built using modern frameworks. From responsive websites to high-performance web apps.',
-    features: ['React & Next.js', 'Node & Express', 'MongoDB Database', 'MERN Stack'],
+      'Tailor-made web systems built using modern frameworks. From responsive websites to high-performance web apps — we write clean, search-engine-optimized code that loads instantly and scales endlessly.',
+    features: ['React & Next.js', 'Node & Express', 'MongoDB', 'REST APIs'],
+    slug: 'web-development',
   },
   {
     icon: ShoppingCart,
     title: 'Ecommerce Solutions',
     description:
-      'Scalable online stores with secure checkout portals, product catalog syncs, and seamless buying experiences.',
-    features: [
-      'WooCommerce & Custom',
-      'Next.js & React Store',
-      'Payment Integration',
-      'Node & REST APIs',
-    ],
+      'Scalable online stores with secure checkout portals, product catalog syncs, and seamless buying experiences. We build platforms engineered to increase average order value and reduce cart abandonment.',
+    features: ['WooCommerce & Custom', 'Payment Integration', 'Inventory Sync', 'Mobile-First'],
+    slug: 'ecommerce-solutions',
   },
   {
     icon: Build,
     title: 'Custom Software',
     description:
-      'Bespoke digital platforms engineered to automate manual business processes and improve operational efficiency.',
-    features: ['MERN Stack Apps', 'MongoDB Solutions', 'JWT Auth & APIs', 'Cloud Migration'],
+      'Bespoke digital platforms engineered to automate manual business processes and improve operational efficiency. We replace bottlenecks with robust, secure software built around your exact requirements.',
+    features: ['MERN Stack Apps', 'JWT Auth & APIs', 'Cloud Migration', 'Database Design'],
+    slug: 'custom-software',
   },
   {
     icon: TrendingUp,
     title: 'SEO Services',
     description:
-      'Data-driven SEO roadmaps built to increase organic search positions, capture traffic, and raise conversions.',
-    features: ['On-Page SEO', 'Link Building', 'Content Strategy', 'Analytics & Reporting'],
+      'Data-driven SEO roadmaps built to increase organic search positions, capture high-intent traffic, and raise conversions. Technical audits, keyword intelligence, and authority building included.',
+    features: ['On-Page SEO', 'Technical Audits', 'Content Strategy', 'Link Building'],
+    slug: 'seo-services',
   },
 ];
-
-const getSlug = (title) => {
-  if (title.toLowerCase().includes('web')) return 'web-development';
-  if (title.toLowerCase().includes('ecommerce')) return 'ecommerce-solutions';
-  if (title.toLowerCase().includes('software')) return 'custom-software';
-  if (title.toLowerCase().includes('seo')) return 'seo-services';
-  return '';
-};
 
 const Services = () => {
   return (
@@ -104,286 +57,167 @@ const Services = () => {
       id="services"
       tabIndex="-1"
       sx={{
-        py: { xs: 6, md: 8 },
-        backgroundColor: colors.background.secondary,
+        py: { xs: 8, md: 12 },
+        backgroundColor: colors.background.primary,
         position: 'relative',
         scrollMarginTop: '80px',
-        borderBottom: `1px solid ${colors.border.light}`,
       }}
     >
-      {/* Background Accent */}
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '1px',
-          background: `linear-gradient(90deg, transparent, ${colors.accent.primary}, transparent)`,
-          opacity: 0.3,
-        }}
-      />
-
       <Container maxWidth="lg">
-        {/* Section Header */}
+        {/* Section header */}
         <Box
           component={motion.div}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.35 }}
-          sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          sx={{ textAlign: 'center', mb: { xs: 6, md: 8 }, maxWidth: 640, mx: 'auto' }}
         >
-          <Box component={motion.div} variants={fadeUpVariants}>
-            <SectionBadge>Our Services</SectionBadge>
-          </Box>
-          <BlurText
-            component="h2"
-            text="Solutions That Transform"
-            animateBy="words"
-            direction="top"
-            delay={110}
-            stepDuration={0.32}
-            highlightWords={['Transform']}
-            sx={{
-              fontSize: { xs: '2.15rem', sm: '2.75rem', md: '3.35rem' },
-              fontWeight: 800,
-              lineHeight: 1.05,
-              mb: 2,
-              color: colors.text.primary,
-              textAlign: 'center',
-              maxWidth: '760px',
-              mx: 'auto',
-            }}
-          />
+          <SectionBadge sx={{ mb: 2.5 }}>Our Services</SectionBadge>
           <Typography
-            component={motion.p}
-            variants={fadeUpVariants}
+            variant="h2"
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: '2.2rem', md: '3rem' },
+              lineHeight: 1.08,
+              mb: 2.5,
+              color: colors.text.primary,
+            }}
+          >
+            Everything you need to{' '}
+            <Box component="span" sx={{ color: colors.accent.primary }}>
+              win online.
+            </Box>
+          </Typography>
+          <Typography
             variant="body1"
             sx={{
               color: colors.text.secondary,
-              fontWeight: 450,
-              maxWidth: '560px',
-              mx: 'auto',
-              fontSize: { xs: '1rem', md: '1.08rem' },
               lineHeight: 1.75,
+              fontSize: '1.05rem',
             }}
           >
-            Comprehensive digital services tailored to accelerate your business growth
+            Four core capabilities, one team. From first pixel to first customer — we handle it all.
           </Typography>
         </Box>
 
-        {/* Services Grid */}
-        <Grid
-          component={motion.div}
-          container
-          spacing={{ xs: 3, md: 4 }}
-          variants={cardsContainerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-        >
+        {/* Service cards — 2x2 grid */}
+        <Grid container spacing={3}>
           {services.map((service, index) => {
             const IconComponent = service.icon;
-            const cardIndex = String(index + 1).padStart(2, '0');
             return (
-              <Grid item xs={12} sm={6} lg={3} key={index}>
-                <Link
-                  to={`/services/${getSlug(service.title)}`}
-                  style={{ textDecoration: 'none', display: 'block', height: '100%' }}
+              <Grid item xs={12} sm={6} key={service.slug}>
+                <Box
+                  component={motion.div}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.06 }}
+                  sx={{ height: '100%' }}
                 >
-                  <Card
-                    component={motion.div}
-                    variants={getCardVariants(index)}
+                  <Box
+                    component={Link}
+                    to={`/services/${service.slug}`}
                     sx={{
-                      height: '100%',
-                      position: 'relative',
-                      overflow: 'hidden',
-                      backgroundColor: colors.background.card,
-                      border: `1px solid ${colors.border.light}`,
-                      borderRadius: 3,
-                      transition:
-                        'transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1)',
-                      cursor: 'pointer',
                       display: 'flex',
                       flexDirection: 'column',
-                      /* Gradient border pseudo-element */
-                      '&::after': {
-                        content: '""',
-                        position: 'absolute',
-                        inset: 0,
-                        borderRadius: 'inherit',
-                        padding: '1px',
-                        background: 'linear-gradient(135deg, #a855f7 0%, #06b6d4 100%)',
-                        WebkitMask:
-                          'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                        WebkitMaskComposite: 'xor',
-                        maskComposite: 'exclude',
-                        opacity: 0,
-                        transition: 'opacity 0.35s ease',
-                        pointerEvents: 'none',
-                        zIndex: 1,
-                      },
+                      height: '100%',
+                      p: { xs: 3, md: 3.5 },
+                      borderRadius: 3,
+                      textDecoration: 'none',
+                      border: `1px solid ${colors.border.light}`,
+                      backgroundColor: colors.background.primary,
+                      transition: 'all 0.2s ease',
                       '&:hover': {
-                        transform: 'translateY(-6px)',
-                        borderColor: 'transparent',
-                        boxShadow: '0 18px 36px rgba(0, 0, 0, 0.34)',
-                        '&::after': {
-                          opacity: 1,
-                        },
-                        '& .service-icon': {
-                          transform: 'scale(1.06)',
+                        borderColor: colors.border.accent,
+                        boxShadow: colors.shadow.elevated,
+                        transform: 'translateY(-3px)',
+                        '& .service-arrow': {
+                          transform: 'translateX(4px)',
                           color: colors.accent.primary,
                         },
-                        '& .service-icon-glow': {
-                          opacity: 1,
-                        },
-                        '& .card-index': {
-                          opacity: 0.08,
+                        '& .service-icon-box': {
+                          backgroundColor: 'rgba(109, 40, 217, 0.1)',
                         },
                       },
                     }}
                   >
-                    {/* Numbered Index Overlay */}
-                    <Typography
-                      className="card-index"
-                      sx={{
-                        position: 'absolute',
-                        top: -4,
-                        right: 12,
-                        fontSize: '3.5rem',
-                        fontWeight: 800,
-                        color: 'rgba(245,241,232,0.04)',
-                        lineHeight: 1,
-                        userSelect: 'none',
-                        pointerEvents: 'none',
-                        zIndex: 0,
-                        transition: 'opacity 0.35s ease',
-                      }}
-                    >
-                      {cardIndex}
-                    </Typography>
-                    <CardContent
-                      sx={{
-                        p: { xs: 3, md: 4 },
-                        display: 'flex',
-                        flexDirection: 'column',
-                        flexGrow: 1,
-                      }}
-                    >
-                      {/* Icon */}
-                      <Box sx={{ position: 'relative', width: 56, height: 56, mb: 3 }}>
-                        {/* Soft glow behind icon */}
-                        <Box
-                          className="service-icon-glow"
-                          sx={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            width: 80,
-                            height: 80,
-                            borderRadius: '50%',
-                            background:
-                              'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%)',
-                            opacity: 0,
-                            transition: 'opacity 0.35s ease',
-                            pointerEvents: 'none',
-                            zIndex: 0,
-                          }}
-                        />
-                        <Box
-                          className="service-icon"
-                          sx={{
-                            position: 'relative',
-                            width: 56,
-                            height: 56,
-                            borderRadius: 2,
-                            backgroundColor: 'rgba(168, 85, 247, 0.1)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            transition: 'all 0.3s ease',
-                            color: colors.accent.primary,
-                            zIndex: 1,
-                          }}
-                        >
-                          <IconComponent sx={{ fontSize: 28 }} />
-                        </Box>
+                    {/* Icon + Title row */}
+                    <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 2 }}>
+                      <Box
+                        className="service-icon-box"
+                        sx={{
+                          width: 46,
+                          height: 46,
+                          borderRadius: 2.5,
+                          backgroundColor: colors.background.secondary,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                          transition: 'background-color 0.2s ease',
+                        }}
+                      >
+                        <IconComponent sx={{ fontSize: 22, color: colors.accent.primary }} />
                       </Box>
-
-                      {/* Title */}
                       <Typography
-                        variant="h5"
+                        variant="h6"
                         sx={{
                           fontWeight: 700,
-                          mb: 2,
                           color: colors.text.primary,
-                          fontSize: { xs: '1.1rem', md: '1.22rem' },
-                          lineHeight: 1.25,
+                          fontSize: '1.1rem',
+                          flex: 1,
                         }}
                       >
                         {service.title}
                       </Typography>
-
-                      {/* Description */}
-                      <Typography
-                        variant="body2"
+                      <ArrowForward
+                        className="service-arrow"
                         sx={{
-                          color: colors.text.secondary,
-                          mb: 3,
-                          lineHeight: 1.8,
-                          fontSize: '0.95rem',
-                          flexGrow: 1,
+                          fontSize: 18,
+                          color: colors.text.muted,
+                          transition: 'all 0.2s ease',
+                          flexShrink: 0,
+                          display: { xs: 'none', sm: 'block' },
                         }}
-                      >
-                        {service.description}
-                      </Typography>
+                      />
+                    </Stack>
 
-                      {/* Features */}
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          flexWrap: 'wrap',
-                          gap: { xs: '8px', md: 1 },
-                          mt: 'auto',
-                          justifyContent: { xs: 'flex-start', md: 'initial' },
-                        }}
-                      >
-                        {service.features.map((feature, idx) => (
-                          <Box
-                            key={idx}
-                            sx={{
-                              px: { xs: 1, md: 1.5 },
-                              py: { xs: 0.75, md: 0.5 },
-                              borderRadius: 1,
-                              backgroundColor: colors.background.elevated,
-                              border: `1px solid ${colors.border.light}`,
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              textAlign: 'center',
-                              width: { xs: 'auto', md: 'auto' },
-                              minHeight: { xs: 34, md: 'auto' },
-                            }}
-                          >
-                            <Typography
-                              variant="caption"
-                              sx={{
-                                color: colors.text.muted,
-                                fontSize: '0.72rem',
-                                letterSpacing: '0.04em',
-                                textTransform: 'uppercase',
-                                fontWeight: 650,
-                              }}
-                            >
-                              {feature}
-                            </Typography>
-                          </Box>
-                        ))}
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </Link>
+                    {/* Description */}
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: colors.text.secondary,
+                        lineHeight: 1.75,
+                        fontSize: '0.92rem',
+                        mb: 2.5,
+                        flex: 1,
+                      }}
+                    >
+                      {service.description}
+                    </Typography>
+
+                    {/* Tech tags */}
+                    <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ gap: 1 }}>
+                      {service.features.map((feature) => (
+                        <Chip
+                          key={feature}
+                          label={feature}
+                          size="small"
+                          sx={{
+                            height: 26,
+                            fontSize: '0.7rem',
+                            fontWeight: 600,
+                            letterSpacing: '0.02em',
+                            backgroundColor: colors.background.secondary,
+                            color: colors.text.secondary,
+                            border: `1px solid ${colors.border.light}`,
+                          }}
+                        />
+                      ))}
+                    </Stack>
+                  </Box>
+                </Box>
               </Grid>
             );
           })}

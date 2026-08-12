@@ -16,19 +16,19 @@ import MenuIconImport from '@mui/icons-material/Menu';
 import { Link, useLocation } from 'react-router-dom';
 import { colors } from '../../theme/theme';
 
-const shinyGradientStyle = {
-  fontFamily: '"Inter", sans-serif',
-  background: colors.accent.brandGradient,
-  backgroundSize: '200% auto',
-  backgroundClip: 'text',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  animation: 'shine 6s linear infinite',
-  '@keyframes shine': {
-    '0%': { backgroundPosition: '200% center' },
-    '100%': { backgroundPosition: '-200% center' },
-  },
+const brandNameStyle = {
+  fontFamily: '"Space Grotesk", "Inter", sans-serif',
+  color: colors.text.primary,
+  fontWeight: 800,
+  display: 'inline',
 };
+
+const BrandName = ({ fontSize = '1.25rem' }) => (
+  <span style={{ ...brandNameStyle, fontSize }}>
+    Aslisite
+    <span style={{ color: colors.accent.primary }}>.</span>
+  </span>
+);
 
 const CloseIcon = CloseIconImport.default || CloseIconImport;
 const KeyboardArrowDownIcon = KeyboardArrowDownIconImport.default || KeyboardArrowDownIconImport;
@@ -62,9 +62,6 @@ const Navbar = () => {
   const isHomePage = location.pathname === '/';
   const isTransparent = isHomePage && !isScrolled;
 
-  // Read safe-area-inset-top ONCE on mount as a fixed px value.
-  // Using env() directly on a position:fixed element causes Chrome Android
-  // to reset it to 0 when the browser address bar collapses during scroll.
   useEffect(() => {
     const el = document.createElement('div');
     el.style.position = 'fixed';
@@ -99,7 +96,7 @@ const Navbar = () => {
       sx={{
         width: '100%',
         height: '100%',
-        backgroundColor: 'rgba(2, 6, 23, 0.96)',
+        backgroundColor: '#ffffff',
         backdropFilter: 'blur(12px)',
         display: 'flex',
         flexDirection: 'column',
@@ -122,15 +119,13 @@ const Navbar = () => {
           />
           <Typography
             sx={{
-              ...shinyGradientStyle,
-              fontFamily: '"Inter", sans-serif',
-              background: 'none',
-              WebkitTextFillColor: '#cbd5e1',
+              fontFamily: '"Space Grotesk", "Inter", sans-serif',
               fontWeight: 800,
               fontSize: '1.25rem',
+              color: colors.text.primary,
             }}
           >
-            Aslisite
+            Aslisite<span style={{ color: colors.accent.primary }}>.</span>
           </Typography>
         </Box>
         <IconButton
@@ -139,11 +134,11 @@ const Navbar = () => {
             width: 48,
             height: 48,
             color: colors.text.primary,
-            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            backgroundColor: '#f1f5f9',
             borderRadius: 2,
             transition: 'all 0.2s ease',
             '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.15)',
+              backgroundColor: '#e2e8f0',
               transform: 'scale(1.05)',
             },
           }}
@@ -166,7 +161,7 @@ const Navbar = () => {
                     borderRadius: 2,
                     transition: 'background-color 0.2s ease',
                     '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                      backgroundColor: '#f1f5f9',
                     },
                   }}
                 >
@@ -174,9 +169,7 @@ const Navbar = () => {
                     primary={item.label}
                     primaryTypographyProps={{
                       sx: {
-                        ...shinyGradientStyle,
-                        background: 'none',
-                        WebkitTextFillColor: '#cbd5e1',
+                        color: colors.text.primary,
                         fontWeight: 600,
                         fontSize: '1.25rem',
                       },
@@ -184,7 +177,7 @@ const Navbar = () => {
                   />
                   <KeyboardArrowDownIcon
                     sx={{
-                      color: '#94a3b8',
+                      color: colors.text.muted,
                       fontSize: 20,
                       transform: mobileOpenProducts ? 'rotate(180deg)' : 'rotate(0)',
                       transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -210,7 +203,7 @@ const Navbar = () => {
                           color: colors.text.secondary,
                           transition: 'color 0.2s ease',
                           '&:hover': {
-                            color: '#ffffff',
+                            color: colors.accent.primary,
                           },
                         }}
                       >
@@ -240,7 +233,7 @@ const Navbar = () => {
                   borderRadius: 2,
                   transition: 'all 0.2s ease',
                   '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                    backgroundColor: '#f1f5f9',
                   },
                 }}
               >
@@ -248,9 +241,7 @@ const Navbar = () => {
                   primary={item.label}
                   primaryTypographyProps={{
                     sx: {
-                      ...shinyGradientStyle,
-                      background: 'none',
-                      WebkitTextFillColor: '#cbd5e1',
+                      color: colors.text.primary,
                       fontWeight: 600,
                       fontSize: '1.25rem',
                     },
@@ -263,7 +254,7 @@ const Navbar = () => {
       </List>
 
       {/* Divider */}
-      <Box sx={{ mx: 3, borderBottom: `1px solid ${colors.border.light}`, opacity: 0.5 }} />
+      <Box sx={{ mx: 3, borderBottom: `1px solid ${colors.border.light}` }} />
 
       {/* Footer Button */}
       <Box sx={{ p: 3 }}>
@@ -283,11 +274,11 @@ const Navbar = () => {
             fontWeight: 600,
             background: colors.accent.gradient,
             borderRadius: 2.5,
-            boxShadow: '0 4px 20px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.15)',
+            boxShadow: '0 4px 20px rgba(124, 58, 237, 0.2)',
             transition: 'background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
             '&:hover': {
               background: colors.accent.gradient,
-              boxShadow: '0 6px 28px rgba(0, 212, 255, 0.45), 0 0 40px rgba(0, 212, 255, 0.2)',
+              boxShadow: '0 6px 28px rgba(124, 58, 237, 0.3)',
               transform: 'translateY(-2px)',
             },
           }}
@@ -309,15 +300,15 @@ const Navbar = () => {
           left: 0,
           right: 0,
           zIndex: 1000,
-          backgroundColor: isTransparent ? 'transparent' : 'rgba(2, 6, 23, 0.8)',
+          backgroundColor: isTransparent ? 'transparent' : colors.background.navbar,
           backdropFilter: isTransparent ? 'blur(0px)' : 'blur(12px)',
           WebkitBackdropFilter: isTransparent ? 'blur(0px)' : 'blur(12px)',
           borderBottom: `1px solid ${
-            isTransparent ? 'rgba(30, 41, 59, 0)' : 'rgba(30, 41, 59, 0.6)'
+            isTransparent ? 'transparent' : colors.border.light
           }`,
           boxShadow: isTransparent
             ? 'none'
-            : '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
+            : '0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04)',
           transition:
             'background-color 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, backdrop-filter 0.28s ease',
         }}
@@ -346,14 +337,14 @@ const Navbar = () => {
               <Typography
                 variant="h6"
                 sx={{
-                  fontFamily: '"Inter", sans-serif',
-                  color: '#cbd5e1',
+                  fontFamily: '"Space Grotesk", "Inter", sans-serif',
+                  color: colors.text.primary,
                   fontWeight: 800,
                   fontSize: { xs: '1.25rem', md: '1.5rem' },
                   display: { xs: 'none', md: 'block' },
                 }}
               >
-                Aslisite
+                Aslisite<span style={{ color: colors.accent.primary }}>.</span>
               </Typography>
             </Box>
 
@@ -378,13 +369,13 @@ const Navbar = () => {
                       >
                         <Typography
                           sx={{
-                            color: '#cbd5e1',
+                            color: '#334155',
                             textDecoration: 'none',
                             fontWeight: 600,
                             fontSize: '0.9375rem',
                             transition: 'color 0.25s ease',
                             '&:hover': {
-                              color: '#ffffff',
+                              color: colors.accent.primary,
                             },
                           }}
                         >
@@ -393,7 +384,7 @@ const Navbar = () => {
                         <KeyboardArrowDownIcon
                           sx={{
                             fontSize: '1rem',
-                            color: '#94a3b8',
+                            color: colors.text.muted,
                             transform: openDropdown === 'products' ? 'rotate(180deg)' : 'rotate(0)',
                             transition: 'transform 0.2s ease',
                           }}
@@ -404,13 +395,13 @@ const Navbar = () => {
                         component={Link}
                         to={item.href}
                         sx={{
-                          color: '#cbd5e1',
+                          color: '#334155',
                           textDecoration: 'none',
                           fontWeight: 600,
                           fontSize: '0.9375rem',
                           transition: 'color 0.25s ease',
                           '&:hover': {
-                            color: '#ffffff',
+                            color: colors.accent.primary,
                           },
                         }}
                       >
@@ -428,10 +419,10 @@ const Navbar = () => {
                           py: 1,
                           px: 1,
                           minWidth: 220,
-                          backgroundColor: 'rgba(2, 6, 23, 0.96)',
-                          border: '1px solid rgba(30, 41, 59, 0.6)',
+                          backgroundColor: '#ffffff',
+                          border: `1px solid ${colors.border.light}`,
                           borderRadius: 2,
-                          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+                          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
                           zIndex: 1001,
                         }}
                       >
@@ -448,7 +439,7 @@ const Navbar = () => {
                               borderRadius: 1,
                               textDecoration: 'none',
                               '&:hover': {
-                                backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                                backgroundColor: '#f8fafc',
                               },
                             }}
                           >
@@ -493,12 +484,12 @@ const Navbar = () => {
                   color: '#ffffff',
                   fontFamily: '"Inter", sans-serif',
                   fontWeight: 700,
-                  background: 'linear-gradient(90deg, #9333ea 0%, #0891b2 100%)',
+                  background: colors.accent.gradient,
                   borderRadius: 2,
-                  boxShadow: 'none',
+                  boxShadow: '0 4px 15px rgba(124, 58, 237, 0.2)',
                   '&:hover': {
-                    background: 'linear-gradient(90deg, #a855f7 0%, #06b6d4 100%)',
-                    boxShadow: '0 0 15px rgba(6, 182, 212, 0.25)',
+                    background: 'linear-gradient(135deg, #6d28d9 0%, #0e7490 100%)',
+                    boxShadow: '0 6px 20px rgba(124, 58, 237, 0.28)',
                   },
                 }}
               >
@@ -512,13 +503,13 @@ const Navbar = () => {
               onClick={handleDrawerToggle}
               sx={{
                 display: { xs: 'inline-flex', md: 'none' },
-                color: '#94a3b8',
-                backgroundColor: '#0f172a',
-                border: '1px solid #1e293b',
+                color: colors.text.secondary,
+                backgroundColor: '#f8fafc',
+                border: `1px solid ${colors.border.light}`,
                 borderRadius: 2,
                 '&:hover': {
-                  color: '#ffffff',
-                  backgroundColor: '#0f172a',
+                  color: colors.text.primary,
+                  backgroundColor: '#f1f5f9',
                 },
               }}
             >
@@ -538,14 +529,14 @@ const Navbar = () => {
         sx={{
           display: { xs: 'block', md: 'none' },
           '& .MuiBackdrop-root': {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0.3)',
             backdropFilter: 'blur(4px)',
           },
           '& .MuiDrawer-paper': {
             width: '100%',
             maxWidth: 320,
             backgroundColor: 'transparent',
-            boxShadow: '-10px 0 40px rgba(0, 0, 0, 0.5)',
+            boxShadow: '-10px 0 40px rgba(0, 0, 0, 0.1)',
           },
         }}
       >

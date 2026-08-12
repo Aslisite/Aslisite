@@ -43,7 +43,10 @@ const BlurText = ({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setInView(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
       },
       { threshold, rootMargin },
     );
@@ -132,7 +135,7 @@ const BlurText = ({
                     color: 'transparent',
                     backgroundClip: 'text',
                     WebkitBackgroundClip: 'text',
-                    backgroundImage: 'linear-gradient(90deg, #c084fc, #f472b6, #22d3ee)',
+                    backgroundImage: 'linear-gradient(90deg, #7c3aed, #db2777, #0891b2)',
                   }
                 : {}),
               pb: isHighlighted ? '0.15em' : 0,

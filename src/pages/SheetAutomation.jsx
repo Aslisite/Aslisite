@@ -283,7 +283,7 @@ const SheetAutomation = () => {
             left: '10%',
             width: '400px',
             height: '400px',
-            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 60%)',
+            background: 'radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 60%)',
             filter: 'blur(50px)',
             pointerEvents: 'none',
           }}
@@ -295,7 +295,7 @@ const SheetAutomation = () => {
             right: '8%',
             width: '500px',
             height: '500px',
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 60%)',
+            background: 'radial-gradient(circle, rgba(8, 145, 178, 0.05) 0%, transparent 60%)',
             filter: 'blur(60px)',
             pointerEvents: 'none',
           }}
@@ -318,7 +318,7 @@ const SheetAutomation = () => {
                   py: 0.75,
                   borderRadius: '9999px',
                   border: `1px solid ${colors.border.accent}`,
-                  backgroundColor: 'rgba(168, 85, 247, 0.08)',
+                  backgroundColor: 'rgba(124, 58, 237, 0.08)',
                   color: colors.accent.primary,
                   fontSize: '0.85rem',
                   fontWeight: 700,
@@ -343,7 +343,7 @@ const SheetAutomation = () => {
                 maxWidth: '900px',
               }}
             >
-              <span style={{ color: '#fff' }}>Google Sheets </span>
+              <span style={{ color: '#0f172a' }}>Google Sheets </span>
               <span
                 style={{
                   background: colors.accent.gradient,
@@ -385,11 +385,11 @@ const SheetAutomation = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
                 sx={{
-                  backgroundColor: 'rgba(19, 24, 36, 0.7)',
+                  backgroundColor: '#ffffff',
                   backdropFilter: 'blur(12px)',
                   border: `1px solid ${colors.border.accent}`,
                   borderRadius: 3,
-                  boxShadow: '0 8px 32px rgba(168, 85, 247, 0.1)',
+                  boxShadow: '0 8px 32px rgba(124, 58, 237, 0.06)',
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
@@ -411,7 +411,7 @@ const SheetAutomation = () => {
                           width: 48,
                           height: 48,
                           borderRadius: 2,
-                          backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                          backgroundColor: 'rgba(124, 58, 237, 0.08)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -424,7 +424,7 @@ const SheetAutomation = () => {
                         <Typography
                           variant="h6"
                           sx={{
-                            color: '#fff',
+                            color: colors.text.primary,
                             fontWeight: 700,
                             fontFamily: '"Space Grotesk", sans-serif',
                           }}
@@ -458,7 +458,7 @@ const SheetAutomation = () => {
                       fontWeight: 700,
                       borderRadius: 2.5,
                       background: colors.accent.gradient,
-                      boxShadow: '0 4px 15px rgba(168, 85, 247, 0.25)',
+                      boxShadow: '0 4px 15px rgba(124, 58, 237, 0.18)',
                       '&:hover': {
                         background: colors.accent.gradient,
                         transform: 'translateY(-1px)',
@@ -479,7 +479,7 @@ const SheetAutomation = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 sx={{
-                  backgroundColor: 'rgba(19, 24, 36, 0.7)',
+                  backgroundColor: '#ffffff',
                   backdropFilter: 'blur(12px)',
                   border: `1px solid ${colors.border.light}`,
                   borderRadius: 3,
@@ -499,7 +499,7 @@ const SheetAutomation = () => {
                     <Typography
                       variant="h6"
                       sx={{
-                        color: '#fff',
+                        color: colors.text.primary,
                         fontWeight: 700,
                         fontFamily: '"Space Grotesk", sans-serif',
                         mb: 2.5,
@@ -704,7 +704,7 @@ const SheetAutomation = () => {
                 fontWeight: 750,
                 fontSize: { xs: '1.8rem', md: '2.2rem' },
                 mb: 6,
-                color: '#fff',
+                color: colors.text.primary,
               }}
             >
               How to Deploy the Script
@@ -714,7 +714,7 @@ const SheetAutomation = () => {
               <Accordion
                 defaultExpanded
                 sx={{
-                  backgroundColor: 'rgba(19, 24, 36, 0.7)',
+                  backgroundColor: '#ffffff',
                   backdropFilter: 'blur(10px)',
                   border: `1px solid ${colors.border.light}`,
                   borderRadius: '12px !important',
@@ -723,7 +723,7 @@ const SheetAutomation = () => {
                 }}
               >
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon sx={{ color: '#fff' }} />}
+                  expandIcon={<ExpandMoreIcon sx={{ color: colors.text.primary }} />}
                   sx={{ py: 1 }}
                 >
                   <Stack direction="row" spacing={2} alignItems="center">
@@ -732,7 +732,7 @@ const SheetAutomation = () => {
                         width: 32,
                         height: 32,
                         borderRadius: '50%',
-                        backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                        backgroundColor: 'rgba(124, 58, 237, 0.08)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -746,7 +746,7 @@ const SheetAutomation = () => {
                     <Typography
                       variant="subtitle1"
                       sx={{
-                        color: '#fff',
+                        color: colors.text.primary,
                         fontWeight: 700,
                         display: 'flex',
                         alignItems: 'center',
@@ -759,7 +759,7 @@ const SheetAutomation = () => {
                   </Stack>
                 </AccordionSummary>
                 <AccordionDetails
-                  sx={{ px: 4, pb: 3, borderTop: '1px solid rgba(255,255,255,0.03)' }}
+                  sx={{ px: 4, pb: 3, borderTop: `1px solid ${colors.border.light}` }}
                 >
                   <Typography
                     variant="body2"
@@ -791,7 +791,7 @@ const SheetAutomation = () => {
 
               <Accordion
                 sx={{
-                  backgroundColor: 'rgba(19, 24, 36, 0.7)',
+                  backgroundColor: '#ffffff',
                   backdropFilter: 'blur(10px)',
                   border: `1px solid ${colors.border.light}`,
                   borderRadius: '12px !important',
@@ -800,7 +800,7 @@ const SheetAutomation = () => {
                 }}
               >
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon sx={{ color: '#fff' }} />}
+                  expandIcon={<ExpandMoreIcon sx={{ color: colors.text.primary }} />}
                   sx={{ py: 1 }}
                 >
                   <Stack direction="row" spacing={2} alignItems="center">
@@ -823,7 +823,7 @@ const SheetAutomation = () => {
                     <Typography
                       variant="subtitle1"
                       sx={{
-                        color: '#fff',
+                        color: colors.text.primary,
                         fontWeight: 700,
                         display: 'flex',
                         alignItems: 'center',
@@ -836,7 +836,7 @@ const SheetAutomation = () => {
                   </Stack>
                 </AccordionSummary>
                 <AccordionDetails
-                  sx={{ px: 4, pb: 3, borderTop: '1px solid rgba(255,255,255,0.03)' }}
+                  sx={{ px: 4, pb: 3, borderTop: `1px solid ${colors.border.light}` }}
                 >
                   <Typography
                     variant="body2"
@@ -875,7 +875,7 @@ const SheetAutomation = () => {
 
               <Accordion
                 sx={{
-                  backgroundColor: 'rgba(19, 24, 36, 0.7)',
+                  backgroundColor: '#ffffff',
                   backdropFilter: 'blur(10px)',
                   border: `1px solid ${colors.border.light}`,
                   borderRadius: '12px !important',
@@ -884,7 +884,7 @@ const SheetAutomation = () => {
                 }}
               >
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon sx={{ color: '#fff' }} />}
+                  expandIcon={<ExpandMoreIcon sx={{ color: colors.text.primary }} />}
                   sx={{ py: 1 }}
                 >
                   <Stack direction="row" spacing={2} alignItems="center">
@@ -893,7 +893,7 @@ const SheetAutomation = () => {
                         width: 32,
                         height: 32,
                         borderRadius: '50%',
-                        backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                        backgroundColor: 'rgba(124, 58, 237, 0.08)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -907,7 +907,7 @@ const SheetAutomation = () => {
                     <Typography
                       variant="subtitle1"
                       sx={{
-                        color: '#fff',
+                        color: colors.text.primary,
                         fontWeight: 700,
                         display: 'flex',
                         alignItems: 'center',
@@ -920,7 +920,7 @@ const SheetAutomation = () => {
                   </Stack>
                 </AccordionSummary>
                 <AccordionDetails
-                  sx={{ px: 4, pb: 3, borderTop: '1px solid rgba(255,255,255,0.03)' }}
+                  sx={{ px: 4, pb: 3, borderTop: `1px solid ${colors.border.light}` }}
                 >
                   <Typography
                     variant="body2"

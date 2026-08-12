@@ -166,32 +166,38 @@ const Contact = () => {
           component={motion.div}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.25 }}
         >
           <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}>
-            <Box component={motion.div} variants={fadeUpVariants}>
-              <SectionBadge>Get In Touch</SectionBadge>
-            </Box>
-            <Box sx={{ overflow: 'hidden', mb: 3, pb: '0.04em' }}>
-              <BlurText
-                component="h2"
-                text="Let's Build Something Amazing Together"
-                animateBy="words"
-                direction="top"
-                delay={85}
-                stepDuration={0.3}
-                highlightWords={['Amazing', 'Together']}
+            <Typography
+              component={motion.h2}
+              variants={fadeUpVariants}
+              sx={{
+                color: colors.text.primary,
+                fontWeight: 800,
+                fontSize: { xs: '2.1rem', sm: '2.55rem', md: '3.15rem' },
+                lineHeight: 1.08,
+                textAlign: 'center',
+                maxWidth: '720px',
+                mx: 'auto',
+                mb: 3,
+                letterSpacing: '-0.03em',
+                fontFamily: '"Space Grotesk", "Inter", sans-serif',
+              }}
+            >
+              Let&apos;s build something{' '}
+              <Box
+                component="span"
                 sx={{
-                  color: colors.text.primary,
-                  fontWeight: 800,
-                  fontSize: { xs: '2.1rem', sm: '2.55rem', md: '3.15rem' },
-                  lineHeight: 1.08,
-                  textAlign: 'center',
-                  maxWidth: '720px',
-                  mx: 'auto',
+                  background: colors.accent.gradient,
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
                 }}
-              />
-            </Box>
+              >
+                amazing together.
+              </Box>
+            </Typography>
             <Typography
               component={motion.p}
               variants={descriptionVariants}
@@ -242,24 +248,24 @@ const Contact = () => {
                           borderRadius: 2,
                           textDecoration: 'none',
                           border: '1px solid transparent',
-                          backgroundColor: 'rgba(255, 255, 255, 0)',
+                          backgroundColor: 'rgba(0, 0, 0, 0)',
                           transition:
                             'background-color 0.22s ease, border-color 0.22s ease, transform 0.22s ease',
                           ...(item.href
                             ? {
                                 cursor: 'pointer',
                                 '&:hover': {
-                                  backgroundColor: 'rgba(255, 255, 255, 0.025)',
-                                  borderColor: 'rgba(255, 255, 255, 0.08)',
+                                  backgroundColor: '#f8fafc',
+                                  borderColor: colors.border.light,
                                   transform: 'translateX(2px)',
                                 },
                               }
                             : {}),
                           '&:hover .contact-icon-chip': {
                             color: colors.accent.primary,
-                            borderColor: 'rgba(168, 85, 247, 0.36)',
-                            backgroundColor: 'rgba(168, 85, 247, 0.08)',
-                            boxShadow: '0 10px 28px rgba(168, 85, 247, 0.14)',
+                            borderColor: 'rgba(124, 58, 237, 0.3)',
+                            backgroundColor: 'rgba(124, 58, 237, 0.06)',
+                            boxShadow: '0 10px 28px rgba(124, 58, 237, 0.1)',
                             transform: 'translateY(-2px)',
                           },
                         }}
@@ -271,9 +277,9 @@ const Contact = () => {
                             height: 48,
                             borderRadius: 2,
                             color: colors.accent.secondary,
-                            backgroundColor: 'rgba(255, 255, 255, 0.025)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+                            backgroundColor: '#f8fafc',
+                            border: `1px solid ${colors.border.light}`,
+                            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.06)',
                             backdropFilter: 'blur(10px)',
                             display: 'flex',
                             alignItems: 'center',
@@ -349,7 +355,7 @@ const Contact = () => {
                       width: '100%',
                       height: '100%',
                       border: 'none',
-                      filter: 'grayscale(100%) invert(92%) contrast(83%)',
+                      filter: 'none',
                     }}
                   />
                   <Box
@@ -359,7 +365,7 @@ const Contact = () => {
                       left: 0,
                       right: 0,
                       background:
-                        'linear-gradient(to top, rgba(11, 13, 16, 0.85) 0%, rgba(11, 13, 16, 0.4) 60%, transparent 100%)',
+                        'linear-gradient(to top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 60%, transparent 100%)',
                       px: 2,
                       py: 1.5,
                       display: 'flex',
@@ -573,12 +579,12 @@ const Contact = () => {
                       sx={{
                         position: 'relative',
                         overflow: 'hidden',
-                        backgroundColor: 'rgba(255, 255, 255, 0.045)',
+                        backgroundColor: '#f8fafc',
                         backgroundImage:
-                          'linear-gradient(135deg, rgba(168, 85, 247, 0.16), rgba(6, 182, 212, 0.12))',
+                          'linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(8, 145, 178, 0.08))',
                         color: colors.text.primary,
-                        border: '1px solid rgba(6, 182, 212, 0.34)',
-                        boxShadow: '0 14px 34px rgba(6, 182, 212, 0.1)',
+                        border: `1px solid ${colors.border.light}`,
+                        boxShadow: '0 4px 15px rgba(124, 58, 237, 0.08)',
                         backdropFilter: 'blur(10px)',
                         fontWeight: 700,
                         px: 4,
@@ -590,18 +596,18 @@ const Contact = () => {
                           position: 'absolute',
                           inset: 0,
                           background:
-                            'linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.16), transparent)',
+                            'linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.5), transparent)',
                           transform: 'translateX(-120%)',
                           transition: 'transform 0.55s ease',
                         },
                         '&:hover': {
-                          backgroundColor: 'rgba(255, 255, 255, 0.065)',
+                          backgroundColor: '#ffffff',
                           backgroundImage:
-                            'linear-gradient(135deg, rgba(192, 132, 252, 0.22), rgba(34, 211, 238, 0.18))',
-                          borderColor: 'rgba(168, 85, 247, 0.5)',
+                            'linear-gradient(135deg, rgba(124, 58, 237, 0.14), rgba(8, 145, 178, 0.1))',
+                          borderColor: 'rgba(124, 58, 237, 0.4)',
                           transform: 'translateY(-2px)',
                           boxShadow:
-                            '0 18px 38px rgba(6, 182, 212, 0.14), 0 0 24px rgba(168, 85, 247, 0.1)',
+                            '0 12px 30px rgba(124, 58, 237, 0.12)',
                           '&::before': {
                             transform: 'translateX(120%)',
                           },
@@ -609,9 +615,9 @@ const Contact = () => {
                         transition:
                           'background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease',
                         '&:disabled': {
-                          color: colors.text.secondary,
-                          borderColor: 'rgba(255, 255, 255, 0.12)',
-                          backgroundColor: 'rgba(255, 255, 255, 0.035)',
+                          color: colors.text.muted,
+                          borderColor: colors.border.light,
+                          backgroundColor: '#f1f5f9',
                           backgroundImage: 'none',
                           opacity: 0.75,
                         },

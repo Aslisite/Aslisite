@@ -351,7 +351,7 @@ const ServiceDetail = () => {
 
       <Box
         sx={{
-          backgroundColor: '#08090b',
+          backgroundColor: colors.background.primary,
           position: 'relative',
           overflow: 'hidden',
           pt: { xs: 12, md: 15 },
@@ -370,7 +370,7 @@ const ServiceDetail = () => {
             transform: 'translate(-50%, -50%)',
             borderRadius: '50%',
             background:
-              'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(168, 85, 247, 0.05) 50%, transparent 80%)',
+              'radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, rgba(124, 58, 237, 0.02) 50%, transparent 80%)',
             filter: 'blur(50px)',
             opacity: 0.8,
             pointerEvents: 'none',
@@ -396,7 +396,7 @@ const ServiceDetail = () => {
                 color: colors.text.secondary,
                 fontWeight: 500,
                 fontSize: '0.9rem',
-                backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                backgroundColor: '#f8fafc',
                 border: `1px solid ${colors.border.light}`,
                 borderRadius: 2,
                 px: 2.2,
@@ -404,7 +404,7 @@ const ServiceDetail = () => {
                 '&:hover': {
                   color: colors.accent.primary,
                   borderColor: colors.border.accent,
-                  backgroundColor: 'rgba(168, 85, 247, 0.05)',
+                  backgroundColor: 'rgba(124, 58, 237, 0.05)',
                   transform: 'translateX(-4px)',
                 },
               }}
@@ -427,8 +427,8 @@ const ServiceDetail = () => {
                   sx={{
                     mb: 2.5,
                     color: colors.accent.primary,
-                    borderColor: 'rgba(168, 85, 247, 0.24)',
-                    backgroundColor: 'rgba(168, 85, 247, 0.07)',
+                    borderColor: 'rgba(124, 58, 237, 0.2)',
+                    backgroundColor: 'rgba(124, 58, 237, 0.06)',
                   }}
                 >
                   {service.badge}
@@ -509,7 +509,7 @@ const ServiceDetail = () => {
                     fontWeight: 700,
                     background: colors.accent.gradient,
                     color: '#ffffff',
-                    boxShadow: '0 18px 40px rgba(168, 85, 247, 0.16)',
+                    boxShadow: '0 18px 40px rgba(124, 58, 237, 0.12)',
                   }}
                 >
                   Discuss Project
@@ -535,7 +535,7 @@ const ServiceDetail = () => {
                       height: '100%',
                       p: 3.5,
                       borderRadius: 3,
-                      backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                      backgroundColor: '#f8fafc',
                       border: `1px solid ${colors.border.light}`,
                       backdropFilter: 'blur(10px)',
                       transition: 'border-color 0.3s ease, transform 0.3s ease',
@@ -707,9 +707,9 @@ const ServiceDetail = () => {
                   key={tech}
                   label={tech}
                   sx={{
-                    backgroundColor: 'rgba(168, 85, 247, 0.07)',
+                    backgroundColor: 'rgba(124, 58, 237, 0.07)',
                     color: colors.accent.primary,
-                    border: '1px solid rgba(168, 85, 247, 0.16)',
+                    border: '1px solid rgba(124, 58, 237, 0.15)',
                     fontSize: '0.82rem',
                     fontWeight: 650,
                     px: 1.2,
@@ -717,7 +717,7 @@ const ServiceDetail = () => {
                     borderRadius: 1.5,
                     transition: 'all 0.2s ease',
                     '&:hover': {
-                      backgroundColor: 'rgba(168, 85, 247, 0.16)',
+                      backgroundColor: 'rgba(124, 58, 237, 0.12)',
                       borderColor: colors.accent.primary,
                     },
                   }}
@@ -760,12 +760,12 @@ const ServiceDetail = () => {
                     alignItems: 'flex-start',
                     p: { xs: 3, md: 3.5 },
                     borderRadius: 3,
-                    border: '1px solid rgba(255, 255, 255, 0.03)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.01)',
+                    border: `1px solid ${colors.border.light}`,
+                    backgroundColor: '#f8fafc',
                     transition: 'all 0.3s ease',
                     '&:hover': {
-                      border: `1px solid ${colors.border.light}`,
-                      backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                      border: `1px solid ${colors.border.accent}`,
+                      backgroundColor: '#ffffff',
                     },
                   }}
                 >
@@ -839,7 +839,7 @@ const ServiceDetail = () => {
                 width: 380,
                 height: 380,
                 transform: 'translate(-50%, -50%)',
-                background: 'radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 68%)',
+                background: 'radial-gradient(circle, rgba(124, 58, 237, 0.05) 0%, transparent 68%)',
                 filter: 'blur(30px)',
                 pointerEvents: 'none',
                 zIndex: 0,
@@ -897,7 +897,7 @@ const ServiceDetail = () => {
                     px: 4.5,
                     fontWeight: 700,
                     background: colors.accent.gradient,
-                    color: '#06100d',
+                    color: '#ffffff',
                   }}
                 >
                   Start the Conversation

@@ -86,7 +86,7 @@ const SkeletonCard = () => (
           aspectRatio: '16/10',
           width: '100%',
           height: 200,
-          bgcolor: 'rgba(245,241,232,0.06)',
+          bgcolor: 'rgba(0, 0, 0, 0.06)',
         }}
       />
       <CardContent sx={{ p: 3.5, flexGrow: 1 }}>
@@ -159,20 +159,27 @@ const LatestInsights = () => {
           component={motion.div}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.25 }}
         >
           <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 } }}>
             <Box component={motion.div} variants={fadeUpVariants}>
-              <SectionBadge>Recent Insights</SectionBadge>
+              <Typography
+                variant="overline"
+                sx={{
+                  color: colors.accent.secondary,
+                  fontWeight: 700,
+                  fontSize: '0.75rem',
+                  letterSpacing: '0.08em',
+                  mb: 1.5,
+                  display: 'block',
+                }}
+              >
+                From the Blog
+              </Typography>
             </Box>
-            <BlurText
-              component="h2"
-              text="Latest from Our Blog"
-              animateBy="words"
-              direction="top"
-              delay={110}
-              stepDuration={0.32}
-              highlightWords={['Blog']}
+            <Typography
+              component={motion.h2}
+              variants={fadeUpVariants}
               sx={{
                 fontSize: { xs: '2rem', sm: '2.45rem', md: '2.85rem' },
                 fontWeight: 800,
@@ -182,8 +189,12 @@ const LatestInsights = () => {
                 textAlign: 'center',
                 maxWidth: '640px',
                 mx: 'auto',
+                letterSpacing: '-0.03em',
+                fontFamily: '"Space Grotesk", "Inter", sans-serif',
               }}
-            />
+            >
+              Latest from our blog
+            </Typography>
             <Typography
               component={motion.p}
               variants={fadeUpVariants}
@@ -230,7 +241,7 @@ const LatestInsights = () => {
                           '&:hover': {
                             transform: 'translateY(-6px)',
                             borderColor: colors.border.accent,
-                            boxShadow: '0 18px 36px rgba(0, 0, 0, 0.34)',
+                            boxShadow: '0 18px 36px rgba(0, 0, 0, 0.08)',
                             '& .insights-card-image': {
                               transform: 'scale(1.06)',
                             },
@@ -276,7 +287,7 @@ const LatestInsights = () => {
                                   position: 'absolute',
                                   inset: 0,
                                   background:
-                                    'linear-gradient(to top, rgba(11,13,16,0.55) 0%, transparent 60%)',
+                                    'linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%)',
                                   transition: 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                                   opacity: 0.45,
                                   pointerEvents: 'none',
@@ -317,7 +328,7 @@ const LatestInsights = () => {
                               label={post.category || 'Digital Strategy'}
                               size="small"
                               sx={{
-                                bgcolor: 'rgba(245, 241, 232, 0.05)',
+                                bgcolor: '#f1f5f9',
                                 color: colors.text.secondary,
                                 fontWeight: 600,
                                 fontSize: '0.7rem',
@@ -443,14 +454,14 @@ const LatestInsights = () => {
               py: 1.25,
               fontWeight: 700,
               borderRadius: 2.5,
-              color: '#fff',
-              borderColor: 'rgba(245, 241, 232, 0.16)',
+              color: colors.text.primary,
+              borderColor: colors.border.medium,
               transition: 'all 0.3s ease',
               '&:hover': {
                 borderColor: colors.accent.primary,
-                backgroundColor: 'rgba(168, 85, 247, 0.05)',
+                backgroundColor: 'rgba(124, 58, 237, 0.05)',
                 transform: 'translateY(-2px)',
-                boxShadow: '0 4px 20px rgba(168, 85, 247, 0.15)',
+                boxShadow: '0 4px 20px rgba(124, 58, 237, 0.1)',
               },
             }}
           >
