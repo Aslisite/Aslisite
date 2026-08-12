@@ -128,7 +128,7 @@ const FeaturedCard = ({ blog }) => {
             label="Latest"
             size="small"
             sx={{
-              background: colors.accent.gradient,
+              background: colors.accent.primary,
               color: '#fff',
               fontWeight: 700,
               fontSize: '0.62rem',

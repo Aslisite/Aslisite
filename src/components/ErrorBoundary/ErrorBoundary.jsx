@@ -41,7 +41,7 @@ class ErrorBoundary extends React.Component {
               variant="contained"
               onClick={() => window.location.reload()}
               sx={{
-                background: colors.accent.gradient,
+                background: colors.accent.primary,
                 color: '#fff',
                 px: 4,
                 py: 1.5,

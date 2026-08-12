@@ -69,9 +69,9 @@ const NotFound = () => {
             py: 1.5,
             fontWeight: 700,
             borderRadius: 2,
-            background: colors.accent.gradient,
+            background: colors.accent.primary,
             '&:hover': {
-              opacity: 0.9,
+              background: colors.accent.primaryHover,
             },
           }}
         >

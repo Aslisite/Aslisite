@@ -152,7 +152,7 @@ const Product = () => {
                   fontSize: '0.7rem',
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
-                  background: colors.accent.gradient,
+                  background: colors.accent.primary,
                   color: '#fff',
                 }}
               />
@@ -270,13 +270,13 @@ const Product = () => {
                       px: 4,
                       fontSize: '1rem',
                       fontWeight: 600,
-                      background: colors.accent.gradient,
+                      background: colors.accent.primary,
                       borderRadius: 2,
-                      boxShadow: '0 4px 20px rgba(124, 58, 237, 0.2)',
+                      boxShadow: '0 2px 8px rgba(109, 40, 217, 0.15)',
                       transition: 'background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
                       '&:hover': {
-                        background: colors.accent.gradient,
-                        boxShadow: '0 6px 28px rgba(124, 58, 237, 0.28)',
+                        background: colors.accent.primaryHover,
+                        boxShadow: '0 4px 14px rgba(109, 40, 217, 0.22)',
                         transform: 'translateY(-2px)',
                       },
                     }}

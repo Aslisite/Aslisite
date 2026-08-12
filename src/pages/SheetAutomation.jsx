@@ -457,10 +457,10 @@ const SheetAutomation = () => {
                       fontSize: '0.95rem',
                       fontWeight: 700,
                       borderRadius: 2.5,
-                      background: colors.accent.gradient,
-                      boxShadow: '0 4px 15px rgba(124, 58, 237, 0.18)',
+                      background: colors.accent.primary,
+                      boxShadow: '0 4px 15px rgba(109, 40, 217, 0.15)',
                       '&:hover': {
-                        background: colors.accent.gradient,
+                        background: colors.accent.primaryHover,
                         transform: 'translateY(-1px)',
                       },
                     }}

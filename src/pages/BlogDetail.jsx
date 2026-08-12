@@ -287,9 +287,9 @@ const CTASection = () => (
       my: 8,
       p: { xs: 4, md: 6 },
       borderRadius: 4,
-      background: colors.accent.gradient,
+      background: colors.accent.primary,
       textAlign: 'center',
-      boxShadow: '0 20px 40px rgba(124, 58, 237, 0.15)',
+      boxShadow: '0 12px 32px rgba(109, 40, 217, 0.12)',
     }}
   >
     <Typography variant="h4" sx={{ fontWeight: 800, mb: 2, color: '#fff' }}>

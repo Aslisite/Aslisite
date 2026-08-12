@@ -507,7 +507,7 @@ const ServiceDetail = () => {
                     py: 1.6,
                     px: 3.8,
                     fontWeight: 700,
-                    background: colors.accent.gradient,
+                    background: colors.accent.primary,
                     color: '#ffffff',
                     boxShadow: '0 18px 40px rgba(124, 58, 237, 0.12)',
                   }}
@@ -896,7 +896,7 @@ const ServiceDetail = () => {
                     py: 1.8,
                     px: 4.5,
                     fontWeight: 700,
-                    background: colors.accent.gradient,
+                    background: colors.accent.primary,
                     color: '#ffffff',
                   }}
                 >
