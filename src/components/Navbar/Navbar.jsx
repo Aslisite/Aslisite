@@ -484,12 +484,12 @@ const Navbar = () => {
                   color: '#ffffff',
                   fontFamily: '"Inter", sans-serif',
                   fontWeight: 700,
-                  background: colors.accent.gradient,
+                  background: colors.accent.primary,
                   borderRadius: 2,
-                  boxShadow: '0 4px 15px rgba(124, 58, 237, 0.2)',
+                  boxShadow: '0 2px 8px rgba(109, 40, 217, 0.15)',
                   '&:hover': {
-                    background: 'linear-gradient(135deg, #6d28d9 0%, #0e7490 100%)',
-                    boxShadow: '0 6px 20px rgba(124, 58, 237, 0.28)',
+                    background: colors.accent.primaryHover,
+                    boxShadow: '0 4px 14px rgba(109, 40, 217, 0.22)',
                   },
                 }}
               >

@@ -193,13 +193,13 @@ let theme = createTheme({
           transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
         },
         containedPrimary: {
-          background: colors.accent.gradient,
-          boxShadow: '0 4px 14px rgba(109, 40, 217, 0.18)',
+          background: colors.accent.primary,
+          boxShadow: '0 2px 8px rgba(109, 40, 217, 0.15)',
           color: '#ffffff',
           '&:hover': {
-            boxShadow: '0 6px 20px rgba(109, 40, 217, 0.25)',
+            boxShadow: '0 4px 14px rgba(109, 40, 217, 0.22)',
             transform: 'translateY(-2px)',
-            background: 'linear-gradient(135deg, #5b21b6 0%, #0f766e 100%)',
+            background: colors.accent.primaryHover,
           },
         },
         containedSecondary: {
