@@ -424,7 +424,15 @@ const Blog = () => {
 
       {/* Header */}
       <Box sx={{ textAlign: 'center', mb: { xs: 5, md: 8 } }}>
-        <SectionBadge>Our Blog</SectionBadge>
+        <SectionBadge
+          sx={{
+            backgroundColor: 'transparent',
+            border: `1.5px solid ${colors.accent.primary}`,
+            color: colors.accent.primary,
+          }}
+        >
+          Our Blog
+        </SectionBadge>
         <Typography
           variant="h2"
           component="h1"

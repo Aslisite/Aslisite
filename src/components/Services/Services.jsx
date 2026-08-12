@@ -73,7 +73,16 @@ const Services = () => {
           transition={{ duration: 0.5 }}
           sx={{ textAlign: 'center', mb: { xs: 6, md: 8 }, maxWidth: 640, mx: 'auto' }}
         >
-          <SectionBadge sx={{ mb: 2.5 }}>Our Services</SectionBadge>
+          <SectionBadge
+            sx={{
+              mb: 2.5,
+              backgroundColor: 'rgba(0, 0, 0, 0.04)',
+              color: colors.text.secondary,
+              borderColor: colors.border.medium,
+            }}
+          >
+            Our Services
+          </SectionBadge>
           <Typography
             variant="h2"
             sx={{

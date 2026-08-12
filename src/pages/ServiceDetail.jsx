@@ -736,7 +736,16 @@ const ServiceDetail = () => {
             sx={{ mb: { xs: 10, md: 15 } }}
           >
             <Box sx={{ textAlign: 'center', mb: { xs: 5, md: 8 } }}>
-              <SectionBadge sx={{ mb: 2 }}>Workflow</SectionBadge>
+              <SectionBadge
+                sx={{
+                  mb: 2,
+                  backgroundColor: 'rgba(13, 148, 136, 0.07)',
+                  color: colors.accent.secondary,
+                  borderColor: 'rgba(13, 148, 136, 0.18)',
+                }}
+              >
+                Workflow
+              </SectionBadge>
               <Typography
                 variant="h2"
                 sx={{
