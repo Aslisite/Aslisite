@@ -1,15 +1,14 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import TrustStrip from '../components/TrustStrip';
+import Services from '../components/Services';
+import Product from '../components/Product';
+import LatestInsights from '../components/LatestInsights';
+import Testimonials from '../components/Testimonials';
+import FAQ from '../components/FAQ';
+import Contact from '../components/Contact';
 import { absoluteUrl, siteMetadata, websiteSchema } from '../seo/siteMetadata';
-
-const Services = React.lazy(() => import('../components/Services'));
-const Product = React.lazy(() => import('../components/Product'));
-const LatestInsights = React.lazy(() => import('../components/LatestInsights'));
-const Testimonials = React.lazy(() => import('../components/Testimonials'));
-const FAQ = React.lazy(() => import('../components/FAQ'));
-const Contact = React.lazy(() => import('../components/Contact'));
 
 const Home = () => {
   return (
@@ -36,14 +35,12 @@ const Home = () => {
       </Helmet>
       <Hero />
       <TrustStrip />
-      <Suspense fallback={null}>
-        <Services />
-        <Product />
-        <Testimonials />
-        <LatestInsights />
-        <FAQ />
-        <Contact />
-      </Suspense>
+      <Services />
+      <Product />
+      <Testimonials />
+      <LatestInsights />
+      <FAQ />
+      <Contact />
     </>
   );
 };
