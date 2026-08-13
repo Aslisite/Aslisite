@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import { HelmetProvider } from 'react-helmet-async';
-import App from './App.server.jsx';
+import App from './App.jsx';
 import { DataProvider } from './context/DataContext.jsx';
 import './index.css';
 
