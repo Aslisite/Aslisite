@@ -362,15 +362,16 @@ const BlogDetail = () => {
 
   const [allBlogs, setAllBlogs] = useState(initialBlogs);
   const [post, setPost] = useState(initialPost || null);
-  const [loading, setLoading] = useState(!initialData?.blogs);
+  const [loading, setLoading] = useState(!initialPost && !initialData?.blogs);
   const [error, setError] = useState(initialData?.blogs && !initialPost ? 'Post not found' : '');
 
   useEffect(() => {
+    // If we already have the post from prerendered/initial data, use it immediately
     if (initialData?.blogs) {
-      const foundPost = initialData.blogs.find((b) => b.slug === slug);
+      const foundPost = filterPublishedBlogs(initialData.blogs).find((b) => b.slug === slug);
       if (foundPost) {
         setPost(foundPost);
-        setAllBlogs(initialData.blogs);
+        setAllBlogs(filterPublishedBlogs(initialData.blogs));
         setError('');
       } else {
         setError('Post not found');
@@ -379,6 +380,7 @@ const BlogDetail = () => {
       return;
     }
 
+    // No initial data available — fetch from API (pure client-side navigation)
     const fetchPost = async () => {
       try {
         const blogs = await getBlogs();
@@ -391,13 +393,18 @@ const BlogDetail = () => {
           setError('Post not found');
         }
       } catch (err) {
-        setError('Failed to load the blog post. Please try again later.');
+        // CRITICAL: If we already have a valid post from SSG, do NOT replace it with an error.
+        // This protects prerendered content from being wiped by a transient API failure.
+        if (!post) {
+          setError('Failed to load the blog post. Please try again later.');
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchPost();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug, initialData]);
 
   const tocItems = useMemo(() => extractTOC(post?.content), [post]);

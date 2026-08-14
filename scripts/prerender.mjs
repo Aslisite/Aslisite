@@ -1,13 +1,14 @@
-import { build, createServer } from 'vite';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { build } from 'vite';
+import { mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { filterPublishedBlogs } from '../src/api/blog.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
+const ssrOutDir = path.join(projectRoot, 'dist-ssr');
 const indexHtmlPath = path.join(distDir, 'index.html');
 
 async function fetchBlogs() {
@@ -35,7 +36,35 @@ async function runBuild() {
     },
   });
 
-  // 2. Prepare routes
+  // 2. Build SSR bundle (Rollup properly handles CJS/ESM interop)
+  console.log('Building SSR bundle...');
+  await build({
+    configFile: path.join(projectRoot, 'vite.config.js'),
+    build: {
+      outDir: 'dist-ssr',
+      ssr: true,
+      rollupOptions: {
+        input: path.join(projectRoot, 'src/entry-server.jsx'),
+        // Externalize only Node built-ins and React (CJS).
+        // Everything else (MUI, framer-motion, etc.) gets bundled
+        // to avoid Node 24's strict ESM resolution issues.
+        external: [
+          'react',
+          'react-dom',
+          'react-dom/server',
+          'react/jsx-runtime',
+          'react/jsx-dev-runtime',
+        ],
+      },
+      emptyOutDir: true,
+    },
+    ssr: {
+      // Force Vite to bundle these instead of externalizing
+      noExternal: [/^(?!react|react-dom)/],
+    },
+  });
+
+  // 3. Prepare routes
   const blogs = await fetchBlogs();
   const routes = [
     '/',
@@ -53,21 +82,18 @@ async function runBuild() {
 
   console.log(`Generating ${routes.length} static pages...`);
 
-  // 3. Setup Vite server for SSR loading
-  const vite = await createServer({
-    configFile: path.join(projectRoot, 'vite.config.js'),
-    server: {
-      middlewareMode: true,
-    },
-    appType: 'custom',
-  });
+  // 4. Import the SSR bundle
+  const ssrEntryPath = path.join(ssrOutDir, 'entry-server.js');
+  const { render } = await import(pathToFileURL(ssrEntryPath).href);
+  const templateHtml = await readFile(indexHtmlPath, 'utf8');
 
-  try {
-    const { render } = await vite.ssrLoadModule('/src/entry-server.jsx');
-    const templateHtml = await readFile(indexHtmlPath, 'utf8');
+  // 5. Render and save each route (including a 404 page)
+  const allRoutes = [...routes, '/404-not-found'];
+  let successCount = 0;
+  let failCount = 0;
 
-    // 4. Render and save each route
-    for (const url of routes) {
+  for (const url of allRoutes) {
+    try {
       console.log(`Pre-rendering: ${url}`);
 
       const { html, helmet } = render(url, { blogs });
@@ -82,11 +108,33 @@ async function runBuild() {
       prerenderedHtml = prerenderedHtml.replace('</head>', `${initialDataScript}\n  </head>`);
 
       if (helmet) {
+        // Replace the default title with the page-specific title from Helmet
+        const helmetTitle = helmet.title ? helmet.title.toString() : '';
+        if (helmetTitle) {
+          prerenderedHtml = prerenderedHtml.replace(
+            /<title>[^<]*<\/title>/,
+            helmetTitle,
+          );
+        }
+
+        // Replace the default meta description with the page-specific one from Helmet
+        const helmetMeta = helmet.meta ? helmet.meta.toString() : '';
+        if (helmetMeta.includes('name="description"')) {
+          // Remove the original multi-line meta description tag from the template
+          prerenderedHtml = prerenderedHtml.replace(
+            /<meta\s[^>]*name="description"[^>]*\/?>/s,
+            '',
+          );
+        }
+
+        // Inject all helmet-generated link and script tags, plus any remaining meta tags
+        const helmetLink = helmet.link ? helmet.link.toString() : '';
+        const helmetScript = helmet.script ? helmet.script.toString() : '';
+
         const helmetTags = `
-    ${helmet.title ? helmet.title.toString() : ''}
-    ${helmet.meta ? helmet.meta.toString() : ''}
-    ${helmet.link ? helmet.link.toString() : ''}
-    ${helmet.script ? helmet.script.toString() : ''}
+    ${helmetMeta}
+    ${helmetLink}
+    ${helmetScript}
 `;
         prerenderedHtml = prerenderedHtml.replace('</head>', `${helmetTags}\n  </head>`);
       }
@@ -97,17 +145,29 @@ async function runBuild() {
       await mkdir(targetDir, { recursive: true });
       const targetFile = path.join(targetDir, 'index.html');
 
-      await writeFile(targetFile, prerenderedHtml, 'utf8');
+      // Special case: save the 404 route as 404.html at the root for Vercel
+      if (url === '/404-not-found') {
+        await writeFile(path.join(distDir, '404.html'), prerenderedHtml, 'utf8');
+      } else {
+        await writeFile(targetFile, prerenderedHtml, 'utf8');
+      }
+      successCount++;
+    } catch (err) {
+      console.error(`  Error pre-rendering ${url}:`, err.message);
+      failCount++;
     }
-  } catch (err) {
-    console.error('Error during pre-rendering:', err);
-  } finally {
-    await vite.close();
   }
 
-  console.log('Static Site Generation complete!');
+  console.log(`\nStatic Site Generation complete! ${successCount} pages generated, ${failCount} failed.`);
 
-  // 5. Generate dynamic sitemap.xml
+  if (failCount > 0) {
+    console.warn('WARNING: Some pages failed to pre-render. They will fall back to client-side rendering.');
+  }
+
+  // 6. Clean up SSR bundle
+  await rm(ssrOutDir, { recursive: true, force: true });
+
+  // 7. Generate dynamic sitemap.xml
   await generateSitemap(routes);
 }
 
