@@ -1,13 +1,67 @@
+import { useState, useEffect, useRef } from 'react';
 import { Box, Container, Stack, Typography } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { colors } from '../../theme/theme';
 
 const stats = [
-  { value: '50+', label: 'Projects Delivered' },
-  { value: '98%', label: 'Client Satisfaction' },
-  { value: '3+', label: 'Years Experience' },
-  { value: '24hr', label: 'Response Time' },
+  { value: 50, suffix: '+', label: 'Projects Delivered' },
+  { value: 98, suffix: '%', label: 'Client Satisfaction' },
+  { value: 3, suffix: '+', label: 'Years Experience' },
+  { value: 24, suffix: 'hr', label: 'Response Time' },
 ];
+
+/* ─── Animated Counter ─── */
+const AnimatedCounter = ({ target, suffix, duration = 1.8 }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let start = 0;
+    const startTime = performance.now();
+
+    const step = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / (duration * 1000), 1);
+
+      // Ease out cubic for smooth deceleration
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+
+      if (current !== start) {
+        start = current;
+        setCount(current);
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        setCount(target);
+      }
+    };
+
+    requestAnimationFrame(step);
+  }, [isInView, target, duration]);
+
+  return (
+    <Typography
+      ref={ref}
+      sx={{
+        fontSize: { xs: '1.8rem', md: '2.2rem' },
+        fontWeight: 800,
+        letterSpacing: '-0.03em',
+        color: colors.text.primary,
+        lineHeight: 1.1,
+        fontFamily: '"Space Grotesk", sans-serif',
+      }}
+    >
+      {count}
+      {suffix}
+    </Typography>
+  );
+};
 
 const TrustStrip = () => {
   return (
@@ -46,18 +100,7 @@ const TrustStrip = () => {
         >
           {stats.map((stat) => (
             <Box key={stat.label} sx={{ textAlign: 'center', flex: { xs: '0 0 50%', sm: 1 }, py: { xs: 1.5, sm: 0 } }}>
-              <Typography
-                sx={{
-                  fontSize: { xs: '1.8rem', md: '2.2rem' },
-                  fontWeight: 800,
-                  letterSpacing: '-0.03em',
-                  color: colors.text.primary,
-                  lineHeight: 1.1,
-                  fontFamily: '"Space Grotesk", sans-serif',
-                }}
-              >
-                {stat.value}
-              </Typography>
+              <AnimatedCounter target={stat.value} suffix={stat.suffix} />
               <Typography
                 variant="caption"
                 sx={{
