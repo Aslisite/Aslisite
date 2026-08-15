@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
   Container,
   Grid,
@@ -11,7 +11,7 @@ import {
   Chip,
   Stack,
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import AccessTimeImport from '@mui/icons-material/AccessTime';
 import CalendarTodayImport from '@mui/icons-material/CalendarToday';
@@ -347,6 +347,8 @@ const Blog = () => {
   const [loading, setLoading] = useState(!initialData?.blogs);
   const [error, setError] = useState('');
   const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get('q') || '';
 
   useEffect(() => {
     if (initialData?.blogs) return;
@@ -365,6 +367,18 @@ const Blog = () => {
     fetchBlogs();
   }, [initialData]);
 
+  // Filter blogs based on search query
+  const filteredBlogs = useMemo(() => {
+    if (!searchQuery.trim()) return blogs;
+    const q = searchQuery.toLowerCase();
+    return blogs.filter(
+      (blog) =>
+        blog.title?.toLowerCase().includes(q) ||
+        blog.metaDesc?.toLowerCase().includes(q) ||
+        blog.category?.toLowerCase().includes(q),
+    );
+  }, [blogs, searchQuery]);
+
   if (loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
@@ -381,7 +395,7 @@ const Blog = () => {
     );
   }
 
-  const [featured, ...allRemaining] = blogs;
+  const [featured, ...allRemaining] = filteredBlogs;
   const remaining = allRemaining.slice(0, visibleCount);
   const hasMore = visibleCount < allRemaining.length;
   const totalCount = allRemaining.length;
@@ -448,39 +462,101 @@ const Blog = () => {
             color: colors.text.primary,
           }}
         >
-          Insights &{' '}
-          <Box
-            component="span"
+          {searchQuery ? (
+            <>
+              Results for &ldquo;
+              <Box
+                component="span"
+                sx={{
+                  background: colors.accent.gradient,
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                {searchQuery}
+              </Box>
+              &rdquo;
+            </>
+          ) : (
+            <>
+              Insights &{' '}
+              <Box
+                component="span"
+                sx={{
+                  background: colors.accent.gradient,
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Updates
+              </Box>
+            </>
+          )}
+        </Typography>
+        {searchQuery ? (
+          <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+            <Typography variant="body1" sx={{ color: colors.text.secondary }}>
+              {filteredBlogs.length} {filteredBlogs.length === 1 ? 'result' : 'results'} found
+            </Typography>
+            <Button
+              component={RouterLink}
+              to="/blog"
+              size="small"
+              sx={{
+                fontWeight: 600,
+                color: colors.accent.primary,
+                textTransform: 'none',
+              }}
+            >
+              Clear search
+            </Button>
+          </Stack>
+        ) : (
+          <Typography
+            variant="h6"
             sx={{
-              background: colors.accent.gradient,
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              color: colors.text.secondary,
+              fontWeight: 400,
+              maxWidth: '580px',
+              mx: 'auto',
+              fontSize: { xs: '1rem', md: '1.1rem' },
+              lineHeight: 1.6,
             }}
           >
-            Updates
-          </Box>
-        </Typography>
-        <Typography
-          variant="h6"
-          sx={{
-            color: colors.text.secondary,
-            fontWeight: 400,
-            maxWidth: '580px',
-            mx: 'auto',
-            fontSize: { xs: '1rem', md: '1.1rem' },
-            lineHeight: 1.6,
-          }}
-        >
-          Practical guides on web development, SEO, and digital growth for businesses.
-        </Typography>
+            Practical guides on web development, SEO, and digital growth for businesses.
+          </Typography>
+        )}
       </Box>
 
       {/* Featured Post */}
-      {featured && <FeaturedCard blog={featured} />}
+      {featured && !searchQuery && <FeaturedCard blog={featured} />}
+
+      {/* No results message */}
+      {searchQuery && filteredBlogs.length === 0 && (
+        <Box sx={{ textAlign: 'center', py: 8 }}>
+          <Typography variant="h6" sx={{ color: colors.text.secondary, mb: 2 }}>
+            No articles found matching your search.
+          </Typography>
+          <Button
+            component={RouterLink}
+            to="/blog"
+            variant="outlined"
+            sx={{
+              fontWeight: 600,
+              borderColor: colors.border.medium,
+              color: colors.text.primary,
+              '&:hover': { borderColor: colors.accent.primary },
+            }}
+          >
+            View all articles
+          </Button>
+        </Box>
+      )}
 
       {/* Section Divider */}
-      {remaining.length > 0 && (
+      {(searchQuery ? filteredBlogs.length > 0 : remaining.length > 0) && (
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
           <Typography
             variant="overline"
@@ -491,20 +567,22 @@ const Blog = () => {
               fontSize: '0.75rem',
             }}
           >
-            All Articles
+            {searchQuery ? 'Search Results' : 'All Articles'}
           </Typography>
-          <Typography
-            variant="caption"
-            sx={{ color: colors.text.muted, fontWeight: 500 }}
-          >
-            Showing {remaining.length} of {totalCount}
-          </Typography>
+          {!searchQuery && (
+            <Typography
+              variant="caption"
+              sx={{ color: colors.text.muted, fontWeight: 500 }}
+            >
+              Showing {remaining.length} of {totalCount}
+            </Typography>
+          )}
         </Stack>
       )}
 
       {/* Remaining Articles — 2-column horizontal cards */}
       <Grid container spacing={3}>
-        {remaining.map((blog) => (
+        {(searchQuery ? filteredBlogs : remaining).map((blog) => (
           <Grid item key={blog.slug || blog.title} xs={12} md={6}>
             <ArticleCard blog={blog} />
           </Grid>
@@ -512,7 +590,7 @@ const Blog = () => {
       </Grid>
 
       {/* Load More */}
-      {hasMore && (
+      {hasMore && !searchQuery && (
         <Box sx={{ textAlign: 'center', mt: { xs: 5, md: 6 } }}>
           <Button
             variant="outlined"
