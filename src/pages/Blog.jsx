@@ -538,6 +538,168 @@ const Blog = () => {
           </Button>
         </Box>
       )}
+
+      {/* ─── Services Cross-Link Section ─── */}
+      <Box sx={{ mt: { xs: 8, md: 12 }, mb: { xs: 4, md: 6 } }}>
+        <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 5 } }}>
+          <Typography
+            variant="overline"
+            sx={{
+              fontWeight: 700,
+              color: colors.accent.primary,
+              letterSpacing: '0.12em',
+              fontSize: '0.72rem',
+            }}
+          >
+            What We Do
+          </Typography>
+          <Typography
+            variant="h4"
+            component="h2"
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: '1.6rem', md: '2rem' },
+              color: colors.text.primary,
+              mt: 1,
+            }}
+          >
+            Explore Our Services
+          </Typography>
+        </Box>
+
+        <Grid container spacing={2.5}>
+          {[
+            { title: 'Web Development', desc: 'High-performance custom web apps built for speed and scale.', href: '/services/web-development' },
+            { title: 'Ecommerce Solutions', desc: 'Online stores designed to convert browsers into loyal customers.', href: '/services/ecommerce-solutions' },
+            { title: 'Custom Software', desc: 'Bespoke tools that automate workflows and grow with your business.', href: '/services/custom-software' },
+            { title: 'SEO Services', desc: 'Data-driven optimization to capture high-intent organic traffic.', href: '/services/seo-services' },
+          ].map((service) => (
+            <Grid item key={service.title} xs={12} sm={6} md={3}>
+              <Box
+                component={RouterLink}
+                to={service.href}
+                sx={{
+                  display: 'block',
+                  p: 3,
+                  height: '100%',
+                  borderRadius: 3,
+                  border: `1px solid ${colors.border.light}`,
+                  backgroundColor: '#f8fafc',
+                  textDecoration: 'none',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    borderColor: colors.border.accent,
+                    transform: 'translateY(-4px)',
+                    boxShadow: '0 12px 24px rgba(124, 58, 237, 0.08)',
+                  },
+                }}
+              >
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    fontWeight: 700,
+                    color: colors.text.primary,
+                    mb: 1,
+                    fontSize: '0.95rem',
+                  }}
+                >
+                  {service.title}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: colors.text.secondary,
+                    lineHeight: 1.6,
+                    fontSize: '0.85rem',
+                  }}
+                >
+                  {service.desc}
+                </Typography>
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+
+      {/* ─── CTA Banner ─── */}
+      <Box
+        sx={{
+          mt: { xs: 4, md: 6 },
+          p: { xs: 4, md: 6 },
+          borderRadius: 4,
+          background: colors.accent.primary,
+          textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <Box
+          aria-hidden="true"
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            width: 400,
+            height: 400,
+            transform: 'translate(-50%, -50%)',
+            background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)',
+            pointerEvents: 'none',
+          }}
+        />
+        <Box sx={{ position: 'relative', zIndex: 1 }}>
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: 800, mb: 2, color: '#fff', fontSize: { xs: '1.5rem', md: '2rem' } }}
+          >
+            Ready to grow your digital presence?
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{ mb: 4, color: 'rgba(255, 255, 255, 0.9)', maxWidth: '520px', mx: 'auto', lineHeight: 1.7 }}
+          >
+            Let&apos;s discuss how Aslisite can help your business with a custom website, better SEO, or a scalable ecommerce platform.
+          </Typography>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
+            <Button
+              variant="contained"
+              size="large"
+              component="a"
+              href="https://wa.me/919495664173"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                background: '#ffffff',
+                color: colors.text.primary,
+                fontWeight: 700,
+                px: 4,
+                py: 1.5,
+                borderRadius: 2,
+                boxShadow: 'none',
+                '&:hover': { background: '#f1f5f9', boxShadow: 'none' },
+              }}
+            >
+              Start a Conversation
+            </Button>
+            <Button
+              variant="outlined"
+              size="large"
+              component={RouterLink}
+              to="/#contact"
+              sx={{
+                borderColor: 'rgba(255, 255, 255, 0.6)',
+                color: '#fff',
+                fontWeight: 700,
+                px: 4,
+                py: 1.5,
+                borderRadius: 2,
+                '&:hover': { borderColor: '#fff', bgcolor: 'rgba(255,255,255,0.12)' },
+              }}
+            >
+              Contact Us
+            </Button>
+          </Stack>
+        </Box>
+      </Box>
     </Container>
   );
 };
