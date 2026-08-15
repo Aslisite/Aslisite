@@ -75,7 +75,7 @@ const AnnouncementBar = ({ onDismiss }) => (
           '&:hover': { textDecoration: 'underline' },
         }}
       >
-        New: Free Google Sheets Invoice Automation Tool &rarr;
+        New: Free Payment Reminder Automation Tool &rarr;
       </Typography>
       <IconButton
         onClick={onDismiss}
