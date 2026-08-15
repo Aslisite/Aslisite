@@ -7,104 +7,83 @@ import {
   CircularProgress,
   Container,
   Grid,
-  Paper,
   Snackbar,
   TextField,
   Typography,
+  Stack,
+  IconButton,
 } from '@mui/material';
 import { motion } from 'framer-motion';
-import BusinessImport from '@mui/icons-material/Business';
-import EmailImport from '@mui/icons-material/Email';
-import LocationOnImport from '@mui/icons-material/LocationOn';
-import PhoneImport from '@mui/icons-material/Phone';
 import SendImport from '@mui/icons-material/Send';
+import WhatsAppImport from '@mui/icons-material/WhatsApp';
+import EmailImport from '@mui/icons-material/Email';
+import PhoneImport from '@mui/icons-material/Phone';
 import { colors } from '../../theme/theme';
+import { SectionBadge } from '../common';
 
-const Business = BusinessImport.default || BusinessImport;
-const Email = EmailImport.default || EmailImport;
-const LocationOn = LocationOnImport.default || LocationOnImport;
-const Phone = PhoneImport.default || PhoneImport;
 const Send = SendImport.default || SendImport;
+const WhatsApp = WhatsAppImport.default || WhatsAppImport;
+const Email = EmailImport.default || EmailImport;
+const Phone = PhoneImport.default || PhoneImport;
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
+  hidden: { opacity: 0, y: 20 },
+  visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-};
-
-const descriptionVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-};
-
-const leftPanelVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-      delay: 0.1,
-    },
-  },
-};
-
-const rightPanelVariants = {
-  hidden: { opacity: 0, x: 20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-      delay: 0.15,
-    },
-  },
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay },
+  }),
 };
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
 
-const contactInfo = [
+const quickActions = [
+  {
+    icon: WhatsApp,
+    label: 'WhatsApp',
+    href: 'https://wa.me/919495664173?text=Hi%20Aslisite,%20I%20have%20a%20project%20to%20discuss!',
+    color: '#25D366',
+    bg: 'rgba(37, 211, 102, 0.08)',
+    border: 'rgba(37, 211, 102, 0.2)',
+  },
   {
     icon: Email,
-    label: 'Email Us',
-    value: 'info@aslisite.com',
+    label: 'Email',
     href: 'mailto:info@aslisite.com',
+    color: colors.accent.primary,
+    bg: 'rgba(124, 58, 237, 0.06)',
+    border: 'rgba(124, 58, 237, 0.15)',
   },
   {
     icon: Phone,
-    label: 'Call Us',
-    value: '91 9495664173',
+    label: 'Call',
     href: 'tel:+919495664173',
-  },
-  {
-    icon: LocationOn,
-    label: 'Visit Us',
-    value: 'Aslisite Technologies, Peruvallur, Malappuram, Kerala, India 676317',
-    href: null,
-  },
-  {
-    icon: Business,
-    label: 'Business Hours',
-    value: 'Mon - Fri: 9:00 AM - 6:00 PM IST',
-    href: null,
+    color: '#0891b2',
+    bg: 'rgba(8, 145, 178, 0.06)',
+    border: 'rgba(8, 145, 178, 0.15)',
   },
 ];
+
+const inputStyles = {
+  '& .MuiOutlinedInput-root': {
+    backgroundColor: '#ffffff',
+    borderRadius: 2,
+    '& fieldset': { borderColor: colors.border.light },
+    '&:hover fieldset': { borderColor: colors.accent.primary },
+    '&.Mui-focused fieldset': { borderColor: colors.accent.primary, borderWidth: '1.5px' },
+  },
+  '& .MuiInputLabel-root': {
+    color: colors.text.muted,
+    fontSize: '0.9rem',
+    '&.Mui-focused': { color: colors.accent.primary },
+  },
+  '& .MuiOutlinedInput-input': {
+    color: colors.text.primary,
+    fontSize: '0.95rem',
+  },
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -129,14 +108,14 @@ const Contact = () => {
       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, PUBLIC_KEY);
       setSnackbar({
         open: true,
-        message: "Thank you for your message! We'll get back to you within 24 hours.",
+        message: "Message sent! We'll get back to you within 24 hours.",
         severity: 'success',
       });
       setFormData({ name: '', email: '', company: '', message: '' });
     } catch (error) {
       setSnackbar({
         open: true,
-        message: 'Failed to send message. Please try again or email us directly.',
+        message: 'Failed to send. Please try again or reach out via WhatsApp.',
         severity: 'error',
       });
     } finally {
@@ -154,52 +133,79 @@ const Contact = () => {
       component="section"
       tabIndex="-1"
       sx={{
-        py: { xs: 6, md: 8 },
-        backgroundColor: colors.background.elevated,
+        py: { xs: 8, md: 12 },
         position: 'relative',
+        overflow: 'hidden',
+        backgroundColor: colors.background.primary,
         scrollMarginTop: '80px',
       }}
     >
-      <Container maxWidth="lg">
+      {/* Background gradient accents */}
+      <Box
+        aria-hidden="true"
+        sx={{
+          position: 'absolute',
+          top: '10%',
+          right: '-5%',
+          width: 500,
+          height: 500,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+          pointerEvents: 'none',
+        }}
+      />
+      <Box
+        aria-hidden="true"
+        sx={{
+          position: 'absolute',
+          bottom: '5%',
+          left: '-8%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(8, 145, 178, 0.03) 0%, transparent 70%)',
+          filter: 'blur(50px)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Box
           component={motion.div}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.15 }}
         >
-          <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 10 } }}>
-            <Typography
-              component={motion.div}
-              variants={fadeUpVariants}
-              variant="overline"
+          {/* Header */}
+          <Box
+            component={motion.div}
+            custom={0}
+            variants={fadeUpVariants}
+            sx={{ textAlign: 'center', mb: { xs: 6, md: 8 } }}
+          >
+            <SectionBadge
               sx={{
+                backgroundColor: 'transparent',
+                border: `1.5px solid ${colors.accent.primary}`,
                 color: colors.accent.primary,
-                fontWeight: 700,
-                fontSize: '0.75rem',
-                letterSpacing: '0.08em',
-                mb: 2,
-                display: 'block',
               }}
             >
               Get In Touch
-            </Typography>
+            </SectionBadge>
             <Typography
-              component={motion.h2}
-              variants={fadeUpVariants}
+              variant="h2"
               sx={{
                 color: colors.text.primary,
                 fontWeight: 800,
-                fontSize: { xs: '2.1rem', sm: '2.55rem', md: '3.15rem' },
-                lineHeight: 1.08,
-                textAlign: 'center',
-                maxWidth: '720px',
-                mx: 'auto',
-                mb: 3,
-                letterSpacing: '-0.03em',
-                fontFamily: '"Space Grotesk", "Inter", sans-serif',
+                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+                lineHeight: 1.1,
+                mt: 2,
+                mb: 2.5,
+                letterSpacing: '-0.02em',
               }}
             >
-              Let&apos;s build something{' '}
+              Let&apos;s start your{' '}
               <Box
                 component="span"
                 sx={{
@@ -209,402 +215,178 @@ const Contact = () => {
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                amazing together.
+                next project
               </Box>
             </Typography>
             <Typography
-              component={motion.p}
-              variants={descriptionVariants}
               variant="body1"
               sx={{
                 color: colors.text.secondary,
-                maxWidth: '600px',
+                maxWidth: '520px',
                 mx: 'auto',
-                lineHeight: 1.82,
-                fontSize: { xs: '0.98rem', md: '1.06rem' },
-                fontWeight: 450,
+                lineHeight: 1.7,
+                fontSize: { xs: '1rem', md: '1.05rem' },
               }}
             >
-              Ready to transform your digital presence? We&apos;d love to hear about your project.
-              Reach out and let&apos;s start the conversation.
+              Have an idea or need a quote? Reach out through the form below or pick your preferred channel.
             </Typography>
           </Box>
 
-          <Grid container spacing={{ xs: 4, md: 6 }}>
-            <Grid item xs={12} md={5} component={motion.div} variants={leftPanelVariants}>
-              <Box sx={{ height: '100%' }}>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    color: colors.text.primary,
-                    fontWeight: 700,
-                    mb: 4,
-                    fontSize: { xs: '1.15rem', md: '1.35rem' },
-                    letterSpacing: '0.01em',
-                  }}
-                >
-                  Contact Information
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                  {contactInfo.map((item, index) => {
-                    const IconComponent = item.icon;
-                    return (
-                      <Box
-                        key={index}
-                        component={item.href ? 'a' : 'div'}
-                        href={item.href || undefined}
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'flex-start',
-                          gap: 2,
-                          p: 1.4,
-                          mx: -1.4,
-                          borderRadius: 2,
-                          textDecoration: 'none',
-                          border: '1px solid transparent',
-                          backgroundColor: 'rgba(0, 0, 0, 0)',
-                          transition:
-                            'background-color 0.22s ease, border-color 0.22s ease, transform 0.22s ease',
-                          ...(item.href
-                            ? {
-                                cursor: 'pointer',
-                                '&:hover': {
-                                  backgroundColor: '#f8fafc',
-                                  borderColor: colors.border.light,
-                                  transform: 'translateX(2px)',
-                                },
-                              }
-                            : {}),
-                          '&:hover .contact-icon-chip': {
-                            color: colors.accent.primary,
-                            borderColor: 'rgba(124, 58, 237, 0.3)',
-                            backgroundColor: 'rgba(124, 58, 237, 0.06)',
-                            boxShadow: '0 10px 28px rgba(124, 58, 237, 0.1)',
-                            transform: 'translateY(-2px)',
-                          },
-                        }}
-                      >
-                        <Box
-                          className="contact-icon-chip"
-                          sx={{
-                            width: 48,
-                            height: 48,
-                            borderRadius: 2,
-                            color: colors.accent.secondary,
-                            backgroundColor: '#f8fafc',
-                            border: `1px solid ${colors.border.light}`,
-                            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.06)',
-                            backdropFilter: 'blur(10px)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexShrink: 0,
-                            transition:
-                              'background-color 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, color 0.22s ease, transform 0.22s ease',
-                          }}
-                        >
-                          <IconComponent sx={{ fontSize: 22, color: 'currentColor' }} />
-                        </Box>
-                        <Box>
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              color: colors.text.muted,
-                              mb: 0.5,
-                              fontWeight: 700,
-                              fontSize: '0.72rem',
-                              letterSpacing: '0.08em',
-                              textTransform: 'uppercase',
-                            }}
-                          >
-                            {item.label}
-                          </Typography>
-                          {item.href ? (
-                            <Typography
-                              sx={{
-                                color: colors.text.primary,
-                                fontSize: '0.98rem',
-                                lineHeight: 1.6,
-                              }}
-                            >
-                              {item.value}
-                            </Typography>
-                          ) : (
-                            <Typography
-                              sx={{
-                                color: colors.text.primary,
-                                fontSize: '0.98rem',
-                                lineHeight: 1.6,
-                              }}
-                            >
-                              {item.value}
-                            </Typography>
-                          )}
-                        </Box>
-                      </Box>
-                    );
-                  })}
-                </Box>
-
-                <Paper
-                  elevation={0}
-                  sx={{
-                    mt: 4,
-                    height: 200,
-                    backgroundColor: colors.background.secondary,
-                    border: `1px solid ${colors.border.light}`,
-                    borderRadius: 3,
-                    overflow: 'hidden',
-                    position: 'relative',
-                  }}
-                >
-                  <Box
-                    component="iframe"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.5!2d76.1!3d11.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sPeruvallur%2C+Malappuram%2C+Kerala!5e0!3m2!1sen!2sin!4v1700000000000"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allowFullScreen=""
-                    title="Aslisite Technologies Location - Peruvallur, Malappuram, Kerala"
-                    sx={{
-                      width: '100%',
-                      height: '100%',
-                      border: 'none',
-                      filter: 'none',
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      background:
-                        'linear-gradient(to top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 60%, transparent 100%)',
-                      px: 2,
-                      py: 1.5,
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1,
-                    }}
-                  >
-                    <LocationOn
-                      sx={{
-                        fontSize: 18,
-                        color: colors.accent.primary,
-                        flexShrink: 0,
-                      }}
-                    />
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        color: colors.text.secondary,
-                        fontSize: '0.75rem',
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      Peruvallur, Malappuram, Kerala, India 676317
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Box>
-            </Grid>
-
-            <Grid item xs={12} md={7} component={motion.div} variants={rightPanelVariants}>
-              <Paper
-                elevation={0}
-                component="form"
-                onSubmit={handleSubmit}
+          {/* Quick contact actions */}
+          <Stack
+            component={motion.div}
+            custom={0.1}
+            variants={fadeUpVariants}
+            direction="row"
+            spacing={2}
+            justifyContent="center"
+            sx={{ mb: { xs: 5, md: 7 } }}
+          >
+            {quickActions.map((action) => (
+              <Box
+                key={action.label}
+                component="a"
+                href={action.href}
+                target={action.label === 'WhatsApp' ? '_blank' : undefined}
+                rel={action.label === 'WhatsApp' ? 'noopener noreferrer' : undefined}
                 sx={{
-                  p: { xs: 3, md: 4 },
-                  backgroundColor: colors.background.secondary,
-                  border: `1px solid ${colors.border.light}`,
-                  borderRadius: 3,
-                  height: '100%',
-                  margin: { xs: '0 auto', md: 0 },
-                  maxWidth: { xs: '480px', sm: '600px', md: '100%' },
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+                  px: { xs: 2, sm: 2.5 },
+                  py: 1.2,
+                  borderRadius: 2.5,
+                  backgroundColor: action.bg,
+                  border: `1px solid ${action.border}`,
+                  textDecoration: 'none',
+                  transition: 'all 0.25s ease',
+                  '&:hover': {
+                    transform: 'translateY(-3px)',
+                    boxShadow: `0 8px 24px ${action.border}`,
+                    borderColor: action.color,
+                  },
                 }}
               >
+                <action.icon sx={{ fontSize: 20, color: action.color }} />
                 <Typography
-                  variant="h4"
                   sx={{
-                    color: colors.text.primary,
-                    fontWeight: 700,
-                    mb: 4,
-                    fontSize: { xs: '1.15rem', md: '1.35rem' },
-                    letterSpacing: '0.01em',
+                    fontWeight: 600,
+                    fontSize: '0.85rem',
+                    color: action.color,
+                    display: { xs: 'none', sm: 'block' },
                   }}
                 >
-                  Send Us a Message
+                  {action.label}
                 </Typography>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      label="Your Name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      autoComplete="name"
-                      variant="outlined"
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          backgroundColor: colors.background.secondary,
-                          '& fieldset': {
-                            borderColor: colors.border.light,
-                          },
-                          '&:hover fieldset': {
-                            borderColor: colors.accent.primary,
-                          },
-                          '&.Mui-focused fieldset': {
-                            borderColor: colors.accent.primary,
-                          },
-                        },
-                        '& .MuiInputLabel-root': {
-                          color: colors.text.muted,
-                          '&.Mui-focused': {
-                            color: colors.accent.primary,
-                          },
-                        },
-                        '& .MuiOutlinedInput-input': {
-                          color: colors.text.primary,
-                        },
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      label="Email Address"
-                      name="email"
-                      type="email"
-                      inputMode="email"
-                      autoComplete="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      variant="outlined"
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          backgroundColor: colors.background.secondary,
-                          '& fieldset': {
-                            borderColor: colors.border.light,
-                          },
-                          '&:hover fieldset': {
-                            borderColor: colors.accent.primary,
-                          },
-                          '&.Mui-focused fieldset': {
-                            borderColor: colors.accent.primary,
-                          },
-                        },
-                        '& .MuiInputLabel-root': {
-                          color: colors.text.muted,
-                          '&.Mui-focused': {
-                            color: colors.accent.primary,
-                          },
-                        },
-                        '& .MuiOutlinedInput-input': {
-                          color: colors.text.primary,
-                        },
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      label="Company (Optional)"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      variant="outlined"
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          backgroundColor: colors.background.secondary,
-                          '& fieldset': {
-                            borderColor: colors.border.light,
-                          },
-                          '&:hover fieldset': {
-                            borderColor: colors.accent.primary,
-                          },
-                          '&.Mui-focused fieldset': {
-                            borderColor: colors.accent.primary,
-                          },
-                        },
-                        '& .MuiInputLabel-root': {
-                          color: colors.text.muted,
-                          '&.Mui-focused': {
-                            color: colors.accent.primary,
-                          },
-                        },
-                        '& .MuiOutlinedInput-input': {
-                          color: colors.text.primary,
-                        },
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      label="Your Message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      multiline
-                      rows={5}
-                      variant="outlined"
-                      placeholder="Tell us about your project, goals, and timeline..."
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          backgroundColor: colors.background.secondary,
-                          '& fieldset': {
-                            borderColor: colors.border.light,
-                          },
-                          '&:hover fieldset': {
-                            borderColor: colors.accent.primary,
-                          },
-                          '&.Mui-focused fieldset': {
-                            borderColor: colors.accent.primary,
-                          },
-                        },
-                        '& .MuiInputLabel-root': {
-                          color: colors.text.muted,
-                          '&.Mui-focused': {
-                            color: colors.accent.primary,
-                          },
-                        },
-                        '& .MuiOutlinedInput-input': {
-                          color: colors.text.primary,
-                        },
-                        '& .MuiOutlinedInput-input::placeholder': {
-                          color: colors.text.muted,
-                          opacity: 0.7,
-                        },
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
+              </Box>
+            ))}
+          </Stack>
+
+          {/* Form section */}
+          <Box
+            component={motion.div}
+            custom={0.2}
+            variants={fadeUpVariants}
+            sx={{
+              maxWidth: 720,
+              mx: 'auto',
+              p: { xs: 3, sm: 4, md: 5 },
+              borderRadius: 4,
+              backgroundColor: '#f8fafc',
+              border: `1px solid ${colors.border.light}`,
+              boxShadow: '0 4px 24px rgba(0, 0, 0, 0.03)',
+            }}
+          >
+            <Box component="form" onSubmit={handleSubmit}>
+              <Grid container spacing={2.5}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    autoComplete="name"
+                    variant="outlined"
+                    size="medium"
+                    sx={inputStyles}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Email"
+                    name="email"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    variant="outlined"
+                    size="medium"
+                    sx={inputStyles}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Company (optional)"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    variant="outlined"
+                    size="medium"
+                    sx={inputStyles}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Tell us about your project"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    placeholder="What are you building? What's the timeline? Any specific tech requirements?"
+                    sx={{
+                      ...inputStyles,
+                      '& .MuiOutlinedInput-input::placeholder': {
+                        color: colors.text.muted,
+                        opacity: 0.6,
+                        fontSize: '0.88rem',
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems={{ sm: 'center' }} justifyContent="space-between">
                     <Button
                       type="submit"
                       variant="contained"
                       size="large"
                       disabled={loading}
-                      endIcon={loading ? <CircularProgress size={20} color="inherit" /> : <Send />}
+                      endIcon={loading ? <CircularProgress size={18} color="inherit" /> : <Send />}
                       sx={{
                         backgroundColor: colors.accent.primary,
                         color: '#ffffff',
                         fontWeight: 700,
                         px: 4,
                         py: 1.5,
-                        fontSize: '1rem',
+                        fontSize: '0.95rem',
                         textTransform: 'none',
-                        boxShadow: '0 2px 8px rgba(109, 40, 217, 0.15)',
+                        borderRadius: 2,
+                        boxShadow: '0 4px 16px rgba(124, 58, 237, 0.2)',
+                        transition: 'all 0.25s ease',
                         '&:hover': {
                           backgroundColor: colors.accent.primaryHover,
                           transform: 'translateY(-2px)',
-                          boxShadow: '0 4px 14px rgba(109, 40, 217, 0.22)',
+                          boxShadow: '0 8px 24px rgba(124, 58, 237, 0.3)',
                         },
-                        transition: 'all 0.2s ease',
                         '&:disabled': {
                           backgroundColor: '#e4e4e7',
                           color: colors.text.muted,
@@ -614,29 +396,63 @@ const Contact = () => {
                     >
                       {loading ? 'Sending...' : 'Send Message'}
                     </Button>
-                  </Grid>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: colors.text.muted,
+                        fontSize: '0.78rem',
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      We typically respond within 24 hours.
+                    </Typography>
+                  </Stack>
                 </Grid>
-              </Paper>
-            </Grid>
-          </Grid>
+              </Grid>
+            </Box>
+          </Box>
+
+          {/* Bottom info strip */}
+          <Stack
+            component={motion.div}
+            custom={0.3}
+            variants={fadeUpVariants}
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 2, sm: 4 }}
+            justifyContent="center"
+            alignItems="center"
+            sx={{ mt: { xs: 5, md: 6 }, color: colors.text.muted }}
+          >
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Email sx={{ fontSize: 16 }} />
+              <Typography variant="body2" sx={{ fontSize: '0.85rem' }}>
+                info@aslisite.com
+              </Typography>
+            </Stack>
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Phone sx={{ fontSize: 16 }} />
+              <Typography variant="body2" sx={{ fontSize: '0.85rem' }}>
+                +91 9495664173
+              </Typography>
+            </Stack>
+            <Typography variant="body2" sx={{ fontSize: '0.85rem' }}>
+              Peruvallur, Malappuram, Kerala
+            </Typography>
+          </Stack>
         </Box>
       </Container>
 
       <Snackbar
         open={snackbar.open}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
         onClose={handleCloseSnackbar}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert
           onClose={handleCloseSnackbar}
           severity={snackbar.severity}
-          sx={{
-            width: '100%',
-            backgroundColor: colors.background.elevated,
-            color: colors.text.primary,
-            border: `1px solid ${colors.accent.primary}`,
-          }}
+          variant="filled"
+          sx={{ width: '100%', fontWeight: 600 }}
         >
           {snackbar.message}
         </Alert>
