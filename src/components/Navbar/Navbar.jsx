@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Button,
   Container,
   Drawer,
   IconButton,
+  InputBase,
   List,
   ListItemButton,
   ListItemText,
@@ -13,26 +14,17 @@ import {
 import CloseIconImport from '@mui/icons-material/Close';
 import KeyboardArrowDownIconImport from '@mui/icons-material/KeyboardArrowDown';
 import MenuIconImport from '@mui/icons-material/Menu';
-import { Link, useLocation } from 'react-router-dom';
+import SearchIconImport from '@mui/icons-material/Search';
+import WhatsAppIconImport from '@mui/icons-material/WhatsApp';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Code, ShoppingCart, Settings, TrendingUp, Sparkles, Zap } from 'lucide-react';
 import { colors } from '../../theme/theme';
-
-const brandNameStyle = {
-  fontFamily: '"Space Grotesk", "Inter", sans-serif',
-  color: colors.text.primary,
-  fontWeight: 800,
-  display: 'inline',
-};
-
-const BrandName = ({ fontSize = '1.25rem' }) => (
-  <span style={{ ...brandNameStyle, fontSize }}>
-    Aslisite
-    <span style={{ color: colors.accent.primary }}>.</span>
-  </span>
-);
 
 const CloseIcon = CloseIconImport.default || CloseIconImport;
 const KeyboardArrowDownIcon = KeyboardArrowDownIconImport.default || KeyboardArrowDownIconImport;
 const MenuIcon = MenuIconImport.default || MenuIconImport;
+const SearchIcon = SearchIconImport.default || SearchIconImport;
+const WhatsAppIcon = WhatsAppIconImport.default || WhatsAppIconImport;
 
 const navItems = [
   { label: 'Services', href: '/#services', hasDropdown: true, dropdownKey: 'services' },
@@ -44,30 +36,109 @@ const navItems = [
 ];
 
 const serviceItems = [
-  { label: 'Web Development', href: '/services/web-development', description: 'Custom high-performance web apps' },
-  { label: 'Ecommerce Solutions', href: '/services/ecommerce-solutions', description: 'Scalable online stores' },
-  { label: 'Custom Software', href: '/services/custom-software', description: 'Workflow automation & portals' },
-  { label: 'SEO Services', href: '/services/seo-services', description: 'Data-driven organic growth' },
+  { label: 'Web Development', href: '/services/web-development', description: 'Custom high-performance web apps', icon: Code },
+  { label: 'Ecommerce Solutions', href: '/services/ecommerce-solutions', description: 'Scalable online stores that convert', icon: ShoppingCart },
+  { label: 'Custom Software', href: '/services/custom-software', description: 'Workflow automation & portals', icon: Settings },
+  { label: 'SEO Services', href: '/services/seo-services', description: 'Data-driven organic growth', icon: TrendingUp },
 ];
 
 const productItems = [
-  { label: 'AsliBooks', href: '/#aslibooks', description: 'Smart Invoicing & GST Solution' },
-  {
-    label: 'Sheet Automation',
-    href: '/products/sheet-automation',
-    description: 'Free Payment Reminder script',
-  },
+  { label: 'AsliBooks', href: '/#aslibooks', description: 'Smart Invoicing & GST Solution', icon: Sparkles },
+  { label: 'Sheet Automation', href: '/products/sheet-automation', description: 'Free Payment Reminder script', icon: Zap },
 ];
+
+/* ─── Announcement Bar ─── */
+const AnnouncementBar = ({ onDismiss }) => (
+  <Box
+    sx={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 1001,
+      background: `linear-gradient(90deg, ${colors.accent.primary} 0%, #4f46e5 100%)`,
+      py: 0.8,
+      px: 2,
+      textAlign: 'center',
+    }}
+  >
+    <Container maxWidth="xl" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Typography
+        component={Link}
+        to="/products/sheet-automation"
+        sx={{
+          color: '#fff',
+          fontSize: '0.8rem',
+          fontWeight: 600,
+          textDecoration: 'none',
+          letterSpacing: '0.02em',
+          '&:hover': { textDecoration: 'underline' },
+        }}
+      >
+        New: Free Google Sheets Invoice Automation Tool &rarr;
+      </Typography>
+      <IconButton
+        onClick={onDismiss}
+        aria-label="Dismiss announcement"
+        sx={{
+          position: 'absolute',
+          right: 8,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          color: 'rgba(255,255,255,0.7)',
+          p: 0.5,
+          '&:hover': { color: '#fff' },
+        }}
+      >
+        <CloseIcon sx={{ fontSize: 16 }} />
+      </IconButton>
+    </Container>
+  </Box>
+);
+
+/* ─── Helper: check if a nav item is active ─── */
+const isNavItemActive = (item, pathname, hash) => {
+  const fullPath = pathname + hash;
+  if (item.href === '/blog' && pathname.startsWith('/blog')) return true;
+  if (item.href.startsWith('/#') && pathname === '/') {
+    return hash === item.href.replace('/', '');
+  }
+  if (!item.href.startsWith('/#') && item.href === pathname) return true;
+  // Check if any dropdown children match
+  if (item.dropdownKey === 'services') {
+    return serviceItems.some((s) => pathname === s.href);
+  }
+  if (item.dropdownKey === 'products') {
+    return productItems.some((p) => pathname === p.href);
+  }
+  return false;
+};
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState(null);
   const [safeAreaTop, setSafeAreaTop] = useState('0px');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showAnnouncement, setShowAnnouncement] = useState(true);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentHash, setCurrentHash] = useState(location.hash);
+
   const isHomePage = location.pathname === '/';
   const isTransparent = isHomePage && !isScrolled;
+
+  // Track hash changes for active link highlighting
+  useEffect(() => {
+    setCurrentHash(location.hash);
+  }, [location]);
+
+  useEffect(() => {
+    const dismissed = sessionStorage.getItem('announcement-dismissed');
+    if (dismissed) setShowAnnouncement(false);
+  }, []);
 
   useEffect(() => {
     const el = document.createElement('div');
@@ -88,14 +159,27 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 12);
     };
-
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleDismissAnnouncement = useCallback(() => {
+    setShowAnnouncement(false);
+    sessionStorage.setItem('announcement-dismissed', 'true');
+  }, []);
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/blog?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchOpen(false);
+      setSearchQuery('');
+    }
   };
 
   const drawer = (
@@ -156,108 +240,110 @@ const Navbar = () => {
 
       {/* Menu Items */}
       <List sx={{ flex: 1, px: 3, pt: 2 }}>
-        {navItems.map((item) => (
-          <Box key={item.label}>
-            {item.hasDropdown ? (
-              <Box sx={{ width: '100%' }}>
+        {navItems.map((item) => {
+          const active = isNavItemActive(item, location.pathname, currentHash);
+          return (
+            <Box key={item.label}>
+              {item.hasDropdown ? (
+                <Box sx={{ width: '100%' }}>
+                  <ListItemButton
+                    onClick={() => setMobileOpenDropdown(mobileOpenDropdown === item.dropdownKey ? null : item.dropdownKey)}
+                    sx={{
+                      py: 2.5,
+                      px: 3,
+                      borderRadius: 2,
+                      backgroundColor: active ? 'rgba(124, 58, 237, 0.04)' : 'transparent',
+                      transition: 'background-color 0.2s ease',
+                      '&:hover': { backgroundColor: '#f1f5f9' },
+                    }}
+                  >
+                    <ListItemText
+                      primary={item.label}
+                      primaryTypographyProps={{
+                        sx: {
+                          color: active ? colors.accent.primary : colors.text.primary,
+                          fontWeight: 600,
+                          fontSize: '1.25rem',
+                        },
+                      }}
+                    />
+                    <KeyboardArrowDownIcon
+                      sx={{
+                        color: colors.text.muted,
+                        fontSize: 20,
+                        transform: mobileOpenDropdown === item.dropdownKey ? 'rotate(180deg)' : 'rotate(0)',
+                        transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      }}
+                    />
+                  </ListItemButton>
+                  {mobileOpenDropdown === item.dropdownKey && (
+                    <Box sx={{ pl: 3, animation: 'fadeIn 0.2s ease' }}>
+                      {(item.dropdownKey === 'services' ? serviceItems : productItems).map((dropItem) => (
+                        <Box
+                          key={dropItem.label}
+                          component={Link}
+                          to={dropItem.href}
+                          onClick={() => {
+                            handleDrawerToggle();
+                            setMobileOpenDropdown(null);
+                          }}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1.5,
+                            py: 1.5,
+                            px: 3,
+                            textDecoration: 'none',
+                            color: location.pathname === dropItem.href ? colors.accent.primary : colors.text.secondary,
+                            transition: 'color 0.2s ease',
+                            '&:hover': { color: colors.accent.primary },
+                          }}
+                        >
+                          <dropItem.icon size={16} />
+                          <Typography
+                            sx={{
+                              fontFamily: '"Inter", sans-serif',
+                              fontWeight: 500,
+                              fontSize: '1rem',
+                              color: 'inherit',
+                            }}
+                          >
+                            {dropItem.label}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </Box>
+                  )}
+                </Box>
+              ) : (
                 <ListItemButton
-                  onClick={() => setMobileOpenDropdown(mobileOpenDropdown === item.dropdownKey ? null : item.dropdownKey)}
+                  component={Link}
+                  to={item.href}
+                  onClick={handleDrawerToggle}
                   sx={{
                     py: 2.5,
                     px: 3,
                     borderRadius: 2,
-                    transition: 'background-color 0.2s ease',
-                    '&:hover': {
-                      backgroundColor: '#f1f5f9',
-                    },
+                    backgroundColor: active ? 'rgba(124, 58, 237, 0.04)' : 'transparent',
+                    transition: 'all 0.2s ease',
+                    '&:hover': { backgroundColor: '#f1f5f9' },
                   }}
                 >
                   <ListItemText
                     primary={item.label}
                     primaryTypographyProps={{
                       sx: {
-                        color: colors.text.primary,
+                        color: active ? colors.accent.primary : colors.text.primary,
                         fontWeight: 600,
                         fontSize: '1.25rem',
                       },
                     }}
                   />
-                  <KeyboardArrowDownIcon
-                    sx={{
-                      color: colors.text.muted,
-                      fontSize: 20,
-                      transform: mobileOpenDropdown === item.dropdownKey ? 'rotate(180deg)' : 'rotate(0)',
-                      transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                    }}
-                  />
                 </ListItemButton>
-                {mobileOpenDropdown === item.dropdownKey && (
-                  <Box sx={{ pl: 3, animation: 'fadeIn 0.2s ease' }}>
-                    {(item.dropdownKey === 'services' ? serviceItems : productItems).map((dropItem) => (
-                      <Box
-                        key={dropItem.label}
-                        component={Link}
-                        to={dropItem.href}
-                        onClick={() => {
-                          handleDrawerToggle();
-                          setMobileOpenDropdown(null);
-                        }}
-                        sx={{
-                          display: 'block',
-                          py: 1.5,
-                          px: 3,
-                          textDecoration: 'none',
-                          color: colors.text.secondary,
-                          transition: 'color 0.2s ease',
-                          '&:hover': {
-                            color: colors.accent.primary,
-                          },
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            fontFamily: '"Inter", sans-serif',
-                            fontWeight: 500,
-                            fontSize: '1rem',
-                            color: 'inherit',
-                          }}
-                        >
-                          {dropItem.label}
-                        </Typography>
-                      </Box>
-                    ))}
-                  </Box>
-                )}
-              </Box>
-            ) : (
-              <ListItemButton
-                component={Link}
-                to={item.href}
-                onClick={handleDrawerToggle}
-                sx={{
-                  py: 2.5,
-                  px: 3,
-                  borderRadius: 2,
-                  transition: 'all 0.2s ease',
-                  '&:hover': {
-                    backgroundColor: '#f1f5f9',
-                  },
-                }}
-              >
-                <ListItemText
-                  primary={item.label}
-                  primaryTypographyProps={{
-                    sx: {
-                      color: colors.text.primary,
-                      fontWeight: 600,
-                      fontSize: '1.25rem',
-                    },
-                  }}
-                />
-              </ListItemButton>
-            )}
-          </Box>
-        ))}
+              )}
+            </Box>
+          );
+        })}
       </List>
 
       {/* Divider */}
@@ -298,26 +384,28 @@ const Navbar = () => {
 
   return (
     <>
+      {/* ─── Announcement Bar ─── */}
+      {showAnnouncement && <AnnouncementBar onDismiss={handleDismissAnnouncement} />}
+
+      {/* ─── Main Header ─── */}
       <Box
         component="header"
         style={{ paddingTop: safeAreaTop }}
         sx={{
           position: 'fixed',
-          top: 0,
+          top: showAnnouncement ? 36 : 0,
           left: 0,
           right: 0,
           zIndex: 1000,
           backgroundColor: isTransparent ? 'transparent' : colors.background.navbar,
           backdropFilter: isTransparent ? 'blur(0px)' : 'blur(12px)',
           WebkitBackdropFilter: isTransparent ? 'blur(0px)' : 'blur(12px)',
-          borderBottom: `1px solid ${
-            isTransparent ? 'transparent' : colors.border.light
-          }`,
+          borderBottom: `1px solid ${isTransparent ? 'transparent' : colors.border.light}`,
           boxShadow: isTransparent
             ? 'none'
             : '0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04)',
           transition:
-            'background-color 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, backdrop-filter 0.28s ease',
+            'top 0.3s ease, background-color 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, backdrop-filter 0.28s ease',
         }}
       >
         <Container maxWidth="xl">
@@ -329,17 +417,33 @@ const Navbar = () => {
               py: isTransparent ? 2.5 : 1.75,
             }}
           >
-            {/* Logo */}
+            {/* Logo with hover animation (#6) */}
             <Box
               component={Link}
               to="/#hero"
-              sx={{ display: 'flex', alignItems: 'center', gap: 1.5, textDecoration: 'none' }}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1.5,
+                textDecoration: 'none',
+                transition: 'transform 0.25s ease',
+                '&:hover': {
+                  transform: 'scale(1.04)',
+                },
+                '&:hover img': {
+                  filter: 'drop-shadow(0 2px 8px rgba(124, 58, 237, 0.3))',
+                },
+              }}
             >
               <Box
                 component="img"
                 src="/AslisiteLogo.svg"
                 alt="Aslisite"
-                sx={{ width: 36, height: 36 }}
+                sx={{
+                  width: 36,
+                  height: 36,
+                  transition: 'filter 0.25s ease',
+                }}
               />
               <Typography
                 variant="h6"
@@ -356,127 +460,285 @@ const Navbar = () => {
             </Box>
 
             {/* Desktop Navigation */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 4 }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 3 }}>
               <Box component="nav" sx={{ display: 'flex', gap: 3 }}>
-                {navItems.map((item) => (
-                  <Box
-                    key={item.label}
-                    sx={{ position: 'relative', py: 1 }}
-                    onMouseEnter={() => item.hasDropdown && setOpenDropdown(item.dropdownKey)}
-                    onMouseLeave={() => item.hasDropdown && setOpenDropdown(null)}
-                  >
-                    {item.hasDropdown ? (
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 0.5,
-                          cursor: 'pointer',
-                        }}
-                      >
-                        <Typography
+                {navItems.map((item) => {
+                  const active = isNavItemActive(item, location.pathname, currentHash);
+                  return (
+                    <Box
+                      key={item.label}
+                      sx={{ position: 'relative', py: 1 }}
+                      onMouseEnter={() => item.hasDropdown && setOpenDropdown(item.dropdownKey)}
+                      onMouseLeave={() => item.hasDropdown && setOpenDropdown(null)}
+                    >
+                      {item.hasDropdown ? (
+                        <Box
                           sx={{
-                            color: '#334155',
-                            textDecoration: 'none',
-                            fontWeight: 600,
-                            fontSize: '0.9375rem',
-                            transition: 'color 0.25s ease',
-                            '&:hover': {
-                              color: colors.accent.primary,
-                            },
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 0.5,
+                            cursor: 'pointer',
                           }}
                         >
-                          {item.label}
-                        </Typography>
-                        <KeyboardArrowDownIcon
-                          sx={{
-                            fontSize: '1rem',
-                            color: colors.text.muted,
-                            transform: openDropdown === item.dropdownKey ? 'rotate(180deg)' : 'rotate(0)',
-                            transition: 'transform 0.2s ease',
-                          }}
-                        />
-                      </Box>
-                    ) : (
-                      <Typography
-                        component={Link}
-                        to={item.href}
-                        sx={{
-                          color: '#334155',
-                          textDecoration: 'none',
-                          fontWeight: 600,
-                          fontSize: '0.9375rem',
-                          transition: 'color 0.25s ease',
-                          '&:hover': {
-                            color: colors.accent.primary,
-                          },
-                        }}
-                      >
-                        {item.label}
-                      </Typography>
-                    )}
-                    {item.hasDropdown && openDropdown === item.dropdownKey && (
-                      <Box
-                        sx={{
-                          position: 'absolute',
-                          top: '100%',
-                          left: 0,
-                          mt: 0.5,
-                          pt: 1,
-                          py: 1,
-                          px: 1,
-                          minWidth: 220,
-                          backgroundColor: '#ffffff',
-                          border: `1px solid ${colors.border.light}`,
-                          borderRadius: 2,
-                          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
-                          zIndex: 1001,
-                        }}
-                      >
-                        {(item.dropdownKey === 'services' ? serviceItems : productItems).map((dropItem) => (
-                          <Box
-                            key={dropItem.label}
-                            component={Link}
-                            to={dropItem.href}
-                            onClick={() => setOpenDropdown(null)}
+                          <Typography
                             sx={{
-                              display: 'block',
-                              px: 2,
-                              py: 1.25,
-                              borderRadius: 1,
+                              color: active ? colors.accent.primary : '#334155',
                               textDecoration: 'none',
-                              '&:hover': {
-                                backgroundColor: '#f8fafc',
-                              },
+                              fontWeight: 600,
+                              fontSize: '0.9375rem',
+                              transition: 'color 0.25s ease',
+                              '&:hover': { color: colors.accent.primary },
                             }}
                           >
-                            <Typography
+                            {item.label}
+                          </Typography>
+                          <KeyboardArrowDownIcon
+                            sx={{
+                              fontSize: '1rem',
+                              color: active ? colors.accent.primary : colors.text.muted,
+                              transform: openDropdown === item.dropdownKey ? 'rotate(180deg)' : 'rotate(0)',
+                              transition: 'transform 0.2s ease',
+                            }}
+                          />
+                          {/* Active indicator */}
+                          {active && (
+                            <Box
                               sx={{
-                                color: colors.text.primary,
-                                fontFamily: '"Inter", sans-serif',
-                                fontWeight: 500,
-                                fontSize: '0.875rem',
+                                position: 'absolute',
+                                bottom: 0,
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                width: 20,
+                                height: 2,
+                                borderRadius: 1,
+                                background: colors.accent.primary,
+                              }}
+                            />
+                          )}
+                        </Box>
+                      ) : (
+                        <>
+                          <Typography
+                            component={Link}
+                            to={item.href}
+                            sx={{
+                              color: active ? colors.accent.primary : '#334155',
+                              textDecoration: 'none',
+                              fontWeight: 600,
+                              fontSize: '0.9375rem',
+                              transition: 'color 0.25s ease',
+                              '&:hover': { color: colors.accent.primary },
+                            }}
+                          >
+                            {item.label}
+                          </Typography>
+                          {/* Active indicator */}
+                          {active && (
+                            <Box
+                              sx={{
+                                position: 'absolute',
+                                bottom: 0,
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                width: 20,
+                                height: 2,
+                                borderRadius: 1,
+                                background: colors.accent.primary,
+                              }}
+                            />
+                          )}
+                        </>
+                      )}
+
+                      {/* ─── Mega Menu for Services (#3) ─── */}
+                      {item.dropdownKey === 'services' && openDropdown === 'services' && (
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            mt: 0.5,
+                            pt: 1.5,
+                            pb: 1.5,
+                            px: 2,
+                            minWidth: 420,
+                            backgroundColor: '#ffffff',
+                            border: `1px solid ${colors.border.light}`,
+                            borderRadius: 3,
+                            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.12)',
+                            zIndex: 1001,
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 1fr',
+                            gap: 0.5,
+                          }}
+                        >
+                          {serviceItems.map((svc) => (
+                            <Box
+                              key={svc.label}
+                              component={Link}
+                              to={svc.href}
+                              onClick={() => setOpenDropdown(null)}
+                              sx={{
+                                display: 'flex',
+                                alignItems: 'flex-start',
+                                gap: 1.5,
+                                px: 2,
+                                py: 1.5,
+                                borderRadius: 2,
+                                textDecoration: 'none',
+                                transition: 'background-color 0.2s ease',
+                                '&:hover': { backgroundColor: '#f8fafc' },
                               }}
                             >
-                              {dropItem.label}
-                            </Typography>
-                            <Typography
+                              <Box
+                                sx={{
+                                  mt: 0.3,
+                                  width: 32,
+                                  height: 32,
+                                  borderRadius: 1.5,
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  backgroundColor: 'rgba(124, 58, 237, 0.06)',
+                                  color: colors.accent.primary,
+                                  flexShrink: 0,
+                                }}
+                              >
+                                <svc.icon size={16} />
+                              </Box>
+                              <Box>
+                                <Typography
+                                  sx={{
+                                    color: colors.text.primary,
+                                    fontFamily: '"Inter", sans-serif',
+                                    fontWeight: 600,
+                                    fontSize: '0.85rem',
+                                    lineHeight: 1.3,
+                                  }}
+                                >
+                                  {svc.label}
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    color: colors.text.secondary,
+                                    fontFamily: '"Inter", sans-serif',
+                                    fontSize: '0.72rem',
+                                    mt: 0.3,
+                                    lineHeight: 1.4,
+                                  }}
+                                >
+                                  {svc.description}
+                                </Typography>
+                              </Box>
+                            </Box>
+                          ))}
+                        </Box>
+                      )}
+
+                      {/* Products dropdown (standard) */}
+                      {item.dropdownKey === 'products' && openDropdown === 'products' && (
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: 0,
+                            mt: 0.5,
+                            pt: 1,
+                            py: 1,
+                            px: 1,
+                            minWidth: 240,
+                            backgroundColor: '#ffffff',
+                            border: `1px solid ${colors.border.light}`,
+                            borderRadius: 2,
+                            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+                            zIndex: 1001,
+                          }}
+                        >
+                          {productItems.map((product) => (
+                            <Box
+                              key={product.label}
+                              component={Link}
+                              to={product.href}
+                              onClick={() => setOpenDropdown(null)}
                               sx={{
-                                color: colors.text.secondary,
-                                fontFamily: '"Inter", sans-serif',
-                                fontSize: '0.75rem',
-                                mt: 0.25,
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 1.5,
+                                px: 2,
+                                py: 1.25,
+                                borderRadius: 1,
+                                textDecoration: 'none',
+                                '&:hover': { backgroundColor: '#f8fafc' },
                               }}
                             >
-                              {dropItem.description}
-                            </Typography>
-                          </Box>
-                        ))}
-                      </Box>
-                    )}
-                  </Box>
-                ))}
+                              <Box sx={{ color: colors.accent.primary, display: 'flex' }}>
+                                <product.icon size={16} />
+                              </Box>
+                              <Box>
+                                <Typography
+                                  sx={{
+                                    color: colors.text.primary,
+                                    fontFamily: '"Inter", sans-serif',
+                                    fontWeight: 500,
+                                    fontSize: '0.875rem',
+                                  }}
+                                >
+                                  {product.label}
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    color: colors.text.secondary,
+                                    fontFamily: '"Inter", sans-serif',
+                                    fontSize: '0.72rem',
+                                    mt: 0.2,
+                                  }}
+                                >
+                                  {product.description}
+                                </Typography>
+                              </Box>
+                            </Box>
+                          ))}
+                        </Box>
+                      )}
+                    </Box>
+                  );
+                })}
               </Box>
+
+              {/* Search icon (#4) */}
+              <IconButton
+                aria-label="Search blog"
+                onClick={() => setSearchOpen(!searchOpen)}
+                sx={{
+                  color: colors.text.muted,
+                  width: 36,
+                  height: 36,
+                  transition: 'color 0.2s ease',
+                  '&:hover': { color: colors.accent.primary },
+                }}
+              >
+                <SearchIcon sx={{ fontSize: 20 }} />
+              </IconButton>
+
+              {/* WhatsApp quick action (#5) */}
+              <IconButton
+                aria-label="Chat on WhatsApp"
+                component="a"
+                href="https://wa.me/919495664173"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  color: '#25D366',
+                  width: 36,
+                  height: 36,
+                  transition: 'transform 0.2s ease',
+                  '&:hover': { transform: 'scale(1.12)' },
+                }}
+              >
+                <WhatsAppIcon sx={{ fontSize: 20 }} />
+              </IconButton>
+
               <Button
                 variant="contained"
                 color="primary"
@@ -524,6 +786,58 @@ const Navbar = () => {
             </IconButton>
           </Box>
         </Container>
+
+        {/* ─── Search Bar (slides open below nav) (#4) ─── */}
+        {searchOpen && (
+          <Box
+            sx={{
+              borderTop: `1px solid ${colors.border.light}`,
+              backgroundColor: '#ffffff',
+              py: 1.5,
+              px: 2,
+            }}
+          >
+            <Container maxWidth="sm">
+              <Box
+                component="form"
+                onSubmit={handleSearchSubmit}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+                  border: `1px solid ${colors.border.light}`,
+                  borderRadius: 2,
+                  px: 2,
+                  py: 0.5,
+                  backgroundColor: '#f8fafc',
+                  transition: 'border-color 0.2s ease',
+                  '&:focus-within': { borderColor: colors.accent.primary },
+                }}
+              >
+                <SearchIcon sx={{ fontSize: 20, color: colors.text.muted }} />
+                <InputBase
+                  placeholder="Search blog articles..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoFocus
+                  sx={{
+                    flex: 1,
+                    fontSize: '0.9rem',
+                    fontFamily: '"Inter", sans-serif',
+                  }}
+                  inputProps={{ 'aria-label': 'Search blog articles' }}
+                />
+                <IconButton
+                  size="small"
+                  onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                  sx={{ color: colors.text.muted }}
+                >
+                  <CloseIcon sx={{ fontSize: 18 }} />
+                </IconButton>
+              </Box>
+            </Container>
+          </Box>
+        )}
       </Box>
 
       {/* Mobile Drawer */}
