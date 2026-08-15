@@ -339,7 +339,7 @@ const ArticleCard = ({ blog }) => {
 };
 
 /* ─── Blog Page ─── */
-const POSTS_PER_PAGE = 6;
+const POSTS_PER_PAGE = 12;
 
 const Blog = () => {
   const initialData = useInitialData();
