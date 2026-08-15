@@ -76,7 +76,7 @@ const extractTOC = (content = '') => {
 
 const processContent = (content = '') => {
   let index = 0;
-  return content.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, level, attrs, innerHTML) => {
+  let processed = content.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, level, attrs, innerHTML) => {
     const plainText = innerHTML.replace(/<[^>]*>/g, '').trim();
     const id = generateSlug(plainText, index);
     index++;
@@ -84,6 +84,17 @@ const processContent = (content = '') => {
     const cleanAttrs = attrs.replace(/\s*id\s*=\s*["'][^"']*["']/gi, '');
     return `<h${level}${cleanAttrs} id="${id}">${innerHTML}</h${level}>`;
   });
+
+  // Ensure all <img> tags have alt attributes for accessibility and SEO
+  processed = processed.replace(/<img\b((?![^>]*\balt\s*=)[^>]*)>/gi, (match, attrs) => {
+    return `<img${attrs} alt="Blog content image">`;
+  });
+  // Replace empty alt="" with a fallback
+  processed = processed.replace(/<img\b([^>]*)\balt\s*=\s*""\s*([^>]*)>/gi, (match, before, after) => {
+    return `<img${before}alt="Blog content image" ${after}>`;
+  });
+
+  return processed;
 };
 
 // --- Sub-components ---
@@ -599,21 +610,34 @@ const BlogDetail = () => {
       {post.image && (
         <Container maxWidth="lg" sx={{ mb: { xs: 4, md: 7 } }}>
           <Box
-            component="img"
-            src={post.image}
-            alt={post.title}
-            loading="eager"
-            fetchPriority="high"
-            referrerPolicy="no-referrer"
+            component="picture"
             sx={{
+              display: 'block',
               width: '100%',
-              height: 'auto',
-              maxHeight: 520,
-              objectFit: 'cover',
               borderRadius: { xs: 2, md: 4 },
+              overflow: 'hidden',
               boxShadow: '0 16px 48px rgba(0, 0, 0, 0.08)',
             }}
-          />
+          >
+            <Box
+              component="img"
+              src={post.image}
+              alt={post.title}
+              width={1200}
+              height={630}
+              loading="eager"
+              fetchPriority="high"
+              referrerPolicy="no-referrer"
+              sizes="(max-width: 600px) 100vw, (max-width: 1200px) 90vw, 1200px"
+              sx={{
+                width: '100%',
+                height: 'auto',
+                maxHeight: 520,
+                objectFit: 'cover',
+                display: 'block',
+              }}
+            />
+          </Box>
         </Container>
       )}
 
@@ -906,6 +930,8 @@ const BlogDetail = () => {
                             className="related-img"
                             src={relatedPost.image}
                             alt={relatedPost.title}
+                            width={400}
+                            height={250}
                             loading="lazy"
                             referrerPolicy="no-referrer"
                             sx={{

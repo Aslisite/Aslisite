@@ -246,7 +246,7 @@ const SheetAutomation = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const pageTitle = 'Free Payment Reminder Apps Script & Google Sheet Template';
+  const pageTitle = 'Free Payment Reminder Apps Script & Google Sheet Template | Aslisite';
   const pageDescription =
     'Copy the free Google Apps Script code and clone the master Google Sheets template to build your own automated self-hosted invoice chaser.';
 
@@ -260,7 +260,7 @@ const SheetAutomation = () => {
         <meta property="og:type" content="article" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
-        <meta property="og:image" content="/AslisiteLogo.svg" />
+        <meta property="og:image" content="https://aslisite.com/AslisiteLogo.svg" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 

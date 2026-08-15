@@ -10,6 +10,7 @@ const projectRoot = path.resolve(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
 const ssrOutDir = path.join(projectRoot, 'dist-ssr');
 const indexHtmlPath = path.join(distDir, 'index.html');
+const blogCachePath = path.join(projectRoot, '.blog-cache.json');
 
 async function fetchBlogs() {
   try {
@@ -17,10 +18,26 @@ async function fetchBlogs() {
     const res = await fetch('https://sheetdb.io/api/v1/qa8ftkry70910');
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
-    return filterPublishedBlogs(data);
+    const blogs = filterPublishedBlogs(data);
+
+    // Cache successful response for fallback
+    await writeFile(blogCachePath, JSON.stringify(blogs, null, 2), 'utf8');
+    console.log('Blog data cached successfully.');
+
+    return blogs;
   } catch (error) {
-    console.error('Error fetching blogs for SSG:', error);
-    return [];
+    console.error('Error fetching blogs from SheetDB:', error.message);
+
+    // Attempt to use cached data as fallback
+    try {
+      const cached = await readFile(blogCachePath, 'utf8');
+      const blogs = JSON.parse(cached);
+      console.log(`Using cached blog data (${blogs.length} posts) as fallback.`);
+      return blogs;
+    } catch {
+      console.error('No cached blog data available. Proceeding without blogs.');
+      return [];
+    }
   }
 }
 
@@ -168,18 +185,27 @@ async function runBuild() {
   await rm(ssrOutDir, { recursive: true, force: true });
 
   // 7. Generate dynamic sitemap.xml
-  await generateSitemap(routes);
+  await generateSitemap(routes, blogs);
 }
 
-async function generateSitemap(routes) {
+async function generateSitemap(routes, blogs = []) {
   console.log('Generating dynamic sitemap.xml...');
   const baseUrl = 'https://aslisite.com';
   const today = new Date().toISOString().split('T')[0];
 
   const sitemapRoutes = routes;
 
+  // Build a map of route -> image URL for blog posts
+  const blogImageMap = {};
+  blogs.forEach((blog) => {
+    if (blog.slug && blog.image) {
+      blogImageMap[`/blog/${blog.slug}`] = blog.image;
+    }
+  });
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${sitemapRoutes
   .map((route) => {
     const url = `${baseUrl}${route === '/' ? '' : route}`;
@@ -194,11 +220,15 @@ ${sitemapRoutes
       changefreq = 'daily';
     }
 
+    const imageTag = blogImageMap[route]
+      ? `\n    <image:image>\n      <image:loc>${blogImageMap[route]}</image:loc>\n    </image:image>`
+      : '';
+
     return `  <url>
     <loc>${url}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>
+    <priority>${priority}</priority>${imageTag}
   </url>`;
   })
   .join('\n')}

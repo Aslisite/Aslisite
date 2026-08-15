@@ -8,7 +8,7 @@ const NotFound = () => {
     <>
       <Helmet>
         <title>Page Not Found | Aslisite</title>
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex, nofollow" />
         <meta name="description" content="The page you are looking for does not exist." />
       </Helmet>
       <Box

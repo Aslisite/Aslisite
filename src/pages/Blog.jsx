@@ -78,8 +78,11 @@ const FeaturedCard = ({ blog }) => {
             className="featured-image"
             src={blog.image}
             alt={blog.title}
+            width={800}
+            height={450}
             loading="eager"
             referrerPolicy="no-referrer"
+            sizes="(max-width: 600px) 100vw, (max-width: 960px) 100vw, 55vw"
             sx={{
               width: '100%',
               height: '100%',
@@ -228,6 +231,8 @@ const ArticleCard = ({ blog }) => {
             className="article-image"
             src={blog.image}
             alt={blog.title}
+            width={480}
+            height={270}
             loading="lazy"
             referrerPolicy="no-referrer"
             sx={{
@@ -388,7 +393,7 @@ const Blog = () => {
   return (
     <Container maxWidth="lg" sx={{ pt: { xs: 12, md: 16 }, pb: 8 }}>
       <Helmet>
-        <title>Blog - Aslisite</title>
+        <title>Blog | Insights & Digital Strategy Tips | Aslisite</title>
         <meta
           name="description"
           content="Read the latest articles from Aslisite on web development, SEO strategy, ecommerce solutions, and digital growth tips for businesses in Kerala and beyond."
@@ -396,14 +401,14 @@ const Blog = () => {
         <link rel="canonical" href={absoluteUrl('/blog')} />
         <meta property="og:url" content={absoluteUrl('/blog')} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Blog - Aslisite" />
+        <meta property="og:title" content="Blog | Insights & Digital Strategy Tips | Aslisite" />
         <meta
           property="og:description"
           content="Read the latest articles from Aslisite on web development, SEO strategy, ecommerce solutions, and digital growth tips for businesses in Kerala and beyond."
         />
         <meta property="og:image" content={siteMetadata.logo} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Blog - Aslisite" />
+        <meta name="twitter:title" content="Blog | Insights & Digital Strategy Tips | Aslisite" />
         <meta
           name="twitter:description"
           content="Read the latest articles from Aslisite on web development, SEO strategy, ecommerce solutions, and digital growth tips for businesses in Kerala and beyond."

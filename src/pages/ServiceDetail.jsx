@@ -6,7 +6,7 @@ import { useParams, Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { colors } from '../theme/theme';
 import { SectionBadge } from '../components/common';
-import { absoluteUrl } from '../seo/siteMetadata';
+import { absoluteUrl, siteMetadata } from '../seo/siteMetadata';
 import NotFound from './NotFound';
 
 const ArrowBack = ArrowBackImport.default || ArrowBackImport;
@@ -347,6 +347,25 @@ const ServiceDetail = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${service.title} | Aslisite`} />
         <meta name="twitter:description" content={service.metaDescription} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: service.title,
+            description: service.metaDescription,
+            provider: {
+              '@type': 'Organization',
+              name: siteMetadata.legalName,
+              url: siteMetadata.baseUrl,
+              logo: siteMetadata.logo,
+            },
+            areaServed: [
+              { '@type': 'State', name: 'Kerala' },
+              { '@type': 'Country', name: 'India' },
+            ],
+            url: absoluteUrl(`/services/${slug}`),
+          })}
+        </script>
       </Helmet>
 
       <Box

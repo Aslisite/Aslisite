@@ -35,12 +35,19 @@ const KeyboardArrowDownIcon = KeyboardArrowDownIconImport.default || KeyboardArr
 const MenuIcon = MenuIconImport.default || MenuIconImport;
 
 const navItems = [
-  { label: 'Services', href: '/#services' },
-  { label: 'Products', href: '/#aslibooks', hasDropdown: true },
+  { label: 'Services', href: '/#services', hasDropdown: true, dropdownKey: 'services' },
+  { label: 'Products', href: '/#aslibooks', hasDropdown: true, dropdownKey: 'products' },
   { label: 'Reviews', href: '/#testimonials' },
   { label: 'Blog', href: '/blog' },
   { label: 'FAQ', href: '/#faq' },
   { label: 'Contact', href: '/#contact' },
+];
+
+const serviceItems = [
+  { label: 'Web Development', href: '/services/web-development', description: 'Custom high-performance web apps' },
+  { label: 'Ecommerce Solutions', href: '/services/ecommerce-solutions', description: 'Scalable online stores' },
+  { label: 'Custom Software', href: '/services/custom-software', description: 'Workflow automation & portals' },
+  { label: 'SEO Services', href: '/services/seo-services', description: 'Data-driven organic growth' },
 ];
 
 const productItems = [
@@ -56,7 +63,7 @@ const Navbar = () => {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [mobileOpenProducts, setMobileOpenProducts] = useState(false);
+  const [mobileOpenDropdown, setMobileOpenDropdown] = useState(null);
   const [safeAreaTop, setSafeAreaTop] = useState('0px');
   const [isScrolled, setIsScrolled] = useState(false);
   const isHomePage = location.pathname === '/';
@@ -154,7 +161,7 @@ const Navbar = () => {
             {item.hasDropdown ? (
               <Box sx={{ width: '100%' }}>
                 <ListItemButton
-                  onClick={() => setMobileOpenProducts(!mobileOpenProducts)}
+                  onClick={() => setMobileOpenDropdown(mobileOpenDropdown === item.dropdownKey ? null : item.dropdownKey)}
                   sx={{
                     py: 2.5,
                     px: 3,
@@ -179,21 +186,21 @@ const Navbar = () => {
                     sx={{
                       color: colors.text.muted,
                       fontSize: 20,
-                      transform: mobileOpenProducts ? 'rotate(180deg)' : 'rotate(0)',
+                      transform: mobileOpenDropdown === item.dropdownKey ? 'rotate(180deg)' : 'rotate(0)',
                       transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     }}
                   />
                 </ListItemButton>
-                {mobileOpenProducts && (
+                {mobileOpenDropdown === item.dropdownKey && (
                   <Box sx={{ pl: 3, animation: 'fadeIn 0.2s ease' }}>
-                    {productItems.map((product) => (
+                    {(item.dropdownKey === 'services' ? serviceItems : productItems).map((dropItem) => (
                       <Box
-                        key={product.label}
+                        key={dropItem.label}
                         component={Link}
-                        to={product.href}
+                        to={dropItem.href}
                         onClick={() => {
                           handleDrawerToggle();
-                          setMobileOpenProducts(false);
+                          setMobileOpenDropdown(null);
                         }}
                         sx={{
                           display: 'block',
@@ -215,7 +222,7 @@ const Navbar = () => {
                             color: 'inherit',
                           }}
                         >
-                          {product.label}
+                          {dropItem.label}
                         </Typography>
                       </Box>
                     ))}
@@ -355,7 +362,7 @@ const Navbar = () => {
                   <Box
                     key={item.label}
                     sx={{ position: 'relative', py: 1 }}
-                    onMouseEnter={() => item.hasDropdown && setOpenDropdown('products')}
+                    onMouseEnter={() => item.hasDropdown && setOpenDropdown(item.dropdownKey)}
                     onMouseLeave={() => item.hasDropdown && setOpenDropdown(null)}
                   >
                     {item.hasDropdown ? (
@@ -385,7 +392,7 @@ const Navbar = () => {
                           sx={{
                             fontSize: '1rem',
                             color: colors.text.muted,
-                            transform: openDropdown === 'products' ? 'rotate(180deg)' : 'rotate(0)',
+                            transform: openDropdown === item.dropdownKey ? 'rotate(180deg)' : 'rotate(0)',
                             transition: 'transform 0.2s ease',
                           }}
                         />
@@ -408,7 +415,7 @@ const Navbar = () => {
                         {item.label}
                       </Typography>
                     )}
-                    {item.hasDropdown && openDropdown === 'products' && (
+                    {item.hasDropdown && openDropdown === item.dropdownKey && (
                       <Box
                         sx={{
                           position: 'absolute',
@@ -426,11 +433,11 @@ const Navbar = () => {
                           zIndex: 1001,
                         }}
                       >
-                        {productItems.map((product) => (
+                        {(item.dropdownKey === 'services' ? serviceItems : productItems).map((dropItem) => (
                           <Box
-                            key={product.label}
+                            key={dropItem.label}
                             component={Link}
-                            to={product.href}
+                            to={dropItem.href}
                             onClick={() => setOpenDropdown(null)}
                             sx={{
                               display: 'block',
@@ -451,7 +458,7 @@ const Navbar = () => {
                                 fontSize: '0.875rem',
                               }}
                             >
-                              {product.label}
+                              {dropItem.label}
                             </Typography>
                             <Typography
                               sx={{
@@ -461,7 +468,7 @@ const Navbar = () => {
                                 mt: 0.25,
                               }}
                             >
-                              {product.description}
+                              {dropItem.description}
                             </Typography>
                           </Box>
                         ))}
