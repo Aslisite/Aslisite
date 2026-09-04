@@ -193,32 +193,30 @@ async function generateSitemap(routes, blogs = []) {
   const baseUrl = 'https://aslisite.com';
   const today = new Date().toISOString().split('T')[0];
 
-  const sitemapRoutes = routes;
-
-  // Build a map of route -> image URL for blog posts
+  // Build per-blog maps keyed by route
   const blogImageMap = {};
+  const blogLastmodMap = {};
   blogs.forEach((blog) => {
-    if (blog.slug && blog.image) {
-      blogImageMap[`/blog/${blog.slug}`] = blog.image;
+    if (!blog.slug) return;
+    const route = `/blog/${blog.slug}`;
+
+    if (blog.image) {
+      blogImageMap[route] = blog.image;
     }
+
+    // Use the most recent meaningful date field, fall back to today
+    const candidate = blog.updatedAt || blog.date || blog.publishedAt || blog.createdAt;
+    const ts = Date.parse(candidate);
+    blogLastmodMap[route] = Number.isNaN(ts) ? today : new Date(ts).toISOString().split('T')[0];
   });
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-${sitemapRoutes
+${routes
   .map((route) => {
     const url = `${baseUrl}${route === '/' ? '' : route}`;
-    let priority = '0.5';
-    let changefreq = 'weekly';
-
-    if (route === '/') {
-      priority = '1.0';
-      changefreq = 'daily';
-    } else if (route === '/blog') {
-      priority = '0.8';
-      changefreq = 'daily';
-    }
+    const lastmod = blogLastmodMap[route] ?? today;
 
     const imageTag = blogImageMap[route]
       ? `\n    <image:image>\n      <image:loc>${blogImageMap[route]}</image:loc>\n    </image:image>`
@@ -226,9 +224,7 @@ ${sitemapRoutes
 
     return `  <url>
     <loc>${url}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>${imageTag}
+    <lastmod>${lastmod}</lastmod>${imageTag}
   </url>`;
   })
   .join('\n')}
