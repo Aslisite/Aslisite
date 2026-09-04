@@ -516,37 +516,33 @@ const BlogDetail = () => {
 
       {/* ─── Minimal Hero ─── */}
       <Container maxWidth="md" sx={{ pt: { xs: 16, md: 16 }, pb: { xs: 3, md: 5 }, px: { xs: 3, md: 4 } }}>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          sx={{ mb: 4 }}
+        <Button
+          startIcon={<ArrowBackIcon />}
+          onClick={() => navigate('/blog')}
+          sx={{
+            mb: 2,
+            ml: -1,
+            color: colors.text.muted,
+            fontWeight: 500,
+            '&:hover': { color: colors.text.primary },
+          }}
         >
-          <Button
-            startIcon={<ArrowBackIcon />}
-            onClick={() => navigate('/blog')}
-            sx={{
-              color: colors.text.muted,
-              fontWeight: 500,
-              '&:hover': { color: colors.text.primary },
-            }}
-          >
-            Back to Blog
-          </Button>
+          Back to Blog
+        </Button>
 
-          <Chip
-            label={post.category || 'Digital Strategy'}
-            sx={{
-              bgcolor: 'rgba(124, 58, 237, 0.07)',
-              color: colors.accent.primary,
-              border: '1px solid rgba(124, 58, 237, 0.15)',
-              fontWeight: 700,
-              fontSize: '0.72rem',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-            }}
-          />
-        </Stack>
+        <Chip
+          label={post.category || 'Digital Strategy'}
+          sx={{
+            mb: 3,
+            bgcolor: 'rgba(124, 58, 237, 0.07)',
+            color: colors.accent.primary,
+            border: '1px solid rgba(124, 58, 237, 0.15)',
+            fontWeight: 700,
+            fontSize: '0.72rem',
+            textTransform: 'uppercase',
+            letterSpacing: '0.06em',
+          }}
+        />
 
         <Typography
           variant="h1"
