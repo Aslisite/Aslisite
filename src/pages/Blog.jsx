@@ -405,7 +405,7 @@ const Blog = () => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ pt: { xs: 12, md: 16 }, pb: 8 }}>
+    <Container maxWidth="lg" sx={{ pt: { xs: 16, md: 16 }, pb: 8 }}>
       <Helmet>
         <title>Blog | Insights & Digital Strategy Tips | Aslisite</title>
         <meta
