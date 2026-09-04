@@ -515,7 +515,7 @@ const BlogDetail = () => {
       </Helmet>
 
       {/* ─── Minimal Hero ─── */}
-      <Container maxWidth="md" sx={{ pt: { xs: 12, md: 16 }, pb: { xs: 3, md: 5 } }}>
+      <Container maxWidth="md" sx={{ pt: { xs: 16, md: 16 }, pb: { xs: 3, md: 5 }, px: { xs: 3, md: 4 } }}>
         <Stack
           direction="row"
           alignItems="center"
