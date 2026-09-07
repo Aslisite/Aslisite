@@ -11,6 +11,11 @@
       "source": "/blog/modern-responsive-website",
       "destination": "/blog/responsive-website-design-for-small-businesses",
       "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/",
+      "permanent": true
     }
   ]
 }
