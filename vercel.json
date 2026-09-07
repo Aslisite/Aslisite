@@ -6,6 +6,11 @@
       "source": "/blog/best-gst-accounting-software-startups-india",
       "destination": "/blog/best-gst-accounting-software-for-startups-india",
       "permanent": true
+    },
+    {
+      "source": "/blog/modern-responsive-website",
+      "destination": "/blog/responsive-website-design-for-small-businesses",
+      "permanent": true
     }
   ]
 }
