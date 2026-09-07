@@ -1,4 +1,11 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/blog/best-gst-accounting-software-startups-india",
+      "destination": "/blog/best-gst-accounting-software-for-startups-india",
+      "permanent": true
+    }
+  ]
 }
