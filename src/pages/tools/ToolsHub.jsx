@@ -29,7 +29,6 @@ const tools = [
       'Calculate GST-inclusive and GST-exclusive prices instantly. Supports all GST 2.0 slabs — 0%, 5%, 18%, and 40%.',
     badge: 'GST 2.0 Updated',
     badgeColor: colors.accent.primary,
-    featured: true,
   },
   {
     icon: FileText,
@@ -126,7 +125,9 @@ const fadeUp = {
 const ToolCard = ({ tool, index }) => {
   const Icon = tool.icon;
   return (
-    <Grid item xs={12} sm={6} md={tool.featured ? 12 : 6} lg={tool.featured ? 6 : 3}>
+    <Grid item xs={6} sm={4} md={4} lg={12 / 5}
+      sx={{ '&.MuiGrid-item': { maxWidth: { lg: '20%' }, flexBasis: { lg: '20%' } } }}
+    >
       <Box
         component={motion.div}
         custom={index}
@@ -143,9 +144,7 @@ const ToolCard = ({ tool, index }) => {
             textDecoration: 'none',
             display: 'flex',
             flexDirection: 'column',
-            border: tool.featured
-              ? `1.5px solid ${colors.border.accent}`
-              : `1px solid ${colors.border.light}`,
+            border: `1px solid ${colors.border.light}`,
             borderRadius: 3,
             transition: 'all 0.25s ease',
             '&:hover': {
@@ -156,12 +155,12 @@ const ToolCard = ({ tool, index }) => {
             },
           }}
         >
-          <CardContent sx={{ p: { xs: 3, md: tool.featured ? 4 : 3 }, flexGrow: 1 }}>
+          <CardContent sx={{ p: { xs: 2.5, md: 3 }, flexGrow: 1 }}>
             <Stack direction="row" alignItems="flex-start" justifyContent="space-between" mb={2}>
               <Box
                 sx={{
-                  width: 44,
-                  height: 44,
+                  width: 40,
+                  height: 40,
                   borderRadius: 2,
                   display: 'flex',
                   alignItems: 'center',
@@ -171,33 +170,33 @@ const ToolCard = ({ tool, index }) => {
                   flexShrink: 0,
                 }}
               >
-                <Icon size={22} strokeWidth={1.8} />
+                <Icon size={20} strokeWidth={1.8} />
               </Box>
               {tool.badge && (
                 <Chip
                   label={tool.badge}
                   size="small"
                   sx={{
-                    fontSize: '0.68rem',
+                    fontSize: '0.65rem',
                     fontWeight: 700,
                     letterSpacing: '0.03em',
                     backgroundColor: `${tool.badgeColor}14`,
                     color: tool.badgeColor,
                     border: `1px solid ${tool.badgeColor}30`,
                     borderRadius: 1,
-                    height: 22,
+                    height: 20,
                   }}
                 />
               )}
             </Stack>
 
-            <Stack direction="row" alignItems="center" gap={1} mb={1}>
+            <Stack direction="row" alignItems="center" gap={0.5} mb={0.75}>
               <Typography
-                variant="h6"
+                variant="subtitle2"
                 sx={{
                   color: colors.text.primary,
                   fontWeight: 700,
-                  fontSize: tool.featured ? '1.15rem' : '1rem',
+                  fontSize: '0.9rem',
                   lineHeight: 1.3,
                 }}
               >
@@ -205,7 +204,7 @@ const ToolCard = ({ tool, index }) => {
               </Typography>
               <ArrowRight
                 className="tool-arrow"
-                size={16}
+                size={14}
                 style={{
                   color: colors.accent.primary,
                   opacity: 0,
@@ -219,8 +218,8 @@ const ToolCard = ({ tool, index }) => {
               variant="body2"
               sx={{
                 color: colors.text.secondary,
-                lineHeight: 1.7,
-                fontSize: '0.875rem',
+                lineHeight: 1.65,
+                fontSize: '0.8rem',
               }}
             >
               {tool.description}
