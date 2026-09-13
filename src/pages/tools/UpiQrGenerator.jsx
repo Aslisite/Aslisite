@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box, Container, Typography, TextField, Grid, Card, CardContent,
   Stack, Button, Divider, Chip, Alert, Tooltip, IconButton,
@@ -14,6 +14,8 @@ import { colors } from '../../theme/theme';
 import { absoluteUrl, siteMetadata } from '../../seo/siteMetadata';
 import { SectionBadge } from '../../components/common';
 
+import QRCode from 'qrcode';
+
 /* ─── UPI deep-link builder ─── */
 const buildUpiUrl = ({ upiId, name, amount, note }) => {
   if (!upiId) return '';
@@ -26,46 +28,36 @@ const buildUpiUrl = ({ upiId, name, amount, note }) => {
   return `upi://pay?${params.toString()}`;
 };
 
-/* ─── QR canvas component (reuses same CDN pattern as WhatsApp tool) ─── */
+/* ─── QR image component — uses qrcode npm package, no CDN ─── */
 const QRCanvas = ({ text, size = 220 }) => {
-  const canvasRef = useRef(null);
+  const [dataUrl, setDataUrl] = useState('');
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (!text) return;
+    if (!text) { setDataUrl(''); return; }
     setError(false);
-    const draw = () => {
-      if (typeof window.QRCode === 'undefined') { setError(true); return; }
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      try {
-        window.QRCode.toCanvas(canvas, text, {
-          width: size, margin: 2,
-          color: { dark: '#18181b', light: '#ffffff' },
-          errorCorrectionLevel: 'M',
-        });
-      } catch { setError(true); }
-    };
-    if (typeof window.QRCode !== 'undefined') { draw(); return; }
-    const existing = document.getElementById('qrcode-script');
-    if (existing) { existing.addEventListener('load', draw); return; }
-    const script = document.createElement('script');
-    script.id = 'qrcode-script';
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
-    script.onload = draw;
-    script.onerror = () => setError(true);
-    document.head.appendChild(script);
+    QRCode.toDataURL(text, {
+      width: size,
+      margin: 2,
+      color: { dark: '#18181b', light: '#ffffff' },
+      errorCorrectionLevel: 'M',
+    })
+      .then(setDataUrl)
+      .catch(() => setError(true));
   }, [text, size]);
 
   if (error) return (
     <Box sx={{ width: size, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center', border: `1px dashed ${colors.border.medium}`, borderRadius: 2, backgroundColor: '#fafafa' }}>
-      <Typography variant="caption" sx={{ color: colors.text.muted, textAlign: 'center', px: 2 }}>QR unavailable — check connection</Typography>
+      <Typography variant="caption" sx={{ color: colors.text.muted, textAlign: 'center', px: 2 }}>QR unavailable</Typography>
     </Box>
   );
 
   return (
     <Box sx={{ borderRadius: 2, overflow: 'hidden', border: `1px solid ${colors.border.light}`, display: 'inline-flex' }}>
-      <canvas ref={canvasRef} width={size} height={size} aria-label="UPI Payment QR Code" />
+      {dataUrl
+        ? <img src={dataUrl} width={size} height={size} alt="UPI Payment QR Code" style={{ display: 'block' }} />
+        : <Box sx={{ width: size, height: size, backgroundColor: '#f4f4f5' }} />
+      }
     </Box>
   );
 };
@@ -106,11 +98,11 @@ const UpiQrGenerator = () => {
   const handleReset = () => { setUpiId(''); setName(''); setAmount(''); setNote(''); setUpiError(''); setShowQr(false); };
 
   const handleDownload = () => {
-    const canvas = document.querySelector('#upi-qr-area canvas');
-    if (!canvas) return;
+    const img = document.querySelector('#upi-qr-area img');
+    if (!img) return;
     const link = document.createElement('a');
     link.download = `upi-qr-${upiId || 'payment'}.png`;
-    link.href = canvas.toDataURL('image/png');
+    link.href = img.src;
     link.click();
   };
 

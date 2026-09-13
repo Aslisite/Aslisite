@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box, Container, Typography, TextField, Grid, Card, CardContent,
   Stack, Button, IconButton, Divider, Chip, Tooltip, Alert,
@@ -15,10 +15,7 @@ import { colors } from '../../theme/theme';
 import { absoluteUrl, siteMetadata } from '../../seo/siteMetadata';
 import { SectionBadge } from '../../components/common';
 
-/* ─── QR Code renderer (pure canvas, no library needed) ─── */
-/* We use the native QR generation via a data URL approach.
-   For a lightweight in-browser QR, we dynamically load the
-   qrcode.js CDN script only when needed. */
+import QRCode from 'qrcode';
 
 /* ─── Helpers ─── */
 const sanitizePhone = (val) => val.replace(/[^\d+]/g, '');
@@ -31,58 +28,29 @@ const buildLink = (phone, message, type) => {
   return `https://wa.me/${cleaned}${message ? `?text=${encoded}` : ''}`;
 };
 
-/* ─── QR canvas component ─── */
+/* ─── QR image component — uses qrcode npm package, no CDN ─── */
 const QRCanvas = ({ text, size = 200 }) => {
-  const canvasRef = useRef(null);
+  const [dataUrl, setDataUrl] = useState('');
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (!text) return;
+    if (!text) { setDataUrl(''); return; }
     setError(false);
-
-    const draw = () => {
-      if (typeof window.QRCode === 'undefined') {
-        setError(true);
-        return;
-      }
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      try {
-        window.QRCode.toCanvas(canvas, text, {
-          width: size,
-          margin: 2,
-          color: { dark: '#18181b', light: '#ffffff' },
-          errorCorrectionLevel: 'M',
-        });
-      } catch {
-        setError(true);
-      }
-    };
-
-    if (typeof window.QRCode !== 'undefined') {
-      draw();
-      return;
-    }
-
-    // Lazy-load qrcode.js from CDN
-    const existing = document.getElementById('qrcode-script');
-    if (existing) {
-      existing.addEventListener('load', draw);
-      return;
-    }
-    const script = document.createElement('script');
-    script.id = 'qrcode-script';
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
-    script.onload = draw;
-    script.onerror = () => setError(true);
-    document.head.appendChild(script);
+    QRCode.toDataURL(text, {
+      width: size,
+      margin: 2,
+      color: { dark: '#18181b', light: '#ffffff' },
+      errorCorrectionLevel: 'M',
+    })
+      .then(setDataUrl)
+      .catch(() => setError(true));
   }, [text, size]);
 
   if (error) {
     return (
       <Box sx={{ width: size, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center', border: `1px dashed ${colors.border.medium}`, borderRadius: 2, backgroundColor: '#fafafa' }}>
         <Typography variant="caption" sx={{ color: colors.text.muted, textAlign: 'center', px: 2 }}>
-          QR unavailable — check your connection
+          QR unavailable
         </Typography>
       </Box>
     );
@@ -90,7 +58,10 @@ const QRCanvas = ({ text, size = 200 }) => {
 
   return (
     <Box sx={{ borderRadius: 2, overflow: 'hidden', border: `1px solid ${colors.border.light}`, display: 'inline-flex' }}>
-      <canvas ref={canvasRef} width={size} height={size} aria-label="WhatsApp QR Code" />
+      {dataUrl
+        ? <img src={dataUrl} width={size} height={size} alt="WhatsApp QR Code" style={{ display: 'block' }} />
+        : <Box sx={{ width: size, height: size, backgroundColor: '#f4f4f5' }} />
+      }
     </Box>
   );
 };
