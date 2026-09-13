@@ -954,7 +954,7 @@ const GstCalculator = () => {
           <Divider sx={{ mb: { xs: 6, md: 8 } }} />
 
           <Box sx={{ textAlign: 'center', mb: 5 }}>
-            <SectionBadge icon={Info} label="GST 2.0 — Effective 22 September 2025" />
+            <SectionBadge icon={Info} label="What Changed in GST 2.0" />
             <Typography
               variant="h2"
               sx={{
