@@ -720,7 +720,7 @@ const Navbar = () => {
                         </Box>
                       )}
 
-                      {/* Tools dropdown */}
+                      {/* Tools dropdown — mega-menu matching Services layout */}
                       {item.dropdownKey === 'tools' && openDropdown === 'tools' && (
                         <Box
                           sx={{
@@ -729,18 +729,18 @@ const Navbar = () => {
                             left: '50%',
                             transform: 'translateX(-50%)',
                             mt: 0.5,
-                            pt: 1,
-                            pb: 1,
-                            px: 1,
-                            minWidth: 280,
+                            pt: 1.5,
+                            pb: 1.5,
+                            px: 2,
+                            minWidth: 560,
                             backgroundColor: '#ffffff',
                             border: `1px solid ${colors.border.light}`,
-                            borderRadius: 2,
-                            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+                            borderRadius: 3,
+                            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.12)',
                             zIndex: 1001,
                           }}
                         >
-                          {/* Header link to hub */}
+                          {/* Header row */}
                           <Box
                             component={Link}
                             to="/tools"
@@ -749,17 +749,19 @@ const Navbar = () => {
                               display: 'flex',
                               alignItems: 'center',
                               gap: 1,
-                              px: 2,
-                              py: 1,
-                              mb: 0.5,
-                              borderRadius: 1,
+                              px: 1,
+                              py: 0.75,
+                              mb: 1,
+                              borderRadius: 1.5,
                               textDecoration: 'none',
                               borderBottom: `1px solid ${colors.border.light}`,
-                              '&:hover': { backgroundColor: '#f8fafc' },
+                              pb: 1.25,
+                              '&:hover': { '& span': { textDecoration: 'underline' } },
                             }}
                           >
                             <Wrench size={13} style={{ color: colors.accent.primary }} />
                             <Typography
+                              component="span"
                               sx={{
                                 color: colors.accent.primary,
                                 fontFamily: '"Inter", sans-serif',
@@ -771,51 +773,76 @@ const Navbar = () => {
                               All Free Tools →
                             </Typography>
                           </Box>
-                          {toolItems.map((tool) => (
-                            <Box
-                              key={tool.label}
-                              component={Link}
-                              to={tool.href}
-                              onClick={() => setOpenDropdown(null)}
-                              sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: 1.5,
-                                px: 2,
-                                py: 1.1,
-                                borderRadius: 1,
-                                textDecoration: 'none',
-                                '&:hover': { backgroundColor: '#f8fafc' },
-                              }}
-                            >
-                              <Box sx={{ color: colors.accent.primary, display: 'flex', flexShrink: 0 }}>
-                                <tool.icon size={15} />
-                              </Box>
-                              <Box>
-                                <Typography
+
+                          {/* 2-column grid — same as Services */}
+                          <Box
+                            sx={{
+                              display: 'grid',
+                              gridTemplateColumns: '1fr 1fr',
+                              gap: 0.5,
+                            }}
+                          >
+                            {toolItems.map((tool) => (
+                              <Box
+                                key={tool.label}
+                                component={Link}
+                                to={tool.href}
+                                onClick={() => setOpenDropdown(null)}
+                                sx={{
+                                  display: 'flex',
+                                  alignItems: 'flex-start',
+                                  gap: 1.5,
+                                  px: 2,
+                                  py: 1.5,
+                                  borderRadius: 2,
+                                  textDecoration: 'none',
+                                  transition: 'background-color 0.2s ease',
+                                  '&:hover': { backgroundColor: '#f8fafc' },
+                                }}
+                              >
+                                <Box
                                   sx={{
-                                    color: colors.text.primary,
-                                    fontFamily: '"Inter", sans-serif',
-                                    fontWeight: 500,
-                                    fontSize: '0.845rem',
-                                    lineHeight: 1.3,
+                                    mt: 0.3,
+                                    width: 32,
+                                    height: 32,
+                                    borderRadius: 1.5,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    backgroundColor: 'rgba(124, 58, 237, 0.06)',
+                                    color: colors.accent.primary,
+                                    flexShrink: 0,
                                   }}
                                 >
-                                  {tool.label}
-                                </Typography>
-                                <Typography
-                                  sx={{
-                                    color: colors.text.muted,
-                                    fontFamily: '"Inter", sans-serif',
-                                    fontSize: '0.7rem',
-                                    mt: 0.15,
-                                  }}
-                                >
-                                  {tool.description}
-                                </Typography>
+                                  <tool.icon size={16} />
+                                </Box>
+                                <Box>
+                                  <Typography
+                                    sx={{
+                                      color: colors.text.primary,
+                                      fontFamily: '"Inter", sans-serif',
+                                      fontWeight: 600,
+                                      fontSize: '0.85rem',
+                                      lineHeight: 1.3,
+                                    }}
+                                  >
+                                    {tool.label}
+                                  </Typography>
+                                  <Typography
+                                    sx={{
+                                      color: colors.text.secondary,
+                                      fontFamily: '"Inter", sans-serif',
+                                      fontSize: '0.72rem',
+                                      mt: 0.3,
+                                      lineHeight: 1.4,
+                                    }}
+                                  >
+                                    {tool.description}
+                                  </Typography>
+                                </Box>
                               </Box>
-                            </Box>
-                          ))}
+                            ))}
+                          </Box>
                         </Box>
                       )}
                     </Box>
