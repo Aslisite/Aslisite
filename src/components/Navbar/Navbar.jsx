@@ -17,7 +17,7 @@ import MenuIconImport from '@mui/icons-material/Menu';
 import SearchIconImport from '@mui/icons-material/Search';
 import WhatsAppIconImport from '@mui/icons-material/WhatsApp';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Code, ShoppingCart, Settings, TrendingUp, Sparkles, Zap } from 'lucide-react';
+import { Code, ShoppingCart, Settings, TrendingUp, Sparkles, Zap, Calculator, FileText, ClipboardList, MessageCircle, Receipt, Wrench } from 'lucide-react';
 import { colors } from '../../theme/theme';
 
 const CloseIcon = CloseIconImport.default || CloseIconImport;
@@ -31,6 +31,7 @@ const navItems = [
   { label: 'Products', href: '/#aslibooks', hasDropdown: true, dropdownKey: 'products' },
   { label: 'Reviews', href: '/#testimonials' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Tools', href: '/tools', hasDropdown: true, dropdownKey: 'tools' },
   { label: 'FAQ', href: '/#faq' },
   { label: 'Contact', href: '/#contact' },
 ];
@@ -47,9 +48,18 @@ const productItems = [
   { label: 'Sheet Automation', href: '/products/sheet-automation', description: 'Free Payment Reminder script', icon: Zap },
 ];
 
+const toolItems = [
+  { label: 'GST Calculator', href: '/tools/gst-calculator', description: 'GST 2.0 slabs — 0%, 5%, 18%, 40%', icon: Calculator },
+  { label: 'Invoice Generator', href: '/tools/invoice-generator', description: 'Free GST tax invoices', icon: FileText },
+  { label: 'Quotation Generator', href: '/tools/quotation-generator', description: 'Professional quotes with validity', icon: ClipboardList },
+  { label: 'WhatsApp Link & QR', href: '/tools/whatsapp-link-generator', description: 'Chat link + scannable QR code', icon: MessageCircle },
+  { label: 'Receipt Generator', href: '/tools/receipt-generator', description: 'Payment receipts in seconds', icon: Receipt },
+];
+
 /* ─── Announcement Bar ─── */
 const AnnouncementBar = ({ onDismiss }) => (
   <Box
+    className="no-print"
     sx={{
       position: 'fixed',
       top: 0,
@@ -110,6 +120,9 @@ const isNavItemActive = (item, pathname, hash) => {
   }
   if (item.dropdownKey === 'products') {
     return productItems.some((p) => pathname === p.href);
+  }
+  if (item.dropdownKey === 'tools') {
+    return pathname.startsWith('/tools');
   }
   return false;
 };
@@ -278,7 +291,7 @@ const Navbar = () => {
                   </ListItemButton>
                   {mobileOpenDropdown === item.dropdownKey && (
                     <Box sx={{ pl: 3, animation: 'fadeIn 0.2s ease' }}>
-                      {(item.dropdownKey === 'services' ? serviceItems : productItems).map((dropItem) => (
+                      {(item.dropdownKey === 'services' ? serviceItems : item.dropdownKey === 'tools' ? toolItems : productItems).map((dropItem) => (
                         <Box
                           key={dropItem.label}
                           component={Link}
@@ -695,6 +708,105 @@ const Navbar = () => {
                                   }}
                                 >
                                   {product.description}
+                                </Typography>
+                              </Box>
+                            </Box>
+                          ))}
+                        </Box>
+                      )}
+
+                      {/* Tools dropdown */}
+                      {item.dropdownKey === 'tools' && openDropdown === 'tools' && (
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            mt: 0.5,
+                            pt: 1,
+                            pb: 1,
+                            px: 1,
+                            minWidth: 280,
+                            backgroundColor: '#ffffff',
+                            border: `1px solid ${colors.border.light}`,
+                            borderRadius: 2,
+                            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+                            zIndex: 1001,
+                          }}
+                        >
+                          {/* Header link to hub */}
+                          <Box
+                            component={Link}
+                            to="/tools"
+                            onClick={() => setOpenDropdown(null)}
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 1,
+                              px: 2,
+                              py: 1,
+                              mb: 0.5,
+                              borderRadius: 1,
+                              textDecoration: 'none',
+                              borderBottom: `1px solid ${colors.border.light}`,
+                              '&:hover': { backgroundColor: '#f8fafc' },
+                            }}
+                          >
+                            <Wrench size={13} style={{ color: colors.accent.primary }} />
+                            <Typography
+                              sx={{
+                                color: colors.accent.primary,
+                                fontFamily: '"Inter", sans-serif',
+                                fontWeight: 700,
+                                fontSize: '0.78rem',
+                                letterSpacing: '0.02em',
+                              }}
+                            >
+                              All Free Tools →
+                            </Typography>
+                          </Box>
+                          {toolItems.map((tool) => (
+                            <Box
+                              key={tool.label}
+                              component={Link}
+                              to={tool.href}
+                              onClick={() => setOpenDropdown(null)}
+                              sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 1.5,
+                                px: 2,
+                                py: 1.1,
+                                borderRadius: 1,
+                                textDecoration: 'none',
+                                '&:hover': { backgroundColor: '#f8fafc' },
+                              }}
+                            >
+                              <Box sx={{ color: colors.accent.primary, display: 'flex', flexShrink: 0 }}>
+                                <tool.icon size={15} />
+                              </Box>
+                              <Box>
+                                <Typography
+                                  sx={{
+                                    color: colors.text.primary,
+                                    fontFamily: '"Inter", sans-serif',
+                                    fontWeight: 500,
+                                    fontSize: '0.845rem',
+                                    lineHeight: 1.3,
+                                  }}
+                                >
+                                  {tool.label}
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    color: colors.text.muted,
+                                    fontFamily: '"Inter", sans-serif',
+                                    fontSize: '0.7rem',
+                                    mt: 0.15,
+                                  }}
+                                >
+                                  {tool.description}
                                 </Typography>
                               </Box>
                             </Box>

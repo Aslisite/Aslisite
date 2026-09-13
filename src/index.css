@@ -73,3 +73,37 @@ body {
 .glow-btn:hover::before {
   left: 100%;
 }
+
+/* ─── Print: hide site chrome, show only tool print areas ─── */
+@media print {
+  /* Hide navbar, announcement bar, footer, and any no-print element */
+  header,
+  footer,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Also hide the MUI Drawer (mobile nav) if open during print */
+  .MuiDrawer-root,
+  .MuiBackdrop-root {
+    display: none !important;
+  }
+
+  /* Remove body background / padding that browsers sometimes add */
+  body {
+    background: #fff !important;
+    overflow: visible !important;
+  }
+
+  /* Ensure the root container doesn't clip content */
+  #root > * {
+    min-height: unset !important;
+  }
+
+  /* Strip the navbar-clearance top padding from tool page containers */
+  .tool-page-container {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+}

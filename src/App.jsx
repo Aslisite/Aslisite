@@ -15,6 +15,12 @@ import ServiceDetail from './pages/ServiceDetail';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import NotFound from './pages/NotFound';
 import SheetAutomation from './pages/SheetAutomation';
+import ToolsHub from './pages/tools/ToolsHub';
+import GstCalculator from './pages/tools/GstCalculator';
+import InvoiceGenerator from './pages/tools/InvoiceGenerator';
+import QuotationGenerator from './pages/tools/QuotationGenerator';
+import WhatsAppLinkGenerator from './pages/tools/WhatsAppLinkGenerator';
+import ReceiptGenerator from './pages/tools/ReceiptGenerator';
 
 const CssBaseline = CssBaselineImport.default || CssBaselineImport;
 
@@ -41,6 +47,12 @@ function App() {
                 <Route path="/services/:slug" element={<ServiceDetail />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/products/sheet-automation" element={<SheetAutomation />} />
+                <Route path="/tools" element={<ToolsHub />} />
+                <Route path="/tools/gst-calculator" element={<GstCalculator />} />
+                <Route path="/tools/invoice-generator" element={<InvoiceGenerator />} />
+                <Route path="/tools/quotation-generator" element={<QuotationGenerator />} />
+                <Route path="/tools/whatsapp-link-generator" element={<WhatsAppLinkGenerator />} />
+                <Route path="/tools/receipt-generator" element={<ReceiptGenerator />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Box>

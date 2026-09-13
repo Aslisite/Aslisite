@@ -92,6 +92,12 @@ async function runBuild() {
     '/services/custom-software',
     '/services/seo-services',
     '/products/sheet-automation',
+    '/tools',
+    '/tools/gst-calculator',
+    '/tools/invoice-generator',
+    '/tools/quotation-generator',
+    '/tools/whatsapp-link-generator',
+    '/tools/receipt-generator',
   ];
   blogs.forEach((blog) => {
     if (blog.slug) routes.push(`/blog/${blog.slug}`);

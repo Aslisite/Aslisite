@@ -91,6 +91,13 @@ const navigation = {
     { label: 'FAQ', href: '/#faq' },
     { label: 'Contact', href: '/#contact' },
   ],
+  freeTools: [
+    { label: 'GST Calculator', href: '/tools/gst-calculator' },
+    { label: 'Invoice Generator', href: '/tools/invoice-generator' },
+    { label: 'Quotation Generator', href: '/tools/quotation-generator' },
+    { label: 'WhatsApp Link & QR', href: '/tools/whatsapp-link-generator' },
+    { label: 'Receipt Generator', href: '/tools/receipt-generator' },
+  ],
 };
 
 const socialLinks = [
@@ -127,8 +134,9 @@ const Footer = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <Grid container spacing={{ xs: 4, md: 6 }}>
-            <Grid item xs={12} md={4}>
+          <Grid container spacing={{ xs: 4, md: 4 }}>
+            {/* Brand column */}
+            <Grid item xs={12} md={3}>
               <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
                 <Typography
                   component={motion.h2}
@@ -195,14 +203,14 @@ const Footer = () => {
               </Box>
             </Grid>
 
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} md={9}>
               <Grid
                 component={motion.div}
                 container
-                spacing={{ xs: 3, md: 4 }}
+                spacing={{ xs: 3, md: 3 }}
                 variants={columnsContainerVariants}
               >
-                <Grid item xs={6} sm={6} md={4} component={motion.div} variants={columnVariants}>
+                <Grid item xs={6} sm={6} md={3} component={motion.div} variants={columnVariants}>
                   <Box sx={{ pl: { xs: '16px', sm: 0 } }}>
                     <Typography
                       variant="subtitle2"
@@ -249,7 +257,7 @@ const Footer = () => {
                   </Box>
                 </Grid>
 
-                <Grid item xs={6} sm={6} md={4} component={motion.div} variants={columnVariants}>
+                <Grid item xs={6} sm={6} md={3} component={motion.div} variants={columnVariants}>
                   <Box sx={{ pl: { xs: '16px', sm: 0 } }}>
                     <Typography
                       variant="subtitle2"
@@ -298,7 +306,61 @@ const Footer = () => {
 
                 <Grid
                   item
-                  md={4}
+                  xs={6}
+                  sm={6}
+                  md={3}
+                  component={motion.div}
+                  variants={columnVariants}
+                >
+                  <Box sx={{ pl: { xs: '16px', sm: 0 } }}>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{
+                        fontWeight: 600,
+                        color: colors.text.primary,
+                        mb: 2,
+                        textTransform: 'uppercase',
+                        letterSpacing: 1,
+                        fontSize: '0.75rem',
+                        textAlign: 'left',
+                      }}
+                    >
+                      Free Tools
+                    </Typography>
+                    <Box
+                      component="nav"
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 1.5,
+                        alignItems: 'flex-start',
+                      }}
+                    >
+                      {navigation.freeTools.map((item, index) => (
+                        <Link
+                          key={index}
+                          component={RouterLink}
+                          to={item.href}
+                          underline="none"
+                          sx={{
+                            color: colors.text.muted,
+                            fontSize: '0.875rem',
+                            transition: 'color 0.2s ease',
+                            '&:hover': {
+                              color: colors.accent.primary,
+                            },
+                          }}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </Box>
+                  </Box>
+                </Grid>
+
+                <Grid
+                  item
+                  md={3}
                   component={motion.div}
                   variants={columnVariants}
                   sx={{ display: { xs: 'none', md: 'block' } }}
