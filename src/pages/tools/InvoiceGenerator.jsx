@@ -311,9 +311,11 @@ const IndiaPrintDocument = ({ biz, client, invoice, items, txnType, totals, disc
           <Box sx={{ minWidth: 260 }}>
             <Typography sx={{ fontWeight: 700, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#6d28d9', mb: 0.5 }}>GST Summary</Typography>
             <Box component="table" sx={{ width: '100%', borderCollapse: 'collapse' }}>
-              <Box component="thead"><Box component="tr">{txnType==='intra' ? ['Rate','Taxable','CGST','SGST','Total GST'] : ['Rate','Taxable','IGST']}.map((h) => (
-                <Box key={h} component="th" sx={{ p: '4px 6px', fontSize: '10px', fontWeight: 700, color: '#52525b', textAlign: 'right', '&:first-of-type': { textAlign: 'left' }, borderBottom: '1px solid #e4e4e7' }}>{h}</Box>
-              ))}</Box></Box>
+              <Box component="thead"><Box component="tr">
+                {(txnType==='intra' ? ['Rate','Taxable','CGST','SGST','Total GST'] : ['Rate','Taxable','IGST']).map((h) => (
+                  <Box key={h} component="th" sx={{ p: '4px 6px', fontSize: '10px', fontWeight: 700, color: '#52525b', textAlign: 'right', '&:first-of-type': { textAlign: 'left' }, borderBottom: '1px solid #e4e4e7' }}>{h}</Box>
+                ))}
+              </Box></Box>
               <Box component="tbody">
                 {Object.entries(taxGroups).map(([rate, { taxable, gst }]) => (
                   <Box key={rate} component="tr">
