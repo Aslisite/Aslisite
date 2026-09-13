@@ -445,7 +445,7 @@ const QuotationGenerator = () => {
                             </Select>
                           </FormControl>
                         )}
-                        <Tooltip title="Remove"><IconButton size="small" onClick={() => isIndia ? removeItem(item.id) : removeGItem(item.id)} disabled={(isIndia?items:gItems).length === 1} sx={{ color: colors.text.muted, '&:hover': { color: '#dc2626' }, '&.Mui-disabled': { opacity: 0.3 } }}><Trash2 size={15} /></IconButton></Tooltip>
+                        <Tooltip title="Remove"><span><IconButton size="small" onClick={() => isIndia ? removeItem(item.id) : removeGItem(item.id)} disabled={(isIndia?items:gItems).length === 1} sx={{ color: colors.text.muted, '&:hover': { color: '#dc2626' }, '&.Mui-disabled': { opacity: 0.3 } }}><Trash2 size={15} /></IconButton></span></Tooltip>
                       </Box>
                       {/* Notes per item */}
                       <Box sx={{ mt: 1 }}>

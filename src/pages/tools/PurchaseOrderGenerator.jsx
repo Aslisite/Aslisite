@@ -340,10 +340,12 @@ const PurchaseOrderGenerator = () => {
               <Field label="Unit" value={item.unit} onChange={(e) => onItem(item.id, 'unit', e.target.value)} />
               <Field label="Unit Price" value={item.rate} onChange={(e) => onItem(item.id, 'rate', e.target.value)} inputProps={{ inputMode: 'decimal' }} />
               <Tooltip title="Remove">
-                <IconButton size="small" onClick={() => onRemove(item.id)} disabled={itemList.length === 1}
-                  sx={{ color: colors.text.muted, '&:hover': { color: '#dc2626' }, '&.Mui-disabled': { opacity: 0.3 } }}>
-                  <Trash2 size={15} />
-                </IconButton>
+                <span>
+                  <IconButton size="small" onClick={() => onRemove(item.id)} disabled={itemList.length === 1}
+                    sx={{ color: colors.text.muted, '&:hover': { color: '#dc2626' }, '&.Mui-disabled': { opacity: 0.3 } }}>
+                    <Trash2 size={15} />
+                  </IconButton>
+                </span>
               </Tooltip>
             </Box>
             {(item.qty && item.rate) && (

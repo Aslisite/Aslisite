@@ -709,7 +709,7 @@ const InvoiceGenerator = () => {
                               {GST_RATES.map((r) => <MenuItem key={r.value} value={r.value}>{r.value}%</MenuItem>)}
                             </Select>
                           </FormControl>
-                          <Tooltip title="Remove item"><IconButton size="small" onClick={() => removeItem(item.id)} disabled={items.length === 1} sx={{ color: colors.text.muted, '&:hover': { color: '#dc2626' }, '&.Mui-disabled': { opacity: 0.3 } }}><Trash2 size={15} /></IconButton></Tooltip>
+                          <Tooltip title="Remove item"><span><IconButton size="small" onClick={() => removeItem(item.id)} disabled={items.length === 1} sx={{ color: colors.text.muted, '&:hover': { color: '#dc2626' }, '&.Mui-disabled': { opacity: 0.3 } }}><Trash2 size={15} /></IconButton></span></Tooltip>
                         </Box>
                         {(item.qty && item.rate) && (
                           <Box sx={{ mt: 1, textAlign: { xs: 'left', md: 'right' } }}>
@@ -838,7 +838,7 @@ const InvoiceGenerator = () => {
                           <Field label="Qty" value={item.qty} onChange={(e) => hGItem(item.id,'qty',e.target.value)} inputProps={{ inputMode: 'decimal' }} />
                           <Field label="Unit" value={item.unit} onChange={(e) => hGItem(item.id,'unit',e.target.value)} />
                           <Field label={`Rate (${currencyCode==='OTHER'?(customSymbol||'?'):currencyCode})`} value={item.rate} onChange={(e) => hGItem(item.id,'rate',e.target.value)} inputProps={{ inputMode: 'decimal' }} />
-                          <Tooltip title="Remove item"><IconButton size="small" onClick={() => removeGItem(item.id)} disabled={globalItems.length === 1} sx={{ color: colors.text.muted, '&:hover': { color: '#dc2626' }, '&.Mui-disabled': { opacity: 0.3 } }}><Trash2 size={15} /></IconButton></Tooltip>
+                          <Tooltip title="Remove item"><span><IconButton size="small" onClick={() => removeGItem(item.id)} disabled={globalItems.length === 1} sx={{ color: colors.text.muted, '&:hover': { color: '#dc2626' }, '&.Mui-disabled': { opacity: 0.3 } }}><Trash2 size={15} /></IconButton></span></Tooltip>
                         </Box>
                         {(item.qty && item.rate) && (
                           <Box sx={{ mt: 0.5, textAlign: { xs: 'left', md: 'right' } }}>
