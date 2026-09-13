@@ -8,6 +8,11 @@ import {
   ClipboardList,
   MessageCircle,
   Receipt,
+  TrendingUp,
+  QrCode,
+  BarChart2,
+  ShoppingCart as PurchaseIcon,
+  Zap as ZapIcon,
   ArrowRight,
   Sparkles,
 } from 'lucide-react';
@@ -59,6 +64,51 @@ const tools = [
     href: '/tools/receipt-generator',
     description:
       'Generate simple payment receipts with item details, amount paid, and payment method. Print or save as PDF.',
+    badge: 'Free',
+    badgeColor: colors.accent.secondary,
+  },
+  {
+    icon: TrendingUp,
+    label: 'Profit Margin Calculator',
+    href: '/tools/profit-margin-calculator',
+    description:
+      'Calculate profit margin, markup percentage, or the ideal selling price from your cost. Instant results.',
+    badge: 'Free',
+    badgeColor: colors.accent.secondary,
+  },
+  {
+    icon: QrCode,
+    label: 'UPI QR Generator',
+    href: '/tools/upi-qr-generator',
+    description:
+      'Generate a UPI payment QR code for your shop or website. Works with PhonePe, GPay, Paytm, and BHIM.',
+    badge: 'Free',
+    badgeColor: colors.accent.secondary,
+  },
+  {
+    icon: BarChart2,
+    label: 'Break-Even Calculator',
+    href: '/tools/break-even-calculator',
+    description:
+      'Find out exactly how many units you need to sell to cover all costs. Includes profit scenario table.',
+    badge: 'Free',
+    badgeColor: colors.accent.secondary,
+  },
+  {
+    icon: PurchaseIcon,
+    label: 'Purchase Order Generator',
+    href: '/tools/purchase-order-generator',
+    description:
+      'Create professional purchase orders with vendor details, delivery dates, and payment terms. Print instantly.',
+    badge: 'Free',
+    badgeColor: colors.accent.secondary,
+  },
+  {
+    icon: ZapIcon,
+    label: 'ROAS Calculator',
+    href: '/tools/roas-calculator',
+    description:
+      'Calculate Return on Ad Spend for Google, Meta, or any ad platform. Also works out required revenue and budget.',
     badge: 'Free',
     badgeColor: colors.accent.secondary,
   },
@@ -185,7 +235,7 @@ const ToolCard = ({ tool, index }) => {
 const ToolsHub = () => {
   const pageTitle = 'Free Business Tools | GST Calculator, Invoice Generator & More | Aslisite';
   const pageDesc =
-    'Free online business tools for Indian SMBs — GST Calculator (GST 2.0 updated), Invoice Generator, Quotation Generator, WhatsApp Link Generator, and Receipt Generator. No login required.';
+    'Free online business tools for Indian SMBs — GST Calculator, Invoice Generator, Quotation Generator, UPI QR Generator, Break-Even Calculator, ROAS Calculator, and more. No login required.';
 
   return (
     <Container maxWidth="lg" className="tool-page-container" sx={{ pt: { xs: 16, md: 16 }, pb: { xs: 8, md: 12 } }}>

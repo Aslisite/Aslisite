@@ -17,7 +17,7 @@ import MenuIconImport from '@mui/icons-material/Menu';
 import SearchIconImport from '@mui/icons-material/Search';
 import WhatsAppIconImport from '@mui/icons-material/WhatsApp';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Code, ShoppingCart, Settings, TrendingUp, Sparkles, Zap, Calculator, FileText, ClipboardList, MessageCircle, Receipt, Wrench } from 'lucide-react';
+import { Code, ShoppingCart, Settings, TrendingUp, Sparkles, Zap, Calculator, FileText, ClipboardList, MessageCircle, Receipt, Wrench, QrCode, BarChart2 } from 'lucide-react';
 import { colors } from '../../theme/theme';
 
 const CloseIcon = CloseIconImport.default || CloseIconImport;
@@ -54,6 +54,11 @@ const toolItems = [
   { label: 'Quotation Generator', href: '/tools/quotation-generator', description: 'Professional quotes with validity', icon: ClipboardList },
   { label: 'WhatsApp Link & QR', href: '/tools/whatsapp-link-generator', description: 'Chat link + scannable QR code', icon: MessageCircle },
   { label: 'Receipt Generator', href: '/tools/receipt-generator', description: 'Payment receipts in seconds', icon: Receipt },
+  { label: 'Profit Margin Calculator', href: '/tools/profit-margin-calculator', description: 'Margin, markup & selling price', icon: TrendingUp },
+  { label: 'UPI QR Generator', href: '/tools/upi-qr-generator', description: 'UPI payment QR for your business', icon: QrCode },
+  { label: 'Break-Even Calculator', href: '/tools/break-even-calculator', description: 'Units & revenue to cover costs', icon: BarChart2 },
+  { label: 'Purchase Order Generator', href: '/tools/purchase-order-generator', description: 'Professional POs with delivery dates', icon: ShoppingCart },
+  { label: 'ROAS Calculator', href: '/tools/roas-calculator', description: 'Return on ad spend for any platform', icon: Zap },
 ];
 
 /* ─── Announcement Bar ─── */

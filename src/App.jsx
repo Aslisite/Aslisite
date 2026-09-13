@@ -21,6 +21,11 @@ import InvoiceGenerator from './pages/tools/InvoiceGenerator';
 import QuotationGenerator from './pages/tools/QuotationGenerator';
 import WhatsAppLinkGenerator from './pages/tools/WhatsAppLinkGenerator';
 import ReceiptGenerator from './pages/tools/ReceiptGenerator';
+import ProfitMarginCalculator from './pages/tools/ProfitMarginCalculator';
+import UpiQrGenerator from './pages/tools/UpiQrGenerator';
+import BreakEvenCalculator from './pages/tools/BreakEvenCalculator';
+import PurchaseOrderGenerator from './pages/tools/PurchaseOrderGenerator';
+import RoasCalculator from './pages/tools/RoasCalculator';
 
 const CssBaseline = CssBaselineImport.default || CssBaselineImport;
 
@@ -53,6 +58,11 @@ function App() {
                 <Route path="/tools/quotation-generator" element={<QuotationGenerator />} />
                 <Route path="/tools/whatsapp-link-generator" element={<WhatsAppLinkGenerator />} />
                 <Route path="/tools/receipt-generator" element={<ReceiptGenerator />} />
+                <Route path="/tools/profit-margin-calculator" element={<ProfitMarginCalculator />} />
+                <Route path="/tools/upi-qr-generator" element={<UpiQrGenerator />} />
+                <Route path="/tools/break-even-calculator" element={<BreakEvenCalculator />} />
+                <Route path="/tools/purchase-order-generator" element={<PurchaseOrderGenerator />} />
+                <Route path="/tools/roas-calculator" element={<RoasCalculator />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Box>

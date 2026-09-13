@@ -97,6 +97,11 @@ const navigation = {
     { label: 'Quotation Generator', href: '/tools/quotation-generator' },
     { label: 'WhatsApp Link & QR', href: '/tools/whatsapp-link-generator' },
     { label: 'Receipt Generator', href: '/tools/receipt-generator' },
+    { label: 'Profit Margin Calculator', href: '/tools/profit-margin-calculator' },
+    { label: 'UPI QR Generator', href: '/tools/upi-qr-generator' },
+    { label: 'Break-Even Calculator', href: '/tools/break-even-calculator' },
+    { label: 'Purchase Order Generator', href: '/tools/purchase-order-generator' },
+    { label: 'ROAS Calculator', href: '/tools/roas-calculator' },
   ],
 };
 

@@ -98,6 +98,11 @@ async function runBuild() {
     '/tools/quotation-generator',
     '/tools/whatsapp-link-generator',
     '/tools/receipt-generator',
+    '/tools/profit-margin-calculator',
+    '/tools/upi-qr-generator',
+    '/tools/break-even-calculator',
+    '/tools/purchase-order-generator',
+    '/tools/roas-calculator',
   ];
   blogs.forEach((blog) => {
     if (blog.slug) routes.push(`/blog/${blog.slug}`);
