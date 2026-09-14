@@ -204,9 +204,9 @@ const Navbar = () => {
     <Box
       sx={{
         width: '100%',
-        height: '100%',
+        minHeight: '100%',
+        overflowY: 'auto',
         backgroundColor: '#ffffff',
-        backdropFilter: 'blur(12px)',
         display: 'flex',
         flexDirection: 'column',
         '@keyframes fadeIn': {
@@ -1000,8 +1000,11 @@ const Navbar = () => {
           '& .MuiDrawer-paper': {
             width: '100%',
             maxWidth: 320,
-            backgroundColor: 'transparent',
+            // Keep the expanded menu fully opaque so the backdrop cannot bleed
+            // through when the list is taller than the mobile viewport.
+            backgroundColor: '#ffffff',
             boxShadow: '-10px 0 40px rgba(0, 0, 0, 0.1)',
+            overflowY: 'auto',
           },
         }}
       >
