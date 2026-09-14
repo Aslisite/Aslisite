@@ -17,6 +17,7 @@ import { SectionBadge } from '../../components/common';
 import {
   CURRENCIES, INDIA_PAYMENT_METHODS, GLOBAL_PAYMENT_METHODS,
   fmtCurrency, currencyPrefix,
+  detectRegion,
 } from './regionConfig';
 
 /* ─── India: amount in words (unchanged) ─── */
@@ -203,7 +204,7 @@ const GlobalPrint = ({ biz, payer, receipt, currencyCode, customSymbol }) => {
    MAIN
 ══════════════════════════════ */
 const ReceiptGenerator = () => {
-  const [region, setRegion] = useState('india');
+  const [region, setRegion] = useState(detectRegion);
   const isIndia = region === 'india';
 
   /* India state (unchanged) */

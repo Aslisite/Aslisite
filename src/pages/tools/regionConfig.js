@@ -146,3 +146,16 @@ export const REGION_OPTIONS = [
   { value: 'india',  label: '🇮🇳 India (GST)',   description: 'GST 2.0, CGST/SGST/IGST, ₹, GSTIN' },
   { value: 'global', label: '🌐 Global',          description: 'Multi-currency, VAT / Sales Tax' },
 ];
+
+/**
+ * Detect whether the user is likely in India based on browser locale.
+ * Returns 'india' if any preferred language starts with 'hi' or ends with '-IN'.
+ * Returns 'global' for everyone else.
+ * Falls back to 'global' in SSR / non-browser environments.
+ */
+export const detectRegion = () => {
+  if (typeof navigator === 'undefined') return 'global';
+  const langs = navigator.languages?.length ? navigator.languages : [navigator.language || ''];
+  const isIndia = langs.some((l) => l.startsWith('hi') || l.toLowerCase().endsWith('-in'));
+  return isIndia ? 'india' : 'global';
+};

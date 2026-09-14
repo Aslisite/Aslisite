@@ -18,6 +18,7 @@ import { SectionBadge } from '../../components/common';
 import {
   CURRENCIES, TAX_MODES, DEFAULT_GLOBAL_TAX, REGION_OPTIONS,
   fmtAmount, fmtCurrency, calcGlobalTax, taxLineLabel,
+  detectRegion,
 } from './regionConfig';
 
 /* ─── India GST 2.0 Slabs ─── */
@@ -222,7 +223,7 @@ const GlobalPrint = ({ biz, client, quote, items, totals, taxConfig, currencyCod
    MAIN COMPONENT
 ══════════════════════════════════════════════ */
 const QuotationGenerator = () => {
-  const [region, setRegion] = useState('india');
+  const [region, setRegion] = useState(detectRegion);
   const isIndia = region === 'india';
 
   /* India state */

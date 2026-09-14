@@ -18,6 +18,7 @@ import { SectionBadge } from '../../components/common';
 import {
   CURRENCIES, TAX_MODES, DEFAULT_GLOBAL_TAX,
   fmtCurrency, calcGlobalTax, taxLineLabel,
+  detectRegion,
 } from './regionConfig';
 
 /* ─── Helpers ─── */
@@ -255,7 +256,7 @@ const GlobalPrint = ({ buyer, vendor, po, items, currencyCode, customSymbol, tax
    MAIN COMPONENT
 ══════════════════════════════════════════ */
 const PurchaseOrderGenerator = () => {
-  const [region, setRegion] = useState('india');
+  const [region, setRegion] = useState(detectRegion);
   const isIndia = region === 'india';
 
   /* ── India state (unchanged) ── */

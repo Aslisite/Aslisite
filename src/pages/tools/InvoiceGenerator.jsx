@@ -20,6 +20,7 @@ import {
   fmtAmount, currencyPrefix, fmtCurrency,
   calcGlobalTax, taxLineLabel,
   defaultGlobalBank, defaultIndiaBank,
+  detectRegion,
 } from './regionConfig';
 
 /* ─── India: GST 2.0 Slabs (effective 22 Sep 2025) ─── */
@@ -490,7 +491,7 @@ const GlobalPrintDocument = ({ biz, client, invoice, items, totals, taxConfig, d
 ══════════════════════════════════════════════════════════════ */
 const InvoiceGenerator = () => {
   /* ── Region ── */
-  const [region, setRegion] = useState('india'); // 'india' | 'global'
+  const [region, setRegion] = useState(detectRegion); // auto-detects India vs Global from browser locale
   const isIndia = region === 'india';
 
   /* ── India state (unchanged) ── */
