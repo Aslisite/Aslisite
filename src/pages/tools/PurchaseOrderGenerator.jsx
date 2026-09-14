@@ -301,11 +301,6 @@ const PurchaseOrderGenerator = () => {
   /* ── Shared item rows renderer ── */
   const renderItems = (itemList, onItem, onAdd, onRemove) => (
     <>
-      <Box sx={{ display: { xs: 'none', md: 'grid' }, gridTemplateColumns: '2.2fr 1.5fr 0.7fr 0.7fr 0.85fr 36px', gap: 1, mb: 1 }}>
-        {['Description', 'Notes / Specs', 'Qty', 'Unit', isIndia ? 'Unit Price (₹)' : `Unit Price (${currencyCode === 'OTHER' ? (customSymbol || '?') : currencyCode})`, ''].map((h) => (
-          <Typography key={h} variant="caption" sx={{ color: colors.text.muted, fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{h}</Typography>
-        ))}
-      </Box>
       <Stack spacing={1.5}>
         {itemList.map((item, idx) => (
           <Box key={item.id} sx={{ p: { xs: 2, md: 0 }, borderRadius: { xs: 2, md: 0 }, border: { xs: `1px solid ${colors.border.light}`, md: 'none' } }}>

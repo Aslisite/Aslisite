@@ -411,10 +411,6 @@ const QuotationGenerator = () => {
             <Card sx={{ borderRadius: 3, border: `1px solid ${colors.border.light}`, boxShadow: 'none', mb: 3 }}>
               <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
                 <SectionHeading>Items / Services</SectionHeading>
-                <Box sx={{ display: { xs: 'none', md: 'grid' }, gridTemplateColumns: isIndia ? '2fr 0.7fr 0.7fr 0.7fr 0.9fr 36px' : '2.5fr 0.7fr 0.7fr 0.9fr 36px', gap: 1, mb: 1 }}>
-                  {(isIndia ? ['Description','Qty','Unit','Rate (₹)','GST %',''] : ['Description','Qty','Unit','Rate',''])
-                    .map((h) => <Typography key={h} variant="caption" sx={{ color: colors.text.muted, fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{h}</Typography>)}
-                </Box>
                 <Stack spacing={2}>
                   {(isIndia ? items : gItems).map((item, idx) => (
                     <Box key={item.id} sx={{ p: { xs: 2, md: 0 }, borderRadius: { xs: 2, md: 0 }, border: { xs: `1px solid ${colors.border.light}`, md: 'none' } }}>

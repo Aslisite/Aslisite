@@ -671,11 +671,6 @@ const InvoiceGenerator = () => {
               <Card sx={{ borderRadius: 3, border: `1px solid ${colors.border.light}`, boxShadow: 'none', mb: 3 }}>
                 <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
                   <SectionHeading>Line Items</SectionHeading>
-                  <Box sx={{ display: { xs: 'none', md: 'grid' }, gridTemplateColumns: '2.5fr 0.9fr 0.7fr 0.7fr 0.7fr 0.9fr 36px', gap: 1, mb: 1 }}>
-                    {['Description','HSN/SAC','Qty','Unit','Rate (₹)','GST %',''].map((h) => (
-                      <Typography key={h} variant="caption" sx={{ color: colors.text.muted, fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{h}</Typography>
-                    ))}
-                  </Box>
                   <Stack spacing={1.5}>
                     {items.map((item, idx) => (
                       <Box key={item.id} sx={{ p: { xs: 2, md: 0 }, borderRadius: { xs: 2, md: 0 }, border: { xs: `1px solid ${colors.border.light}`, md: 'none' } }}>
@@ -806,11 +801,6 @@ const InvoiceGenerator = () => {
               <Card sx={{ borderRadius: 3, border: `1px solid ${colors.border.light}`, boxShadow: 'none', mb: 3 }}>
                 <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
                   <SectionHeading>Line Items</SectionHeading>
-                  <Box sx={{ display: { xs: 'none', md: 'grid' }, gridTemplateColumns: '2.8fr 1fr 0.7fr 0.7fr 0.9fr 36px', gap: 1, mb: 1 }}>
-                    {['Description','SKU / Code','Qty','Unit','Rate',''].map((h) => (
-                      <Typography key={h} variant="caption" sx={{ color: colors.text.muted, fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{h}</Typography>
-                    ))}
-                  </Box>
                   <Stack spacing={1.5}>
                     {globalItems.map((item, idx) => (
                       <Box key={item.id} sx={{ p: { xs: 2, md: 0 }, borderRadius: { xs: 2, md: 0 }, border: { xs: `1px solid ${colors.border.light}`, md: 'none' } }}>
