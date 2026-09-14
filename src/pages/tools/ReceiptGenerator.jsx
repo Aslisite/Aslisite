@@ -267,7 +267,7 @@ const ReceiptGenerator = () => {
         <Stack direction="row" alignItems="center" gap={1.5} flexWrap="wrap" sx={{ mb: 4 }} className="no-print">
           <Button variant="contained" startIcon={<Printer size={15} />} onClick={() => window.print()} sx={{ borderRadius: 2, fontWeight: 700, background: colors.accent.primary, color: '#fff', px: 3, '&:hover': { background: colors.accent.primaryHover } }}>Print / Save PDF</Button>
           <Button variant="outlined" startIcon={<RotateCcw size={14} />} onClick={handleReset} sx={{ borderRadius: 2, fontWeight: 600, borderColor: colors.border.medium, color: colors.text.secondary, '&:hover': { borderColor: colors.accent.primary, color: colors.accent.primary } }}>Reset</Button>
-          <Box sx={{ ml: 'auto' }}>
+          <Box sx={{ ml: { xs: 0, sm: 'auto' }, width: { xs: '100%', sm: 'auto' }, display: 'flex', justifyContent: { xs: 'center', sm: 'flex-end' } }}>
             <ToggleButtonGroup value={region} exclusive onChange={(_, v) => v && setRegion(v)} size="small"
               sx={{ '& .MuiToggleButton-root': { px: 1.5, py: 0.6, fontWeight: 600, fontSize: '0.75rem', textTransform: 'none', border: `1px solid ${colors.border.medium} !important`, gap: 0.5, lineHeight: 1.4,
                 '&.Mui-selected': { backgroundColor: colors.accent.primary, color: '#fff', borderColor: `${colors.accent.primary} !important` },
