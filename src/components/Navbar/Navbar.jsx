@@ -17,7 +17,7 @@ import MenuIconImport from '@mui/icons-material/Menu';
 import SearchIconImport from '@mui/icons-material/Search';
 import WhatsAppIconImport from '@mui/icons-material/WhatsApp';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Code, ShoppingCart, Settings, TrendingUp, Sparkles, Zap, Calculator, FileText, ClipboardList, MessageCircle, Receipt, Wrench, QrCode, BarChart2 } from 'lucide-react';
+import { Code, ShoppingCart, Settings, TrendingUp, Sparkles, Zap, Calculator, FileText, ClipboardList, MessageCircle, Receipt, Wrench, QrCode, BarChart2, Mail, ImageDown, Barcode, Link2, Percent, Tags, Contact } from 'lucide-react';
 import { colors } from '../../theme/theme';
 
 const CloseIcon = CloseIconImport.default || CloseIconImport;
@@ -59,6 +59,16 @@ const toolItems = [
   { label: 'Break-Even Calculator', href: '/tools/break-even-calculator', description: 'Units & revenue to cover costs', icon: BarChart2 },
   { label: 'Purchase Order Generator', href: '/tools/purchase-order-generator', description: 'Professional POs with delivery dates', icon: ShoppingCart },
   { label: 'ROAS Calculator', href: '/tools/roas-calculator', description: 'Return on ad spend for any platform', icon: Zap },
+  { label: 'Email Signature Generator', href: '/tools/email-signature-generator', description: 'Professional HTML email signature', icon: Mail },
+  { label: 'Image Compressor & Resizer', href: '/tools/image-compressor-resizer', description: 'Compress and resize images', icon: ImageDown },
+  { label: 'Barcode Generator', href: '/tools/barcode-generator', description: 'Product and inventory barcodes', icon: Barcode },
+  { label: 'UTM Campaign URL Builder', href: '/tools/utm-campaign-url-builder', description: 'Build campaign tracking URLs', icon: Link2 },
+  { label: 'General QR Code Generator', href: '/tools/qr-code-generator', description: 'QR codes for any content', icon: QrCode },
+  { label: 'ROI Calculator', href: '/tools/roi-calculator', description: 'Return on investment calculator', icon: TrendingUp },
+  { label: 'Business Loan Calculator', href: '/tools/business-loan-calculator', description: 'Loan payment and interest estimate', icon: Calculator },
+  { label: 'Discount & Sale Price Calculator', href: '/tools/discount-sale-price-calculator', description: 'Sale price and savings calculator', icon: Percent },
+  { label: 'Meta Tag & Open Graph Generator', href: '/tools/meta-tag-generator', description: 'SEO and social meta tags', icon: Tags },
+  { label: 'Business Card Maker', href: '/tools/business-card-maker', description: 'Print-ready business cards', icon: Contact },
 ];
 
 /* ─── Announcement Bar ─── */

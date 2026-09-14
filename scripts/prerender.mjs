@@ -103,6 +103,16 @@ async function runBuild() {
     '/tools/break-even-calculator',
     '/tools/purchase-order-generator',
     '/tools/roas-calculator',
+    '/tools/email-signature-generator',
+    '/tools/image-compressor-resizer',
+    '/tools/barcode-generator',
+    '/tools/utm-campaign-url-builder',
+    '/tools/qr-code-generator',
+    '/tools/roi-calculator',
+    '/tools/business-loan-calculator',
+    '/tools/discount-sale-price-calculator',
+    '/tools/meta-tag-generator',
+    '/tools/business-card-maker',
   ];
   blogs.forEach((blog) => {
     if (blog.slug) routes.push(`/blog/${blog.slug}`);

@@ -26,6 +26,7 @@ import UpiQrGenerator from './pages/tools/UpiQrGenerator';
 import BreakEvenCalculator from './pages/tools/BreakEvenCalculator';
 import PurchaseOrderGenerator from './pages/tools/PurchaseOrderGenerator';
 import RoasCalculator from './pages/tools/RoasCalculator';
+import { EmailSignature, ImageTool, BarcodeTool, UTMTool, QRTool, ROITool, LoanTool, DiscountTool, MetaTool, CardTool } from './pages/tools/NewTools';
 
 const CssBaseline = CssBaselineImport.default || CssBaselineImport;
 
@@ -63,6 +64,16 @@ function App() {
                 <Route path="/tools/break-even-calculator" element={<BreakEvenCalculator />} />
                 <Route path="/tools/purchase-order-generator" element={<PurchaseOrderGenerator />} />
                 <Route path="/tools/roas-calculator" element={<RoasCalculator />} />
+                <Route path="/tools/email-signature-generator" element={<EmailSignature />} />
+                <Route path="/tools/image-compressor-resizer" element={<ImageTool />} />
+                <Route path="/tools/barcode-generator" element={<BarcodeTool />} />
+                <Route path="/tools/utm-campaign-url-builder" element={<UTMTool />} />
+                <Route path="/tools/qr-code-generator" element={<QRTool />} />
+                <Route path="/tools/roi-calculator" element={<ROITool />} />
+                <Route path="/tools/business-loan-calculator" element={<LoanTool />} />
+                <Route path="/tools/discount-sale-price-calculator" element={<DiscountTool />} />
+                <Route path="/tools/meta-tag-generator" element={<MetaTool />} />
+                <Route path="/tools/business-card-maker" element={<CardTool />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Box>

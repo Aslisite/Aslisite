@@ -15,6 +15,7 @@ import {
   Zap as ZapIcon,
   ArrowRight,
   Sparkles,
+  Mail, ImageDown, Barcode, Link2, Percent, Tags, WalletCards,
 } from 'lucide-react';
 import { colors } from '../../theme/theme';
 import { absoluteUrl, siteMetadata } from '../../seo/siteMetadata';
@@ -111,6 +112,16 @@ const tools = [
     badge: 'Free',
     badgeColor: colors.accent.secondary,
   },
+  { icon: Mail, label: 'Email Signature Generator', href: '/tools/email-signature-generator', description: 'Create a polished HTML email signature for Gmail, Outlook, and any email client.', badge: 'Free', badgeColor: colors.accent.secondary },
+  { icon: ImageDown, label: 'Image Compressor & Resizer', href: '/tools/image-compressor-resizer', description: 'Compress and resize images privately in your browser with no upload.', badge: 'Free', badgeColor: colors.accent.secondary },
+  { icon: Barcode, label: 'Barcode Generator', href: '/tools/barcode-generator', description: 'Generate downloadable product and inventory barcodes in your browser.', badge: 'Free', badgeColor: colors.accent.secondary },
+  { icon: Link2, label: 'UTM Campaign URL Builder', href: '/tools/utm-campaign-url-builder', description: 'Build clean campaign tracking URLs for analytics and marketing.', badge: 'Free', badgeColor: colors.accent.secondary },
+  { icon: QrCode, label: 'General QR Code Generator', href: '/tools/qr-code-generator', description: 'Create QR codes for URLs, text, contact details, and more.', badge: 'Free', badgeColor: colors.accent.secondary },
+  { icon: BarChart2, label: 'ROI Calculator', href: '/tools/roi-calculator', description: 'Measure return on investment, profit, and break-even performance.', badge: 'Free', badgeColor: colors.accent.secondary },
+  { icon: WalletCards, label: 'Business Loan Calculator', href: '/tools/business-loan-calculator', description: 'Estimate monthly payments and total interest for business loans.', badge: 'Free', badgeColor: colors.accent.secondary },
+  { icon: Percent, label: 'Discount & Sale Price Calculator', href: '/tools/discount-sale-price-calculator', description: 'Calculate sale prices, savings, and tax in any currency.', badge: 'Free', badgeColor: colors.accent.secondary },
+  { icon: Tags, label: 'Meta Tag & Open Graph Generator', href: '/tools/meta-tag-generator', description: 'Generate SEO and social sharing tags ready to paste into your site.', badge: 'Free', badgeColor: colors.accent.secondary },
+  { icon: WalletCards, label: 'Business Card Maker', href: '/tools/business-card-maker', description: 'Create a clean print-ready business card with your contact details.', badge: 'Free', badgeColor: colors.accent.secondary },
 ];
 
 const fadeUp = {
@@ -234,7 +245,7 @@ const ToolCard = ({ tool, index }) => {
 const ToolsHub = () => {
   const pageTitle = 'Free Business Tools | GST Calculator, Invoice Generator & More | Aslisite';
   const pageDesc =
-    'Free online business tools for Indian SMBs — GST Calculator, Invoice Generator, Quotation Generator, UPI QR Generator, Break-Even Calculator, ROAS Calculator, and more. No login required.';
+    'Free online business tools for businesses worldwide — calculators, generators, image tools, SEO tools, and more. No login required.';
 
   return (
     <Container maxWidth="lg" className="tool-page-container" sx={{ pt: { xs: 16, md: 16 }, pb: { xs: 8, md: 12 } }}>

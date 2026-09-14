@@ -102,6 +102,16 @@ const navigation = {
     { label: 'Break-Even Calculator', href: '/tools/break-even-calculator' },
     { label: 'Purchase Order Generator', href: '/tools/purchase-order-generator' },
     { label: 'ROAS Calculator', href: '/tools/roas-calculator' },
+    { label: 'Email Signature Generator', href: '/tools/email-signature-generator' },
+    { label: 'Image Compressor & Resizer', href: '/tools/image-compressor-resizer' },
+    { label: 'Barcode Generator', href: '/tools/barcode-generator' },
+    { label: 'UTM Campaign URL Builder', href: '/tools/utm-campaign-url-builder' },
+    { label: 'General QR Code Generator', href: '/tools/qr-code-generator' },
+    { label: 'ROI Calculator', href: '/tools/roi-calculator' },
+    { label: 'Business Loan Calculator', href: '/tools/business-loan-calculator' },
+    { label: 'Discount & Sale Price Calculator', href: '/tools/discount-sale-price-calculator' },
+    { label: 'Meta Tag Generator', href: '/tools/meta-tag-generator' },
+    { label: 'Business Card Maker', href: '/tools/business-card-maker' },
   ],
 };
 
