@@ -742,7 +742,7 @@ const Navbar = () => {
                             pt: 1.5,
                             pb: 1.5,
                             px: 2,
-                            width: 620,
+                            width: 860,
                             maxWidth: 'calc(100vw - 32px)',
                             maxHeight: 'calc(100vh - 145px)',
                             overflowY: 'auto',
@@ -787,11 +787,11 @@ const Navbar = () => {
                             </Typography>
                           </Box>
 
-                          {/* 2-column grid — same as Services */}
+                          {/* Four-column grid keeps the expanded tool list compact. */}
                           <Box
                             sx={{
                               display: 'grid',
-                              gridTemplateColumns: '1fr 1fr',
+                              gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
                               gap: 0.5,
                             }}
                           >
@@ -804,9 +804,9 @@ const Navbar = () => {
                                 sx={{
                                   display: 'flex',
                                   alignItems: 'flex-start',
-                                  gap: 1.5,
-                                  px: 2,
-                                  py: 1.5,
+                                  gap: 1,
+                                  px: 1,
+                                  py: 1.25,
                                   borderRadius: 2,
                                   textDecoration: 'none',
                                   transition: 'background-color 0.2s ease',
