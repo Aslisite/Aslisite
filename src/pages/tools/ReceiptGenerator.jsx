@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   Receipt, Printer, RotateCcw, ArrowLeft, ChevronRight,
-  CheckCircle, Info, Globe, MapPin,
+  CheckCircle, Info,
 } from 'lucide-react';
 import { colors } from '../../theme/theme';
 import { absoluteUrl, siteMetadata } from '../../seo/siteMetadata';
@@ -53,25 +53,6 @@ const SH = ({ children }) => (
 );
 
 /* ─── Region Selector ─── */
-const RegionSelector = ({ region, onChange }) => (
-  <Card sx={{ borderRadius: 3, border: `1.5px solid ${region==='global'?colors.accent.secondary:colors.border.accent}`, boxShadow: 'none', mb: 3 }}>
-    <CardContent sx={{ p: { xs: 2, md: 2.5 } }}>
-      <Stack direction={{ xs: 'column', sm: 'row' }} alignItems={{ sm: 'center' }} justifyContent="space-between" gap={2}>
-        <Box>
-          <Typography variant="subtitle2" sx={{ fontWeight: 700, color: colors.text.primary, mb: 0.25 }}>Document Region</Typography>
-          <Typography variant="caption" sx={{ color: colors.text.muted }}>
-            {region==='india' ? 'India mode — GSTIN, UPI/NEFT, ₹, amount in words (Rupees)' : 'Global mode — multi-currency, IBAN/SWIFT/wire payment methods'}
-          </Typography>
-        </Box>
-        <ToggleButtonGroup value={region} exclusive onChange={(_, v) => v && onChange(v)} size="small" sx={{ flexShrink: 0, '& .MuiToggleButton-root': { px: 2, py: 0.9, fontWeight: 600, fontSize: '0.8rem', textTransform: 'none', border: `1px solid ${colors.border.medium} !important`, gap: 0.6, '&.Mui-selected': { backgroundColor: colors.accent.primary, color: '#fff', borderColor: `${colors.accent.primary} !important` } } }}>
-          <ToggleButton value="india"><MapPin size={13} />🇮🇳 India</ToggleButton>
-          <ToggleButton value="global"><Globe size={13} />🌐 Global</ToggleButton>
-        </ToggleButtonGroup>
-      </Stack>
-    </CardContent>
-  </Card>
-);
-
 /* ══════════════════════════════
    PRINT — India (unchanged)
 ══════════════════════════════ */
@@ -283,12 +264,19 @@ const ReceiptGenerator = () => {
           </Typography>
         </Box>
 
-        <Stack direction="row" gap={1.5} flexWrap="wrap" sx={{ mb: 4 }} className="no-print">
+        <Stack direction="row" alignItems="center" gap={1.5} flexWrap="wrap" sx={{ mb: 4 }} className="no-print">
           <Button variant="contained" startIcon={<Printer size={15} />} onClick={() => window.print()} sx={{ borderRadius: 2, fontWeight: 700, background: colors.accent.primary, color: '#fff', px: 3, '&:hover': { background: colors.accent.primaryHover } }}>Print / Save PDF</Button>
           <Button variant="outlined" startIcon={<RotateCcw size={14} />} onClick={handleReset} sx={{ borderRadius: 2, fontWeight: 600, borderColor: colors.border.medium, color: colors.text.secondary, '&:hover': { borderColor: colors.accent.primary, color: colors.accent.primary } }}>Reset</Button>
+          <Box sx={{ ml: 'auto' }}>
+            <ToggleButtonGroup value={region} exclusive onChange={(_, v) => v && setRegion(v)} size="small"
+              sx={{ '& .MuiToggleButton-root': { px: 1.5, py: 0.6, fontWeight: 600, fontSize: '0.75rem', textTransform: 'none', border: `1px solid ${colors.border.medium} !important`, gap: 0.5, lineHeight: 1.4,
+                '&.Mui-selected': { backgroundColor: colors.accent.primary, color: '#fff', borderColor: `${colors.accent.primary} !important` },
+                '&:not(.Mui-selected):hover': { backgroundColor: 'rgba(109,40,217,0.05)' } } }}>
+              <ToggleButton value="india" aria-label="India mode">🇮🇳 India</ToggleButton>
+              <ToggleButton value="global" aria-label="Global mode">🌐 Global</ToggleButton>
+            </ToggleButtonGroup>
+          </Box>
         </Stack>
-
-        <RegionSelector region={region} onChange={setRegion} />
 
         <Grid container spacing={3} className="no-print">
           <Grid item xs={12} lg={8}>
