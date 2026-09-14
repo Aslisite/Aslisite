@@ -742,10 +742,8 @@ const Navbar = () => {
                             pt: 1.5,
                             pb: 1.5,
                             px: 2,
-                            width: 860,
+                            width: 920,
                             maxWidth: 'calc(100vw - 32px)',
-                            maxHeight: 'calc(100vh - 145px)',
-                            overflowY: 'auto',
                             backgroundColor: '#ffffff',
                             border: `1px solid ${colors.border.light}`,
                             borderRadius: 3,
@@ -787,11 +785,11 @@ const Navbar = () => {
                             </Typography>
                           </Box>
 
-                          {/* Four-column grid keeps the expanded tool list compact. */}
+                          {/* Five-column grid keeps all 20 tools visible without scrolling. */}
                           <Box
                             sx={{
                               display: 'grid',
-                              gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+                              gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
                               gap: 0.5,
                             }}
                           >
