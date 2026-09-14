@@ -148,12 +148,19 @@ export const REGION_OPTIONS = [
 ];
 
 /**
- * Detect whether the user is likely in India based on browser locale.
- * Returns 'india' if any preferred language starts with 'hi' or ends with '-IN'.
- * Returns 'global' for everyone else.
- * Falls back to 'global' in SSR / non-browser environments.
+ * Detect whether the user is likely in India.
+ * Uses timezone first (most reliable — Indian users always have Asia/Kolkata),
+ * then falls back to browser locale (en-IN / hi / hi-IN etc.).
+ * Returns 'india' or 'global'.
+ * Safe in SSR / non-browser environments.
  */
 export const detectRegion = () => {
+  if (typeof Intl === 'undefined') return 'global';
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    if (tz === 'Asia/Calcutta' || tz === 'Asia/Kolkata') return 'india';
+  } catch {}
+  // Fallback: check browser language
   if (typeof navigator === 'undefined') return 'global';
   const langs = navigator.languages?.length ? navigator.languages : [navigator.language || ''];
   const isIndia = langs.some((l) => l.startsWith('hi') || l.toLowerCase().endsWith('-in'));
