@@ -223,6 +223,7 @@ const Footer = () => {
                 component={motion.div}
                 container
                 spacing={{ xs: 3, md: 3 }}
+                alignItems="flex-start"
                 variants={columnsContainerVariants}
               >
                 <Grid item xs={6} sm={6} md={3} component={motion.div} variants={columnVariants}>
@@ -321,7 +322,7 @@ const Footer = () => {
 
                 <Grid
                   item
-                  xs={6}
+                  xs={12}
                   sm={6}
                   md={3}
                   component={motion.div}
@@ -345,13 +346,14 @@ const Footer = () => {
                     <Box
                       component="nav"
                       sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 1.5,
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                        columnGap: { xs: 2, sm: 3 },
+                        rowGap: { xs: 1.25, sm: 1.5 },
                         alignItems: 'flex-start',
                       }}
                     >
-                      {navigation.freeTools.map((item, index) => (
+                      {navigation.freeTools.slice(0, 6).map((item, index) => (
                         <Link
                           key={index}
                           component={RouterLink}
@@ -359,7 +361,7 @@ const Footer = () => {
                           underline="none"
                           sx={{
                             color: colors.text.muted,
-                            fontSize: '0.875rem',
+                            fontSize: { xs: '0.78rem', sm: '0.875rem' },
                             transition: 'color 0.2s ease',
                             '&:hover': {
                               color: colors.accent.primary,
@@ -369,6 +371,21 @@ const Footer = () => {
                           {item.label}
                         </Link>
                       ))}
+                      <Link
+                        component={RouterLink}
+                        to="/tools"
+                        underline="none"
+                        sx={{
+                          gridColumn: '1 / -1',
+                          color: colors.accent.primary,
+                          fontSize: { xs: '0.78rem', sm: '0.875rem' },
+                          fontWeight: 700,
+                          transition: 'color 0.2s ease',
+                          '&:hover': { color: colors.accent.primaryHover },
+                        }}
+                      >
+                        View All Tools →
+                      </Link>
                     </Box>
                   </Box>
                 </Grid>
