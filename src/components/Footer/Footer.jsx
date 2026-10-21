@@ -167,17 +167,6 @@ const Footer = () => {
                   Aslisite<span style={{ color: colors.accent.primary }}>.</span>
                 </Typography>
                 <Typography
-                  variant="body2"
-                  sx={{
-                    color: colors.text.secondary,
-                    fontSize: '0.85rem',
-                    fontWeight: 600,
-                    mb: 2,
-                  }}
-                >
-                  Aslisite Technologies
-                </Typography>
-                <Typography
                   component={motion.p}
                   variants={revealUpVariants}
                   variant="body2"
@@ -422,6 +411,29 @@ const Footer = () => {
                   >
                     Start a Project
                   </Typography>
+                  <Box sx={{ mb: 2 }}>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: colors.text.primary,
+                        fontWeight: 600,
+                        fontSize: '0.875rem',
+                        mb: 0.5,
+                      }}
+                    >
+                      Aslisite Technologies
+                    </Typography>
+                  
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: colors.text.muted,
+                        fontSize: '0.78rem',
+                      }}
+                    >
+                      GSTIN: 32CYTPP2009K1Z5
+                    </Typography>
+                  </Box>
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.6 }}>
                     {contactLinks.map((item) => {
                       const IconComponent = item.icon;
