@@ -413,9 +413,9 @@ const Footer = () => {
                   </Typography>
                   <Box sx={{ mb: 2 }}>
                     <Typography
-                      variant="body2"
+                      variant="caption"
                       sx={{
-                        color: colors.text.primary,
+                        color: colors.text.muted,
                         fontWeight: 600,
                         fontSize: '0.875rem',
                         mb: 0.5,
