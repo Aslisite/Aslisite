@@ -167,6 +167,17 @@ const Footer = () => {
                   Aslisite<span style={{ color: colors.accent.primary }}>.</span>
                 </Typography>
                 <Typography
+                  variant="body2"
+                  sx={{
+                    color: colors.text.secondary,
+                    fontSize: '0.85rem',
+                    fontWeight: 600,
+                    mb: 2,
+                  }}
+                >
+                  Aslisite Technologies
+                </Typography>
+                <Typography
                   component={motion.p}
                   variants={revealUpVariants}
                   variant="body2"
@@ -469,7 +480,7 @@ const Footer = () => {
             }}
           >
             <Typography variant="caption" sx={{ color: colors.text.muted }}>
-              Copyright 2023 Aslisite. All rights reserved. |{' '}
+              Copyright 2026 Aslisite Technologies. All rights reserved. |{' '}
               <Link
                 component={RouterLink}
                 to="/privacy-policy"
