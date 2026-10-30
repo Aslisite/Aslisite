@@ -52,7 +52,7 @@ export default function Portfolio() {
         <link rel="canonical" href="https://aslisite.com/portfolio" />
       </Helmet>
       <Box sx={{ bgcolor: '#fff', overflow: 'hidden' }}>
-        <Container maxWidth="lg" sx={{ pt: { xs: 14, sm: 15, md: 16 }, pb: { xs: 7, md: 9 } }}>
+        <Container maxWidth="lg" sx={{ pt: { xs: 14, sm: 15, md: 16 }, pb: { xs: 3, md: 4 } }}>
           <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.25, color: colors.accent.primary, mb: { xs: 2.5, md: 3 }, px: 1.75, py: 0.9, borderRadius: '999px', bgcolor: '#f4efff', border: '1px solid #e8dcff' }}>
             <Layers3 size={17} aria-hidden="true" />
             <Typography variant="overline" sx={{ fontWeight: 800, letterSpacing: '.12em', fontSize: { xs: '0.7rem', md: '0.75rem' }, lineHeight: 1.4 }}>Concept websites</Typography>
@@ -69,7 +69,7 @@ export default function Portfolio() {
           </Box>
         </Container>
         <Box sx={{ bgcolor: '#fafafa', borderTop: '1px solid #eee', borderBottom: '1px solid #eee' }}>
-          <Container maxWidth="lg" sx={{ py: { xs: 6, md: 9 } }}>
+          <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 5 }, pb: { xs: 6, md: 9 } }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 3, flexWrap: 'wrap', alignItems: 'end', mb: 4 }}>
               <Box>
                 <Typography variant="overline" sx={{ color: colors.accent.primary, fontWeight: 700 }}>Explore our work</Typography>
