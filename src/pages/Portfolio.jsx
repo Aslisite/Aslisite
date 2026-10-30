@@ -14,6 +14,30 @@ const projects = [
   { title: 'Education Platform', category: 'Education', tag: 'Learning experience', url: 'https://education-gamma-one.vercel.app/', description: 'A modern learning platform concept with course discovery and engaging education interfaces.', tint: '#fef3c7', number: '07' },
   { title: 'Luxury Architecture Studio', category: 'Creative', tag: 'Architecture & design', url: 'https://studio-liart-seven.vercel.app/', description: 'An art-directed architecture studio concept with immersive project storytelling.', tint: '#e7e5e4', number: '08' },
 ];
+// WordPress mShots generates screenshots of public pages. These are fetched by the
+// visitor's browser and can fail for protected or unavailable deployments.
+const screenshotUrl = (url) => `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=960&h=600`;
+
+function ProjectThumbnail({ project }) {
+  const [failed, setFailed] = useState(false);
+  return (
+    <Box sx={{ height: { xs: 225, sm: 290 }, bgcolor: project.tint, position: 'relative', overflow: 'hidden' }}>
+      {!failed && (
+        <Box component="img" src={screenshotUrl(project.url)} alt={`Preview of ${project.title} concept website`}
+          loading="lazy" referrerPolicy="no-referrer" onError={() => setFailed(true)}
+          sx={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }} />
+      )}
+      {failed && (
+        <Box sx={{ height: '100%', p: 4, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <Typography sx={{ fontSize: 13, fontWeight: 700, letterSpacing: '.12em' }}>ASLISITE / CONCEPT {project.number}</Typography>
+          <Box><MonitorSmartphone size={28} aria-hidden="true" /><Typography sx={{ mt: 1, fontWeight: 750, fontSize: { xs: '1.8rem', md: '2.3rem' }, letterSpacing: '-.05em' }}>{project.title}</Typography></Box>
+          <Typography variant="caption">Preview unavailable — open the live demo below</Typography>
+        </Box>
+      )}
+    </Box>
+  );
+}
+
 const categories = ['All projects', ...new Set(projects.map((project) => project.category))];
 
 export default function Portfolio() {
@@ -23,7 +47,7 @@ export default function Portfolio() {
   return (
     <>
       <Helmet>
-        <title>Portfolio & Website Concept Demos | Aslisite Technologies</title>
+        <title>Our Work | Website Concept Demos | Aslisite Technologies</title>
         <meta name="description" content="Explore eight original website concept demonstrations by Aslisite Technologies, from e-commerce and hospitality to healthcare, education and architecture." />
         <link rel="canonical" href="https://aslisite.com/portfolio" />
       </Helmet>
@@ -31,10 +55,10 @@ export default function Portfolio() {
         <Container maxWidth="lg" sx={{ pt: { xs: 9, md: 14 }, pb: { xs: 7, md: 11 } }}>
           <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, color: colors.accent.primary, mb: 3 }}>
             <Layers3 size={17} aria-hidden="true" />
-            <Typography variant="overline" sx={{ fontWeight: 750, letterSpacing: '.16em' }}>Selected digital concepts</Typography>
+            <Typography variant="overline" sx={{ fontWeight: 750, letterSpacing: '.16em' }}>Concept websites</Typography>
           </Box>
           <Typography component="h1" sx={{ fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 800, fontSize: { xs: 'clamp(3rem, 11vw, 5rem)', md: 'clamp(4.5rem, 7.8vw, 7.5rem)' }, letterSpacing: '-.065em', lineHeight: 1.03, maxWidth: 920 }}>
-            Ideas made <Box component="span" sx={{ color: colors.accent.primary }}>interactive.</Box>
+            Explore <Box component="span" sx={{ color: colors.accent.primary }}>Our Work.</Box>
           </Typography>
           <Typography sx={{ mt: 3, maxWidth: 640, fontSize: { xs: '1.05rem', md: '1.2rem' }, color: colors.text.secondary, lineHeight: 1.8 }}>
             Explore a curated collection of website concepts across industries. Each one is a demonstration of the experiences we can design and build.
@@ -59,14 +83,7 @@ export default function Portfolio() {
             <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' }, gap: { xs: 3, md: 4 } }}>
               {visible.map((project) => (
                 <Box component="article" key={project.url} sx={{ bgcolor: '#fff', border: '1px solid #eaeaea', borderRadius: '20px', overflow: 'hidden', transition: 'transform .25s ease, box-shadow .25s ease', '&:hover': { transform: 'translateY(-5px)', boxShadow: '0 18px 55px rgba(24,24,27,.09)' } }}>
-                  <Box sx={{ height: { xs: 225, sm: 290 }, bgcolor: project.tint, position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', p: { xs: 3, md: 4 }, overflow: 'hidden' }}>
-                    <Typography sx={{ fontSize: 13, fontWeight: 700, letterSpacing: '.12em', color: '#3f3f46' }}>ASLISITE / CONCEPT {project.number}</Typography>
-                    <Box sx={{ position: 'absolute', right: '-9%', bottom: '-34%', width: '70%', height: '105%', borderRadius: '24px', transform: 'rotate(-13deg)', bgcolor: 'rgba(255,255,255,.55)', border: '1px solid rgba(255,255,255,.7)', boxShadow: '-18px -18px 50px rgba(0,0,0,.035)' }} />
-                    <Box sx={{ zIndex: 1 }}>
-                      <MonitorSmartphone size={28} strokeWidth={1.5} aria-hidden="true" />
-                      <Typography sx={{ mt: 1.5, fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 750, fontSize: { xs: '2rem', md: '2.5rem' }, letterSpacing: '-.05em', lineHeight: 1.1, maxWidth: '75%' }}>{project.title}</Typography>
-                    </Box>
-                  </Box>
+                  <ProjectThumbnail project={project} />
                   <Box sx={{ p: { xs: 3, md: 3.5 } }}>
                     <Typography variant="overline" sx={{ color: colors.accent.primary, fontWeight: 750 }}>{project.category} · {project.tag}</Typography>
                     <Typography sx={{ mt: 1, mb: 3, color: colors.text.secondary, lineHeight: 1.75, minHeight: { md: 58 } }}>{project.description}</Typography>
@@ -75,7 +92,7 @@ export default function Portfolio() {
                 </Box>
               ))}
             </Box>
-            <Typography variant="caption" sx={{ display: 'block', mt: 4, color: colors.text.secondary }}>Visual panels are original category illustrations, not screenshots of the linked websites. Demo availability depends on external hosting.</Typography>
+            <Typography variant="caption" sx={{ display: 'block', mt: 4, color: colors.text.secondary }}>Website previews are generated from publicly accessible demos by an external screenshot service. Some previews may be unavailable; live demo links remain accessible.</Typography>
           </Container>
         </Box>
         <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 }, textAlign: 'center' }}>
