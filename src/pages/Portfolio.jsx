@@ -52,15 +52,15 @@ export default function Portfolio() {
         <link rel="canonical" href="https://aslisite.com/portfolio" />
       </Helmet>
       <Box sx={{ bgcolor: '#fff', overflow: 'hidden' }}>
-        <Container maxWidth="lg" sx={{ pt: { xs: 9, md: 14 }, pb: { xs: 7, md: 11 } }}>
-          <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, color: colors.accent.primary, mb: 3 }}>
+        <Container maxWidth="lg" sx={{ pt: { xs: 7, sm: 9, md: 10 }, pb: { xs: 7, md: 9 } }}>
+          <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.25, color: colors.accent.primary, mb: { xs: 2.5, md: 3 }, px: 1.75, py: 0.9, borderRadius: '999px', bgcolor: '#f4efff', border: '1px solid #e8dcff' }}>
             <Layers3 size={17} aria-hidden="true" />
-            <Typography variant="overline" sx={{ fontWeight: 750, letterSpacing: '.16em' }}>Concept websites</Typography>
+            <Typography variant="overline" sx={{ fontWeight: 800, letterSpacing: '.12em', fontSize: { xs: '0.7rem', md: '0.75rem' }, lineHeight: 1.4 }}>Concept websites</Typography>
           </Box>
-          <Typography component="h1" sx={{ fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 800, fontSize: { xs: 'clamp(3rem, 11vw, 5rem)', md: 'clamp(4.5rem, 7.8vw, 7.5rem)' }, letterSpacing: '-.065em', lineHeight: 1.03, maxWidth: 920 }}>
-            Explore <Box component="span" sx={{ color: colors.accent.primary }}>Our Work.</Box>
+          <Typography component="h1" sx={{ fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 800, fontSize: { xs: 'clamp(2.9rem, 9vw, 4.5rem)', sm: 'clamp(4rem, 7.2vw, 5.8rem)', md: 'clamp(4.5rem, 6.2vw, 6.5rem)' }, letterSpacing: '-.065em', lineHeight: 1.08, maxWidth: 950 }}>
+            Explore <Box component="span" sx={{ color: colors.accent.primary, display: 'inline-block' }}>Our Work.</Box>
           </Typography>
-          <Typography sx={{ mt: 3, maxWidth: 640, fontSize: { xs: '1.05rem', md: '1.2rem' }, color: colors.text.secondary, lineHeight: 1.8 }}>
+          <Typography sx={{ mt: { xs: 2.5, md: 3 }, maxWidth: 640, fontSize: { xs: '1.05rem', md: '1.2rem' }, color: colors.text.secondary, lineHeight: 1.8 }}>
             Explore a curated collection of website concepts across industries. Each one is a demonstration of the experiences we can design and build.
           </Typography>
           <Box sx={{ mt: 4, display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'center' }}>
