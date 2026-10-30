@@ -52,7 +52,7 @@ export default function Portfolio() {
         <link rel="canonical" href="https://aslisite.com/portfolio" />
       </Helmet>
       <Box sx={{ bgcolor: '#fff', overflow: 'hidden' }}>
-        <Container maxWidth="lg" sx={{ pt: { xs: 7, sm: 9, md: 10 }, pb: { xs: 7, md: 9 } }}>
+        <Container maxWidth="lg" sx={{ pt: { xs: 14, sm: 15, md: 16 }, pb: { xs: 7, md: 9 } }}>
           <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.25, color: colors.accent.primary, mb: { xs: 2.5, md: 3 }, px: 1.75, py: 0.9, borderRadius: '999px', bgcolor: '#f4efff', border: '1px solid #e8dcff' }}>
             <Layers3 size={17} aria-hidden="true" />
             <Typography variant="overline" sx={{ fontWeight: 800, letterSpacing: '.12em', fontSize: { xs: '0.7rem', md: '0.75rem' }, lineHeight: 1.4 }}>Concept websites</Typography>
