@@ -86,6 +86,7 @@ async function runBuild() {
   const routes = [
     '/',
     '/blog',
+    '/portfolio',
     '/privacy-policy',
     '/services/web-development',
     '/services/ecommerce-solutions',
