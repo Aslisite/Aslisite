@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Box, Button, Chip, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 import { ArrowUpRight, ArrowRight, Layers3, MonitorSmartphone } from 'lucide-react';
 import { colors } from '../theme/theme';
@@ -63,10 +63,6 @@ export default function Portfolio() {
           <Typography sx={{ mt: { xs: 2.5, md: 3 }, maxWidth: 640, fontSize: { xs: '1.05rem', md: '1.2rem' }, color: colors.text.secondary, lineHeight: 1.8 }}>
             Explore a curated collection of website concepts across industries. Each one is a demonstration of the experiences we can design and build.
           </Typography>
-          <Box sx={{ mt: 4, display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'center' }}>
-            <Chip label="8 concept demos" sx={{ bgcolor: '#f4f0ff', color: colors.accent.primary, fontWeight: 700 }} />
-            <Chip label="Live interactive websites" variant="outlined" sx={{ fontWeight: 600 }} />
-          </Box>
         </Container>
         <Box sx={{ bgcolor: '#fafafa', borderTop: '1px solid #eee', borderBottom: '1px solid #eee' }}>
           <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 5 }, pb: { xs: 6, md: 9 } }}>
