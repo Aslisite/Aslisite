@@ -52,15 +52,15 @@ export default function Portfolio() {
         <link rel="canonical" href="https://aslisite.com/portfolio" />
       </Helmet>
       <Box sx={{ bgcolor: '#fff', overflow: 'hidden' }}>
-        <Container maxWidth="lg" sx={{ pt: { xs: 14, sm: 15, md: 16 }, pb: { xs: 3, md: 4 } }}>
-          <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.25, color: colors.accent.primary, mb: { xs: 2.5, md: 3 }, px: 1.75, py: 0.9, borderRadius: '999px', bgcolor: '#f4efff', border: '1px solid #e8dcff' }}>
+        <Container maxWidth="lg" sx={{ pt: { xs: 7, sm: 8, md: 9 }, pb: { xs: 7, md: 8 }, textAlign: 'center' }}>
+          <Box sx={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 1, color: colors.accent.primary, mb: { xs: 2.5, md: 3 }, px: 2, py: 0.9, borderRadius: '999px', bgcolor: '#f4efff', border: '1px solid #e8dcff' }}>
             <Layers3 size={17} aria-hidden="true" />
             <Typography variant="overline" sx={{ fontWeight: 800, letterSpacing: '.12em', fontSize: { xs: '0.7rem', md: '0.75rem' }, lineHeight: 1.4 }}>Concept websites</Typography>
           </Box>
-          <Typography component="h1" sx={{ fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 800, fontSize: { xs: 'clamp(2.9rem, 9vw, 4.5rem)', sm: 'clamp(4rem, 7.2vw, 5.8rem)', md: 'clamp(4.5rem, 6.2vw, 6.5rem)' }, letterSpacing: '-.065em', lineHeight: 1.08, maxWidth: 950 }}>
+          <Typography component="h1" sx={{ fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 800, fontSize: { xs: 'clamp(2.5rem, 9vw, 3.5rem)', sm: '3.8rem', md: 'clamp(3.7rem, 5vw, 4.6rem)' }, letterSpacing: '-.055em', lineHeight: 1.12, maxWidth: 950, mx: 'auto' }}>
             Explore <Box component="span" sx={{ color: colors.accent.primary, display: 'inline-block' }}>Our Work.</Box>
           </Typography>
-          <Typography sx={{ mt: { xs: 2.5, md: 3 }, maxWidth: 640, fontSize: { xs: '1.05rem', md: '1.2rem' }, color: colors.text.secondary, lineHeight: 1.8 }}>
+          <Typography sx={{ mt: { xs: 2, md: 2.5 }, maxWidth: 640, mx: 'auto', fontSize: { xs: '1.05rem', md: '1.2rem' }, color: colors.text.secondary, lineHeight: 1.8 }}>
             Discover original digital experiences across industries, designed to show what is possible for your business.
           </Typography>
         </Container>
