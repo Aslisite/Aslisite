@@ -57,8 +57,8 @@ export default function Portfolio() {
             <Layers3 size={17} aria-hidden="true" />
             <Typography variant="overline" sx={{ fontWeight: 800, letterSpacing: '.12em', fontSize: { xs: '0.7rem', md: '0.75rem' }, lineHeight: 1.4 }}>Concept websites</Typography>
           </Box>
-          <Typography component="h1" sx={{ fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 800, fontSize: { xs: 'clamp(2.5rem, 9vw, 3.5rem)', sm: '3.8rem', md: 'clamp(3.7rem, 5vw, 4.6rem)' }, letterSpacing: '-.055em', lineHeight: 1.12, maxWidth: 950, mx: 'auto' }}>
-            Explore <Box component="span" sx={{ color: colors.accent.primary, display: 'inline-block' }}>Our Work.</Box>
+          <Typography component="h1" sx={{ fontWeight: 800, fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }, mb: 2, color: colors.text.primary, maxWidth: 950, mx: 'auto' }}>
+            Explore <Box component="span" sx={{ background: colors.accent.gradient, backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Our Work.</Box>
           </Typography>
           <Typography sx={{ mt: { xs: 2, md: 2.5 }, maxWidth: 640, mx: 'auto', fontSize: { xs: '1.05rem', md: '1.2rem' }, color: colors.text.secondary, lineHeight: 1.8 }}>
             Discover original digital experiences across industries, designed to show what is possible for your business.
