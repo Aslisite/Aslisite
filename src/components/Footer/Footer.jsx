@@ -87,6 +87,7 @@ const navigation = {
   quickLinks: [
     { label: 'Home', href: '/#hero' },
     { label: 'AsliBooks', href: '/#aslibooks' },
+    { label: 'Portfolio', href: '/portfolio' },
     { label: 'Reviews', href: '/#testimonials' },
     { label: 'FAQ', href: '/#faq' },
     { label: 'Contact', href: '/#contact' },
