@@ -61,15 +61,15 @@ export default function Portfolio() {
             Explore <Box component="span" sx={{ color: colors.accent.primary, display: 'inline-block' }}>Our Work.</Box>
           </Typography>
           <Typography sx={{ mt: { xs: 2.5, md: 3 }, maxWidth: 640, fontSize: { xs: '1.05rem', md: '1.2rem' }, color: colors.text.secondary, lineHeight: 1.8 }}>
-            Explore a curated collection of website concepts across industries. Each one is a demonstration of the experiences we can design and build.
+            Discover original digital experiences across industries, designed to show what is possible for your business.
           </Typography>
         </Container>
         <Box sx={{ bgcolor: '#fafafa', borderTop: '1px solid #eee', borderBottom: '1px solid #eee' }}>
           <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 5 }, pb: { xs: 6, md: 9 } }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 3, flexWrap: 'wrap', alignItems: 'end', mb: 4 }}>
               <Box>
-                <Typography variant="overline" sx={{ color: colors.accent.primary, fontWeight: 700 }}>Explore our work</Typography>
-                <Typography component="h2" sx={{ fontFamily: '"Space Grotesk", "Inter", sans-serif', fontSize: { xs: '2rem', md: '3rem' }, fontWeight: 750, letterSpacing: '-.045em' }}>Built to inspire.</Typography>
+                <Typography variant="overline" sx={{ color: colors.accent.primary, fontWeight: 700 }}>Selected concepts</Typography>
+                <Typography component="h2" sx={{ fontFamily: '"Space Grotesk", "Inter", sans-serif', fontSize: { xs: '2rem', md: '3rem' }, fontWeight: 750, letterSpacing: '-.045em' }}>A showcase of possibilities.</Typography>
               </Box>
               <Typography variant="body2" sx={{ color: colors.text.secondary, maxWidth: 370 }}>These are original portfolio concepts, not commissioned client projects. Explore each live experience.</Typography>
             </Box>
