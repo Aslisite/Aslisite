@@ -52,15 +52,15 @@ export default function Portfolio() {
         <link rel="canonical" href="https://aslisite.com/portfolio" />
       </Helmet>
       <Box sx={{ bgcolor: '#fff', overflow: 'hidden' }}>
-        <Container maxWidth="lg" sx={{ pt: { xs: 7, sm: 8, md: 9 }, pb: { xs: 7, md: 8 }, textAlign: 'center' }}>
-          <Box sx={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 1, color: colors.accent.primary, mb: { xs: 2.5, md: 3 }, px: 2, py: 0.9, borderRadius: '999px', bgcolor: '#f4efff', border: '1px solid #e8dcff' }}>
+        <Container maxWidth="lg" sx={{ pt: { xs: 10, sm: 11, md: 12 }, pb: { xs: 4, md: 5 }, textAlign: 'center' }}>
+          <Box sx={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 1, color: colors.accent.primary, mb: { xs: 2, md: 2.5 }, px: 2, py: 0.9, borderRadius: '999px', bgcolor: '#f4efff', border: '1px solid #e8dcff' }}>
             <Layers3 size={17} aria-hidden="true" />
             <Typography variant="overline" sx={{ fontWeight: 800, letterSpacing: '.12em', fontSize: { xs: '0.7rem', md: '0.75rem' }, lineHeight: 1.4 }}>Concept websites</Typography>
           </Box>
-          <Typography component="h1" sx={{ fontWeight: 800, fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }, mb: 2, color: colors.text.primary, maxWidth: 950, mx: 'auto' }}>
+          <Typography component="h1" sx={{ fontWeight: 800, fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }, mb: 1, color: colors.text.primary, maxWidth: 950, mx: 'auto' }}>
             Explore <Box component="span" sx={{ background: colors.accent.gradient, backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Our Work.</Box>
           </Typography>
-          <Typography sx={{ mt: { xs: 2, md: 2.5 }, maxWidth: 640, mx: 'auto', fontSize: { xs: '1.05rem', md: '1.2rem' }, color: colors.text.secondary, lineHeight: 1.8 }}>
+          <Typography sx={{ mt: 0, maxWidth: 640, mx: 'auto', fontSize: { xs: '1.05rem', md: '1.2rem' }, color: colors.text.secondary, lineHeight: 1.8 }}>
             Discover original digital experiences across industries, designed to show what is possible for your business.
           </Typography>
         </Container>
