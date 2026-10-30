@@ -29,6 +29,7 @@ const WhatsAppIcon = WhatsAppIconImport.default || WhatsAppIconImport;
 const navItems = [
   { label: 'Services', href: '/#services', hasDropdown: true, dropdownKey: 'services' },
   { label: 'Products', href: '/#aslibooks', hasDropdown: true, dropdownKey: 'products' },
+  { label: 'Our Work', href: '/portfolio' },
   { label: 'Reviews', href: '/#testimonials' },
   { label: 'Blog', href: '/blog' },
   { label: 'Tools', href: '/tools', hasDropdown: true, dropdownKey: 'tools' },
