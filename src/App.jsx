@@ -9,6 +9,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import { ClickSpark, ScrollToTop } from './components/common';
 
 import Home from './pages/Home';
+import Portfolio from './pages/Portfolio';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import ServiceDetail from './pages/ServiceDetail';
@@ -49,6 +50,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/blog/:slug" element={<BlogDetail />} />
                 <Route path="/services/:slug" element={<ServiceDetail />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
