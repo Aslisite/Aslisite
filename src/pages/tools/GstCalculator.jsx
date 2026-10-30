@@ -1,3 +1,4 @@
+import heroHeading from '../../theme/heroHeading';
 import { useState, useCallback, useRef } from 'react';
 import {
   Box,
@@ -356,12 +357,10 @@ const GstCalculator = () => {
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: '1.9rem', sm: '2.5rem', md: '2.8rem' },
-              fontWeight: 800,
+              ...heroHeading,
               color: colors.text.primary,
               mt: 2,
               mb: 1.5,
-              letterSpacing: '-0.03em',
             }}
           >
             Free GST Calculator

@@ -1,3 +1,4 @@
+import heroHeading from '../../theme/heroHeading';
 import { useRef } from 'react';
 import { Box, Button, Container, Stack, Typography, useMediaQuery } from '@mui/material';
 import ArrowForwardImport from '@mui/icons-material/ArrowForward';
@@ -130,13 +131,9 @@ const Hero = () => {
             custom={0.08}
             variants={fadeUpVariants}
             sx={{
+              ...heroHeading,
               color: colors.text.primary,
-              fontSize: { xs: '2.5rem', sm: '3.8rem', md: '4.8rem', lg: '5.5rem' },
-              fontWeight: 800,
-              lineHeight: 1.0,
-              letterSpacing: '-0.04em',
               mb: 3,
-              fontFamily: '"Space Grotesk", "Inter", sans-serif',
             }}
           >
             Build digital systems

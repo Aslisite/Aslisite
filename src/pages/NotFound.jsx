@@ -1,3 +1,4 @@
+import heroHeading from '../theme/heroHeading';
 import { Box, Typography, Button } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -25,15 +26,13 @@ const NotFound = () => {
         <Typography
           variant="h1"
           sx={{
-            fontWeight: 900,
-            fontSize: { xs: '6rem', md: '10rem' },
-            background: colors.accent.gradient,
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            lineHeight: 1,
-            mb: 2,
-          }}
+              ...heroHeading,
+              background: colors.accent.gradient,
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              mb: 2,
+            }}
         >
           404
         </Typography>

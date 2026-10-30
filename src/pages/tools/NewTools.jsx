@@ -1,3 +1,4 @@
+import heroHeading from '../../theme/heroHeading';
 import { useMemo, useRef, useState } from 'react';
 import {
   Box,
@@ -197,12 +198,10 @@ function ToolShell({ kind, children }) {
         <Typography
           variant="h1"
           sx={{
-            fontSize: { xs: '1.9rem', sm: '2.5rem', md: '2.8rem' },
-            fontWeight: 800,
-            mt: 2,
-            mb: 1.5,
-            letterSpacing: '-0.03em',
-          }}
+              ...heroHeading,
+              mt: 2,
+              mb: 1.5,
+            }}
         >
           {title}
         </Typography>

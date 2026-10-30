@@ -1,3 +1,4 @@
+import heroHeading from '../theme/heroHeading';
 import { useState, useEffect, useMemo } from 'react';
 import {
   Container,
@@ -554,13 +555,10 @@ const BlogDetail = () => {
         <Typography
           variant="h1"
           sx={{
-            fontWeight: 800,
-            fontSize: { xs: '2rem', sm: '2.6rem', md: '3.2rem' },
-            lineHeight: 1.1,
-            mb: 3,
-            color: colors.text.primary,
-            letterSpacing: '-0.02em',
-          }}
+              ...heroHeading,
+              mb: 3,
+              color: colors.text.primary,
+            }}
         >
           {post.title}
         </Typography>

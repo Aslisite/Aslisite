@@ -1,3 +1,4 @@
+import heroHeading from '../../theme/heroHeading';
 import { useState } from 'react';
 import {
   Box, Container, Typography, TextField, Grid, Card, CardContent,
@@ -559,7 +560,12 @@ const InvoiceGenerator = () => {
         {/* Header */}
         <Box component={motion.div} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} sx={{ mb: { xs: 5, md: 6 } }} className="no-print">
           <SectionBadge icon={FileText} label={isIndia ? 'Free GST Tax Invoice · India' : 'Free Invoice · Global Mode'} />
-          <Typography variant="h1" sx={{ fontSize: { xs: '1.9rem', sm: '2.5rem', md: '2.8rem' }, fontWeight: 800, color: colors.text.primary, mt: 2, mb: 1.5, letterSpacing: '-0.03em' }}>
+          <Typography variant="h1" sx={{
+              ...heroHeading,
+              color: colors.text.primary,
+              mt: 2,
+              mb: 1.5,
+            }}>
             Free Invoice Generator
           </Typography>
           <Typography variant="subtitle1" sx={{ color: colors.text.secondary, maxWidth: 560, lineHeight: 1.7 }}>

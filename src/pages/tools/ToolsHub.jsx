@@ -1,3 +1,4 @@
+import heroHeading from '../../theme/heroHeading';
 import { Box, Container, Grid, Typography, Card, CardContent, Chip, Stack } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -288,13 +289,11 @@ const ToolsHub = () => {
         <Typography
           variant="h1"
           sx={{
-            fontSize: { xs: '2rem', sm: '2.6rem', md: '3rem' },
-            fontWeight: 800,
-            color: colors.text.primary,
-            mt: 2,
-            mb: 2,
-            letterSpacing: '-0.03em',
-          }}
+              ...heroHeading,
+              color: colors.text.primary,
+              mt: 2,
+              mb: 2,
+            }}
         >
           Free Business Tools
         </Typography>

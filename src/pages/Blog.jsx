@@ -1,3 +1,4 @@
+import heroHeading from '../theme/heroHeading';
 import { useState, useEffect, useMemo } from 'react';
 import {
   Container,
@@ -453,14 +454,13 @@ const Blog = () => {
           Our Blog
         </SectionBadge>
         <Typography
-          variant="h2"
+          variant="h1"
           component="h1"
           sx={{
-            fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
-            fontWeight: 800,
-            mb: 2,
-            color: colors.text.primary,
-          }}
+              ...heroHeading,
+              mb: 2,
+              color: colors.text.primary,
+            }}
         >
           {searchQuery ? (
             <>

@@ -1,3 +1,4 @@
+import heroHeading from '../theme/heroHeading';
 import { Box, Button, Container, Grid, Typography, Chip, Stack } from '@mui/material';
 import ArrowBackImport from '@mui/icons-material/ArrowBack';
 import ArrowForwardImport from '@mui/icons-material/ArrowForward';
@@ -455,14 +456,10 @@ const ServiceDetail = () => {
                 <Typography
                   variant="h1"
                   sx={{
-                    fontWeight: 800,
-                    fontFamily: 'Space Grotesk',
-                    fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.2rem' },
-                    lineHeight: 1.1,
-                    mb: 3,
-                    color: colors.text.primary,
-                    letterSpacing: '-0.02em',
-                  }}
+              ...heroHeading,
+              mb: 3,
+              color: colors.text.primary,
+            }}
                 >
                   {service.title.split(' ').slice(0, -1).join(' ')}{' '}
                   <Box

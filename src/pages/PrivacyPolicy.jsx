@@ -1,3 +1,4 @@
+import heroHeading from '../theme/heroHeading';
 import { Container, Typography, Box, Paper, Divider } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 import { colors } from '../theme/theme';
@@ -47,7 +48,9 @@ const PrivacyPolicy = () => {
               borderRadius: 4,
             }}
           >
-            <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 800 }}>
+            <Typography variant="h1" component="h1" gutterBottom sx={{
+              ...heroHeading,
+            }}>
               Privacy Policy
             </Typography>
             <Typography variant="subtitle1" color="text.secondary" gutterBottom>

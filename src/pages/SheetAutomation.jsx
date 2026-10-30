@@ -1,3 +1,4 @@
+import heroHeading from '../theme/heroHeading';
 import { useState } from 'react';
 import {
   Box,
@@ -330,18 +331,15 @@ const SheetAutomation = () => {
               </Typography>
             </motion.div>
 
-            <motion.h1
+            <Typography component={motion.h1} variant="h1"
               initial={{ opacity: 0.35, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              style={{
-                fontFamily: '"Space Grotesk", "Inter", sans-serif',
-                fontWeight: 800,
-                fontSize: '2.5rem',
-                lineHeight: 1.15,
-                margin: '16px auto',
-                maxWidth: '900px',
-              }}
+              sx={{
+              ...heroHeading,
+              margin: '16px auto',
+              maxWidth: '900px',
+            }}
             >
               <span style={{ color: '#0f172a' }}>Google Sheets </span>
               <span
@@ -354,7 +352,7 @@ const SheetAutomation = () => {
               >
                 Payment Reminder Automation Script
               </span>
-            </motion.h1>
+            </Typography>
 
             <motion.p
               initial={{ opacity: 0.35, y: 18 }}
